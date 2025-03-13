@@ -1,6 +1,7 @@
 
 import { useState, useRef } from 'react';
 import { Upload, X, FileText } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface FileUploadProps {
   onFileContent: (content: string) => void;
@@ -15,6 +16,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
   const [file, setFile] = useState<File | null>(null);
   const [error, setError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const { t } = useLanguage();
 
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -29,14 +31,14 @@ const FileUpload: React.FC<FileUploadProps> = ({
   const processFile = (file: File) => {
     // Check file size (max 5MB)
     if (file.size > 5 * 1024 * 1024) {
-      setError("File is too large. Maximum size is 5MB.");
+      setError(t('fileUpload.fileTooLarge'));
       return;
     }
 
     // Check file type
     const fileType = file.type;
     if (!fileType.match(/(text\/plain|application\/pdf|application\/msword|application\/vnd.openxmlformats-officedocument.wordprocessingml.document)/)) {
-      setError("Unsupported file type. Please upload a TXT, DOC, DOCX, or PDF file.");
+      setError(t('fileUpload.unsupportedFormat'));
       return;
     }
 
@@ -55,7 +57,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
     } else {
       // For demo purposes, we'll just extract the file name as content
       // In a real app, you'd send this to a backend service for proper conversion
-      onFileContent(`[Content extracted from ${file.name}] This is simulated content for demo purposes.`);
+      onFileContent(`[${t('fileUpload.contentFrom')} ${file.name}] ${t('fileUpload.simulatedContent')}`);
     }
   };
 
@@ -108,12 +110,12 @@ const FileUpload: React.FC<FileUploadProps> = ({
           }`}
         >
           <Upload className="mx-auto h-10 w-10 text-muted-foreground mb-4" />
-          <h3 className="text-lg font-medium mb-2">Upload a file</h3>
+          <h3 className="text-lg font-medium mb-2">{t('fileUpload.title')}</h3>
           <p className="text-muted-foreground mb-2">
-            Drag and drop a file here or click to browse
+            {t('fileUpload.dragAndDrop')}
           </p>
           <p className="text-xs text-muted-foreground">
-            Supported formats: TXT, DOC, DOCX, PDF (Max 5MB)
+            {t('fileUpload.supportedFormats')}
           </p>
         </div>
       ) : (
@@ -134,7 +136,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
                 handleRemoveFile();
               }}
               className="p-1 hover:bg-secondary rounded-full"
-              aria-label="Remove file"
+              aria-label={t('fileUpload.removeFile')}
             >
               <X className="h-5 w-5 text-muted-foreground" />
             </button>

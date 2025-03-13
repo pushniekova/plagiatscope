@@ -7,6 +7,7 @@ import FileUpload from '@/components/FileUpload';
 import ResultsViewer from '@/components/ResultsViewer';
 import { analyzePlagiarism } from '@/lib/textProcessing';
 import { useToast } from '@/hooks/use-toast';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const CheckPage = () => {
   const [text, setText] = useState('');
@@ -24,6 +25,7 @@ const CheckPage = () => {
   }>({ overallScore: 0, matches: [] });
   
   const { toast } = useToast();
+  const { t } = useLanguage();
   
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -42,16 +44,16 @@ const CheckPage = () => {
       setShowResults(false);
     }
     toast({
-      title: "File uploaded successfully",
-      description: "Your text has been loaded and is ready for analysis.",
+      title: t('check.fileUploaded'),
+      description: t('check.fileLoadedMessage'),
     });
   };
 
   const handleAnalyze = () => {
     if (!text.trim()) {
       toast({
-        title: "Empty text",
-        description: "Please enter some text or upload a file to analyze.",
+        title: t('check.emptyText'),
+        description: t('check.enterTextMessage'),
         variant: "destructive",
       });
       return;
@@ -83,13 +85,13 @@ const CheckPage = () => {
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-12">
               <span className="inline-block bg-primary/10 text-primary rounded-full px-3 py-1 text-sm font-medium mb-6">
-                Plagiarism Checker
+                {t('check.badge')}
               </span>
               <h1 className="text-3xl md:text-5xl font-medium mb-6">
-                Check Your Text for Originality
+                {t('check.title')}
               </h1>
               <p className="text-lg text-muted-foreground">
-                Upload a document or paste your text below to analyze for potential plagiarism.
+                {t('check.description')}
               </p>
             </div>
             
@@ -97,16 +99,17 @@ const CheckPage = () => {
               {/* Input method tabs */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                 <div>
-                  <h3 className="text-lg font-medium mb-4">Paste Text</h3>
+                  <h3 className="text-lg font-medium mb-4">{t('check.pasteText')}</h3>
                   <TextInput 
                     onTextChange={handleTextChange} 
                     initialValue={text}
                     minHeight="240px"
+                    placeholder={t('check.textPlaceholder')}
                   />
                 </div>
                 
                 <div>
-                  <h3 className="text-lg font-medium mb-4">Upload File</h3>
+                  <h3 className="text-lg font-medium mb-4">{t('check.uploadFile')}</h3>
                   <FileUpload onFileContent={handleFileContent} />
                 </div>
               </div>
@@ -115,10 +118,9 @@ const CheckPage = () => {
               <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-6 flex items-start gap-3">
                 <AlertTriangle className="h-5 w-5 text-amber-500 flex-shrink-0 mt-0.5" />
                 <div>
-                  <h4 className="font-medium text-amber-800 mb-1">Important Notice</h4>
+                  <h4 className="font-medium text-amber-800 mb-1">{t('check.noticeTitle')}</h4>
                   <p className="text-sm text-amber-700">
-                    This is a demonstration of the plagiarism detection service. In a real application, 
-                    your text would be analyzed against a comprehensive database of sources.
+                    {t('check.noticeText')}
                   </p>
                 </div>
               </div>
@@ -134,7 +136,7 @@ const CheckPage = () => {
                       : 'hover:brightness-110 active:brightness-90'
                   }`}
                 >
-                  {isAnalyzing ? 'Analyzing...' : 'Check for Plagiarism'}
+                  {isAnalyzing ? t('check.analyzing') : t('check.checkButton')}
                 </button>
               </div>
             </div>
@@ -147,7 +149,7 @@ const CheckPage = () => {
         <section id="results-section" className="py-12 bg-secondary/30">
           <div className="container mx-auto px-6">
             <div className="max-w-4xl mx-auto">
-              <h2 className="text-2xl md:text-3xl font-medium mb-6">Analysis Results</h2>
+              <h2 className="text-2xl md:text-3xl font-medium mb-6">{t('check.resultsTitle')}</h2>
               <ResultsViewer 
                 originalText={text}
                 overallScore={analysisResults.overallScore}
@@ -163,18 +165,18 @@ const CheckPage = () => {
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center mb-12">
             <h2 className="text-2xl md:text-3xl font-medium mb-4">
-              Advanced Plagiarism Detection
+              {t('check.featuresTitle')}
             </h2>
             <p className="text-muted-foreground">
-              Our comprehensive tool helps ensure academic integrity and content originality.
+              {t('check.featuresDescription')}
             </p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             {[
               {
-                title: "Precise Analysis",
-                description: "Advanced algorithms detect even subtle instances of plagiarism, ensuring comprehensive coverage.",
+                title: t('check.feature1.title'),
+                description: t('check.feature1.description'),
                 icon: (
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
                     <circle cx="11" cy="11" r="8"/>
@@ -183,8 +185,8 @@ const CheckPage = () => {
                 )
               },
               {
-                title: "Multiple Languages",
-                description: "Support for multiple languages, including Ukrainian, ensuring thorough plagiarism detection.",
+                title: t('check.feature2.title'),
+                description: t('check.feature2.description'),
                 icon: (
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
                     <circle cx="12" cy="12" r="10"/>
@@ -194,8 +196,8 @@ const CheckPage = () => {
                 )
               },
               {
-                title: "Detailed Reports",
-                description: "Comprehensive reports that highlight potential issues and provide actionable insights.",
+                title: t('check.feature3.title'),
+                description: t('check.feature3.description'),
                 icon: (
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
                     <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>

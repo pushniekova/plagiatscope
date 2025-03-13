@@ -1,5 +1,6 @@
 
 import { useState, useEffect } from 'react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface TextInputProps {
   onTextChange: (text: string) => void;
@@ -10,11 +11,12 @@ interface TextInputProps {
 
 const TextInput: React.FC<TextInputProps> = ({ 
   onTextChange, 
-  placeholder = "Paste or type your text here...", 
+  placeholder,
   initialValue = "",
   minHeight = "200px"
 }) => {
   const [text, setText] = useState(initialValue);
+  const { t } = useLanguage();
   
   useEffect(() => {
     setText(initialValue);
@@ -31,12 +33,12 @@ const TextInput: React.FC<TextInputProps> = ({
       <textarea
         value={text}
         onChange={handleTextChange}
-        placeholder={placeholder}
+        placeholder={placeholder || t('textInput.placeholder')}
         className="w-full rounded-lg border border-input bg-background p-4 text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all resize-y"
         style={{ minHeight }}
       />
       <div className="mt-2 text-xs text-muted-foreground text-right">
-        {text.length} characters
+        {text.length} {t('textInput.characters')}
       </div>
     </div>
   );

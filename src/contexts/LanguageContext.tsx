@@ -1,4 +1,3 @@
-
 import React, { createContext, useState, useContext, useEffect, ReactNode } from 'react';
 
 // Define our supported languages
@@ -93,6 +92,68 @@ const translations: Record<Language, Record<string, string>> = {
     'language.uk': 'Українська',
     'language.cs': 'Чеська',
     'language.en': 'Англійська',
+    
+    // Check page
+    'check.badge': 'Перевірка на плагіат',
+    'check.title': 'Перевірте текст на оригінальність',
+    'check.description': 'Завантажте документ або вставте ваш текст нижче для аналізу на можливий плагіат.',
+    'check.pasteText': 'Вставте текст',
+    'check.textPlaceholder': 'Вставте або введіть ваш текст тут...',
+    'check.uploadFile': 'Завантажте файл',
+    'check.noticeTitle': 'Важлива інформація',
+    'check.noticeText': 'Це демонстрація сервісу виявлення плагіату. У реальному додатку ваш текст буде аналізуватися з використанням комплексної бази даних джерел.',
+    'check.checkButton': 'Перевірити на плагіат',
+    'check.analyzing': 'Аналізуємо...',
+    'check.featuresTitle': 'Розширена система виявлення плагіату',
+    'check.featuresDescription': 'Наш комплексний інструмент допомагає забезпечити академічну доброчесність та оригінальність контенту.',
+    'check.feature1.title': 'Точний аналіз',
+    'check.feature1.description': 'Передові алгоритми виявляють навіть найтонші випадки плагіату, забезпечуючи комплексне охоплення.',
+    'check.feature2.title': 'Багатомовність',
+    'check.feature2.description': 'Підтримка багатьох мов, включаючи українську, забезпечує ретельне виявлення плагіату.',
+    'check.feature3.title': 'Детальні звіти',
+    'check.feature3.description': 'Вичерпні звіти, що виділяють потенційні проблеми та надають практичні рекомендації.',
+    'check.fileUploaded': 'Файл успішно завантажено',
+    'check.fileLoadedMessage': 'Ваш текст завантажено та готовий до аналізу.',
+    'check.emptyText': 'Порожній текст',
+    'check.enterTextMessage': 'Будь ласка, введіть текст або завантажте файл для аналізу.',
+    'check.resultsTitle': 'Результати аналізу',
+    
+    // FileUpload component
+    'fileUpload.title': 'Завантажити файл',
+    'fileUpload.dragAndDrop': 'Перетягніть файл сюди або натисніть для вибору',
+    'fileUpload.supportedFormats': 'Підтримувані формати: TXT, DOC, DOCX, PDF (Макс 5МБ)',
+    'fileUpload.fileTooLarge': 'Файл завеликий. Максимальний розмір 5МБ.',
+    'fileUpload.unsupportedFormat': 'Непідтримуваний формат файлу. Будь ласка, завантажте файл TXT, DOC, DOCX або PDF.',
+    'fileUpload.removeFile': 'Видалити файл',
+    'fileUpload.contentFrom': 'Вміст з',
+    'fileUpload.simulatedContent': 'Це симульований вміст для демонстрації.',
+    
+    // TextInput component
+    'textInput.placeholder': 'Вставте або введіть ваш текст тут...',
+    'textInput.characters': 'символів',
+    
+    // ResultsViewer component
+    'results.title': 'Результати аналізу на плагіат',
+    'results.similarityScore': 'Оцінка схожості',
+    'results.tabs.highlighted': 'Виділений текст',
+    'results.tabs.sources': 'Джерела',
+    'results.tabs.summary': 'Зведення',
+    'results.noPlagiarism': 'У поданому тексті плагіат не виявлено.',
+    'results.noSources': 'У проаналізованому тексті не знайдено джерел плагіату.',
+    'results.match': 'збіг',
+    'results.matchedText': 'Знайдений текст',
+    'results.characters': 'символи',
+    'results.sourcesFound': 'Знайдено джерел',
+    'results.charactersAnalyzed': 'Символів проаналізовано',
+    'results.analysisSummary': 'Зведення аналізу',
+    'results.summary.low': 'Ваш текст видається дуже оригінальним з мінімальною схожістю з існуючими джерелами.',
+    'results.summary.medium': 'Ваш текст містить деякі елементи, які збігаються з існуючими джерелами. Рекомендуємо переглянути виділені фрагменти.',
+    'results.summary.high': 'Ваш текст має значні збіги з існуючими джерелами. Ми рекомендуємо ретельно переглянути виділені фрагменти.',
+    'results.recommendations': 'Рекомендації',
+    'results.recommendation1': 'Перегляньте виділені розділи і переформулюйте їх',
+    'results.recommendation2': 'Переконайтеся, що всі цитати належним чином позначені',
+    'results.recommendation3': 'Перевірте посилання та цитати на точність',
+    'results.recommendation4': 'Розгляньте можливість більш ретельного перегляду вмісту',
   },
   
   cs: {
@@ -174,6 +235,68 @@ const translations: Record<Language, Record<string, string>> = {
     'language.uk': 'Ukrajinština',
     'language.cs': 'Čeština',
     'language.en': 'Angličtina',
+    
+    // Check page
+    'check.badge': 'Kontrola plagiátů',
+    'check.title': 'Zkontrolujte originalitu vašeho textu',
+    'check.description': 'Nahrajte dokument nebo vložte svůj text níže pro analýzu možných plagiátů.',
+    'check.pasteText': 'Vložit text',
+    'check.textPlaceholder': 'Vložte nebo napište svůj text zde...',
+    'check.uploadFile': 'Nahrát soubor',
+    'check.noticeTitle': 'Důležité upozornění',
+    'check.noticeText': 'Toto je ukázka služby pro detekci plagiátů. V reálné aplikaci by byl váš text analyzován oproti komplexní databázi zdrojů.',
+    'check.checkButton': 'Zkontrolovat na plagiáty',
+    'check.analyzing': 'Analyzuji...',
+    'check.featuresTitle': 'Pokročilá detekce plagiátů',
+    'check.featuresDescription': 'Náš komplexní nástroj pomáhá zajistit akademickou integritu a originalitu obsahu.',
+    'check.feature1.title': 'Přesná analýza',
+    'check.feature1.description': 'Pokročilé algoritmy detekují i ty nejjemnější případy plagiátorství a zajišťují komplexní pokrytí.',
+    'check.feature2.title': 'Více jazyků',
+    'check.feature2.description': 'Podpora více jazyků, včetně ukrajinštiny, zajišťující důkladnou detekci plagiátů.',
+    'check.feature3.title': 'Podrobné zprávy',
+    'check.feature3.description': 'Komplexní zprávy zvýrazňující potenciální problémy a poskytující praktická doporučení.',
+    'check.fileUploaded': 'Soubor úspěšně nahrán',
+    'check.fileLoadedMessage': 'Váš text byl načten a je připraven k analýze.',
+    'check.emptyText': 'Prázdný text',
+    'check.enterTextMessage': 'Prosím vložte text nebo nahrajte soubor pro analýzu.',
+    'check.resultsTitle': 'Výsledky analýzy',
+    
+    // FileUpload component
+    'fileUpload.title': 'Nahrát soubor',
+    'fileUpload.dragAndDrop': 'Přetáhněte soubor sem nebo klikněte pro výběr',
+    'fileUpload.supportedFormats': 'Podporované formáty: TXT, DOC, DOCX, PDF (Max 5MB)',
+    'fileUpload.fileTooLarge': 'Soubor je příliš velký. Maximální velikost je 5MB.',
+    'fileUpload.unsupportedFormat': 'Nepodporovaný formát souboru. Nahrajte prosím soubor TXT, DOC, DOCX nebo PDF.',
+    'fileUpload.removeFile': 'Odstranit soubor',
+    'fileUpload.contentFrom': 'Obsah z',
+    'fileUpload.simulatedContent': 'Toto je simulovaný obsah pro ukázku.',
+    
+    // TextInput component
+    'textInput.placeholder': 'Vložte nebo napište svůj text zde...',
+    'textInput.characters': 'znaků',
+    
+    // ResultsViewer component
+    'results.title': 'Výsledky analýzy plagiátů',
+    'results.similarityScore': 'Skóre podobnosti',
+    'results.tabs.highlighted': 'Zvýrazněný text',
+    'results.tabs.sources': 'Zdroje',
+    'results.tabs.summary': 'Shrnutí',
+    'results.noPlagiarism': 'V předloženém textu nebyl zjištěn žádný plagiát.',
+    'results.noSources': 'V analyzovaném textu nebyly nalezeny žádné zdroje plagiátů.',
+    'results.match': 'shoda',
+    'results.matchedText': 'Shodný text',
+    'results.characters': 'znaky',
+    'results.sourcesFound': 'Nalezené zdroje',
+    'results.charactersAnalyzed': 'Analyzovaných znaků',
+    'results.analysisSummary': 'Shrnutí analýzy',
+    'results.summary.low': 'Váš text se jeví jako vysoce originální s minimální podobností s existujícími zdroji.',
+    'results.summary.medium': 'Váš text obsahuje některé prvky, které se shodují s existujícími zdroji. Doporučujeme zkontrolovat zvýrazněné části.',
+    'results.summary.high': 'Váš text má významný překryv s existujícími zdroji. Doporučujeme důkladně revidovat zvýrazněné části.',
+    'results.recommendations': 'Doporučení',
+    'results.recommendation1': 'Zkontrolujte zvýrazněné části a zvažte přeformulování',
+    'results.recommendation2': 'Ujistěte se, že jsou všechny citace řádně označeny',
+    'results.recommendation3': 'Zkontrolujte přesnost referencí a citací',
+    'results.recommendation4': 'Zvažte důkladnější revizi obsahu',
   },
   
   en: {
@@ -255,11 +378,69 @@ const translations: Record<Language, Record<string, string>> = {
     'language.uk': 'Ukrainian',
     'language.cs': 'Czech',
     'language.en': 'English',
+    
+    // Check page
+    'check.badge': 'Plagiarism Checker',
+    'check.title': 'Check Your Text for Originality',
+    'check.description': 'Upload a document or paste your text below to analyze for potential plagiarism.',
+    'check.pasteText': 'Paste Text',
+    'check.textPlaceholder': 'Paste or type your text here...',
+    'check.uploadFile': 'Upload File',
+    'check.noticeTitle': 'Important Notice',
+    'check.noticeText': 'This is a demonstration of the plagiarism detection service. In a real application, your text would be analyzed against a comprehensive database of sources.',
+    'check.checkButton': 'Check for Plagiarism',
+    'check.analyzing': 'Analyzing...',
+    'check.featuresTitle': 'Advanced Plagiarism Detection',
+    'check.featuresDescription': 'Our comprehensive tool helps ensure academic integrity and content originality.',
+    'check.feature1.title': 'Precise Analysis',
+    'check.feature1.description': 'Advanced algorithms detect even subtle instances of plagiarism, ensuring comprehensive coverage.',
+    'check.feature2.title': 'Multiple Languages',
+    'check.feature2.description': 'Support for multiple languages, including Ukrainian, ensuring thorough plagiarism detection.',
+    'check.feature3.title': 'Detailed Reports',
+    'check.feature3.description': 'Comprehensive reports that highlight potential issues and provide actionable insights.',
+    'check.fileUploaded': 'File uploaded successfully',
+    'check.fileLoadedMessage': 'Your text has been loaded and is ready for analysis.',
+    'check.emptyText': 'Empty text',
+    'check.enterTextMessage': 'Please enter some text or upload a file to analyze.',
+    'check.resultsTitle': 'Analysis Results',
+    
+    // FileUpload component
+    'fileUpload.title': 'Upload a file',
+    'fileUpload.dragAndDrop': 'Drag and drop a file here or click to browse',
+    'fileUpload.supportedFormats': 'Supported formats: TXT, DOC, DOCX, PDF (Max 5MB)',
+    'fileUpload.fileTooLarge': 'File is too large. Maximum size is 5MB.',
+    'fileUpload.unsupportedFormat': 'Unsupported file type. Please upload a TXT, DOC, DOCX, or PDF file.',
+    'fileUpload.removeFile': 'Remove file',
+    'fileUpload.contentFrom': 'Content extracted from',
+    'fileUpload.simulatedContent': 'This is simulated content for demo purposes.',
+    
+    // TextInput component
+    'textInput.placeholder': 'Paste or type your text here...',
+    'textInput.characters': 'characters',
+    
+    // ResultsViewer component
+    'results.title': 'Plagiarism Analysis Results',
+    'results.similarityScore': 'Similarity Score',
+    'results.tabs.highlighted': 'Highlighted Text',
+    'results.tabs.sources': 'Sources',
+    'results.tabs.summary': 'Summary',
+    'results.noPlagiarism': 'No plagiarism detected in the submitted text.',
+    'results.noSources': 'No plagiarism sources found in the analyzed text.',
+    'results.match': 'match',
+    'results.matchedText': 'Matched text',
+    'results.characters': 'characters',
+    'results.sourcesFound': 'Sources Found',
+    'results.charactersAnalyzed': 'Characters Analyzed',
+    'results.analysisSummary': 'Analysis Summary',
+    'results.summary.low': 'Your text appears to be highly original with minimal similarity to existing sources.',
+    'results.summary.medium': 'Your text contains some elements that match existing sources. Consider reviewing the highlighted sections.',
+    'results.summary.high': 'Your text has significant overlap with existing sources. We recommend thoroughly revising the highlighted sections.',
+    'results.recommendations': 'Recommendations',
+    'results.recommendation1': 'Review highlighted sections and consider rephrasing',
+    'results.recommendation2': 'Ensure all quotes are properly cited',
+    'results.recommendation3': 'Check references and citations for accuracy',
+    'results.recommendation4': 'Consider a more thorough revision of the content',
   }
-};
-
-type LanguageProviderProps = {
-  children: ReactNode;
 };
 
 export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) => {
