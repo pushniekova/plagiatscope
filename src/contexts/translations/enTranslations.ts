@@ -166,6 +166,33 @@ const enTranslations: Translations = {
     emptyText: 'Empty Text',
     enterTextMessage: 'Please enter text to check or upload a file',
   },
+  results: {
+    title: 'Check Results',
+    similarityScore: 'Similarity Score',
+    tabs: {
+      highlighted: 'Highlighted Text',
+      sources: 'Sources',
+      summary: 'Summary'
+    },
+    noPlagiarism: 'No plagiarism detected in the text.',
+    noSources: 'No matching sources were found for this text.',
+    match: 'match',
+    matchedText: 'Matched text',
+    characters: 'characters',
+    sourcesFound: 'Sources Found',
+    charactersAnalyzed: 'Characters Analyzed',
+    analysisSummary: 'Analysis Summary',
+    summary: {
+      low: 'The text has a low similarity score, suggesting high originality. Few or no matches were found with existing sources.',
+      medium: 'The text has a moderate similarity score. Some portions may need to be reviewed and cited properly.',
+      high: 'The text has a high similarity score. Significant portions match existing sources and should be reviewed carefully.'
+    },
+    recommendations: 'Recommendations',
+    recommendation1: 'Cite all sources properly using appropriate citation format',
+    recommendation2: 'Use quotation marks for direct quotes',
+    recommendation3: 'Paraphrase content in your own words while still citing the source',
+    recommendation4: 'Consider revising sections with high similarity scores'
+  },
   about: {
     badge: 'About ForgenHub',
     title: 'Our Mission and Values',
