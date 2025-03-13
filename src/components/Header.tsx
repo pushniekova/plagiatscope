@@ -58,7 +58,7 @@ const Header = () => {
             <span className="button-gradient text-white p-1 rounded-md flex items-center justify-center">
               <Sparkles className="h-5 w-5" />
             </span>
-            <span className="rainbow-text font-bold">PlagiatScope</span>
+            <span className="rainbow-text font-bold">ForgenHub</span>
           </Link>
 
           {/* Desktop Navigation */}

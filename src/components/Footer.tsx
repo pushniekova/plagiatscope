@@ -21,7 +21,7 @@ const Footer = () => {
               <span className="button-gradient text-white p-1 rounded-md flex items-center justify-center">
                 <Sparkles className="h-5 w-5" />
               </span>
-              <span className="text-xl font-bold rainbow-text">PlagiatScope</span>
+              <span className="text-xl font-bold rainbow-text">ForgenHub</span>
             </Link>
             <p className="text-muted-foreground md:max-w-xs">
               {t('footer.description')}

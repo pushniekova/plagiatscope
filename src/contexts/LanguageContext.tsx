@@ -91,7 +91,7 @@ const translations: Record<Language, Record<string, string>> = {
     'footer.terms': 'Умови використання',
     'footer.privacy': 'Політика конфіденційності',
     'footer.cookies': 'Політика щодо файлів cookie',
-    'footer.copyright': '© {year} PlagiatScope. Усі права захищено.',
+    'footer.copyright': '© {year} ForgenHub. Усі права захищено.',
     'footer.tagline': 'Зроблено з точністю та турботою',
     
     // Language selector
@@ -164,12 +164,12 @@ const translations: Record<Language, Record<string, string>> = {
     // About page
     'about.badge': 'Про нас',
     'about.title': 'Підтримка академічної доброчесності',
-    'about.description': 'PlagiatScope — це сучасний сервіс виявлення плагіату, розроблений для студентів, викладачів та авторів контенту, які цінують автентичність та оригінальність.',
+    'about.description': 'ForgenHub — це сучасний сервіс виявлення плагіату, розроблений для студентів, викладачів та авторів контенту, які цінують автентичність та оригінальність.',
     
     'about.mission.label': 'Наша місія',
     'about.mission.title': 'Сприяння створенню оригінального контенту',
     'about.mission.description1': 'Наша місія — надати доступні та ефективні інструменти для забезпечення оригінальності контенту та академічної доброчесності. Ми віримо у важливість оригінальної думки та належного цитування в академічному та професійному контекстах.',
-    'about.mission.description2': 'PlagiatScope прагне бути освітнім інструментом, який не лише виявляє плагіат, але й допомагає користувачам зрозуміти важливість оригінального письма та правильних практик цитування.',
+    'about.mission.description2': 'ForgenHub прагне бути освітнім інструментом, який не лише виявляє плагіат, але й допомагає користувачам зрозуміти важливість оригінального письма та правильних практик цитування.',
     'about.mission.button': 'Спробувати наш інструмент',
     
     'about.values.title': 'Основні цінності',
@@ -181,7 +181,7 @@ const translations: Record<Language, Record<string, string>> = {
     'about.values.innovation.description': 'Ми постійно вдосконалюємо нашу технологію для вирішення проблем плагіату, що розвиваються.',
     
     'about.technology.label': 'Наша технологія',
-    'about.technology.title': 'Як працює PlagiatScope',
+    'about.technology.title': 'Як працює ForgenHub',
     'about.technology.description': 'Наша система виявлення плагіату використовує передові алгоритми та обробку природної мови для надання точних і всебічних результатів.',
     
     'about.textProcessing.title': 'Обробка тексту',
@@ -276,7 +276,7 @@ const translations: Record<Language, Record<string, string>> = {
     'footer.terms': 'Podmínky služby',
     'footer.privacy': 'Zásady ochrany osobních údajů',
     'footer.cookies': 'Zásady používání souborů cookie',
-    'footer.copyright': '© {year} PlagiatScope. Všechna práva vyhrazena.',
+    'footer.copyright': '© {year} ForgenHub. Všechna práva vyhrazena.',
     'footer.tagline': 'Vytvořeno s přesností a péčí',
     
     // Language selector
@@ -349,12 +349,12 @@ const translations: Record<Language, Record<string, string>> = {
     // About page
     'about.badge': 'O nás',
     'about.title': 'Podpora akademické integrity',
-    'about.description': 'PlagiatScope je špičková služba pro detekci plagiátů navržená pro studenty, učitele a tvůrce obsahu, kteří si cení autenticity a originality.',
+    'about.description': 'ForgenHub je špičková služba pro detekci plagiátů navržená pro studenty, učitele a tvůrce obsahu, kteří si cení autenticity a originality.',
     
     'about.mission.label': 'Naše mise',
     'about.mission.title': 'Podpora tvorby autentického obsahu',
     'about.mission.description1': 'Naším posláním je poskytovat přístupné a efektivní nástroje pro zajištění originality obsahu a akademické integrity. Věříme v důležitost původního myšlení a správné atribuce v akademickém a profesionálním kontextu.',
-    'about.mission.description2': 'PlagiatScope má být vzdělávacím nástrojem, který nejen detekuje plagiáty, ale také pomáhá uživatelům pochopit důležitost původního psaní a správných citačních postupů.',
+    'about.mission.description2': 'ForgenHub má být vzdělávacím nástrojem, který nejen detekuje plagiáty, ale také pomáhá uživatelům pochopit důležitost původního psaní a správných citačních postupů.',
     'about.mission.button': 'Vyzkoušet náš nástroj',
     
     'about.values.title': 'Základní hodnoty',
@@ -366,7 +366,7 @@ const translations: Record<Language, Record<string, string>> = {
     'about.values.innovation.description': 'Neustále vylepšujeme naši technologii, abychom řešili vyvíjející se problémy s plagiátorstvím.',
     
     'about.technology.label': 'Naše technologie',
-    'about.technology.title': 'Jak PlagiatScope funguje',
+    'about.technology.title': 'Jak ForgenHub funguje',
     'about.technology.description': 'Náš systém detekce plagiátů využívá pokročilé algoritmy a zpracování přirozeného jazyka k poskytování přesných a komplexních výsledků.',
     
     'about.textProcessing.title': 'Zpracování textu',
@@ -461,7 +461,7 @@ const translations: Record<Language, Record<string, string>> = {
     'footer.terms': 'Terms of Service',
     'footer.privacy': 'Privacy Policy',
     'footer.cookies': 'Cookie Policy',
-    'footer.copyright': '© {year} PlagiatScope. All rights reserved.',
+    'footer.copyright': '© {year} ForgenHub. All rights reserved.',
     'footer.tagline': 'Made with precision and care',
     
     // Language selector
@@ -534,12 +534,12 @@ const translations: Record<Language, Record<string, string>> = {
     // About page
     'about.badge': 'About Us',
     'about.title': 'Empowering Academic Integrity',
-    'about.description': 'PlagiatScope is a cutting-edge plagiarism detection service designed for students, teachers, and content creators who value authenticity and originality.',
+    'about.description': 'ForgenHub is a cutting-edge plagiarism detection service designed for students, teachers, and content creators who value authenticity and originality.',
     
     'about.mission.label': 'Our Mission',
     'about.mission.title': 'Promoting Authentic Content Creation',
     'about.mission.description1': 'Our mission is to provide accessible and effective tools for ensuring content originality and academic integrity. We believe in the importance of original thought and proper attribution in academic and professional contexts.',
-    'about.mission.description2': 'PlagiatScope aims to be an educational tool that not only detects plagiarism but also helps users understand the importance of original writing and proper citation practices.',
+    'about.mission.description2': 'ForgenHub aims to be an educational tool that not only detects plagiarism but also helps users understand the importance of original writing and proper citation practices.',
     'about.mission.button': 'Try Our Tool',
     
     'about.values.title': 'Core Values',
@@ -551,7 +551,7 @@ const translations: Record<Language, Record<string, string>> = {
     'about.values.innovation.description': 'We continuously improve our technology to address evolving plagiarism challenges.',
     
     'about.technology.label': 'Our Technology',
-    'about.technology.title': 'How PlagiatScope Works',
+    'about.technology.title': 'How ForgenHub Works',
     'about.technology.description': 'Our plagiarism detection system utilizes advanced algorithms and natural language processing to provide accurate and comprehensive results.',
     
     'about.textProcessing.title': 'Text Processing',
