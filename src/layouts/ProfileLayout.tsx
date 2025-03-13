@@ -16,12 +16,12 @@ import {
   SidebarInset,
 } from '@/components/ui/sidebar';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { User, Settings, CreditCard, DollarSign, List, History, LogOut } from 'lucide-react';
-import Header from '@/components/Header';
+import { User, Settings, CreditCard, DollarSign, List, History, LogOut, Home } from 'lucide-react';
 import Footer from '@/components/Footer';
 import ParticlesBackground from '@/components/ParticlesBackground';
 import { useClerk } from '@clerk/clerk-react';
 import { toast } from 'sonner';
+import { Button } from '@/components/ui/button';
 
 interface ProfileLayoutProps {
   children: React.ReactNode;
@@ -43,6 +43,10 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = ({ children, activePage = 'p
     }
   };
 
+  const goToHomePage = () => {
+    navigate('/');
+  };
+
   // Define all menu items in one place for easier maintenance
   const menuItems = [
     { id: 'profile', title: t('profile.menu.profile'), icon: User, path: '/profile' },
@@ -56,10 +60,9 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = ({ children, activePage = 'p
   return (
     <div className="flex flex-col min-h-screen overflow-hidden">
       <ParticlesBackground />
-      <Header />
       
-      <SidebarProvider>
-        <div className="flex-1 flex w-full">
+      <div className="pt-4 md:pt-6 flex-1 flex w-full">
+        <SidebarProvider>
           <Sidebar>
             <SidebarHeader className="border-b border-border">
               <div className="px-3 py-2">
@@ -93,11 +96,23 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = ({ children, activePage = 'p
             </SidebarContent>
             
             <SidebarFooter className="border-t border-border">
-              <div className="px-3 py-2">
-                <SidebarMenuButton onClick={handleSignOut} className="text-destructive hover:text-destructive/90 hover:bg-destructive/10 w-full">
-                  <LogOut className="h-4 w-4" />
+              <div className="px-3 py-2 space-y-2">
+                <Button 
+                  variant="outline" 
+                  onClick={goToHomePage} 
+                  className="w-full"
+                >
+                  <Home className="h-4 w-4 mr-2" />
+                  <span>{t('common.home')}</span>
+                </Button>
+                <Button 
+                  onClick={handleSignOut} 
+                  variant="destructive" 
+                  className="w-full"
+                >
+                  <LogOut className="h-4 w-4 mr-2" />
                   <span>{t('auth.signOut')}</span>
-                </SidebarMenuButton>
+                </Button>
               </div>
             </SidebarFooter>
           </Sidebar>
@@ -105,8 +120,8 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = ({ children, activePage = 'p
           <SidebarInset className="py-6 px-4 md:px-6">
             {children}
           </SidebarInset>
-        </div>
-      </SidebarProvider>
+        </SidebarProvider>
+      </div>
       
       <Footer />
     </div>
