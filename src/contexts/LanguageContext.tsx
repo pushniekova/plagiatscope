@@ -64,6 +64,7 @@ type Translations = {
     dontHaveAccount: string;
     or: string;
     continue: string;
+    continueWithGoogle: string;
   };
   hero: {
     badge: string;
@@ -143,6 +144,92 @@ type Translations = {
     description: string;
     button: string;
   };
+  check: {
+    badge: string;
+    title: string;
+    description: string;
+    pasteText: string;
+    uploadFile: string;
+    textPlaceholder: string;
+    noticeTitle: string;
+    noticeText: string;
+    checkButton: string;
+    analyzing: string;
+    resultsTitle: string;
+    featuresTitle: string;
+    featuresDescription: string;
+    feature1: {
+      title: string;
+      description: string;
+    };
+    feature2: {
+      title: string;
+      description: string;
+    };
+    feature3: {
+      title: string;
+      description: string;
+    };
+    fileUploaded: string;
+    fileLoadedMessage: string;
+    emptyText: string;
+    enterTextMessage: string;
+  };
+  about: {
+    badge: string;
+    title: string;
+    description: string;
+    mission: {
+      label: string;
+      title: string;
+      description1: string;
+      description2: string;
+      button: string;
+    };
+    values: {
+      title: string;
+      integrity: {
+        title: string;
+        description: string;
+      };
+      accuracy: {
+        title: string;
+        description: string;
+      };
+      innovation: {
+        title: string;
+        description: string;
+      };
+    };
+    technology: {
+      label: string;
+      title: string;
+      description: string;
+    };
+    textProcessing: {
+      title: string;
+      step1: string;
+      step2: string;
+      step3: string;
+      step4: string;
+    };
+    comparison: {
+      title: string;
+      step1: string;
+      step2: string;
+      step3: string;
+      step4: string;
+    };
+    languages: {
+      title: string;
+      description: string;
+    };
+    cta: {
+      title: string;
+      description: string;
+      button: string;
+    };
+  };
 };
 
 const LanguageContext = createContext<LanguageContextProps>({
@@ -206,6 +293,7 @@ const translations: Record<Language, Translations> = {
       dontHaveAccount: 'Не маєте облікового запису?',
       or: 'або',
       continue: 'Продовжити',
+      continueWithGoogle: 'Продовжити з Google',
     },
     hero: {
       badge: 'ШІ-інструмент',
@@ -284,6 +372,92 @@ const translations: Record<Language, Translations> = {
       title: 'Готові перевірити свій текст?',
       description: 'Почніть користуватися ForgenHub вже сьогодні та забезпечте оригінальність вашого контенту',
       button: 'Перевірити зараз'
+    },
+    check: {
+      badge: 'ШІ-перевірка',
+      title: 'Перевірка тексту на плагіат',
+      description: 'Вставте текст або завантажте файл для перевірки на плагіат',
+      pasteText: 'Вставити текст',
+      uploadFile: 'Завантажити файл',
+      textPlaceholder: 'Вставте текст для перевірки...',
+      noticeTitle: 'Важлива інформація',
+      noticeText: 'Для найкращих результатів, будь ласка, використовуйте тексти обсягом не менше 300 слів',
+      checkButton: 'Перевірити',
+      analyzing: 'Аналізуємо...',
+      resultsTitle: 'Результати перевірки',
+      featuresTitle: 'Особливості нашої перевірки',
+      featuresDescription: 'ForgenHub пропонує передові інструменти для виявлення плагіату в текстах',
+      feature1: {
+        title: 'Глибокий аналіз',
+        description: 'Детальне сканування тексту для виявлення потенційних збігів'
+      },
+      feature2: {
+        title: 'Підтримка мов',
+        description: 'Перевірка текстів різними мовами з однаковою точністю'
+      },
+      feature3: {
+        title: 'Детальний звіт',
+        description: 'Отримайте повний звіт з посиланнями на джерела'
+      },
+      fileUploaded: 'Файл завантажено',
+      fileLoadedMessage: 'Текст з файлу успішно завантажено',
+      emptyText: 'Порожній текст',
+      enterTextMessage: 'Будь ласка, введіть текст для перевірки або завантажте файл',
+    },
+    about: {
+      badge: 'Про ForgenHub',
+      title: 'Наша місія та цінності',
+      description: 'Дізнайтесь більше про нашу технологію та підхід до боротьби з плагіатом',
+      mission: {
+        label: 'Наша місія',
+        title: 'Підтримка академічної та творчої доброчесності',
+        description1: 'Ми створили ForgenHub, щоб допомогти авторам, студентам та науковцям захистити свої роботи та перевірити оригінальність текстів.',
+        description2: 'Наша мета - надати доступний та точний інструмент для виявлення плагіату, який допоможе зробити інтелектуальне середовище більш чесним та прозорим.',
+        button: 'Спробувати перевірку'
+      },
+      values: {
+        title: 'Наші цінності',
+        integrity: {
+          title: 'Доброчесність',
+          description: 'Ми віримо в важливість оригінальності та інтелектуальної чесності'
+        },
+        accuracy: {
+          title: 'Точність',
+          description: 'Ми прагнемо надавати найточніші результати перевірки'
+        },
+        innovation: {
+          title: 'Інновації',
+          description: 'Ми постійно вдосконалюємо наші алгоритми та підходи'
+        }
+      },
+      technology: {
+        label: 'Технологія',
+        title: 'Як працює наша система',
+        description: 'ForgenHub використовує передові алгоритми машинного навчання та штучного інтелекту для аналізу текстів та виявлення плагіату'
+      },
+      textProcessing: {
+        title: 'Обробка тексту',
+        step1: 'Семантичний аналіз тексту для розуміння контексту',
+        step2: 'Розбиття на змістовні фрагменти для покращення точності',
+        step3: 'Видалення шумів та нормалізація тексту',
+        step4: 'Створення цифрових відбитків для порівняння'
+      },
+      comparison: {
+        title: 'Процес порівняння',
+        step1: 'Пошук у базі даних академічних та інтернет-джерел',
+        step2: 'Порівняння з мільйонами документів в реальному часі',
+        step3: 'Виявлення як прямих, так і перефразованих запозичень',
+        step4: 'Генерація детального звіту з відсотком збігів'
+      },
+      languages: {
+        title: 'Підтримка мов',
+        description: 'Наша система здатна аналізувати тексти різними мовами, забезпечуючи точність перевірки незалежно від мови оригіналу'
+      },
+      cta: {
+        title: 'Готові перевірити свій текст?',
+        description: 'Почніть користуватися ForgenHub вже сьогодні та забезпечте оригінальність вашого контенту',
+        button: 'Перевірити зараз'
+      }
     }
   },
   en: {
@@ -340,6 +514,7 @@ const translations: Record<Language, Translations> = {
       dontHaveAccount: 'Don\'t have an account?',
       or: 'or',
       continue: 'Continue',
+      continueWithGoogle: 'Continue with Google',
     },
     hero: {
       badge: 'AI-powered Tool',
@@ -418,6 +593,92 @@ const translations: Record<Language, Translations> = {
       title: 'Ready to Check Your Text?',
       description: 'Start using ForgenHub today and ensure the originality of your content',
       button: 'Check Now'
+    },
+    check: {
+      badge: 'AI Check',
+      title: 'Check Text for Plagiarism',
+      description: 'Paste your text or upload a file to check for plagiarism',
+      pasteText: 'Paste Text',
+      uploadFile: 'Upload File',
+      textPlaceholder: 'Paste your text to check...',
+      noticeTitle: 'Important Information',
+      noticeText: 'For best results, please use texts with at least 300 words',
+      checkButton: 'Check Now',
+      analyzing: 'Analyzing...',
+      resultsTitle: 'Check Results',
+      featuresTitle: 'Our Checking Features',
+      featuresDescription: 'ForgenHub offers advanced tools for detecting plagiarism in texts',
+      feature1: {
+        title: 'Deep Analysis',
+        description: 'Detailed scanning of text to identify potential matches'
+      },
+      feature2: {
+        title: 'Language Support',
+        description: 'Check texts in different languages with the same accuracy'
+      },
+      feature3: {
+        title: 'Detailed Report',
+        description: 'Get a complete report with references to sources'
+      },
+      fileUploaded: 'File Uploaded',
+      fileLoadedMessage: 'Text from file successfully loaded',
+      emptyText: 'Empty Text',
+      enterTextMessage: 'Please enter text to check or upload a file',
+    },
+    about: {
+      badge: 'About ForgenHub',
+      title: 'Our Mission and Values',
+      description: 'Learn more about our technology and approach to combating plagiarism',
+      mission: {
+        label: 'Our Mission',
+        title: 'Supporting Academic and Creative Integrity',
+        description1: 'We created ForgenHub to help authors, students, and researchers protect their work and verify the originality of texts.',
+        description2: 'Our goal is to provide an accessible and accurate tool for detecting plagiarism that will help make the intellectual environment more honest and transparent.',
+        button: 'Try Checking'
+      },
+      values: {
+        title: 'Our Values',
+        integrity: {
+          title: 'Integrity',
+          description: 'We believe in the importance of originality and intellectual honesty'
+        },
+        accuracy: {
+          title: 'Accuracy',
+          description: 'We strive to provide the most accurate checking results'
+        },
+        innovation: {
+          title: 'Innovation',
+          description: 'We constantly improve our algorithms and approaches'
+        }
+      },
+      technology: {
+        label: 'Technology',
+        title: 'How Our System Works',
+        description: 'ForgenHub uses advanced machine learning and artificial intelligence algorithms to analyze texts and detect plagiarism'
+      },
+      textProcessing: {
+        title: 'Text Processing',
+        step1: 'Semantic text analysis to understand context',
+        step2: 'Breaking into meaningful fragments to improve accuracy',
+        step3: 'Noise removal and text normalization',
+        step4: 'Creating digital fingerprints for comparison'
+      },
+      comparison: {
+        title: 'Comparison Process',
+        step1: 'Search in a database of academic and internet sources',
+        step2: 'Comparison with millions of documents in real-time',
+        step3: 'Detection of both direct and paraphrased borrowings',
+        step4: 'Generation of a detailed report with match percentage'
+      },
+      languages: {
+        title: 'Language Support',
+        description: 'Our system can analyze texts in different languages, ensuring checking accuracy regardless of the original language'
+      },
+      cta: {
+        title: 'Ready to Check Your Text?',
+        description: 'Start using ForgenHub today and ensure the originality of your content',
+        button: 'Check Now'
+      }
     }
   },
   cs: {
@@ -474,6 +735,7 @@ const translations: Record<Language, Translations> = {
       dontHaveAccount: 'Nemáte účet?',
       or: 'nebo',
       continue: 'Pokračovat',
+      continueWithGoogle: 'Pokračovat s Google',
     },
     hero: {
       badge: 'AI nástroj',
@@ -552,6 +814,92 @@ const translations: Record<Language, Translations> = {
       title: 'Připraveni zkontrolovat svůj text?',
       description: 'Začněte používat ForgenHub ještě dnes a zajistěte originalitu svého obsahu',
       button: 'Zkontrolovat nyní'
+    },
+    check: {
+      badge: 'AI kontrola',
+      title: 'Kontrola textu na plagiáty',
+      description: 'Vložte svůj text nebo nahrajte soubor ke kontrole plagiátů',
+      pasteText: 'Vložit text',
+      uploadFile: 'Nahrát soubor',
+      textPlaceholder: 'Vložte svůj text ke kontrole...',
+      noticeTitle: 'Důležité informace',
+      noticeText: 'Pro nejlepší výsledky použijte texty s minimálně 300 slovy',
+      checkButton: 'Zkontrolovat',
+      analyzing: 'Analyzuji...',
+      resultsTitle: 'Výsledky kontroly',
+      featuresTitle: 'Naše funkce kontroly',
+      featuresDescription: 'ForgenHub nabízí pokročilé nástroje pro detekci plagiátů v textech',
+      feature1: {
+        title: 'Hloubková analýza',
+        description: 'Detailní skenování textu pro identifikaci potenciálních shod'
+      },
+      feature2: {
+        title: 'Jazyková podpora',
+        description: 'Kontrolujte texty v různých jazycích se stejnou přesností'
+      },
+      feature3: {
+        title: 'Podrobná zpráva',
+        description: 'Získejte kompletní zprávu s odkazy na zdroje'
+      },
+      fileUploaded: 'Soubor nahrán',
+      fileLoadedMessage: 'Text ze souboru byl úspěšně nahrán',
+      emptyText: 'Prázdný text',
+      enterTextMessage: 'Prosím, zadejte text ke kontrole nebo nahrajte soubor',
+    },
+    about: {
+      badge: 'O ForgenHub',
+      title: 'Naše mise a hodnoty',
+      description: 'Zjistěte více o naší technologii a přístupu k boji proti plagiátům',
+      mission: {
+        label: 'Naše mise',
+        title: 'Podpora akademické a tvůrčí integrity',
+        description1: 'Vytvořili jsme ForgenHub, abychom pomohli autorům, studentům a výzkumníkům chránit jejich práci a ověřit originalitu textů.',
+        description2: 'Naším cílem je poskytnout dostupný a přesný nástroj pro detekci plagiátů, který pomůže učinit intelektuální prostředí poctivějším a transparentnějším.',
+        button: 'Vyzkoušet kontrolu'
+      },
+      values: {
+        title: 'Naše hodnoty',
+        integrity: {
+          title: 'Integrita',
+          description: 'Věříme v důležitost originality a intelektuální poctivosti'
+        },
+        accuracy: {
+          title: 'Přesnost',
+          description: 'Snažíme se poskytovat nejpřesnější výsledky kontroly'
+        },
+        innovation: {
+          title: 'Inovace',
+          description: 'Neustále zdokonalujeme naše algoritmy a přístupy'
+        }
+      },
+      technology: {
+        label: 'Technologie',
+        title: 'Jak náš systém funguje',
+        description: 'ForgenHub používá pokročilé algoritmy strojového učení a umělé inteligence k analýze textů a detekci plagiátů'
+      },
+      textProcessing: {
+        title: 'Zpracování textu',
+        step1: 'Sémantická analýza textu pro pochopení kontextu',
+        step2: 'Rozdělení na smysluplné fragmenty pro zlepšení přesnosti',
+        step3: 'Odstranění šumu a normalizace textu',
+        step4: 'Vytváření digitálních otisků pro porovnání'
+      },
+      comparison: {
+        title: 'Proces porovnávání',
+        step1: 'Vyhledávání v databázi akademických a internetových zdrojů',
+        step2: 'Porovnání s miliony dokumentů v reálném čase',
+        step3: 'Detekce přímých i parafrázovaných výpůjček',
+        step4: 'Generování podrobné zprávy s procentem shody'
+      },
+      languages: {
+        title: 'Jazyková podpora',
+        description: 'Náš systém dokáže analyzovat texty v různých jazycích a zajišťuje přesnost kontroly bez ohledu na původní jazyk'
+      },
+      cta: {
+        title: 'Připraveni zkontrolovat svůj text?',
+        description: 'Začněte používat ForgenHub ještě dnes a zajistěte originalitu svého obsahu',
+        button: 'Zkontrolovat nyní'
+      }
     }
   },
 };
