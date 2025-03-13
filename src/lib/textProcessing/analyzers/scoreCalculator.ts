@@ -32,8 +32,11 @@ export const calculateOverallScore = async (
   externalSources: ExternalSource[]
 ): Promise<number> => {
   // Avoid counting overlapping regions twice
-  const matchRanges = matches.map(match => ({start: match.startIndex, end: match.endIndex}));
-  const nonOverlappingLength = calculateNonOverlappingLength(matchRanges, text.length);
+  const matchRanges = matches.map(match => ({
+    startIndex: match.startIndex, 
+    endIndex: match.endIndex
+  }));
+  const nonOverlappingLength = calculateNonOverlappingLength(text, matchRanges);
   const percentageMatched = (nonOverlappingLength / text.length) * 100;
   
   console.log(`Non-overlapping matched content: ${nonOverlappingLength} characters (${percentageMatched.toFixed(2)}%)`);
