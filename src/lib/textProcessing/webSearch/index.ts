@@ -9,6 +9,7 @@ import type { WebSearchResult } from './types';
 import { generateSearchQuery } from './query';
 import { performGoogleSearch } from './googleApi';
 import { simulateWebSearch } from './simulation';
+import { getGoogleApiCredentials } from '../utils';
 
 /**
  * Search for matching content using web resources
@@ -16,15 +17,25 @@ import { simulateWebSearch } from './simulation';
  * otherwise it will fall back to our internal simulation
  */
 export async function searchMultipleResources(text: string): Promise<WebSearchResult[]> {
-  // Generate a suitable search query from the text
+  // Generate suitable search queries from the text
   const query = generateSearchQuery(text);
   
-  // First try to use Google Search API
-  const googleResults = await performGoogleSearch(query, text);
+  // First check if we have Google API credentials
+  const googleCredentials = getGoogleApiCredentials();
   
-  // If we got results from Google, return them
-  if (googleResults && googleResults.length > 0) {
-    return googleResults;
+  if (googleCredentials && googleCredentials.apiKey && googleCredentials.engineId) {
+    try {
+      // Try to use Google Search API with our query
+      const googleResults = await performGoogleSearch(query, text);
+      
+      // If we got results from Google, return them
+      if (googleResults && googleResults.length > 0) {
+        return googleResults;
+      }
+    } catch (error) {
+      console.error("Google search failed, falling back to simulation:", error);
+      // Continue to fallback if Google search fails
+    }
   }
   
   // Fall back to internal simulation if Google API is not configured or fails

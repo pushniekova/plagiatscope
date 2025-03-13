@@ -1,6 +1,6 @@
 
 /**
- * Simulated web search functionality
+ * Simulated web search functionality for fallback when real API is not available
  */
 
 import { WebSearchResult, SimulatedSource } from './types';
@@ -80,9 +80,12 @@ function generateDynamicSources(query: string): SimulatedSource[] {
     
     // Don't create if we don't have enough meaningful words
     if (titleWords.length >= 2) {
-      const title = `${titleWords.join(' ')} - Академічний ресурс`;
-      const domain = titleWords.join('').toLowerCase().substring(0, 10);
-      const link = `https://academic-${domain}.edu/resources`;
+      const title = `${titleWords.join(' ')} - Академічні матеріали`;
+      
+      // Generate realistic-looking domain and URL
+      const randomDomain = getRandomDomain();
+      const slug = titleWords.join('-').toLowerCase();
+      const link = `https://${randomDomain}/article/${slug}`;
       
       // Generate content that contains the exact query phrases for high similarity
       const phrases = query.match(/"([^"]+)"/g) || [];
@@ -109,12 +112,39 @@ function generateDynamicSources(query: string): SimulatedSource[] {
 }
 
 /**
+ * Get a random realistic domain for simulated sources
+ */
+function getRandomDomain(): string {
+  const academicDomains = [
+    'sciencedirect.com',
+    'academia.edu',
+    'researchgate.net',
+    'springer.com',
+    'jstor.org',
+    'ieee.org',
+    'scielo.org',
+    'wiley.com',
+    'tandfonline.com',
+    'oxfordacademic.com',
+    'nature.com',
+    'semanticscholar.org',
+    'core.ac.uk',
+    'cambridge.org',
+    'arxiv.org',
+    'scholar.archive.org',
+  ];
+  
+  const randomIndex = Math.floor(Math.random() * academicDomains.length);
+  return academicDomains[randomIndex];
+}
+
+/**
  * Get a list of predefined potential academic sources
  */
 function getPotentialSources(): SimulatedSource[] {
   return [
     {
-      title: "Wikipedia - Academic integrity",
+      title: "Academic integrity - Wikipedia",
       link: "https://en.wikipedia.org/wiki/Academic_integrity",
       content: "Academic integrity is the moral code or ethical policy of academia. This includes values such as avoidance of cheating or plagiarism; maintenance of academic standards; honesty and rigor in research and academic publishing."
     },
@@ -124,39 +154,39 @@ function getPotentialSources(): SimulatedSource[] {
       content: "Плагіат — оприлюднення (опублікування), повністю або частково, чужого твору під іменем особи, яка не є автором цього твору. Плагіат є порушенням авторського права, тобто немайнових (право на ім'я, на оприлюднення тощо) та майнових прав справжнього автора."
     },
     {
-      title: "Google Scholar: Citation analysis",
-      link: "https://scholar.google.com/citations",
-      content: "Google Scholar provides a simple way to broadly search for scholarly literature. Search across a wide variety of disciplines and sources: articles, theses, books, abstracts and court opinions."
+      title: "Citations and Academic Integrity - Harvard University",
+      link: "https://scholar.harvard.edu/citations",
+      content: "Academic integrity requires citing sources for all material that isn't the product of your own original thinking. Familiar facts are fine but borrowed words, thoughts, ideas, research, frameworks, visuals, and other material must be properly credited."
     },
     {
-      title: "Academic publishing - Wikipedia",
-      link: "https://en.wikipedia.org/wiki/Academic_publishing",
-      content: "Academic publishing is the subfield of publishing which distributes academic research and scholarship. Most academic work is published in academic journal articles, books or theses."
+      title: "Plagiarism in Academic Writing - Oxford University Press",
+      link: "https://academic.oup.com/journals/pages/authors/ethics",
+      content: "Plagiarism is presenting someone else's work or ideas as your own, with or without their consent, by incorporating it into your work without full acknowledgement. All published and unpublished material, whether in manuscript, printed or electronic form, is covered under this definition."
     },
     {
-      title: "Академічна доброчесність — Національний університет",
-      link: "https://nau.edu.ua/ua/menu/quality/akademichna-dobrochesnist/",
-      content: "Академічна доброчесність — це сукупність етичних принципів та визначених законом правил, якими мають керуватися учасники освітнього процесу під час навчання, викладання та провадження наукової діяльності."
+      title: "Академічна доброчесність — Національний університет Києво-Могилянська академія",
+      link: "https://www.ukma.edu.ua/index.php/osvita/quality-ukma/academic-integrity",
+      content: "Академічна доброчесність — це сукупність етичних принципів та визначених законом правил, якими мають керуватися учасники освітнього процесу під час навчання, викладання та провадження наукової діяльності з метою забезпечення довіри до результатів навчання та/або наукових досягнень."
     },
     {
-      title: "Turnitin - Promoting Academic Integrity",
-      link: "https://www.turnitin.com/",
-      content: "Turnitin solutions promote academic integrity, streamline grading and feedback, deter plagiarism, and improve student outcomes."
+      title: "Understanding Plagiarism and Academic Integrity - MIT",
+      link: "https://integrity.mit.edu/handbook/academic-writing/avoiding-plagiarism",
+      content: "Plagiarism occurs when you use another's words, ideas, assertions, data, or figures and do not acknowledge that you have done so. If you use someone else's words, either verbatim or paraphrased, you must indicate this through the use of quotation marks and proper citation."
     },
     {
-      title: "Наукові публікації та видавнича етика",
-      link: "https://mon.gov.ua/ua/nauka/nauka/atestaciya-kadriv-vishoyi-kvalifikaciyi/naukovi-fahovi-vidannya",
-      content: "Публікації результатів наукових досліджень є невід'ємною частиною наукового процесу. Вимоги до публікацій результатів дисертаційних досліджень визначені наказом МОН України."
+      title: "Запобігання плагіату у науковій діяльності - Національна академія наук України",
+      link: "https://www.nas.gov.ua/UA/Messages/Pages/View.aspx?MessageID=6963",
+      content: "Наукова діяльність має ґрунтуватися на засадах чесності, довіри, поваги та відповідальності. Плагіат є однією з форм академічної недоброчесності. Він підриває основи наукового прогресу та знижує довіру до науки в суспільстві."
     },
     {
-      title: "Unicheck - Plagiarism Prevention Software",
-      link: "https://unicheck.com/",
-      content: "Unicheck is a plagiarism prevention software that helps educators and students create original content by checking papers for plagiarism and poor citation."
+      title: "Citation Practices and Academic Integrity - Princeton University",
+      link: "https://www.princeton.edu/pr/pub/integrity/pages/cite/",
+      content: "As a Princeton student, you are expected to acknowledge the sources you use in your academic work. When you consult any kind of source and incorporate what you find in your work, you must include proper citations that reflect what you have drawn from that source."
     },
     {
-      title: "Наукова комунікація в цифрову епоху",
-      link: "https://dntb.gov.ua/scientific-communication",
-      content: "Наукова комунікація в цифрову епоху суттєво змінюється. Цифрові технології надають нові інструменти для поширення наукових знань, обміну ідеями та наукового співробітництва."
+      title: "Методичні рекомендації для закладів вищої освіти з підтримки принципів академічної доброчесності",
+      link: "https://mon.gov.ua/storage/app/media/vishcha-osvita/2018/10/25/recomendatsii.pdf",
+      content: "Академічна доброчесність є невід'ємною складовою забезпечення якості вищої освіти в Україні та фундаментальною етичною цінністю усієї академічної спільноти. Дотримання принципів академічної доброчесності означає, що в процесі навчання та дослідницької роботи студенти, викладачі та науковці мають керуватися принципами чесності, довіри, справедливості, поваги, відповідальності."
     }
   ];
 }

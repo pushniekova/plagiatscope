@@ -5,7 +5,7 @@
 
 import { getGoogleApiCredentials } from '../utils';
 import { GoogleCredentials, WebSearchResult } from './types';
-import { processAndScoreResults } from './utils';
+import { processAndScoreResults, calculateTextSimilarity } from './utils';
 
 /**
  * Search using Google Custom Search API
@@ -15,7 +15,15 @@ export async function searchWithGoogleApi(
   credentials: GoogleCredentials
 ): Promise<any[]> {
   const { apiKey, engineId } = credentials;
-  const url = `https://www.googleapis.com/customsearch/v1?key=${apiKey}&cx=${engineId}&q=${encodeURIComponent(query)}&num=10`;
+  
+  if (!apiKey || !engineId) {
+    console.log("Missing Google API credentials");
+    return [];
+  }
+  
+  // Add quotes to search for exact phrases when possible
+  const enhancedQuery = query.length > 40 ? `"${query.substring(0, 40)}"` : query;
+  const url = `https://www.googleapis.com/customsearch/v1?key=${apiKey}&cx=${engineId}&q=${encodeURIComponent(enhancedQuery)}&num=10`;
   
   try {
     const response = await fetch(url);
@@ -40,8 +48,8 @@ export async function searchWithGoogleApi(
 export async function performGoogleSearch(query: string, text: string): Promise<WebSearchResult[] | null> {
   const googleCredentials = getGoogleApiCredentials();
   
-  if (!googleCredentials) {
-    console.log("No Google API credentials found in local storage");
+  if (!googleCredentials || !googleCredentials.apiKey || !googleCredentials.engineId) {
+    console.log("No valid Google API credentials found in local storage");
     return null;
   }
   

@@ -2,6 +2,7 @@
 import React from 'react';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface WebSearchTabProps {
   googleApiKey: string;
@@ -16,6 +17,8 @@ const WebSearchConfigTab: React.FC<WebSearchTabProps> = ({
   googleEngineId, 
   setGoogleEngineId 
 }) => {
+  const { currentLanguage } = useLanguage();
+  
   return (
     <div className="space-y-4 mt-4">
       <div className="space-y-2">
@@ -25,10 +28,21 @@ const WebSearchConfigTab: React.FC<WebSearchTabProps> = ({
           type="text"
           value={googleApiKey}
           onChange={(e) => setGoogleApiKey(e.target.value)}
-          placeholder="Введіть ваш Google API Key"
+          placeholder={currentLanguage === 'uk' ? "Введіть ваш Google API Key" : "Enter your Google API Key"}
         />
         <p className="text-xs text-muted-foreground mt-1">
-          Отримайте API ключ з <a href="https://console.cloud.google.com/apis/credentials" target="_blank" className="text-primary hover:underline">Google Cloud Console</a>
+          {currentLanguage === 'uk' ? (
+            <>Отримайте API ключ з <a href="https://console.cloud.google.com/apis/credentials" target="_blank" className="text-primary hover:underline">Google Cloud Console</a></>
+          ) : (
+            <>Get your API key from <a href="https://console.cloud.google.com/apis/credentials" target="_blank" className="text-primary hover:underline">Google Cloud Console</a></>
+          )}
+        </p>
+        <p className="text-xs text-muted-foreground mt-1">
+          {currentLanguage === 'uk' ? (
+            <>Не забудьте активувати "Custom Search API" у <a href="https://console.cloud.google.com/apis/library/customsearch.googleapis.com" target="_blank" className="text-primary hover:underline">Google Cloud Library</a></>
+          ) : (
+            <>Don't forget to enable "Custom Search API" in <a href="https://console.cloud.google.com/apis/library/customsearch.googleapis.com" target="_blank" className="text-primary hover:underline">Google Cloud Library</a></>
+          )}
         </p>
       </div>
       
@@ -39,10 +53,21 @@ const WebSearchConfigTab: React.FC<WebSearchTabProps> = ({
           type="text"
           value={googleEngineId}
           onChange={(e) => setGoogleEngineId(e.target.value)}
-          placeholder="Введіть ID пошукової системи Google"
+          placeholder={currentLanguage === 'uk' ? "Введіть ID пошукової системи Google" : "Enter your Google Search Engine ID"}
         />
         <p className="text-xs text-muted-foreground mt-1">
-          Створіть пошукову систему та отримайте ID на <a href="https://programmablesearchengine.google.com/cse/all" target="_blank" className="text-primary hover:underline">Programmable Search Engine</a>
+          {currentLanguage === 'uk' ? (
+            <>Створіть пошукову систему та отримайте ID на <a href="https://programmablesearchengine.google.com/cse/all" target="_blank" className="text-primary hover:underline">Programmable Search Engine</a></>
+          ) : (
+            <>Create a search engine and get your ID at <a href="https://programmablesearchengine.google.com/cse/all" target="_blank" className="text-primary hover:underline">Programmable Search Engine</a></>
+          )}
+        </p>
+        <p className="text-xs text-muted-foreground mt-1">
+          {currentLanguage === 'uk' ? (
+            <>Налаштуйте пошукову систему на "Весь інтернет" для найкращих результатів</>
+          ) : (
+            <>Configure your search engine to search "The entire web" for best results</>
+          )}
         </p>
       </div>
     </div>
