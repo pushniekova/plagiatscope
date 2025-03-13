@@ -1,3 +1,4 @@
+
 import React, { createContext, useState, useContext, useEffect, ReactNode } from 'react';
 
 // Define our supported languages
@@ -454,4 +455,163 @@ const translations: Record<Language, Record<string, string>> = {
     'cta.button': 'Check Your Text Now',
     
     // Footer
-    'footer.description': '
+    'footer.description': 'Advanced plagiarism detection service for students, teachers, and content creators. Check your text\'s originality with precision and ease.',
+    'footer.navigation': 'Navigation',
+    'footer.legal': 'Legal Information',
+    'footer.terms': 'Terms of Service',
+    'footer.privacy': 'Privacy Policy',
+    'footer.cookies': 'Cookie Policy',
+    'footer.copyright': '© {year} PlagiatScope. All rights reserved.',
+    'footer.tagline': 'Made with precision and care',
+    
+    // Language selector
+    'language.uk': 'Ukrainian',
+    'language.cs': 'Czech',
+    'language.en': 'English',
+    
+    // Check page
+    'check.badge': 'Plagiarism Checker',
+    'check.title': 'Check Your Text for Originality',
+    'check.description': 'Upload a document or paste your text below to analyze for potential plagiarism.',
+    'check.pasteText': 'Paste Text',
+    'check.textPlaceholder': 'Paste or type your text here...',
+    'check.uploadFile': 'Upload File',
+    'check.noticeTitle': 'Important Notice',
+    'check.noticeText': 'This is a demonstration of the plagiarism detection service. In a real application, your text would be analyzed against a comprehensive database of sources.',
+    'check.checkButton': 'Check for Plagiarism',
+    'check.analyzing': 'Analyzing...',
+    'check.featuresTitle': 'Advanced Plagiarism Detection',
+    'check.featuresDescription': 'Our comprehensive tool helps ensure academic integrity and content originality.',
+    'check.feature1.title': 'Precise Analysis',
+    'check.feature1.description': 'Advanced algorithms detect even subtle instances of plagiarism, ensuring comprehensive coverage.',
+    'check.feature2.title': 'Multiple Languages',
+    'check.feature2.description': 'Support for multiple languages, including Ukrainian, ensuring thorough plagiarism detection.',
+    'check.feature3.title': 'Detailed Reports',
+    'check.feature3.description': 'Comprehensive reports that highlight potential issues and provide actionable insights.',
+    'check.fileUploaded': 'File Successfully Uploaded',
+    'check.fileLoadedMessage': 'Your text has been loaded and is ready for analysis.',
+    'check.emptyText': 'Empty Text',
+    'check.enterTextMessage': 'Please enter text or upload a file for analysis.',
+    'check.resultsTitle': 'Analysis Results',
+    
+    // FileUpload component
+    'fileUpload.title': 'Upload a file',
+    'fileUpload.dragAndDrop': 'Drag and drop a file here or click to browse',
+    'fileUpload.supportedFormats': 'Supported formats: TXT, DOC, DOCX, PDF (Max 5MB)',
+    'fileUpload.fileTooLarge': 'File is too large. Maximum size is 5MB.',
+    'fileUpload.unsupportedFormat': 'Unsupported file format. Please upload a TXT, DOC, DOCX, or PDF file.',
+    'fileUpload.removeFile': 'Remove file',
+    'fileUpload.contentFrom': 'Content from',
+    'fileUpload.simulatedContent': 'This is simulated content for demonstration.',
+    
+    // TextInput component
+    'textInput.placeholder': 'Paste or type your text here...',
+    'textInput.characters': 'characters',
+    
+    // ResultsViewer component
+    'results.title': 'Plagiarism Analysis Results',
+    'results.similarityScore': 'Similarity Score',
+    'results.tabs.highlighted': 'Highlighted Text',
+    'results.tabs.sources': 'Sources',
+    'results.tabs.summary': 'Summary',
+    'results.noPlagiarism': 'No plagiarism was detected in the submitted text.',
+    'results.noSources': 'No plagiarism sources were found in the analyzed text.',
+    'results.match': 'match',
+    'results.matchedText': 'Matched Text',
+    'results.characters': 'characters',
+    'results.sourcesFound': 'Sources Found',
+    'results.charactersAnalyzed': 'Characters Analyzed',
+    'results.analysisSummary': 'Analysis Summary',
+    'results.summary.low': 'Your text appears to be highly original with minimal similarity to existing sources.',
+    'results.summary.medium': 'Your text contains some elements that match existing sources. We recommend reviewing the highlighted sections.',
+    'results.summary.high': 'Your text has significant overlap with existing sources. We recommend thoroughly revising the highlighted sections.',
+    'results.recommendations': 'Recommendations',
+    'results.recommendation1': 'Review highlighted sections and consider rephrasing',
+    'results.recommendation2': 'Ensure all quotations are properly marked',
+    'results.recommendation3': 'Check references and citations for accuracy',
+    'results.recommendation4': 'Consider a more thorough review of the content',
+
+    // About page
+    'about.badge': 'About Us',
+    'about.title': 'Empowering Academic Integrity',
+    'about.description': 'PlagiatScope is a cutting-edge plagiarism detection service designed for students, teachers, and content creators who value authenticity and originality.',
+    
+    'about.mission.label': 'Our Mission',
+    'about.mission.title': 'Promoting Authentic Content Creation',
+    'about.mission.description1': 'Our mission is to provide accessible and effective tools for ensuring content originality and academic integrity. We believe in the importance of original thought and proper attribution in academic and professional contexts.',
+    'about.mission.description2': 'PlagiatScope aims to be an educational tool that not only detects plagiarism but also helps users understand the importance of original writing and proper citation practices.',
+    'about.mission.button': 'Try Our Tool',
+    
+    'about.values.title': 'Core Values',
+    'about.values.integrity.title': 'Integrity',
+    'about.values.integrity.description': 'We uphold the highest standards of academic honesty and integrity in everything we do.',
+    'about.values.accuracy.title': 'Accuracy',
+    'about.values.accuracy.description': 'We strive for precision in our detection algorithms to provide reliable results.',
+    'about.values.innovation.title': 'Innovation',
+    'about.values.innovation.description': 'We continuously improve our technology to address evolving plagiarism challenges.',
+    
+    'about.technology.label': 'Our Technology',
+    'about.technology.title': 'How PlagiatScope Works',
+    'about.technology.description': 'Our plagiarism detection system utilizes advanced algorithms and natural language processing to provide accurate and comprehensive results.',
+    
+    'about.textProcessing.title': 'Text Processing',
+    'about.textProcessing.step1': 'Normalization: Converting text to a standard format for analysis',
+    'about.textProcessing.step2': 'Tokenization: Breaking text into analyzable units',
+    'about.textProcessing.step3': 'N-gram generation: Creating sequences of words for comparison',
+    'about.textProcessing.step4': 'Hashing: Generating unique identifiers for efficient matching',
+    
+    'about.comparison.title': 'Comparison & Analysis',
+    'about.comparison.step1': 'Database comparison: Matching against a vast library of sources',
+    'about.comparison.step2': 'Similarity calculation: Determining percentage of matching content',
+    'about.comparison.step3': 'Source identification: Finding the origins of matched text',
+    'about.comparison.step4': 'Report generation: Creating comprehensive, understandable results',
+    
+    'about.languages.title': 'Supporting Multiple Languages',
+    'about.languages.description': 'Our system is designed to handle text in Ukrainian, English, and other languages, with specialized processing for each language\'s unique features and characteristics.',
+    
+    'about.cta.title': 'Ready to Check Your Text?',
+    'about.cta.description': 'Experience the power and precision of our plagiarism detection tool.',
+    'about.cta.button': 'Start a Free Check',
+  },
+};
+
+export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) => {
+  // Try to get the language from localStorage or default to Ukrainian
+  const [language, setLanguage] = useState<Language>(() => {
+    const savedLanguage = localStorage.getItem('language') as Language;
+    return savedLanguage && (savedLanguage === 'uk' || savedLanguage === 'cs' || savedLanguage === 'en') 
+      ? savedLanguage 
+      : 'uk';
+  });
+
+  // Translation function
+  const t = (key: string): string => {
+    return translations[language][key] || key;
+  };
+
+  // Save the language preference to localStorage
+  useEffect(() => {
+    localStorage.setItem('language', language);
+  }, [language]);
+
+  const value = {
+    language,
+    setLanguage,
+    t
+  };
+
+  return (
+    <LanguageContext.Provider value={value}>
+      {children}
+    </LanguageContext.Provider>
+  );
+};
+
+// Custom hook to use the language context
+export const useLanguage = (): LanguageContextType => {
+  const context = useContext(LanguageContext);
+  if (context === undefined) {
+    throw new Error('useLanguage must be used within a LanguageProvider');
+  }
+  return context;
+};
