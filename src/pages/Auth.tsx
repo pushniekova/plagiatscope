@@ -101,12 +101,6 @@ const Auth = () => {
                       main: "!p-0"
                     }
                   }}
-                  localization={{
-                    locale: currentLocale,
-                    socialButtonsBlockButton: {
-                      google: `${t('auth.continueWithGoogle')}`
-                    }
-                  }}
                 />
               </TabsContent>
               <TabsContent value="signup" className="mt-0">
@@ -133,12 +127,6 @@ const Auth = () => {
                       footerActionLink: "text-primary hover:text-primary/80",
                       navbar: "hidden",
                       main: "!p-0"
-                    }
-                  }}
-                  localization={{
-                    locale: currentLocale,
-                    socialButtonsBlockButton: {
-                      google: `${t('auth.continueWithGoogle')}`
                     }
                   }}
                 />
