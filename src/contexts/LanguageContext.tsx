@@ -36,6 +36,49 @@ const translations: Record<Language, Record<string, string>> = {
     'feature.reports.title': 'Детальні звіти',
     'feature.reports.description': 'Вичерпні звіти з виділенням потенційних проблем',
     
+    // How It Works section
+    'howItWorks.badge': 'Як це працює',
+    'howItWorks.title': 'Просто, швидко та ефективно',
+    'howItWorks.description': 'Наш процес виявлення плагіату розроблений, щоб бути простим і потужним, надаючи вам точні результати за кілька кліків.',
+    'howItWorks.step1.number': '01',
+    'howItWorks.step1.title': 'Відправте ваш текст',
+    'howItWorks.step1.description': 'Завантажте документ або вставте текст безпосередньо в наш перевірник.',
+    'howItWorks.step2.number': '02',
+    'howItWorks.step2.title': 'Розширений аналіз',
+    'howItWorks.step2.description': 'Наші алгоритми сканують ваш текст по мільярдах джерел.',
+    'howItWorks.step3.number': '03',
+    'howItWorks.step3.title': 'Перегляд детальних результатів',
+    'howItWorks.step3.description': 'Отримайте вичерпний звіт із виділеними збігами та джерелами.',
+    'howItWorks.tryItNow': 'Спробуйте зараз',
+    
+    // Features section
+    'features.badge': 'Можливості',
+    'features.title': 'Потужні інструменти для аналізу тексту',
+    'features.description': 'Відкрийте для себе повний набір функцій, які виділяють наш сервіс виявлення плагіату.',
+    'features.upload.title': 'Завантаження та вставка тексту',
+    'features.upload.description': 'Легко надсилайте контент, завантажуючи файли або безпосередньо вставляючи текст у систему.',
+    'features.analysis.title': 'Розширений аналіз',
+    'features.analysis.description': 'Наші алгоритми виконують глибокий аналіз тексту для виявлення навіть найтонших випадків плагіату.',
+    'features.reports.title': 'Вичерпні звіти',
+    'features.reports.description': 'Отримуйте детальні звіти, що виділяють потенційний плагіат і джерела відповідного контенту.',
+    'features.languages.title': 'Багато мов',
+    'features.languages.description': 'Підтримка кількох мов, включаючи українську, що забезпечує комплексне виявлення плагіату.',
+    
+    // Stats section
+    'stats.accuracy': '99,8%',
+    'stats.accuracyLabel': 'Точність виявлення',
+    'stats.documents': '10M+',
+    'stats.documentsLabel': 'Аналізовані документи',
+    'stats.checkTime': '5с',
+    'stats.checkTimeLabel': 'Середній час перевірки',
+    'stats.support': '24/7',
+    'stats.supportLabel': 'Доступна підтримка',
+    
+    // CTA section
+    'cta.title': 'Готові забезпечити оригінальність вашого контенту?',
+    'cta.description': 'Приєднуйтесь до тисяч студентів, викладачів та авторів контенту, які довіряють нашому сервісу для точного виявлення плагіату.',
+    'cta.button': 'Перевірте свій текст зараз',
+    
     // Footer
     'footer.description': 'Сучасний сервіс виявлення плагіату для студентів, викладачів та авторів контенту. Перевіряйте оригінальність вашого тексту з точністю та легкістю.',
     'footer.navigation': 'Навігація',
@@ -74,6 +117,49 @@ const translations: Record<Language, Record<string, string>> = {
     'feature.reports.title': 'Podrobné zprávy',
     'feature.reports.description': 'Komplexní zprávy zvýrazňující potenciální problémy',
     
+    // How It Works section
+    'howItWorks.badge': 'Jak to funguje',
+    'howItWorks.title': 'Jednoduché, rychlé a efektivní',
+    'howItWorks.description': 'Náš proces detekce plagiátů je navržen tak, aby byl přímočarý a výkonný, poskytující vám přesné výsledky během několika kliknutí.',
+    'howItWorks.step1.number': '01',
+    'howItWorks.step1.title': 'Vložte svůj text',
+    'howItWorks.step1.description': 'Nahrajte dokument nebo přímo vložte svůj text do našeho kontroloru.',
+    'howItWorks.step2.number': '02',
+    'howItWorks.step2.title': 'Pokročilá analýza',
+    'howItWorks.step2.description': 'Naše algoritmy porovnávají váš text s miliardami zdrojů.',
+    'howItWorks.step3.number': '03',
+    'howItWorks.step3.title': 'Zobrazení podrobných výsledků',
+    'howItWorks.step3.description': 'Získejte komplexní zprávu se zvýrazněnými shodami a zdroji.',
+    'howItWorks.tryItNow': 'Vyzkoušejte nyní',
+    
+    // Features section
+    'features.badge': 'Funkce',
+    'features.title': 'Výkonné nástroje pro analýzu textu',
+    'features.description': 'Objevte komplexní sadu funkcí, které odlišují naši službu detekce plagiátů.',
+    'features.upload.title': 'Nahrání nebo vložení textu',
+    'features.upload.description': 'Snadno odešlete obsah nahráním souborů nebo přímým vložením textu do systému.',
+    'features.analysis.title': 'Pokročilá analýza',
+    'features.analysis.description': 'Naše algoritmy provádějí hlubokou analýzu textu k odhalení i těch nejjemnějších případů plagiátorství.',
+    'features.reports.title': 'Komplexní zprávy',
+    'features.reports.description': 'Získejte podrobné zprávy zvýrazňující potenciální plagiátorství a zdroje shodného obsahu.',
+    'features.languages.title': 'Více jazyků',
+    'features.languages.description': 'Podpora více jazyků včetně ukrajinštiny, zajišťující komplexní detekci plagiátů.',
+    
+    // Stats section
+    'stats.accuracy': '99,8%',
+    'stats.accuracyLabel': 'Přesnost detekce',
+    'stats.documents': '10M+',
+    'stats.documentsLabel': 'Analyzovaných dokumentů',
+    'stats.checkTime': '5s',
+    'stats.checkTimeLabel': 'Průměrný čas kontroly',
+    'stats.support': '24/7',
+    'stats.supportLabel': 'Dostupná podpora',
+    
+    // CTA section
+    'cta.title': 'Jste připraveni zajistit originalitu vašeho obsahu?',
+    'cta.description': 'Připojte se k tisícům studentů, učitelů a tvůrců obsahu, kteří důvěřují naší službě pro přesnou detekci plagiátů.',
+    'cta.button': 'Zkontrolujte svůj text nyní',
+    
     // Footer
     'footer.description': 'Pokročilá služba pro detekci plagiátů pro studenty, učitele a tvůrce obsahu. Zkontrolujte originalitu svého textu s přesností a snadností.',
     'footer.navigation': 'Navigace',
@@ -111,6 +197,49 @@ const translations: Record<Language, Record<string, string>> = {
     'feature.fast.description': 'Get results within seconds, not minutes or hours',
     'feature.reports.title': 'Detailed Reports',
     'feature.reports.description': 'Comprehensive reports highlighting potential issues',
+    
+    // How It Works section
+    'howItWorks.badge': 'How It Works',
+    'howItWorks.title': 'Simple, Fast, and Effective',
+    'howItWorks.description': 'Our plagiarism detection process is designed to be straightforward and powerful, giving you accurate results in just a few clicks.',
+    'howItWorks.step1.number': '01',
+    'howItWorks.step1.title': 'Submit Your Text',
+    'howItWorks.step1.description': 'Upload a document or paste your text directly into our checker.',
+    'howItWorks.step2.number': '02',
+    'howItWorks.step2.title': 'Advanced Analysis',
+    'howItWorks.step2.description': 'Our algorithms scan your text against billions of sources.',
+    'howItWorks.step3.number': '03',
+    'howItWorks.step3.title': 'View Detailed Results',
+    'howItWorks.step3.description': 'Get a comprehensive report with highlighted matches and sources.',
+    'howItWorks.tryItNow': 'Try It Now',
+    
+    // Features section
+    'features.badge': 'Features',
+    'features.title': 'Powerful Tools for Text Analysis',
+    'features.description': 'Discover the comprehensive suite of features that make our plagiarism detection service stand out.',
+    'features.upload.title': 'Upload or Paste Text',
+    'features.upload.description': 'Easily submit content by uploading files or directly pasting text into the system.',
+    'features.analysis.title': 'Advanced Analysis',
+    'features.analysis.description': 'Our algorithms perform deep text analysis to detect even the most subtle instances of plagiarism.',
+    'features.reports.title': 'Comprehensive Reports',
+    'features.reports.description': 'Receive detailed reports highlighting potential plagiarism and sources of matched content.',
+    'features.languages.title': 'Multiple Languages',
+    'features.languages.description': 'Support for multiple languages, including Ukrainian, ensuring comprehensive plagiarism detection.',
+    
+    // Stats section
+    'stats.accuracy': '99.8%',
+    'stats.accuracyLabel': 'Detection Accuracy',
+    'stats.documents': '10M+',
+    'stats.documentsLabel': 'Documents Analyzed',
+    'stats.checkTime': '5s',
+    'stats.checkTimeLabel': 'Average Check Time',
+    'stats.support': '24/7',
+    'stats.supportLabel': 'Available Support',
+    
+    // CTA section
+    'cta.title': 'Ready to Ensure Your Content\'s Originality?',
+    'cta.description': 'Join thousands of students, teachers, and content creators who trust our service for accurate plagiarism detection.',
+    'cta.button': 'Check Your Text Now',
     
     // Footer
     'footer.description': 'Advanced plagiarism detection service for students, teachers, and content creators. Check your text for originality with precision and ease.',
