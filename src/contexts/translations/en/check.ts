@@ -31,6 +31,21 @@ export default {
   enterTextMessage: 'Please enter text to check for plagiarism.',
   analysisError: 'Analysis Error',
   analysisErrorMessage: 'An error occurred while analyzing your text. Please try again.',
+  queueStatus: {
+    waiting: 'Waiting in Queue',
+    position: 'You are position {position} in queue',
+    estimatedTime: 'It will take up to {minutes} min. to analyze your work',
+    skipQueue: 'Skip the queue',
+  },
+  checkOptions: {
+    standard: 'Standard',
+    priority: 'Priority',
+    deep: 'Deep Analysis',
+    scientific: 'Scientific Publications',
+    documentation: 'Documentation',
+    compare: 'Compare file with',
+    articles: 'scientific articles available',
+  },
   externalApi: {
     title: 'External API Configuration',
     description: 'Configure your PlagiarismCheck.org API credentials',

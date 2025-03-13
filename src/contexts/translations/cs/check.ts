@@ -37,6 +37,21 @@ export default {
   enterTextMessage: 'Zadejte text pro kontrolu plagiátorství.',
   analysisError: 'Chyba analýzy',
   analysisErrorMessage: 'Při analýze textu došlo k chybě. Zkuste to prosím znovu.',
+  queueStatus: {
+    waiting: 'Čekání ve frontě',
+    position: 'Jste na pozici {position} ve frontě',
+    estimatedTime: 'Analýza vaší práce zabere až {minutes} minut',
+    skipQueue: 'Přeskočit frontu',
+  },
+  checkOptions: {
+    standard: 'Standardní',
+    priority: 'Priorita',
+    deep: 'Hloubková analýza',
+    scientific: 'Vědecké publikace',
+    documentation: 'Dokumentace',
+    compare: 'Porovnat soubor s',
+    articles: 'vědeckých článků k dispozici',
+  },
   externalApi: {
     title: 'Konfigurace externího API',
     description: 'Nastavte své přihlašovací údaje PlagiarismCheck.org API',

@@ -21,6 +21,7 @@ export default {
   documentStructure: 'Struktura dokumentu',
   paraphrasing: 'Parafráze',
   improperCitation: 'Nesprávná citace',
+  downloadReport: 'Stáhnout zprávu',
   highlightedTextHelp: 'Zvýrazněné části ukazují potenciální plagiát. Najeďte myší na zvýrazněný text pro zobrazení zdroje.',
   highPlagiarismWarning: 'Zjištěna vysoká úroveň plagiátu. Doporučujeme dokument revidovat, abyste zahrnuli správné citace nebo učinili obsah originálnějším.',
   riskLevel: {
@@ -39,9 +40,23 @@ export default {
     medium: 'Některé části vašeho textu se shodují s jinými zdroji. Zvažte přidání citací, kde je to potřeba.',
     high: 'Významné části vašeho textu se shodují s jinými zdroji. Doporučuje se zásadní revize.',
   },
+  emoticons: {
+    veryLow: 'Velmi dobré',
+    low: 'Dobré',
+    medium: 'Přijatelné',
+    high: 'Špatné',
+    veryHigh: 'Velmi špatné'
+  },
   recommendations: 'Doporučení',
   recommendation1: 'Přezkoumejte zvýrazněné části pro potenciální plagiát.',
   recommendation2: 'Citujte původní zdroje, abyste ocenili autory.',
   recommendation3: 'Parafrázujte text, aby byl originálnější.',
   recommendation4: 'Používejte uvozovky pro přímé citace.',
+  scientificCheck: {
+    title: 'Kontrola vědeckých článků',
+    description: 'Porovnejte svůj dokument s 80 miliony vědeckých článků od akademických vydavatelů.',
+    price: 'Cena',
+    button: 'Přidat kontrolu vědeckých článků',
+    skipButton: 'Pokračovat bez kontroly'
+  }
 };

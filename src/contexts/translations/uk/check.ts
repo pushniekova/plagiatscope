@@ -31,6 +31,21 @@ export default {
   enterTextMessage: 'Будь ласка, введіть текст для перевірки на плагіат.',
   analysisError: 'Помилка аналізу',
   analysisErrorMessage: 'Під час аналізу тексту сталася помилка. Будь ласка, спробуйте ще раз.',
+  queueStatus: {
+    waiting: 'Очікування в черзі',
+    position: 'Ви {position} в черзі',
+    estimatedTime: 'Це займе до {minutes} хв. щоб проаналізувати вашу роботу',
+    skipQueue: 'Без черги',
+  },
+  checkOptions: {
+    standard: 'Стандартний',
+    priority: 'Пріоритет',
+    deep: 'Глибокий аналіз',
+    scientific: 'Наукові публікації',
+    documentation: 'Перевірка',
+    compare: 'Порівняйте файл з',
+    articles: 'наукових статей доступні',
+  },
   externalApi: {
     title: 'Налаштування зовнішнього API',
     description: 'Налаштуйте свої облікові дані API для PlagiarismCheck.org',

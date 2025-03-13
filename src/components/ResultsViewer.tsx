@@ -8,7 +8,10 @@ import SourcesTab from './results/SourcesTab';
 import ExternalSourcesTab from './results/ExternalSourcesTab';
 import SummaryTab from './results/SummaryTab';
 import { ResultsProps } from './results/types';
-import { FileText, AlertTriangle } from 'lucide-react';
+import { FileText, AlertTriangle, Download } from 'lucide-react';
+import { Button } from "@/components/ui/button";
+import SimilarityGauge from './results/SimilarityGauge';
+import RiskLevelIndicator from './results/RiskLevelIndicator';
 
 const ResultsViewer: React.FC<ResultsProps> = ({ 
   originalText, 
@@ -16,20 +19,14 @@ const ResultsViewer: React.FC<ResultsProps> = ({
   matches,
   externalSources = [],
   documentName = 'Untitled Document',
-  analyzedCharacters
+  analyzedCharacters,
+  queueStatus
 }) => {
   const [activeTab, setActiveTab] = useState<string>('highlight');
   const { t } = useLanguage();
 
   // Use the actual text length for analysis
   const textLength = analyzedCharacters || originalText.length;
-
-  // Function to determine score color
-  const getScoreColor = () => {
-    if (overallScore < 20) return 'text-green-500';
-    if (overallScore < 40) return 'text-yellow-500';
-    return 'text-red-500';
-  };
 
   // Function to determine plagiarism risk level
   const getPlagiarismRiskLevel = () => {
@@ -44,6 +41,81 @@ const ResultsViewer: React.FC<ResultsProps> = ({
   const improperCitationPercentage = Math.min(Math.max(overallScore / 10, 0), 10);
   const matchesCount = matches.length;
 
+  const handleDownloadReport = () => {
+    // This would be implemented to generate and download a PDF/DOCX report
+    console.log('Downloading report for', documentName);
+    
+    // For demo purposes, we'll just create a simple text file
+    const reportText = `
+Plagiarism Report for: ${documentName}
+Overall Similarity Score: ${overallScore}%
+Risk Level: ${getPlagiarismRiskLevel()}
+Matches Found: ${matchesCount}
+Text Length: ${textLength} characters
+      
+Summary:
+${overallScore < 20 
+  ? t('results.summaryDetail.low') 
+  : overallScore < 40 
+    ? t('results.summaryDetail.medium') 
+    : t('results.summaryDetail.high')}
+`;
+    
+    // Create blob and download
+    const blob = new Blob([reportText], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${documentName.split('.')[0]}-report.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
+  // If the document is in queue, show queue status
+  if (queueStatus && queueStatus.status === 'inQueue') {
+    return (
+      <div className="w-full rounded-lg border border-border overflow-hidden">
+        <div className="bg-muted/50 p-4 border-b border-border flex items-center justify-between">
+          <div className="flex items-center">
+            <FileText className="mr-2 h-5 w-5 text-muted-foreground" />
+            <h2 className="text-lg font-medium">{documentName}</h2>
+          </div>
+        </div>
+        
+        <div className="p-8 flex flex-col items-center justify-center">
+          <div className="w-20 h-20 relative mb-4">
+            <div className="absolute inset-0 rounded-full border-4 border-muted-foreground/20 border-dashed animate-spin"></div>
+            <div className="absolute inset-3 bg-background flex items-center justify-center">
+              <span className="text-xl font-semibold">{queueStatus.position}</span>
+            </div>
+          </div>
+          
+          <h3 className="text-lg font-medium mb-2">{t('check.queueStatus.waiting')}</h3>
+          <p className="text-center text-muted-foreground max-w-md mb-4">
+            {t('check.queueStatus.position', { position: queueStatus.position })}
+          </p>
+          <p className="text-sm text-muted-foreground">
+            {t('check.queueStatus.estimatedTime', { minutes: queueStatus.estimatedMinutes || 15 })}
+          </p>
+          
+          {queueStatus.skipQueueAvailable && (
+            <Button 
+              className="mt-6 button-gradient text-white gap-2 items-center flex"
+              onClick={() => queueStatus.onSkipQueue && queueStatus.onSkipQueue()}
+            >
+              {t('check.queueStatus.skipQueue')}
+              <span className="text-xs opacity-80 ml-1">
+                {queueStatus.skipQueuePrice}
+              </span>
+            </Button>
+          )}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="w-full rounded-lg border border-border overflow-hidden">
       {/* Document title */}
@@ -52,6 +124,15 @@ const ResultsViewer: React.FC<ResultsProps> = ({
           <FileText className="mr-2 h-5 w-5 text-muted-foreground" />
           <h2 className="text-lg font-medium">{documentName}</h2>
         </div>
+        <Button 
+          variant="outline" 
+          size="sm"
+          className="gap-1.5"
+          onClick={handleDownloadReport}
+        >
+          <Download className="h-4 w-4" />
+          {t('results.downloadReport')}
+        </Button>
       </div>
 
       {/* Results header with metrics */}
@@ -60,14 +141,7 @@ const ResultsViewer: React.FC<ResultsProps> = ({
           {/* Similarity gauge */}
           <div className="col-span-1 md:col-span-1">
             <div className="flex flex-col items-center">
-              <div className="relative w-24 h-12 mb-1">
-                <div className="absolute inset-0 bg-gradient-to-r from-green-500 via-yellow-500 to-red-500 rounded-t-full overflow-hidden" style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0% 100%)' }}></div>
-                <div className="absolute bottom-0 left-1/2 w-1 h-5 bg-black transform -translate-x-1/2" style={{ transform: `translateX(calc(${overallScore}% - 50%)) translateX(-50%) rotate(0deg)` }}></div>
-                <div className="absolute bottom-0 left-0 right-0 h-1 bg-black"></div>
-              </div>
-              <div className={`text-xl font-bold ${getScoreColor()}`}>
-                {overallScore}%
-              </div>
+              <SimilarityGauge score={overallScore} />
               <div className="text-sm text-center text-muted-foreground">
                 {t('results.similarityScore')}
               </div>
@@ -77,9 +151,7 @@ const ResultsViewer: React.FC<ResultsProps> = ({
           {/* Risk level */}
           <div className="col-span-1 md:col-span-1">
             <div className="flex flex-col items-center justify-center h-full">
-              <div className={`text-sm font-medium px-3 py-1 rounded-full ${overallScore < 20 ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400' : overallScore < 40 ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400' : 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400'}`}>
-                {getPlagiarismRiskLevel()}
-              </div>
+              <RiskLevelIndicator score={overallScore} />
               <div className="text-sm mt-1 text-center text-muted-foreground">
                 {t('results.riskLevel.title')}
               </div>
