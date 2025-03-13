@@ -5,7 +5,7 @@ import { AuthTranslations } from './types/authTypes';
 import { HomePageTranslations } from './types/homePageTypes';
 import { CheckPageTranslations } from './types/checkPageTypes';
 import { AboutPageTranslations } from './types/aboutPageTypes';
-import { ProfilePageTranslations } from './types/profilePageTypes';
+import { ProfilePageTranslations } from './types/profile';
 import { LegalPageTranslations } from './types/legalPageTypes';
 
 // Re-export types
