@@ -1,6 +1,8 @@
 
 /**
  * External sources checking utilities for plagiarism detection
+ * 
+ * @deprecated This file is deprecated. Use the webSearch/ modules instead.
  */
 
 import { normalizeText, tokenizeText, calculateTF } from './normalize';
