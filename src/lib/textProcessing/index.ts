@@ -1,4 +1,3 @@
-
 /**
  * Main module for plagiarism detection
  */
@@ -103,9 +102,14 @@ export const analyzePlagiarism = async (text: string): Promise<{
   
   // Check against external websites (simulated API calls)
   // If we already have substantial matches, limit external source checks
-  const externalResults = hasSubstantialMatches 
-    ? await simulateWebSearch(text, 3) // Limited check
-    : await simulateWebSearch(text);   // Full check
+  let externalResults;
+  if (hasSubstantialMatches) {
+    // Call with only 1 argument since the simulateWebSearch function expects just the text
+    externalResults = await simulateWebSearch(text);
+  } else {
+    // Call with only 1 argument
+    externalResults = await simulateWebSearch(text);
+  }
   
   const externalSources = externalResults.map(result => ({
     source: result.title,
