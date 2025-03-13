@@ -1,3 +1,4 @@
+
 /**
  * Web search utilities for plagiarism detection
  * This module provides functionality to check text against external web sources
@@ -298,17 +299,6 @@ function generateDynamicSources(query: string): Array<{title: string, link: stri
   }
   
   return sources;
-}
-
-// Return simulated results with clear indication they are simulated
-  return [
-    {
-      title: "Симульований результат (немає API ключа)",
-      snippet: "Це симульований результат, оскільки ви не налаштували Google API. Будь ласка, налаштуйте Google Custom Search API для отримання реальних результатів.",
-      link: "https://console.cloud.google.com/apis/credentials",
-      similarity: 0.5
-    }
-  ];
 }
 
 // Common words to exclude from search queries for better results
