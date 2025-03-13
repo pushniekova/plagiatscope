@@ -1,9 +1,9 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Language, LanguageContextProps, Translations } from './types';
-import ukTranslations from './translations/ukTranslations';
-import enTranslations from './translations/enTranslations';
-import csTranslations from './translations/csTranslations';
+import ukTranslations from './translations/uk';
+import enTranslations from './translations/en';
+import csTranslations from './translations/cs';
 
 const LanguageContext = createContext<LanguageContextProps>({
   language: 'uk',
