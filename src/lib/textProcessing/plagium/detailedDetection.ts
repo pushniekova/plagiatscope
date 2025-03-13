@@ -57,7 +57,12 @@ export async function getDetailedPlagiarismScore({
       
       for (const result of simulatedResults) {
         if (!existingUrls.has(result.url)) {
-          sources.push(result);
+          sources.push({
+            url: result.url,
+            title: result.title,
+            snippet: result.snippet,
+            similarity: result.similarity
+          });
           existingUrls.add(result.url);
         }
       }

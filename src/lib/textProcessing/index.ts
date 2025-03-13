@@ -46,7 +46,6 @@ export {
   calculateCosineSimilarity,
   calculateJaccardSimilarity,
   findMatchingSegments,
-  simulateWebSearch,
   hashText,
   calculateNonOverlappingLength
 };
