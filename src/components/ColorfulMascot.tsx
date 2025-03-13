@@ -1,19 +1,21 @@
 
 import React, { useEffect, useRef } from 'react';
-import { Sparkles } from 'lucide-react';
+import { Sparkles, Star, Paperclip } from 'lucide-react';
 
 interface ColorfulMascotProps {
   size?: 'sm' | 'md' | 'lg';
   animated?: boolean;
   position?: 'left' | 'right' | 'center';
   style?: React.CSSProperties;
+  iconType?: 'star' | 'paperclip';
 }
 
 const ColorfulMascot: React.FC<ColorfulMascotProps> = ({ 
   size = 'md', 
   animated = true,
   position = 'right',
-  style
+  style,
+  iconType = 'star'
 }) => {
   const mascotRef = useRef<HTMLDivElement>(null);
   
@@ -69,6 +71,17 @@ const ColorfulMascot: React.FC<ColorfulMascotProps> = ({
     }
   };
 
+  const getIconSize = () => {
+    switch(size) {
+      case 'sm': return 48;
+      case 'lg': return 144;
+      case 'md':
+      default: return 96;
+    }
+  };
+
+  const MascotIcon = iconType === 'star' ? Star : Paperclip;
+
   return (
     <div 
       className={`relative ${getPosition()} ${animated ? 'transition-transform duration-300' : ''}`} 
@@ -79,11 +92,15 @@ const ColorfulMascot: React.FC<ColorfulMascotProps> = ({
         <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-gradient-to-r from-purple-500 to-indigo-600 text-white px-3 py-1 rounded-full text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
           FHub
         </div>
-        <img 
-          src="/lovable-uploads/colorful-creature.png" 
-          alt="ForgenHub mascot" 
-          className={`object-contain ${animated ? 'animated-float' : ''}`}
-        />
+        
+        <div className={`w-full h-full flex items-center justify-center ${animated ? 'animated-float' : ''}`}>
+          <MascotIcon 
+            size={getIconSize()} 
+            className="text-primary animate-pulse-slow" 
+            strokeWidth={1.5}
+            fill="rgba(var(--primary), 0.2)"
+          />
+        </div>
         
         {animated && (
           <>

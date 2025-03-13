@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Heart, Sparkles } from 'lucide-react';
+import { Heart, Sparkles, Star } from 'lucide-react';
 
 const Footer = () => {
   const { t } = useLanguage();
@@ -19,7 +19,7 @@ const Footer = () => {
           <div className="md:col-span-2">
             <Link to="/" className="inline-flex items-center gap-2 mb-4 no-underline">
               <span className="button-gradient text-white p-1 rounded-md flex items-center justify-center">
-                <Sparkles className="h-5 w-5" />
+                <Star className="h-5 w-5" />
               </span>
               <span className="text-xl font-bold rainbow-text">ForgenHub</span>
             </Link>
