@@ -1,22 +1,19 @@
 
 /**
- * Detailed plagiarism detection module with external API integration
+ * Detailed plagiarism detection module with simulated web search
  * Provides extended functionality compared to basic detection
  */
 
 import { getPlagiarismScore } from './basicDetection';
-import { simulateWebSearch } from '../externalSources';
+import { simulateWebSearch } from '../webSearch';
 import { searchMultipleResources } from '../webSearch';
 
 /**
- * Extended version with additional parameters matching Plagium API style
- * In a real implementation, these would connect to external services
+ * Extended version that combines basic plagiarism detection with web sources
  */
 export async function getDetailedPlagiarismScore({
   text,
   languageCode = 'en',
-  googleApiKey,
-  googleEngineId,
 }: {
   text: string;
   languageCode?: string;
@@ -31,22 +28,14 @@ export async function getDetailedPlagiarismScore({
     similarity: number;
   }>;
 }> {
-  // In a real implementation, we would use the Google API key and engine ID
-  // to perform actual searches. For now, we'll use our simulator.
-  
-  // Log API usage attempt (in a real app, we'd validate these)
-  if (googleApiKey && googleEngineId) {
-    console.log("External API keys provided - would use Google Custom Search in production");
-  }
-  
   // Basic implementation - get the score
   const score = await getPlagiarismScore({ text, languageCode });
   
-  // Get sources from both methods and combine them
+  // Get sources using our simulated web search
   let sources = [];
   
   try {
-    // Try using the web search API with Google Custom Search
+    // Use our simulated search
     const webResults = await searchMultipleResources(text);
     
     // Convert to the format our API expects
@@ -59,7 +48,7 @@ export async function getDetailedPlagiarismScore({
     
     sources = [...webSources];
     
-    // If we don't have enough results, supplement with our simulated search
+    // If we don't have enough results, supplement with our direct simulated search
     if (sources.length < 3) {
       const simulatedResults = await simulateWebSearch(text);
       
@@ -76,7 +65,7 @@ export async function getDetailedPlagiarismScore({
   } catch (error) {
     console.error("Error in web search:", error);
     
-    // Fall back to simulated search on error
+    // Fall back to direct simulated search on error
     sources = await simulateWebSearch(text);
   }
   

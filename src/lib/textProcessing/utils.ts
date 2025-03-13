@@ -4,7 +4,7 @@
  * Used across different plagiarism detection approaches
  */
 
-// Utility function to simulate hashing text (like in Plagiarism-Checker)
+// Utility function to simulate hashing text
 export function hashText(text: string): string {
   let hash = 0;
   for (let i = 0; i < text.length; i++) {
@@ -15,11 +15,11 @@ export function hashText(text: string): string {
   return hash.toString(16);
 }
 
-// Calculate total length of non-overlapping matched text segments (from Plagiarism-Checker)
+// Calculate total length of non-overlapping matched text segments
 export function calculateNonOverlappingLength(ranges: {start: number, end: number}[], textLength: number): number {
   if (ranges.length === 0) return 0;
   
-  // Sort ranges by start index - Fixed property name from startIndex to start
+  // Sort ranges by start index
   ranges.sort((a, b) => a.start - b.start);
   
   let totalLength = 0;
@@ -69,27 +69,11 @@ export function isPersonalApiConfigured(): boolean {
   }
 }
 
-// Check if Google API is configured
-export function isGoogleApiConfigured(): boolean {
-  try {
-    const apiConfig = localStorage.getItem('plagiarismCheckConfig');
-    if (!apiConfig) return false;
-    
-    const config = JSON.parse(apiConfig);
-    return !!config.googleApiKey && !!config.googleEngineId;
-  } catch (error) {
-    console.error('Error checking Google API configuration:', error);
-    return false;
-  }
-}
-
 // Get the external API configuration from browser storage
 export function getExternalApiConfig(): { 
   groupToken: string; 
   authorEmail: string;
   personalApiToken?: string;
-  googleApiKey?: string;
-  googleEngineId?: string;
 } | null {
   try {
     const apiConfig = localStorage.getItem('plagiarismCheckConfig');
@@ -107,8 +91,6 @@ export function saveExternalApiConfig(config: {
   groupToken: string; 
   authorEmail: string;
   personalApiToken?: string;
-  googleApiKey?: string;
-  googleEngineId?: string;
 }): void {
   try {
     localStorage.setItem('plagiarismCheckConfig', JSON.stringify(config));

@@ -10,9 +10,9 @@
 import { normalizeText, tokenizeText, calculateTF, generateNGrams } from './normalize';
 import { calculateCosineSimilarity, findMatchingSegments, calculateJaccardSimilarity } from './similarity';
 import { databaseSources, academicSources } from './databaseSources';
-import { simulateWebSearch } from './externalSources';
+import { simulateWebSearch } from './webSearch';
 import { searchMultipleResources } from './webSearch';
-import { hashText, calculateNonOverlappingLength, isGoogleApiConfigured } from './utils';
+import { hashText, calculateNonOverlappingLength } from './utils';
 import { getPlagiarismScore } from './plagiumDetection';
 
 /**
@@ -51,7 +51,7 @@ export const analyzePlagiarism = async (text: string): Promise<{
   const normalizedInputText = normalizeText(text);
   const inputTokens = tokenizeText(normalizedInputText);
   
-  // Generate n-grams for more robust comparison (as in the Plagiarism-Checker algorithm)
+  // Generate n-grams for more robust comparison
   const inputNGrams3 = generateNGrams(inputTokens, 3); // Trigrams
   const inputNGrams5 = generateNGrams(inputTokens, 5); // 5-grams for longer phrase matching
   const inputNGrams7 = generateNGrams(inputTokens, 7); // 7-grams for even more context
@@ -62,7 +62,6 @@ export const analyzePlagiarism = async (text: string): Promise<{
   const inputTF = calculateTF(inputTokens);
   
   // Step 2: Generate fingerprints (hashes) for each n-gram
-  // This is similar to the approach in the Plagiarism-Checker algorithm
   const inputFingerprints3 = new Set(inputNGrams3.map(hashText));
   const inputFingerprints5 = new Set(inputNGrams5.map(hashText));
   const inputFingerprints7 = new Set(inputNGrams7.map(hashText));
@@ -108,10 +107,10 @@ export const analyzePlagiarism = async (text: string): Promise<{
       (jaccardSimilarity5 * 0.3) + 
       (jaccardSimilarity7 * 0.5);
     
-    // Calculate cosine similarity for term frequency vectors (as in the Plagiarism-Checker)
+    // Calculate cosine similarity for term frequency vectors
     const cosineSimilarity = calculateCosineSimilarity(inputTF, sourceTF);
     
-    // Combined similarity score with multiple methods (as described in the Plagiarism-Checker)
+    // Combined similarity score with multiple methods
     const combinedSimilarity = (weightedJaccardSimilarity * 0.6) + (cosineSimilarity * 0.4);
     
     // If there's enough similarity, find matching segments
@@ -132,25 +131,18 @@ export const analyzePlagiarism = async (text: string): Promise<{
   
   console.log(`Found ${matches.length} matches in database sources`);
   
-  // Step 5: Check against external sources using our upgraded web search
-  console.log("Checking against external web sources");
+  // Step 5: Check against simulated web sources using our internal implementation
+  console.log("Checking against simulated web sources");
   
   let externalResults = [];
   
   try {
-    // Try using Google Custom Search API if configured, otherwise use simulated search
-    if (isGoogleApiConfigured()) {
-      console.log("Using Google Custom Search API for external sources");
-      externalResults = await searchMultipleResources(text);
-    } else {
-      console.log("Google API not configured, using simulated web search");
-      externalResults = await simulateWebSearch(text);
-    }
-    
+    // Use our simulated web search
+    externalResults = await searchMultipleResources(text);
     console.log(`Found ${externalResults.length} potential external sources`);
   } catch (error) {
     console.error("Error during web search:", error);
-    // Fallback to simulated search on error
+    // Fallback to direct simulation on error
     externalResults = await simulateWebSearch(text);
   }
   
@@ -186,14 +178,14 @@ export const analyzePlagiarism = async (text: string): Promise<{
   console.log(`Total matches including external sources: ${matches.length}`);
   
   // Step 6: Calculate overall score based on matches and external sources
-  // Avoid counting overlapping regions twice (as in Plagiarism-Checker)
+  // Avoid counting overlapping regions twice
   const matchRanges = matches.map(match => ({start: match.startIndex, end: match.endIndex}));
   const nonOverlappingLength = calculateNonOverlappingLength(matchRanges, text.length);
   const percentageMatched = (nonOverlappingLength / text.length) * 100;
   
   console.log(`Non-overlapping matched content: ${nonOverlappingLength} characters (${percentageMatched.toFixed(2)}%)`);
   
-  // Add weight from external sources (as in Plagiarism-Checker)
+  // Add weight from external sources
   const externalSourceWeight = externalSources.reduce((sum, source) => sum + source.similarity, 0);
   
   // Step 7: Also get score from Plagium-inspired method
@@ -202,9 +194,9 @@ export const analyzePlagiarism = async (text: string): Promise<{
   
   console.log(`Plagium-inspired score: ${plagiumScoreWeighted}%`);
   
-  // Calculate overall score with a weighted formula (adapted from Plagiarism-Checker + Plagium)
+  // Calculate overall score with a weighted formula
   // Give more weight to the original method but boost with Plagium-inspired score
-  let overallScore = Math.round(percentageMatched * 0.5); // Reduced from 0.6 to make room for web search
+  let overallScore = Math.round(percentageMatched * 0.5); // 50% from direct match analysis
   
   // Add external source weight (up to 20% of the score)
   overallScore += Math.min(20, Math.round(externalSourceWeight * 10));

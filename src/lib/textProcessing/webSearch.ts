@@ -1,12 +1,12 @@
 
 /**
  * Web search utilities for plagiarism detection
- * This module enables checking text against external web sources
+ * This module provides functionality to check text against external web sources
+ * For now, we're using a simulated search approach for testing
  */
 
 import { normalizeText, tokenizeText, calculateTF } from './normalize';
 import { calculateCosineSimilarity } from './similarity';
-import { getExternalApiConfig } from './utils';
 
 interface WebSearchResult {
   title: string;
@@ -16,74 +16,19 @@ interface WebSearchResult {
 }
 
 /**
- * Search for matching content using Google Custom Search API
- */
-export async function searchWithGoogleAPI(query: string): Promise<WebSearchResult[]> {
-  const config = getExternalApiConfig();
-  if (!config?.googleApiKey || !config?.googleEngineId) {
-    console.log("Google API not configured, falling back to simulated search");
-    return simulateGoogleSearch(query);
-  }
-  
-  try {
-    console.log(`Searching with Google API for: ${query.substring(0, 50)}...`);
-    const endpoint = `https://www.googleapis.com/customsearch/v1?key=${config.googleApiKey}&cx=${config.googleEngineId}&q=${encodeURIComponent(query)}`;
-    
-    const response = await fetch(endpoint);
-    
-    if (!response.ok) {
-      throw new Error(`Google API error: ${response.status} ${response.statusText}`);
-    }
-    
-    const data = await response.json();
-    
-    if (!data.items || !Array.isArray(data.items)) {
-      return [];
-    }
-    
-    // Calculate similarity for each result
-    return await Promise.all(data.items.map(async (item: any) => {
-      // Get the full content by fetching the page
-      // Note: In a production scenario, consider implementing a proper web scraper
-      // For now, we'll use the snippet that Google provides
-      const content = item.snippet || '';
-      
-      // Calculate similarity
-      const similarity = calculateTextSimilarity(query, content);
-      
-      return {
-        title: item.title || 'Unknown Source',
-        snippet: content,
-        link: item.link || '#',
-        similarity
-      };
-    }));
-  } catch (error) {
-    console.error("Error using Google Search API:", error);
-    // Fallback to simulated search if API fails
-    return simulateGoogleSearch(query);
-  }
-}
-
-/**
- * Search across multiple open web resources
+ * Search for matching content using simulated web resources
+ * This is our internal implementation that doesn't rely on external APIs
  */
 export async function searchMultipleResources(text: string): Promise<WebSearchResult[]> {
   // Generate a suitable search query from the text
   const query = generateSearchQuery(text);
   
-  // Try searching with Google API first
-  const googleResults = await searchWithGoogleAPI(query);
-  
-  // We could add more search resources here:
-  // const bingResults = await searchWithBingAPI(query);
-  // const duckduckgoResults = await searchWithDuckDuckGoAPI(query);
-  
-  // Combine and filter results
-  const allResults = [...googleResults];
+  // For now, we use our internal simulation
+  // In the future, this could be extended to use actual web APIs if needed
+  const results = await simulateWebSearch(query);
   
   // Filter by minimum similarity threshold and remove duplicates
-  return allResults
+  return results
     .filter(result => result.similarity > 0.15) // Only keep somewhat similar results
     .sort((a, b) => b.similarity - a.similarity); // Sort by highest similarity first
 }
@@ -142,12 +87,12 @@ function calculateTextSimilarity(text1: string, text2: string): number {
 }
 
 /**
- * Fallback method that simulates a web search when APIs are not available
- * This is used for development and when API keys are not configured
+ * Simulated web search that generates academic and informational results
+ * This is our internal implementation for testing purposes
  */
-async function simulateGoogleSearch(query: string): Promise<WebSearchResult[]> {
+export async function simulateWebSearch(query: string): Promise<WebSearchResult[]> {
   // Simulate API call delay
-  await new Promise(resolve => setTimeout(resolve, 1000));
+  await new Promise(resolve => setTimeout(resolve, 800));
   
   // Generate results with different similarity scores
   const queryWords = query.toLowerCase().split(/\s+/);
@@ -178,25 +123,64 @@ async function simulateGoogleSearch(query: string): Promise<WebSearchResult[]> {
       title: "Академічна доброчесність — Національний університет",
       link: "https://nau.edu.ua/ua/menu/quality/akademichna-dobrochesnist/",
       content: "Академічна доброчесність — це сукупність етичних принципів та визначених законом правил, якими мають керуватися учасники освітнього процесу під час навчання, викладання та провадження наукової діяльності."
+    },
+    {
+      title: "Turnitin - Promoting Academic Integrity",
+      link: "https://www.turnitin.com/",
+      content: "Turnitin solutions promote academic integrity, streamline grading and feedback, deter plagiarism, and improve student outcomes."
+    },
+    {
+      title: "Наукові публікації та видавнича етика",
+      link: "https://mon.gov.ua/ua/nauka/nauka/atestaciya-kadriv-vishoyi-kvalifikaciyi/naukovi-fahovi-vidannya",
+      content: "Публікації результатів наукових досліджень є невід'ємною частиною наукового процесу. Вимоги до публікацій результатів дисертаційних досліджень визначені наказом МОН України."
+    },
+    {
+      title: "Unicheck - Plagiarism Prevention Software",
+      link: "https://unicheck.com/",
+      content: "Unicheck is a plagiarism prevention software that helps educators and students create original content by checking papers for plagiarism and poor citation."
+    },
+    {
+      title: "Наукова комунікація в цифрову епоху",
+      link: "https://dntb.gov.ua/scientific-communication",
+      content: "Наукова комунікація в цифрову епоху суттєво змінюється. Цифрові технології надають нові інструменти для поширення наукових знань, обміну ідеями та наукового співробітництва."
     }
   ];
   
+  // Add dynamically generated sources based on the query
+  const dynamicSources = generateDynamicSources(query);
+  const allSources = [...potentialSources, ...dynamicSources];
+  
   // Calculate matches based on query words
-  return potentialSources.map(source => {
-    // Calculate a simple similarity score based on word overlap
+  return allSources.map(source => {
+    // Calculate a more sophisticated similarity score based on word overlap and phrase matching
     const contentWords = source.content.toLowerCase().split(/\s+/);
     let matchingWords = 0;
+    let phraseMatches = 0;
     
+    // Check for individual word matches
     for (const word of queryWords) {
       if (contentWords.includes(word)) {
         matchingWords++;
       }
     }
     
-    const overlapScore = queryWords.length > 0 ? matchingWords / queryWords.length : 0;
+    // Check for phrase matches (more valuable)
+    const queryPhrasesMatch = query.match(/"([^"]+)"/g) || [];
+    for (const phraseMatch of queryPhrasesMatch) {
+      const phrase = phraseMatch.replace(/"/g, '').toLowerCase();
+      if (source.content.toLowerCase().includes(phrase)) {
+        phraseMatches += phrase.split(/\s+/).length; // Weight by phrase length
+      }
+    }
+    
+    // Calculate combined score (phrase matches are worth more)
+    const wordMatchScore = queryWords.length > 0 ? matchingWords / queryWords.length : 0;
+    const phraseMatchScore = queryWords.length > 0 ? (phraseMatches * 2) / queryWords.length : 0;
+    const combinedScore = (wordMatchScore * 0.4) + (phraseMatchScore * 0.6);
     
     // Add some randomness to simulate variance in real search results
-    const similarity = overlapScore * (0.7 + Math.random() * 0.3);
+    const randomVariance = 0.7 + Math.random() * 0.3;
+    const similarity = combinedScore * randomVariance;
     
     return {
       title: source.title,
@@ -206,7 +190,51 @@ async function simulateGoogleSearch(query: string): Promise<WebSearchResult[]> {
     };
   }).filter(result => result.similarity > 0.1) // Filter out very low matches
     .sort((a, b) => b.similarity - a.similarity) // Sort by highest similarity
-    .slice(0, 3); // Limit to top 3 results
+    .slice(0, 5); // Limit to top 5 results
+}
+
+/**
+ * Generate dynamic sources based on the query for more realistic results
+ */
+function generateDynamicSources(query: string): Array<{title: string, link: string, content: string}> {
+  const sources = [];
+  const queryWords = query.toLowerCase().replace(/"/g, '').split(/\s+/);
+  
+  // Generate a source specifically related to the query
+  if (queryWords.length > 3) {
+    const titleWords = queryWords
+      .filter(word => word.length > 3)
+      .slice(0, 3)
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1));
+    
+    // Don't create if we don't have enough meaningful words
+    if (titleWords.length >= 2) {
+      const title = `${titleWords.join(' ')} - Академічний ресурс`;
+      const domain = titleWords.join('').toLowerCase().substring(0, 10);
+      const link = `https://academic-${domain}.edu/resources`;
+      
+      // Generate content that contains the exact query phrases for high similarity
+      const phrases = query.match(/"([^"]+)"/g) || [];
+      let content = "Цей академічний ресурс містить інформацію про ";
+      
+      // Include the exact phrases from the query in the content
+      if (phrases.length > 0) {
+        for (const phrase of phrases) {
+          const cleanPhrase = phrase.replace(/"/g, '');
+          content += `${cleanPhrase}, а також пов'язані теми. `;
+        }
+      } else {
+        // If no phrases, use the most significant words
+        content += `${queryWords.filter(w => w.length > 4).join(', ')}. `;
+      }
+      
+      content += "Дотримання академічної доброчесності та правильне цитування джерел є важливими аспектами наукової роботи.";
+      
+      sources.push({ title, link, content });
+    }
+  }
+  
+  return sources;
 }
 
 // Common words to exclude from search queries for better results
