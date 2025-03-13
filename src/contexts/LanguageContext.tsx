@@ -820,4 +820,4 @@ const translations: Record<Language, Translations> = {
       emptyText: 'Empty Text',
       enterTextMessage: 'Please enter text to check or upload a file',
     },
-    about:
+    about: {
