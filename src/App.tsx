@@ -35,11 +35,6 @@ const ClerkRouteChangeListener = () => {
 const App = () => (
   <ClerkProvider 
     publishableKey={PUBLISHABLE_KEY}
-    localization={{
-      socialButtonsBlockButton: {
-        divider: " "
-      }
-    }}
   >
     <QueryClientProvider client={queryClient}>
       <LanguageProvider>
