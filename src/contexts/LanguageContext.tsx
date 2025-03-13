@@ -38,7 +38,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     localStorage.setItem('language', language);
   }, [language]);
 
-  const t = (key: string): string => {
+  const t = (key: string, replacements?: Record<string, any>): string => {
     const keys = key.split('.');
     let value: any = translations[language];
 
@@ -49,6 +49,13 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         console.warn(`Translation key not found: ${key}`);
         return key;
       }
+    }
+
+    // If we have replacements, process the template string
+    if (replacements && typeof value === 'string') {
+      return Object.entries(replacements).reduce((str, [key, val]) => {
+        return str.replace(new RegExp(`{${key}}`, 'g'), val);
+      }, value);
     }
 
     return value;
