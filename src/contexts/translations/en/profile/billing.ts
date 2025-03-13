@@ -1,0 +1,26 @@
+
+export default {
+  title: 'Billing',
+  billingInfo: 'Billing Information',
+  billingInfoDesc: 'Manage your payment details and subscriptions',
+  noCard: 'No credit card',
+  addCardDesc: 'Add a payment card for quick and secure payments',
+  addCard: 'Add Card',
+  plans: 'Subscription Plans',
+  month: 'month',
+  freePlan: 'Free Plan',
+  freePlanDesc: 'Basic features for individuals',
+  freePlanFeature1: '10 checks per month',
+  freePlanFeature2: 'Basic analysis',
+  premiumPlan: 'Premium Plan',
+  premiumPlanDesc: 'More features for professionals',
+  premiumPlanFeature1: '100 checks per month',
+  premiumPlanFeature2: 'Advanced analysis',
+  proPlan: 'Pro Plan',
+  proPlanDesc: 'Complete solution for businesses',
+  proPlanFeature1: 'Unlimited checks',
+  proPlanFeature2: 'Priority support',
+  currentPlan: 'Current Plan',
+  upgradePlan: 'Upgrade Plan',
+  comingSoon: 'Coming soon'
+};

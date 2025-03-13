@@ -6,7 +6,7 @@ import { CheckPageTranslations } from './checkPageTypes';
 import { CommonTranslations } from './commonTypes';
 import { HomePageTranslations } from './homePageTypes';
 import { LegalPageTranslations } from './legalPageTypes';
-import { ProfilePageTranslations } from './profilePageTypes';
+import { ProfilePageTranslations } from './profile';
 
 // Combined type for all translations
 export type Translations = 
@@ -26,5 +26,5 @@ export * from './aboutPageTypes';
 export * from './checkPageTypes';
 export * from './authTypes';
 export * from './legalPageTypes';
-export * from './profilePageTypes';
+export * from './profile';
 export type { Language, LanguageContextProps };
