@@ -29,50 +29,80 @@ const SummaryTab: React.FC<SummaryTabProps> = ({
     return <XCircle className="h-5 w-5 text-red-500" />;
   };
 
-  // Extract document structure from the actual text content
+  // Extract document structure from the actual text content using improved regex
   const getDocumentStructure = (text: string) => {
     if (!text) {
       return [];
     }
 
-    // Use regex to find headings (uppercase words followed by numbers or dots)
-    // This is a simplified approach - in a real implementation, you would use more sophisticated parsing
-    const headingRegex = /^\s*([\u0410-\u042F\u0406\u0407\u0454\u0404\u0490\s0-9.]+)[.\s]*$/gm;
+    // Try to detect the document language to use appropriate regex patterns
+    const hasCyrillic = /[\u0400-\u04FF]/.test(text);
+    
+    let headingRegex;
+    if (hasCyrillic) {
+      // For Ukrainian/Russian/Cyrillic documents - match uppercase headings, numbered sections, etc.
+      headingRegex = /^\s*((?:[\u0410-\u042F\u0406\u0407\u0404\u0490]{2,}|(?:\d+\.)+\s*[\u0410-\u042F\u0406\u0407\u0404\u0490])[^\n\r.]*)[.\s]*$/gm;
+    } else {
+      // For English/Latin alphabet documents
+      headingRegex = /^\s*(?:(?:[A-Z]{2,}[^a-z\n\r.]*)|(?:(?:\d+\.)+\s*[A-Z][^\n\r.]*))[.\s]*$/gm;
+    }
+    
+    // Extract all potential headings
     const matches = [...text.matchAll(headingRegex)];
+    console.log("Detected potential headings:", matches.length);
     
     const headings = matches
-      .map(match => match[1].trim())
-      .filter(heading => heading.length > 3) // Filter out short matches
-      .slice(0, 8); // Limit to reasonable number of headings
+      .map(match => match[0].trim())
+      .filter(heading => heading.length > 3 && heading.length < 100) // Filter reasonable heading lengths
+      .slice(0, 12); // Limit to reasonable number of headings
+    
+    console.log("Filtered headings:", headings);
     
     // Create document structure with estimated page numbers
     let page = 4; // Start at page 4
     return headings.map((title, index) => {
       const currentPage = page;
-      // Increment pages based on position and heading type
-      if (title.includes('РОЗДІЛ')) {
+      
+      // Increment pages based on heading type
+      if (/РОЗДІЛ|CHAPTER|SECTION|ГЛАВА/i.test(title)) {
         page += 6;
-      } else if (title.includes('ВИСНОВКИ') || title.includes('СПИСОК')) {
+      } else if (/ВИСНОВКИ|CONCLUSION|SUMMARY|СПИСОК|REFERENCES|BIBLIOGRAPHY/i.test(title)) {
+        page += 3;
+      } else if (/^\d+\.\d+/.test(title)) { // Subsection like 1.2
         page += 2;
       } else {
-        page += 2 + index;
+        page += 3 + (index % 2); // Vary page counts slightly
       }
+      
       return { title, page: currentPage };
     });
   };
 
   const documentStructure = getDocumentStructure(originalText);
+  console.log("Extracted document structure:", documentStructure);
 
-  // If no structure was detected, use a reasonable fallback
-  const finalDocumentStructure = documentStructure.length > 0 ? documentStructure : [
+  // If no structure was detected, use a reasonable fallback based on document language
+  const hasCyrillic = originalText && /[\u0400-\u04FF]/.test(originalText);
+  
+  const defaultStructure = hasCyrillic ? [
     { title: 'ВСТУП', page: 4 },
-    { title: 'РОЗДІЛ 1. БОТАНІЧНА ХАРАКТЕРИСТИКА ВИДІВ', page: 6 },
+    { title: 'РОЗДІЛ 1. ТЕОРЕТИЧНА ЧАСТИНА', page: 6 },
     { title: '1.1. Підрозділ перший', page: 8 },
     { title: '1.2. Підрозділ другий', page: 10 },
-    { title: 'РОЗДІЛ 2. АНАЛІЗ ДОСЛІДЖЕНЬ', page: 12 },
+    { title: 'РОЗДІЛ 2. ПРАКТИЧНА ЧАСТИНА', page: 12 },
     { title: 'ВИСНОВКИ', page: 22 },
     { title: 'СПИСОК ВИКОРИСТАНИХ ДЖЕРЕЛ', page: 24 },
+  ] : [
+    { title: 'INTRODUCTION', page: 4 },
+    { title: 'CHAPTER 1. THEORETICAL FRAMEWORK', page: 6 },
+    { title: '1.1. First subsection', page: 8 },
+    { title: '1.2. Second subsection', page: 10 },
+    { title: 'CHAPTER 2. PRACTICAL ANALYSIS', page: 12 },
+    { title: 'CONCLUSIONS', page: 22 },
+    { title: 'REFERENCES', page: 24 },
   ];
+  
+  const finalDocumentStructure = documentStructure.length > 0 ? documentStructure : defaultStructure;
 
   return (
     <div className="p-4">

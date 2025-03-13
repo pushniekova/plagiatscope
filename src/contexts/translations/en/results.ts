@@ -21,6 +21,7 @@ export default {
   documentStructure: 'Document Structure',
   paraphrasing: 'Paraphrasing',
   improperCitation: 'Improper Citation',
+  highlightedTextHelp: 'Highlighted sections show potential plagiarism. Hover over highlighted text to see the source.',
   highPlagiarismWarning: 'High levels of plagiarism detected. We recommend revising your document to include proper citations or make the content more original.',
   riskLevel: {
     title: 'Risk Level',

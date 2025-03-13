@@ -21,6 +21,7 @@ export default {
   documentStructure: 'Struktura dokumentu',
   paraphrasing: 'Parafráze',
   improperCitation: 'Nesprávná citace',
+  highlightedTextHelp: 'Zvýrazněné části ukazují potenciální plagiát. Najeďte myší na zvýrazněný text pro zobrazení zdroje.',
   highPlagiarismWarning: 'Zjištěna vysoká úroveň plagiátu. Doporučujeme dokument revidovat, abyste zahrnuli správné citace nebo učinili obsah originálnějším.',
   riskLevel: {
     title: 'Úroveň rizika',
