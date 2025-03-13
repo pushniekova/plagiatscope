@@ -3,8 +3,11 @@ import { useEffect } from 'react';
 import { CheckCircle, Shield, Code } from 'lucide-react';
 import MainLayout from '@/layouts/MainLayout';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const AboutPage = () => {
+  const { t } = useLanguage();
+  
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -18,14 +21,13 @@ const AboutPage = () => {
         <div className="container mx-auto px-6">
           <div className="max-w-3xl mx-auto text-center">
             <span className="inline-block bg-primary/10 text-primary rounded-full px-3 py-1 text-sm font-medium mb-6 animate-fade-in">
-              About Us
+              {t('about.badge')}
             </span>
             <h1 className="text-4xl md:text-5xl font-medium mb-6 animate-slide-in-up">
-              Empowering Academic Integrity
+              {t('about.title')}
             </h1>
             <p className="text-xl text-muted-foreground mb-12 animate-slide-in-up animation-delay-200">
-              PlagiatScope is a cutting-edge plagiarism detection service designed for students, teachers, 
-              and content creators who value authenticity and originality.
+              {t('about.description')}
             </p>
           </div>
         </div>
@@ -37,44 +39,41 @@ const AboutPage = () => {
           <div className="max-w-4xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
               <div>
-                <span className="text-primary font-medium">Our Mission</span>
+                <span className="text-primary font-medium">{t('about.mission.label')}</span>
                 <h2 className="text-3xl md:text-4xl font-medium mt-2 mb-6">
-                  Promoting Authentic Content Creation
+                  {t('about.mission.title')}
                 </h2>
                 <p className="text-muted-foreground mb-4">
-                  Our mission is to provide accessible and effective tools for ensuring content originality and 
-                  academic integrity. We believe in the importance of original thought and proper attribution 
-                  in academic and professional contexts.
+                  {t('about.mission.description1')}
                 </p>
                 <p className="text-muted-foreground mb-6">
-                  PlagiatScope aims to be an educational tool that not only detects plagiarism but also helps 
-                  users understand the importance of original writing and proper citation practices.
+                  {t('about.mission.description2')}
                 </p>
                 <Link
                   to="/check"
                   className="bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium transition-all hover:brightness-110 active:brightness-90 inline-block"
                 >
-                  Try Our Tool
+                  {t('about.mission.button')}
                 </Link>
               </div>
               
               <div className="bg-card border border-border p-8 rounded-2xl shadow-sm">
-                <h3 className="text-xl font-medium mb-4">Core Values</h3>
+                <h3 className="text-xl font-medium mb-4">{t('about.values.title')}</h3>
                 <ul className="space-y-4">
                   {[
                     {
-                      title: "Integrity",
-                      description: "We uphold the highest standards of academic honesty and integrity in everything we do.",
+                      title: t('about.values.integrity.title'),
+                      description: t('about.values.integrity.description'),
                       icon: <Shield className="h-5 w-5" />
                     },
                     {
-                      title: "Accuracy",
-                      description: "We strive for precision in our detection algorithms to provide reliable results.",
+                      title: t('about.values.accuracy.title'),
+                      description: t('about.values.accuracy.description'),
                       icon: <CheckCircle className="h-5 w-5" />
                     },
                     {
-                      title: "Innovation",
-                      description: "We continuously improve our technology to address evolving plagiarism challenges.",
+                      title: t('about.values.innovation.title'),
+                      description: t('about.values.innovation.description'),
                       icon: <Code className="h-5 w-5" />
                     }
                   ].map((value, index) => (
@@ -100,26 +99,25 @@ const AboutPage = () => {
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
-              <span className="text-primary font-medium">Our Technology</span>
+              <span className="text-primary font-medium">{t('about.technology.label')}</span>
               <h2 className="text-3xl md:text-4xl font-medium mt-2 mb-6">
-                How PlagiatScope Works
+                {t('about.technology.title')}
               </h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                Our plagiarism detection system utilizes advanced algorithms and natural language processing 
-                to provide accurate and comprehensive results.
+                {t('about.technology.description')}
               </p>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
               <div className="bg-card border border-border rounded-xl p-6 relative overflow-hidden">
                 <div className="relative z-10">
-                  <h3 className="text-xl font-medium mb-4">Text Processing</h3>
+                  <h3 className="text-xl font-medium mb-4">{t('about.textProcessing.title')}</h3>
                   <ol className="space-y-3">
                     {[
-                      "Normalization: Converting text to a standard format for analysis",
-                      "Tokenization: Breaking text into analyzable units",
-                      "N-gram generation: Creating sequences of words for comparison",
-                      "Hashing: Generating unique identifiers for efficient matching"
+                      t('about.textProcessing.step1'),
+                      t('about.textProcessing.step2'),
+                      t('about.textProcessing.step3'),
+                      t('about.textProcessing.step4')
                     ].map((step, index) => (
                       <li key={index} className="flex gap-3">
                         <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm font-medium">
@@ -135,13 +133,13 @@ const AboutPage = () => {
               
               <div className="bg-card border border-border rounded-xl p-6 relative overflow-hidden">
                 <div className="relative z-10">
-                  <h3 className="text-xl font-medium mb-4">Comparison & Analysis</h3>
+                  <h3 className="text-xl font-medium mb-4">{t('about.comparison.title')}</h3>
                   <ol className="space-y-3">
                     {[
-                      "Database comparison: Matching against a vast library of sources",
-                      "Similarity calculation: Determining percentage of matching content",
-                      "Source identification: Finding the origins of matched text",
-                      "Report generation: Creating comprehensive, understandable results"
+                      t('about.comparison.step1'),
+                      t('about.comparison.step2'),
+                      t('about.comparison.step3'),
+                      t('about.comparison.step4')
                     ].map((step, index) => (
                       <li key={index} className="flex gap-3">
                         <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm font-medium">
@@ -157,10 +155,9 @@ const AboutPage = () => {
             </div>
             
             <div className="mt-12 bg-primary/5 border border-primary/10 rounded-xl p-8 text-center">
-              <h3 className="text-xl font-medium mb-3">Supporting Multiple Languages</h3>
+              <h3 className="text-xl font-medium mb-3">{t('about.languages.title')}</h3>
               <p className="text-muted-foreground mb-6">
-                Our system is designed to handle text in Ukrainian, English, and other languages, with specialized 
-                processing for each language's unique features and characteristics.
+                {t('about.languages.description')}
               </p>
               <div className="flex flex-wrap justify-center gap-2">
                 {["Ukrainian", "English", "Russian", "Polish", "German", "French"].map((language) => (
@@ -179,16 +176,16 @@ const AboutPage = () => {
         <div className="container mx-auto px-6">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-medium mb-6">
-              Ready to Check Your Text?
+              {t('about.cta.title')}
             </h2>
             <p className="text-muted-foreground mb-8 text-lg">
-              Experience the power and precision of our plagiarism detection tool.
+              {t('about.cta.description')}
             </p>
             <Link
               to="/check"
               className="bg-primary text-primary-foreground px-8 py-3 rounded-lg font-medium transition-all hover:brightness-110 active:brightness-90 inline-block"
             >
-              Start a Free Check
+              {t('about.cta.button')}
             </Link>
           </div>
         </div>
