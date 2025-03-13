@@ -2,11 +2,14 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
+import LanguageSelector from './LanguageSelector';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const { t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,9 +30,9 @@ const Header = () => {
   }, [location.pathname]);
 
   const navLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'Check', path: '/check' },
-    { name: 'About', path: '/about' },
+    { name: t('nav.home'), path: '/' },
+    { name: t('nav.check'), path: '/check' },
+    { name: t('nav.about'), path: '/about' },
   ];
 
   const isActive = (path: string) => {
@@ -75,18 +78,23 @@ const Header = () => {
               to="/check"
               className="bg-primary text-primary-foreground px-4 py-2 rounded-lg transition-all hover:brightness-110 active:brightness-90 text-sm font-medium"
             >
-              Check Text
+              {t('nav.checkText')}
             </Link>
+            
+            <LanguageSelector />
           </nav>
 
-          {/* Mobile Menu Button */}
-          <button 
-            className="md:hidden text-foreground p-1"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          {/* Mobile Menu Button and Language Selector */}
+          <div className="md:hidden flex items-center gap-2">
+            <LanguageSelector />
+            <button 
+              className="text-foreground p-1"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -111,7 +119,7 @@ const Header = () => {
               to="/check"
               className="bg-primary text-primary-foreground px-4 py-2 rounded-lg text-center transition-all hover:brightness-110 active:brightness-90 text-sm font-medium"
             >
-              Check Text
+              {t('nav.checkText')}
             </Link>
           </div>
         </div>

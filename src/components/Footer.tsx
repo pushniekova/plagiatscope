@@ -1,8 +1,10 @@
 
 import { Link } from 'react-router-dom';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const { t } = useLanguage();
 
   return (
     <footer className="py-12 bg-secondary/50">
@@ -14,48 +16,47 @@ const Footer = () => {
               <span>PlagiatScope</span>
             </Link>
             <p className="text-muted-foreground max-w-md">
-              Advanced plagiarism detection service for students, teachers, and content creators. 
-              Check your text for originality with precision and ease.
+              {t('footer.description')}
             </p>
           </div>
 
           <div>
-            <h4 className="text-base font-medium mb-4">Navigation</h4>
+            <h4 className="text-base font-medium mb-4">{t('footer.navigation')}</h4>
             <ul className="space-y-2">
               <li>
                 <Link to="/" className="text-muted-foreground hover:text-primary transition-colors">
-                  Home
+                  {t('nav.home')}
                 </Link>
               </li>
               <li>
                 <Link to="/check" className="text-muted-foreground hover:text-primary transition-colors">
-                  Check Text
+                  {t('nav.check')}
                 </Link>
               </li>
               <li>
                 <Link to="/about" className="text-muted-foreground hover:text-primary transition-colors">
-                  About
+                  {t('nav.about')}
                 </Link>
               </li>
             </ul>
           </div>
 
           <div>
-            <h4 className="text-base font-medium mb-4">Legal</h4>
+            <h4 className="text-base font-medium mb-4">{t('footer.legal')}</h4>
             <ul className="space-y-2">
               <li>
                 <Link to="#" className="text-muted-foreground hover:text-primary transition-colors">
-                  Terms of Service
+                  {t('footer.terms')}
                 </Link>
               </li>
               <li>
                 <Link to="#" className="text-muted-foreground hover:text-primary transition-colors">
-                  Privacy Policy
+                  {t('footer.privacy')}
                 </Link>
               </li>
               <li>
                 <Link to="#" className="text-muted-foreground hover:text-primary transition-colors">
-                  Cookie Policy
+                  {t('footer.cookies')}
                 </Link>
               </li>
             </ul>
@@ -63,9 +64,9 @@ const Footer = () => {
         </div>
 
         <div className="mt-12 pt-6 border-t border-border flex flex-col md:flex-row justify-between items-center text-muted-foreground text-sm">
-          <p>© {currentYear} PlagiatScope. All rights reserved.</p>
+          <p>{t('footer.copyright').replace('{year}', currentYear.toString())}</p>
           <div className="mt-4 md:mt-0">
-            Made with precision and care
+            {t('footer.tagline')}
           </div>
         </div>
       </div>

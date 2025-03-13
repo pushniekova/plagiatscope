@@ -1,8 +1,11 @@
 
 import { ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const Hero = () => {
+  const { t } = useLanguage();
+
   return (
     <section className="pt-32 pb-16 md:pt-40 md:pb-24 relative overflow-hidden">
       {/* Background gradient */}
@@ -16,17 +19,17 @@ const Hero = () => {
         <div className="max-w-4xl mx-auto text-center">
           <div className="inline-block animate-slide-in-down">
             <span className="inline-block bg-primary/10 text-primary rounded-full px-3 py-1 text-sm font-medium mb-6">
-              Modern plagiarism detection
+              {t('hero.badge')}
             </span>
           </div>
           
-          <h1 className="text-4xl md:text-6xl font-medium leading-tight md:leading-tight mb-6 animate-slide-in-up">
-            Ensure Your Content's <span className="text-primary">Originality</span> with Precision
-          </h1>
+          <h1 
+            className="text-4xl md:text-6xl font-medium leading-tight md:leading-tight mb-6 animate-slide-in-up"
+            dangerouslySetInnerHTML={{ __html: t('hero.title').replace('<span>', '<span class="text-primary">').replace('</span>', '</span>') }}
+          />
           
           <p className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto animate-slide-in-up animation-delay-200">
-            Advanced text analysis for students, teachers, and content creators. 
-            Fast, accurate, and easy-to-use plagiarism detection service.
+            {t('hero.description')}
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12 animate-slide-in-up animation-delay-400">
@@ -34,14 +37,14 @@ const Hero = () => {
               to="/check"
               className="bg-primary text-primary-foreground px-8 py-3 rounded-lg font-medium transition-all hover:brightness-110 active:brightness-90 flex items-center justify-center"
             >
-              Check Your Text
+              {t('hero.checkButton')}
               <ChevronRight className="ml-2 h-4 w-4" />
             </Link>
             <Link
               to="/about"
               className="bg-secondary text-foreground px-8 py-3 rounded-lg font-medium transition-colors hover:bg-secondary/80 flex items-center justify-center"
             >
-              Learn More
+              {t('hero.learnMore')}
             </Link>
           </div>
           
@@ -53,8 +56,8 @@ const Hero = () => {
                   <path d="m21 21-4.3-4.3"/>
                 </svg>
               </div>
-              <h3 className="text-lg font-medium mb-2">Precise Analysis</h3>
-              <p className="text-muted-foreground text-sm">State-of-the-art algorithms for accurate plagiarism detection</p>
+              <h3 className="text-lg font-medium mb-2">{t('feature.analysis.title')}</h3>
+              <p className="text-muted-foreground text-sm">{t('feature.analysis.description')}</p>
             </div>
             
             <div className="bg-card rounded-2xl p-6 shadow-sm">
@@ -63,8 +66,8 @@ const Hero = () => {
                   <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
                 </svg>
               </div>
-              <h3 className="text-lg font-medium mb-2">Lightning Fast</h3>
-              <p className="text-muted-foreground text-sm">Get results within seconds, not minutes or hours</p>
+              <h3 className="text-lg font-medium mb-2">{t('feature.fast.title')}</h3>
+              <p className="text-muted-foreground text-sm">{t('feature.fast.description')}</p>
             </div>
             
             <div className="bg-card rounded-2xl p-6 shadow-sm">
@@ -77,8 +80,8 @@ const Hero = () => {
                   <line x1="10" x2="8" y1="9" y2="9"/>
                 </svg>
               </div>
-              <h3 className="text-lg font-medium mb-2">Detailed Reports</h3>
-              <p className="text-muted-foreground text-sm">Comprehensive reports highlighting potential issues</p>
+              <h3 className="text-lg font-medium mb-2">{t('feature.reports.title')}</h3>
+              <p className="text-muted-foreground text-sm">{t('feature.reports.description')}</p>
             </div>
           </div>
         </div>
