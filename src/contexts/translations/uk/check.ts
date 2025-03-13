@@ -1,3 +1,4 @@
+
 export default {
   badge: 'Перевірка тексту',
   title: 'Перевірте текст на плагіат',
@@ -40,12 +41,17 @@ export default {
     groupTokenPlaceholder: 'Введіть ваш PlagiarismCheck.org API token',
     authorEmail: 'Email автора',
     authorEmailPlaceholder: 'Введіть зареєстрований email',
+    personalApiToken: 'Персональний API Token',
+    personalApiTokenPlaceholder: 'Введіть ваш персональний API token',
+    plagiarismTab: 'Перевірка плагіату',
+    aiTab: 'Виявлення AI',
     warning: 'Ваші облікові дані зберігаються локально у вашому браузері',
     saveButton: 'Зберегти налаштування',
     configured: 'API успішно налаштовано',
     configSaved: 'Налаштування API збережено',
     configSavedDesc: 'Ваші облікові дані PlagiarismCheck.org API були збережені',
     missingFields: 'Будь ласка, заповніть всі обов\'язкові поля',
+    missingApiToken: 'Будь ласка, введіть ваш API token',
     invalidEmail: 'Будь ласка, введіть дійсну адресу електронної пошти',
   },
 };

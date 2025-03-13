@@ -1,3 +1,4 @@
+
 export default {
   badge: 'Plagiarism Check',
   title: 'Check Your Text for Plagiarism',
@@ -37,12 +38,17 @@ export default {
     groupTokenPlaceholder: 'Enter your PlagiarismCheck.org API token',
     authorEmail: 'Author Email',
     authorEmailPlaceholder: 'Enter your registered email',
+    personalApiToken: 'Personal API Token',
+    personalApiTokenPlaceholder: 'Enter your PlagiarismCheck.org personal API token',
+    plagiarismTab: 'Plagiarism Check',
+    aiTab: 'AI Detection',
     warning: 'Your credentials are stored locally in your browser',
     saveButton: 'Save Configuration',
     configured: 'API configured successfully',
     configSaved: 'API Configuration Saved',
     configSavedDesc: 'Your PlagiarismCheck.org API credentials have been saved',
     missingFields: 'Please fill in all required fields',
+    missingApiToken: 'Please enter your API token',
     invalidEmail: 'Please enter a valid email address',
   },
 };

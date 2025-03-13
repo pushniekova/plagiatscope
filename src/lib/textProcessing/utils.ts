@@ -55,8 +55,26 @@ export function isExternalApiConfigured(): boolean {
   }
 }
 
+// Check if the personal API token is configured
+export function isPersonalApiConfigured(): boolean {
+  try {
+    const apiConfig = localStorage.getItem('plagiarismCheckConfig');
+    if (!apiConfig) return false;
+    
+    const config = JSON.parse(apiConfig);
+    return !!config.personalApiToken;
+  } catch (error) {
+    console.error('Error checking personal API configuration:', error);
+    return false;
+  }
+}
+
 // Get the external API configuration from browser storage
-export function getExternalApiConfig(): { groupToken: string; authorEmail: string } | null {
+export function getExternalApiConfig(): { 
+  groupToken: string; 
+  authorEmail: string;
+  personalApiToken?: string; 
+} | null {
   try {
     const apiConfig = localStorage.getItem('plagiarismCheckConfig');
     if (!apiConfig) return null;
@@ -69,7 +87,11 @@ export function getExternalApiConfig(): { groupToken: string; authorEmail: strin
 }
 
 // Save external API configuration to browser storage
-export function saveExternalApiConfig(config: { groupToken: string; authorEmail: string }): void {
+export function saveExternalApiConfig(config: { 
+  groupToken: string; 
+  authorEmail: string;
+  personalApiToken?: string;
+}): void {
   try {
     localStorage.setItem('plagiarismCheckConfig', JSON.stringify(config));
   } catch (error) {

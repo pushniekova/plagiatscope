@@ -4,6 +4,22 @@
  * Based on the API documentation at https://plagiarismcheck.org/api/
  */
 
+// Common types for both Plagiarism and AI detection APIs
+export enum CheckStatus {
+  // Plagiarism check statuses
+  STATE_STORED = 2,
+  STATE_SUBMITTED = 3,
+  STATE_FAILED = 4,
+  STATE_CHECKED = 5,
+  
+  // AI detection statuses
+  AI_STATE_QUEUED = 1,
+  AI_STATE_IN_PROGRESS = 2,
+  AI_STATE_FAILED = 3,
+  AI_STATE_CHECKED = 4
+}
+
+// Plagiarism check types
 interface PlagiarismCheckStatus {
   id: number;
   state: number;
@@ -54,17 +70,49 @@ interface PlagiarismReport {
   };
 }
 
+// AI detection types
+interface AiDetectionStatus {
+  id: number;
+  status: number;
+  percent: number | null;
+  processed_percent: number | null;
+  strong_percent: number | null;
+  likely_percent: number | null;
+  chunks: AiDetectionChunk[];
+}
+
+interface AiDetectionChunk {
+  reliability: number;
+  position: [number, number]; // [start, end]
+}
+
+interface AiDetectionReport {
+  id: number;
+  status: number;
+  percent: number;
+  processed_percent: number;
+  strong_percent: number;
+  likely_percent: number;
+  content: string;
+  chunks: AiDetectionChunk[];
+}
+
 // Configuration object for the API
 export interface PlagiarismCheckConfig {
+  // Organization API (plagiarism check)
   groupToken: string;
   authorEmail: string;
+  
+  // Personal API (AI detection)
+  personalApiToken?: string;
 }
 
 /**
  * API service for interacting with PlagiarismCheck.org
  */
 export class PlagiarismCheckService {
-  private baseUrl = 'https://plagiarismcheck.org/api/org';
+  private baseOrgUrl = 'https://plagiarismcheck.org/api/org';
+  private basePersonalUrl = 'https://plagiarismcheck.org/api/v1';
   private config: PlagiarismCheckConfig | null = null;
   
   /**
@@ -72,7 +120,7 @@ export class PlagiarismCheckService {
    */
   public initialize(config: PlagiarismCheckConfig): void {
     this.config = config;
-    console.log('PlagiarismCheck API initialized with token');
+    console.log('PlagiarismCheck API initialized with tokens');
   }
 
   /**
@@ -81,133 +129,263 @@ export class PlagiarismCheckService {
   public isConfigured(): boolean {
     return !!this.config && !!this.config.groupToken && !!this.config.authorEmail;
   }
+
+  /**
+   * Check if the personal API is configured
+   */
+  public isPersonalApiConfigured(): boolean {
+    return !!this.config && !!this.config.personalApiToken;
+  }
   
   /**
-   * Submit a text for plagiarism checking
+   * Submit a text for plagiarism checking (organization API)
    */
-  public async submitText(text: string): Promise<number> {
+  public async submitTextForPlagiarism(text: string): Promise<number> {
     if (!this.isConfigured()) {
       throw new Error('PlagiarismCheck API not configured. Call initialize() first.');
     }
     
-    console.log('Submitting text to PlagiarismCheck API');
+    console.log('Submitting text to PlagiarismCheck API for plagiarism check');
     
-    // In a real implementation, this would be a fetch request to the API
-    // For our demo, we'll simulate the API response
+    const formData = new FormData();
+    formData.append('group_token', this.config!.groupToken);
+    formData.append('author', this.config!.authorEmail);
+    formData.append('text', text);
     
-    // Simulated API call
-    return new Promise((resolve) => {
-      // Simulate API delay
-      setTimeout(() => {
-        // Return a fake text ID
-        resolve(Math.floor(Math.random() * 10000));
-      }, 1500);
-    });
+    try {
+      const response = await fetch(`${this.baseOrgUrl}/text/check/`, {
+        method: 'POST',
+        body: formData
+      });
+      
+      if (!response.ok) {
+        throw new Error(`API error: ${response.status} ${response.statusText}`);
+      }
+      
+      const data = await response.json();
+      
+      if (!data.success) {
+        throw new Error('API returned failure status');
+      }
+      
+      return data.data.id;
+    } catch (error) {
+      console.error('Error submitting text for plagiarism check:', error);
+      throw error;
+    }
   }
   
   /**
    * Check the status of a plagiarism check
    */
-  public async checkStatus(textId: number): Promise<PlagiarismCheckStatus> {
+  public async checkPlagiarismStatus(textId: number): Promise<PlagiarismCheckStatus> {
     if (!this.isConfigured()) {
       throw new Error('PlagiarismCheck API not configured. Call initialize() first.');
     }
     
-    console.log(`Checking status for text ID: ${textId}`);
+    console.log(`Checking plagiarism status for text ID: ${textId}`);
     
-    // Simulated API call
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        // Return a fake status with the text complete
-        resolve({
-          id: textId,
-          state: 5, // STATE_CHECKED
-          filename: 'document.txt',
-          report: {
-            id: textId + 100,
-            percent: (Math.random() * 30).toFixed(2),
-            source_count: Math.floor(Math.random() * 5) + 1
-          }
-        });
-      }, 1000);
-    });
+    const formData = new FormData();
+    formData.append('group_token', this.config!.groupToken);
+    
+    try {
+      const response = await fetch(`${this.baseOrgUrl}/text/status/${textId}/`, {
+        method: 'POST',
+        body: formData
+      });
+      
+      if (!response.ok) {
+        throw new Error(`API error: ${response.status} ${response.statusText}`);
+      }
+      
+      const data = await response.json();
+      
+      if (!data.success) {
+        throw new Error('API returned failure status');
+      }
+      
+      return data.data;
+    } catch (error) {
+      console.error('Error checking plagiarism status:', error);
+      throw error;
+    }
   }
   
   /**
    * Get the plagiarism report for a text
    */
-  public async getReport(textId: number): Promise<PlagiarismReport> {
+  public async getPlagiarismReport(textId: number): Promise<PlagiarismReport> {
     if (!this.isConfigured()) {
       throw new Error('PlagiarismCheck API not configured. Call initialize() first.');
     }
     
-    console.log(`Getting report for text ID: ${textId}`);
+    console.log(`Getting plagiarism report for text ID: ${textId}`);
     
-    // Simulated API call
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        // Generate a simulated report with random matches
-        const matchPercent = parseFloat((Math.random() * 30).toFixed(2));
-        const sourceCount = Math.floor(Math.random() * 5) + 1;
-        
-        resolve({
-          report: {
-            id: textId + 100,
-            percent: matchPercent.toString(),
-            source_count: sourceCount
-          },
-          report_data: {
-            nodes: this.generateSimulatedNodes(),
-            sources: this.generateSimulatedSources(sourceCount),
-            matched_percent: matchPercent
-          }
-        });
-      }, 1500);
-    });
-  }
-  
-  // Helper methods to generate simulated data
-  
-  private generateSimulatedNodes(): PlagiarismReportNode[] {
-    const nodes: PlagiarismReportNode[] = [];
-    // This would generate sample nodes with matches
-    // For a real implementation, we would process the actual API response
-    return nodes;
-  }
-  
-  private generateSimulatedSources(count: number): PlagiarismSource[] {
-    const sources: PlagiarismSource[] = [];
-    for (let i = 0; i < count; i++) {
-      sources.push({
-        content_type: 'text/plain',
-        source: `http://example.com/resource/${i + 1}`,
-        percent: parseFloat((Math.random() * 20).toFixed(2)),
-        plagiarism_percent: parseFloat((Math.random() * 10).toFixed(2)),
-        link: {
-          name: 'example.com',
-          urls: [`http://example.com/resource/${i + 1}`]
-        }
+    const formData = new FormData();
+    formData.append('group_token', this.config!.groupToken);
+    
+    try {
+      const response = await fetch(`${this.baseOrgUrl}/text/report/${textId}/`, {
+        method: 'POST',
+        body: formData
       });
+      
+      if (!response.ok) {
+        throw new Error(`API error: ${response.status} ${response.statusText}`);
+      }
+      
+      const data = await response.json();
+      
+      if (!data.success) {
+        throw new Error('API returned failure status');
+      }
+      
+      return data.data;
+    } catch (error) {
+      console.error('Error getting plagiarism report:', error);
+      throw error;
     }
-    return sources;
   }
   
   /**
    * Delete a text and its report
    */
-  public async deleteText(textId: number): Promise<boolean> {
+  public async deletePlagiarismText(textId: number): Promise<boolean> {
     if (!this.isConfigured()) {
       throw new Error('PlagiarismCheck API not configured. Call initialize() first.');
     }
     
     console.log(`Deleting text ID: ${textId}`);
     
-    // Simulated API call
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(true);
-      }, 500);
-    });
+    const formData = new FormData();
+    formData.append('group_token', this.config!.groupToken);
+    
+    try {
+      const response = await fetch(`${this.baseOrgUrl}/text/delete/${textId}/`, {
+        method: 'POST',
+        body: formData
+      });
+      
+      if (!response.ok) {
+        throw new Error(`API error: ${response.status} ${response.statusText}`);
+      }
+      
+      const data = await response.json();
+      
+      return data.success === true;
+    } catch (error) {
+      console.error('Error deleting text:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * Submit a text for AI detection (personal API)
+   */
+  public async submitTextForAiDetection(text: string): Promise<number> {
+    if (!this.isPersonalApiConfigured()) {
+      throw new Error('Personal API token not configured. Call initialize() with personalApiToken first.');
+    }
+    
+    console.log('Submitting text to PlagiarismCheck API for AI detection');
+    
+    const formData = new FormData();
+    formData.append('text', text);
+    
+    try {
+      const response = await fetch(`${this.basePersonalUrl}/chat-gpt/`, {
+        method: 'POST',
+        headers: {
+          'X-API-TOKEN': this.config!.personalApiToken!
+        },
+        body: formData
+      });
+      
+      if (!response.ok) {
+        throw new Error(`API error: ${response.status} ${response.statusText}`);
+      }
+      
+      const data = await response.json();
+      
+      if (!data.success) {
+        throw new Error('API returned failure status');
+      }
+      
+      return data.data.id;
+    } catch (error) {
+      console.error('Error submitting text for AI detection:', error);
+      throw error;
+    }
+  }
+  
+  /**
+   * Check the status of an AI detection
+   */
+  public async checkAiDetectionStatus(textId: number): Promise<AiDetectionStatus> {
+    if (!this.isPersonalApiConfigured()) {
+      throw new Error('Personal API token not configured. Call initialize() with personalApiToken first.');
+    }
+    
+    console.log(`Checking AI detection status for text ID: ${textId}`);
+    
+    try {
+      const response = await fetch(`${this.basePersonalUrl}/chat-gpt/${textId}`, {
+        method: 'GET',
+        headers: {
+          'X-API-TOKEN': this.config!.personalApiToken!
+        }
+      });
+      
+      if (!response.ok) {
+        throw new Error(`API error: ${response.status} ${response.statusText}`);
+      }
+      
+      const data = await response.json();
+      
+      if (!data.success) {
+        throw new Error('API returned failure status');
+      }
+      
+      return data.data;
+    } catch (error) {
+      console.error('Error checking AI detection status:', error);
+      throw error;
+    }
+  }
+  
+  /**
+   * Get the AI detection report
+   */
+  public async getAiDetectionReport(textId: number): Promise<AiDetectionReport> {
+    if (!this.isPersonalApiConfigured()) {
+      throw new Error('Personal API token not configured. Call initialize() with personalApiToken first.');
+    }
+    
+    console.log(`Getting AI detection report for text ID: ${textId}`);
+    
+    try {
+      const response = await fetch(`${this.basePersonalUrl}/chat-gpt/${textId}`, {
+        method: 'GET',
+        headers: {
+          'X-API-TOKEN': this.config!.personalApiToken!
+        }
+      });
+      
+      if (!response.ok) {
+        throw new Error(`API error: ${response.status} ${response.statusText}`);
+      }
+      
+      const data = await response.json();
+      
+      if (!data.success) {
+        throw new Error('API returned failure status');
+      }
+      
+      return data.data;
+    } catch (error) {
+      console.error('Error getting AI detection report:', error);
+      throw error;
+    }
   }
 }
 
