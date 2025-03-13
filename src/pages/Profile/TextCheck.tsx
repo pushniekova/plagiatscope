@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { ArrowLeft, AlertTriangle, Sparkles } from 'lucide-react';
+import { ArrowLeft, AlertTriangle, Sparkles, FileText } from 'lucide-react';
 import ProfileLayout from '@/layouts/ProfileLayout';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
@@ -16,6 +16,7 @@ import FileUpload from '@/components/FileUpload';
 
 const TextCheckPage: React.FC = () => {
   const [text, setText] = useState('');
+  const [documentName, setDocumentName] = useState('document.txt');
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [showResults, setShowResults] = useState(false);
   const [analysisResults, setAnalysisResults] = useState<{
@@ -39,8 +40,11 @@ const TextCheckPage: React.FC = () => {
     }
   };
 
-  const handleFileContent = (content: string) => {
+  const handleFileContent = (content: string, filename?: string) => {
     setText(content);
+    if (filename) {
+      setDocumentName(filename);
+    }
     toast({
       title: t('check.fileUploaded'),
       description: t('check.fileLoadedMessage'),
@@ -165,7 +169,10 @@ const TextCheckPage: React.FC = () => {
           <div id="results-section">
             <Card>
               <CardHeader>
-                <CardTitle>{t('results.title')}</CardTitle>
+                <CardTitle className="flex items-center gap-2">
+                  <FileText className="h-5 w-5" />
+                  {t('results.title')}
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <ResultsViewer 
@@ -173,6 +180,7 @@ const TextCheckPage: React.FC = () => {
                   overallScore={analysisResults.overallScore}
                   matches={analysisResults.matches}
                   externalSources={analysisResults.externalSources}
+                  documentName={documentName}
                 />
               </CardContent>
             </Card>

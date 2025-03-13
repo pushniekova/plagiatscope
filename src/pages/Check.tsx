@@ -16,6 +16,7 @@ const CheckPage = () => {
   const [text, setText] = useState('');
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [showResults, setShowResults] = useState(false);
+  const [documentName, setDocumentName] = useState('document.txt');
   const [analysisResults, setAnalysisResults] = useState<{
     overallScore: number;
     matches: Match[];
@@ -35,6 +36,14 @@ const CheckPage = () => {
 
   const handleTextChange = (newText: string) => {
     setText(newText);
+    if (showResults) {
+      setShowResults(false);
+    }
+  };
+
+  const handleFileUpload = (content: string, filename: string) => {
+    setText(content);
+    setDocumentName(filename || 'document.txt');
     if (showResults) {
       setShowResults(false);
     }
@@ -90,6 +99,7 @@ const CheckPage = () => {
               onAnalyze={handleAnalyze}
               text={text}
               onTextChange={handleTextChange}
+              onFileUpload={handleFileUpload}
               isAnalyzing={isAnalyzing}
             />
           </div>
@@ -101,6 +111,7 @@ const CheckPage = () => {
         <CheckResults 
           text={text}
           analysisResults={analysisResults}
+          documentName={documentName}
         />
       )}
       

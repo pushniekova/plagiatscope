@@ -18,10 +18,25 @@ export default {
   sourcesFound: 'Nalezené zdroje',
   charactersAnalyzed: 'Analyzované znaky',
   analysisSummary: 'Shrnutí analýzy',
+  documentStructure: 'Struktura dokumentu',
+  paraphrasing: 'Parafráze',
+  improperCitation: 'Nesprávná citace',
+  highPlagiarismWarning: 'Zjištěna vysoká úroveň plagiátu. Doporučujeme dokument revidovat, abyste zahrnuli správné citace nebo učinili obsah originálnějším.',
+  riskLevel: {
+    title: 'Úroveň rizika',
+    low: 'Nízké riziko',
+    medium: 'Střední riziko',
+    high: 'Vysoké riziko'
+  },
   summary: {
     low: 'Nízká pravděpodobnost plagiátu',
     medium: 'Střední pravděpodobnost plagiátu',
     high: 'Vysoká pravděpodobnost plagiátu',
+  },
+  summaryDetail: {
+    low: 'Váš obsah se zdá být originální s minimálními shodami s existujícími zdroji.',
+    medium: 'Některé části vašeho textu se shodují s jinými zdroji. Zvažte přidání citací, kde je to potřeba.',
+    high: 'Významné části vašeho textu se shodují s jinými zdroji. Doporučuje se zásadní revize.',
   },
   recommendations: 'Doporučení',
   recommendation1: 'Přezkoumejte zvýrazněné části pro potenciální plagiát.',

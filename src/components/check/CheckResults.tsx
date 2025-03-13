@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Sparkles } from 'lucide-react';
+import { Sparkles, FileText } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import ResultsViewer from '@/components/ResultsViewer';
 import { Match, ExternalSource } from '@/components/results/types';
@@ -12,9 +12,14 @@ interface CheckResultsProps {
     matches: Match[];
     externalSources: ExternalSource[];
   };
+  documentName?: string;
 }
 
-const CheckResults: React.FC<CheckResultsProps> = ({ text, analysisResults }) => {
+const CheckResults: React.FC<CheckResultsProps> = ({ 
+  text, 
+  analysisResults,
+  documentName = 'document.txt'
+}) => {
   const { t } = useLanguage();
 
   return (
@@ -30,6 +35,7 @@ const CheckResults: React.FC<CheckResultsProps> = ({ text, analysisResults }) =>
             overallScore={analysisResults.overallScore}
             matches={analysisResults.matches}
             externalSources={analysisResults.externalSources}
+            documentName={documentName}
           />
         </div>
       </div>

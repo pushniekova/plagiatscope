@@ -20,4 +20,5 @@ export interface ResultsProps {
   overallScore: number;
   matches: Match[];
   externalSources?: ExternalSource[];
+  documentName?: string;
 }
