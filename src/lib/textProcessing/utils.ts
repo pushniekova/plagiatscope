@@ -1,6 +1,7 @@
 
 /**
- * Common utilities for text processing
+ * Common utilities for text processing 
+ * Used across different plagiarism detection approaches
  */
 
 // Utility function to simulate hashing text (like in Plagiarism-Checker)

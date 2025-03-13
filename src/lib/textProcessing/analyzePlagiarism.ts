@@ -1,55 +1,21 @@
-
 /**
  * Core plagiarism detection algorithm adapted from the Plagiarism-Checker algorithm
  * https://github.com/architshukla/Plagiarism-Checker
+ * 
+ * Also incorporates elements from Plagium
+ * https://github.com/ceifa/plagium
  */
 
 import { normalizeText, tokenizeText, calculateTF, generateNGrams } from './normalize';
 import { calculateCosineSimilarity, findMatchingSegments, calculateJaccardSimilarity } from './similarity';
 import { databaseSources, academicSources } from './databaseSources';
 import { simulateWebSearch } from './externalSources';
-
-// Utility function to simulate hashing text (like in Plagiarism-Checker)
-function hashText(text: string): string {
-  // We'll implement a simple hash function similar to what would be used in the Plagiarism-Checker
-  let hash = 0;
-  for (let i = 0; i < text.length; i++) {
-    const char = text.charCodeAt(i);
-    hash = ((hash << 5) - hash) + char;
-    hash = hash & hash; // Convert to 32bit integer
-  }
-  return hash.toString(16);
-}
-
-// Calculate total length of non-overlapping matched text segments (from Plagiarism-Checker)
-function calculateNonOverlappingLength(ranges: {start: number, end: number}[], textLength: number): number {
-  if (ranges.length === 0) return 0;
-  
-  // Sort ranges by start index
-  ranges.sort((a, b) => a.start - b.start);
-  
-  let totalLength = 0;
-  let currentEnd = ranges[0].start;
-  
-  for (const range of ranges) {
-    if (range.start > currentEnd) {
-      // Non-overlapping range
-      totalLength += range.end - range.start;
-      currentEnd = range.end;
-    } else if (range.end > currentEnd) {
-      // Partially overlapping range
-      totalLength += range.end - currentEnd;
-      currentEnd = range.end;
-    }
-    // Completely overlapping ranges are ignored
-  }
-  
-  return Math.min(totalLength, textLength);
-}
+import { hashText, calculateNonOverlappingLength } from './utils';
+import { getPlagiarismScore } from './plagiumDetection';
 
 /**
  * Analyze text against both our database and external sources using an improved algorithm
- * inspired by the Plagiarism-Checker project
+ * inspired by the Plagiarism-Checker project and Plagium
  */
 export const analyzePlagiarism = async (text: string): Promise<{
   overallScore: number;
@@ -219,11 +185,21 @@ export const analyzePlagiarism = async (text: string): Promise<{
   // Add weight from external sources (as in Plagiarism-Checker)
   const externalSourceWeight = externalSources.reduce((sum, source) => sum + source.similarity, 0);
   
-  // Calculate overall score with a weighted formula (adapted from Plagiarism-Checker)
-  let overallScore = Math.round(percentageMatched * 0.75);
+  // Step 7: Also get score from Plagium-inspired method
+  const plagiumScore = await getPlagiarismScore({ text });
+  const plagiumScoreWeighted = Math.round(plagiumScore * 100);
   
-  // Add external source weight (up to 25% of the score)
-  overallScore += Math.min(25, Math.round(externalSourceWeight * 12.5));
+  console.log(`Plagium-inspired score: ${plagiumScoreWeighted}%`);
+  
+  // Calculate overall score with a weighted formula (adapted from Plagiarism-Checker + Plagium)
+  // Give more weight to the original method but boost with Plagium-inspired score
+  let overallScore = Math.round(percentageMatched * 0.6);
+  
+  // Add external source weight (up to 20% of the score)
+  overallScore += Math.min(20, Math.round(externalSourceWeight * 10));
+  
+  // Add Plagium-inspired score component (up to 20% of the score)
+  overallScore += Math.min(20, plagiumScoreWeighted);
   
   // Ensure score is between 0 and 100
   overallScore = Math.min(100, Math.max(0, overallScore));
