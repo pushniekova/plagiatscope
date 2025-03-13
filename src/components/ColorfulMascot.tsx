@@ -76,9 +76,12 @@ const ColorfulMascot: React.FC<ColorfulMascotProps> = ({
       style={style}
     >
       <div className={`${getSize()} relative`}>
+        <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-gradient-to-r from-purple-500 to-indigo-600 text-white px-3 py-1 rounded-full text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+          FHub
+        </div>
         <img 
           src="/lovable-uploads/colorful-creature.png" 
-          alt="Colorful creature mascot" 
+          alt="ForgenHub mascot" 
           className={`object-contain ${animated ? 'animated-float' : ''}`}
         />
         
