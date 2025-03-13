@@ -31,14 +31,14 @@ const FileUpload: React.FC<FileUploadProps> = ({
   const processFile = (file: File) => {
     // Check file size (max 5MB)
     if (file.size > 5 * 1024 * 1024) {
-      setError(t('fileUpload.fileTooLarge'));
+      setError("Файл занадто великий (максимум 5MB)");
       return;
     }
 
     // Check file type
     const fileType = file.type;
     if (!fileType.match(/(text\/plain|application\/pdf|application\/msword|application\/vnd.openxmlformats-officedocument.wordprocessingml.document)/)) {
-      setError(t('fileUpload.unsupportedFormat'));
+      setError("Непідтримуваний формат файлу");
       return;
     }
 
@@ -56,8 +56,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
       reader.readAsText(file);
     } else {
       // For demo purposes, we'll just extract the file name as content
-      // In a real app, you'd send this to a backend service for proper conversion
-      onFileContent(`[${t('fileUpload.contentFrom')} ${file.name}] ${t('fileUpload.simulatedContent')}`);
+      onFileContent(`[Вміст з файлу ${file.name}] Симульований вміст файлу для демонстрації.`);
     }
   };
 
@@ -110,12 +109,12 @@ const FileUpload: React.FC<FileUploadProps> = ({
           }`}
         >
           <Upload className="mx-auto h-10 w-10 text-muted-foreground mb-4" />
-          <h3 className="text-lg font-medium mb-2">{t('fileUpload.title')}</h3>
+          <h3 className="text-lg font-medium mb-2">Завантажити файл</h3>
           <p className="text-muted-foreground mb-2">
-            {t('fileUpload.dragAndDrop')}
+            Перетягніть файл сюди або натисніть для вибору
           </p>
           <p className="text-xs text-muted-foreground">
-            {t('fileUpload.supportedFormats')}
+            Підтримувані формати: TXT, DOC, DOCX, PDF
           </p>
         </div>
       ) : (
@@ -136,7 +135,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
                 handleRemoveFile();
               }}
               className="p-1 hover:bg-secondary rounded-full"
-              aria-label={t('fileUpload.removeFile')}
+              aria-label="Видалити файл"
             >
               <X className="h-5 w-5 text-muted-foreground" />
             </button>

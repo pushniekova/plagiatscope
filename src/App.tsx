@@ -12,6 +12,9 @@ import CheckPage from "./pages/Check";
 import AboutPage from "./pages/About";
 import AuthPage from "./pages/Auth";
 import NotFound from "./pages/NotFound";
+import Terms from "./pages/Terms";
+import Privacy from "./pages/Privacy";
+import Cookies from "./pages/Cookies";
 
 const queryClient = new QueryClient();
 
@@ -46,6 +49,9 @@ const App = () => (
               <Route path="/check" element={<CheckPage />} />
               <Route path="/about" element={<AboutPage />} />
               <Route path="/auth" element={<AuthPage />} />
+              <Route path="/terms" element={<Terms />} />
+              <Route path="/privacy" element={<Privacy />} />
+              <Route path="/cookies" element={<Cookies />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>

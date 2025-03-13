@@ -40,9 +40,9 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-medium mb-4">{t('footer.legal')}</h3>
             <ul className="space-y-2">
-              <li><Link to="#" className="text-muted-foreground hover:text-primary transition-colors">{t('footer.terms')}</Link></li>
-              <li><Link to="#" className="text-muted-foreground hover:text-primary transition-colors">{t('footer.privacy')}</Link></li>
-              <li><Link to="#" className="text-muted-foreground hover:text-primary transition-colors">{t('footer.cookies')}</Link></li>
+              <li><Link to="/terms" className="text-muted-foreground hover:text-primary transition-colors">{t('footer.terms')}</Link></li>
+              <li><Link to="/privacy" className="text-muted-foreground hover:text-primary transition-colors">{t('footer.privacy')}</Link></li>
+              <li><Link to="/cookies" className="text-muted-foreground hover:text-primary transition-colors">{t('footer.cookies')}</Link></li>
             </ul>
           </div>
         </div>
