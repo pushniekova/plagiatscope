@@ -199,7 +199,7 @@ const ukTranslations: Translations = {
     recommendation1: 'Перефразуйте текст, щоб зменшити схожість.',
     recommendation2:
       'Додайте цитати та посилання на використані джерела.',
-    recommendation3: 'Переконайтеся, що ви правильно цитуєте джерела.',
+    recommendation3: 'Переконайтеся, что вы правильно цитуете джерела.',
     recommendation4: 'Використовуйте унікальні ідеї та приклади.',
   },
   about: {
@@ -387,7 +387,7 @@ const ukTranslations: Translations = {
     },
   },
   profile: {
-    dashboard: 'Панель користувача',
+    dashboard: 'Кабінет користувача',
     welcomeMessage: 'Керуйте своїм обліковим записом та доступом до сервісів',
     title: 'Мій профіль',
     personalInfo: 'Особиста інформація',
