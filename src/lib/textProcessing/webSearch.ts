@@ -8,7 +8,9 @@
  * in the webSearch/ directory
  */
 
-import { searchMultipleResources, simulateWebSearch, WebSearchResult } from './webSearch/index';
+import { searchMultipleResources, simulateWebSearch } from './webSearch/index';
+import type { WebSearchResult } from './webSearch/types';
 
 // Re-export the main functions and types
-export { searchMultipleResources, simulateWebSearch, WebSearchResult };
+export { searchMultipleResources, simulateWebSearch };
+export type { WebSearchResult };

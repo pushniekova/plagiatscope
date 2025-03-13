@@ -5,7 +5,7 @@
  * It supports both real Google Custom Search integration and fallback simulation
  */
 
-import { WebSearchResult } from './types';
+import type { WebSearchResult } from './types';
 import { generateSearchQuery } from './query';
 import { performGoogleSearch } from './googleApi';
 import { simulateWebSearch } from './simulation';
@@ -35,4 +35,4 @@ export async function searchMultipleResources(text: string): Promise<WebSearchRe
 // Re-export the simulation function for direct access
 export { simulateWebSearch };
 // Re-export the WebSearchResult type
-export { WebSearchResult };
+export type { WebSearchResult };
