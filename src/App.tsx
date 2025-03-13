@@ -3,33 +3,64 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import { LanguageProvider } from "./contexts/LanguageContext";
+import { ClerkProvider, useAuth } from "@clerk/clerk-react";
+import { useEffect } from "react";
 import Index from "./pages/Index";
 import CheckPage from "./pages/Check";
 import AboutPage from "./pages/About";
+import AuthPage from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
+// Get the publishable key from the environment
+const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
+
+// Redirect component for authentication state changes
+const ClerkRouteChangeListener = () => {
+  const { isLoaded, isSignedIn } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isLoaded && !isSignedIn && window.location.pathname.includes('/profile')) {
+      navigate('/auth');
+    }
+  }, [isLoaded, isSignedIn, navigate]);
+
+  return null;
+};
+
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <LanguageProvider>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/check" element={<CheckPage />} />
-            <Route path="/about" element={<AboutPage />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
-    </LanguageProvider>
-  </QueryClientProvider>
+  <ClerkProvider 
+    publishableKey={PUBLISHABLE_KEY}
+    localization={{
+      socialButtonsBlockButton: {
+        divider: " "
+      }
+    }}
+  >
+    <QueryClientProvider client={queryClient}>
+      <LanguageProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <ClerkRouteChangeListener />
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/check" element={<CheckPage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/auth" element={<AuthPage />} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </TooltipProvider>
+      </LanguageProvider>
+    </QueryClientProvider>
+  </ClerkProvider>
 );
 
 export default App;

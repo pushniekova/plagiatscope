@@ -1,15 +1,19 @@
 
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Sparkles } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Menu, X, Sparkles, User, LogIn } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useAuth, UserButton } from '@clerk/clerk-react';
 import LanguageSelector from './LanguageSelector';
+import { Button } from '@/components/ui/button';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
   const { t } = useLanguage();
+  const { isSignedIn } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -79,12 +83,49 @@ const Header = () => {
                 )}
               </Link>
             ))}
+            
             <Link
               to="/check"
               className="button-gradient text-white px-4 py-2 rounded-lg transition-all hover:shadow-md hover:shadow-primary/30 active:scale-95 text-sm font-medium no-underline"
             >
               {t('nav.checkText')}
             </Link>
+            
+            {/* Authentication UI */}
+            {isSignedIn ? (
+              <div className="flex items-center">
+                <UserButton 
+                  afterSignOutUrl="/"
+                  appearance={{
+                    elements: {
+                      userButtonBox: "h-10 w-10",
+                      userButtonTrigger: "h-10 w-10 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+                      userButtonAvatarBox: "h-9 w-9",
+                    }
+                  }}
+                />
+              </div>
+            ) : (
+              <div className="flex space-x-2">
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className="gap-1.5 font-medium"
+                  onClick={() => navigate('/auth?tab=signin')}
+                >
+                  <LogIn className="h-4 w-4" />
+                  {t('auth.signIn')}
+                </Button>
+                <Button 
+                  className="gap-1.5 button-gradient text-white"
+                  size="sm"
+                  onClick={() => navigate('/auth?tab=signup')}
+                >
+                  <User className="h-4 w-4" />
+                  {t('auth.signUp')}
+                </Button>
+              </div>
+            )}
             
             <div className="w-[100px]">
               <LanguageSelector />
@@ -122,6 +163,40 @@ const Header = () => {
                 {link.name}
               </Link>
             ))}
+            
+            {/* Mobile Authentication UI */}
+            {isSignedIn ? (
+              <div className="flex items-center gap-3 px-3 py-2">
+                <UserButton 
+                  afterSignOutUrl="/"
+                  appearance={{
+                    elements: {
+                      userButtonAvatarBox: "h-8 w-8",
+                    }
+                  }}
+                />
+                <span className="text-sm font-medium">{t('auth.account')}</span>
+              </div>
+            ) : (
+              <div className="flex flex-col space-y-2">
+                <Button 
+                  variant="outline" 
+                  className="w-full justify-start gap-1.5"
+                  onClick={() => navigate('/auth?tab=signin')}
+                >
+                  <LogIn className="h-4 w-4" />
+                  {t('auth.signIn')}
+                </Button>
+                <Button 
+                  className="w-full justify-start gap-1.5 button-gradient text-white"
+                  onClick={() => navigate('/auth?tab=signup')}
+                >
+                  <User className="h-4 w-4" />
+                  {t('auth.signUp')}
+                </Button>
+              </div>
+            )}
+            
             <Link
               to="/check"
               className="button-gradient text-white px-4 py-2 rounded-lg text-center transition-all hover:brightness-110 active:brightness-90 text-sm font-medium no-underline"
