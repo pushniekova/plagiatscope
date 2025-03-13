@@ -62,7 +62,7 @@ const Header = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-6">
+          <nav className="hidden md:flex items-center space-x-4">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
@@ -86,7 +86,7 @@ const Header = () => {
               {t('nav.checkText')}
             </Link>
             
-            <div className="min-w-[40px] flex items-center">
+            <div className="w-[100px]">
               <LanguageSelector />
             </div>
           </nav>

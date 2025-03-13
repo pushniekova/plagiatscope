@@ -16,8 +16,8 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
       <Header />
       <main className="flex-grow relative">
         {children}
-        <div className="fixed bottom-4 right-4 z-10">
-          <ColorfulMascot size="md" />
+        <div className="fixed bottom-4 right-4 z-10 pointer-events-none">
+          <ColorfulMascot size="sm" />
         </div>
       </main>
       <Footer />
