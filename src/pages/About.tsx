@@ -1,9 +1,10 @@
 
 import { useEffect } from 'react';
-import { CheckCircle, Shield, Code } from 'lucide-react';
+import { CheckCircle, Shield, Code, Sparkles, Star, Zap } from 'lucide-react';
 import MainLayout from '@/layouts/MainLayout';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
+import ColorfulMascot from '@/components/ColorfulMascot';
 
 const AboutPage = () => {
   const { t } = useLanguage();
@@ -18,9 +19,14 @@ const AboutPage = () => {
         {/* Background gradient */}
         <div className="absolute inset-0 bg-gradient-to-b from-blue-50/50 to-transparent dark:from-blue-950/20 dark:to-transparent -z-10"></div>
         
-        <div className="container mx-auto px-6">
+        <div className="container mx-auto px-6 relative">
+          {/* Colorful mascot */}
+          <div className="absolute -top-20 -right-10 hidden lg:block z-10">
+            <ColorfulMascot size="lg" />
+          </div>
+          
           <div className="max-w-3xl mx-auto text-center">
-            <span className="inline-block bg-primary/10 text-primary rounded-full px-3 py-1 text-sm font-medium mb-6 animate-fade-in">
+            <span className="inline-block button-gradient text-white rounded-full px-3 py-1 text-sm font-medium mb-6 animate-fade-in">
               {t('about.badge')}
             </span>
             <h1 className="text-4xl md:text-5xl font-medium mb-6 animate-slide-in-up">
@@ -34,12 +40,19 @@ const AboutPage = () => {
       </section>
       
       {/* Mission Section */}
-      <section className="py-16 bg-secondary/30">
+      <section className="py-16 bg-secondary/10 relative overflow-hidden">
+        {/* Background blob decorations */}
+        <div className="absolute -left-36 -top-36 w-72 h-72 bg-primary/5 rounded-full blur-3xl"></div>
+        <div className="absolute -right-36 -bottom-36 w-72 h-72 bg-secondary/5 rounded-full blur-3xl"></div>
+        
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
               <div>
-                <span className="text-primary font-medium">{t('about.mission.label')}</span>
+                <span className="text-primary font-medium inline-flex items-center gap-1">
+                  <Star className="h-4 w-4 animated-sparkle" />
+                  {t('about.mission.label')}
+                </span>
                 <h2 className="text-3xl md:text-4xl font-medium mt-2 mb-6">
                   {t('about.mission.title')}
                 </h2>
@@ -51,34 +64,40 @@ const AboutPage = () => {
                 </p>
                 <Link
                   to="/check"
-                  className="bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium transition-all hover:brightness-110 active:brightness-90 inline-block"
+                  className="button-gradient text-white px-6 py-3 rounded-lg font-medium transition-all hover:shadow-lg hover:shadow-primary/30 active:scale-95 inline-flex items-center gap-2 no-underline"
                 >
+                  <Sparkles className="h-4 w-4" />
                   {t('about.mission.button')}
                 </Link>
               </div>
               
-              <div className="bg-card border border-border p-8 rounded-2xl shadow-sm">
+              <div className="card-gradient rounded-2xl p-8 shadow-lg relative group">
+                <div className="absolute inset-0 rainbow-border opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity duration-500"></div>
+                
                 <h3 className="text-xl font-medium mb-4">{t('about.values.title')}</h3>
                 <ul className="space-y-4">
                   {[
                     {
                       title: t('about.values.integrity.title'),
                       description: t('about.values.integrity.description'),
-                      icon: <Shield className="h-5 w-5" />
+                      icon: <Shield className="h-5 w-5" />,
+                      color: 'text-primary bg-primary/10'
                     },
                     {
                       title: t('about.values.accuracy.title'),
                       description: t('about.values.accuracy.description'),
-                      icon: <CheckCircle className="h-5 w-5" />
+                      icon: <CheckCircle className="h-5 w-5" />,
+                      color: 'text-secondary bg-secondary/10'
                     },
                     {
                       title: t('about.values.innovation.title'),
                       description: t('about.values.innovation.description'),
-                      icon: <Code className="h-5 w-5" />
+                      icon: <Code className="h-5 w-5" />,
+                      color: 'text-accent bg-accent/10'
                     }
                   ].map((value, index) => (
-                    <li key={index} className="flex gap-3">
-                      <div className="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-full bg-primary/10 text-primary">
+                    <li key={index} className="flex gap-3 group">
+                      <div className={`flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-full ${value.color} group-hover:animated-bounce transition-transform duration-300`}>
                         {value.icon}
                       </div>
                       <div>
@@ -95,11 +114,21 @@ const AboutPage = () => {
       </section>
       
       {/* Technology Section */}
-      <section className="py-16">
-        <div className="container mx-auto px-6">
+      <section className="py-16 relative overflow-hidden">
+        <div className="absolute top-1/4 left-1/4 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-1/4 right-1/4 transform translate-x-1/2 translate-y-1/2 w-64 h-64 bg-accent/5 rounded-full blur-3xl"></div>
+        
+        <div className="container mx-auto px-6 relative">
+          <div className="absolute -bottom-24 -left-20 hidden lg:block">
+            <ColorfulMascot size="lg" position="left" style={{ transform: 'scaleX(-1)' }} />
+          </div>
+          
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
-              <span className="text-primary font-medium">{t('about.technology.label')}</span>
+              <span className="inline-flex items-center gap-1 text-primary font-medium">
+                <Zap className="h-4 w-4 animated-sparkle" />
+                {t('about.technology.label')}
+              </span>
               <h2 className="text-3xl md:text-4xl font-medium mt-2 mb-6">
                 {t('about.technology.title')}
               </h2>
@@ -109,7 +138,7 @@ const AboutPage = () => {
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-              <div className="bg-card border border-border rounded-xl p-6 relative overflow-hidden">
+              <div className="card-gradient rounded-xl p-6 relative overflow-hidden hover:shadow-lg transition-shadow">
                 <div className="relative z-10">
                   <h3 className="text-xl font-medium mb-4">{t('about.textProcessing.title')}</h3>
                   <ol className="space-y-3">
@@ -119,8 +148,8 @@ const AboutPage = () => {
                       t('about.textProcessing.step3'),
                       t('about.textProcessing.step4')
                     ].map((step, index) => (
-                      <li key={index} className="flex gap-3">
-                        <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm font-medium">
+                      <li key={index} className="flex gap-3 group">
+                        <span className="flex-shrink-0 w-6 h-6 rounded-full button-gradient text-white flex items-center justify-center text-sm font-medium group-hover:animated-wiggle">
                           {index + 1}
                         </span>
                         <span className="text-muted-foreground">{step}</span>
@@ -131,7 +160,7 @@ const AboutPage = () => {
                 <div className="absolute bottom-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl -z-10"></div>
               </div>
               
-              <div className="bg-card border border-border rounded-xl p-6 relative overflow-hidden">
+              <div className="card-gradient rounded-xl p-6 relative overflow-hidden hover:shadow-lg transition-shadow">
                 <div className="relative z-10">
                   <h3 className="text-xl font-medium mb-4">{t('about.comparison.title')}</h3>
                   <ol className="space-y-3">
@@ -141,8 +170,8 @@ const AboutPage = () => {
                       t('about.comparison.step3'),
                       t('about.comparison.step4')
                     ].map((step, index) => (
-                      <li key={index} className="flex gap-3">
-                        <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm font-medium">
+                      <li key={index} className="flex gap-3 group">
+                        <span className="flex-shrink-0 w-6 h-6 rounded-full button-gradient text-white flex items-center justify-center text-sm font-medium group-hover:animated-wiggle">
                           {index + 1}
                         </span>
                         <span className="text-muted-foreground">{step}</span>
@@ -154,14 +183,23 @@ const AboutPage = () => {
               </div>
             </div>
             
-            <div className="mt-12 bg-primary/5 border border-primary/10 rounded-xl p-8 text-center">
+            <div className="mt-12 bg-primary/5 border border-primary/10 rounded-xl p-8 text-center relative group hover:shadow-lg transition-shadow">
+              <div className="absolute inset-0 rainbow-border opacity-0 group-hover:opacity-100 rounded-xl transition-opacity duration-500"></div>
+              
               <h3 className="text-xl font-medium mb-3">{t('about.languages.title')}</h3>
               <p className="text-muted-foreground mb-6">
                 {t('about.languages.description')}
               </p>
               <div className="flex flex-wrap justify-center gap-2">
-                {["Ukrainian", "English", "Russian", "Polish", "German", "French"].map((language) => (
-                  <span key={language} className="px-3 py-1 bg-card border border-border rounded-full text-sm">
+                {["Ukrainian", "English", "Russian", "Polish", "German", "French"].map((language, index) => (
+                  <span 
+                    key={language} 
+                    className="px-3 py-1 card-gradient border border-white/10 rounded-full text-sm hover:shadow-md transition-all hover:-translate-y-1"
+                    style={{ 
+                      animationDelay: `${index * 100}ms`,
+                      animation: "float 4s ease-in-out infinite"
+                    }}
+                  >
                     {language}
                   </span>
                 ))}
@@ -172,7 +210,7 @@ const AboutPage = () => {
       </section>
       
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-b from-secondary to-secondary/10">
+      <section className="py-16 bg-gradient-to-b from-secondary/10 to-transparent">
         <div className="container mx-auto px-6">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-medium mb-6">
@@ -183,8 +221,9 @@ const AboutPage = () => {
             </p>
             <Link
               to="/check"
-              className="bg-primary text-primary-foreground px-8 py-3 rounded-lg font-medium transition-all hover:brightness-110 active:brightness-90 inline-block"
+              className="button-gradient text-white px-8 py-3 rounded-lg font-medium transition-all hover:shadow-lg hover:shadow-primary/30 active:scale-95 inline-flex items-center gap-2 no-underline"
             >
+              <Sparkles className="h-4 w-4" />
               {t('about.cta.button')}
             </Link>
           </div>

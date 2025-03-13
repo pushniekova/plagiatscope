@@ -19,6 +19,11 @@ export default {
 			}
 		},
 		extend: {
+			backgroundImage: {
+				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+				'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+				'rainbow-gradient': 'linear-gradient(90deg, #ff3bac 0%, #5b50e8 50%, #45caff 100%)',
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -114,6 +119,20 @@ export default {
 					'0%, 100%': { opacity: '1' },
 					'50%': { opacity: '0.8' },
 				},
+				'wiggle': {
+					'0%, 100%': { transform: 'rotate(-3deg)' },
+					'50%': { transform: 'rotate(3deg)' },
+				},
+				'blob': {
+					'0%, 100%': { borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%' },
+					'25%': { borderRadius: '30% 60% 70% 40% / 50% 60% 30% 60%' },
+					'50%': { borderRadius: '40% 60% 50% 70% / 60% 30% 70% 40%' },
+					'75%': { borderRadius: '60% 40% 30% 70% / 40% 60% 50% 60%' },
+				},
+				'rainbow': {
+					'0%': { backgroundPosition: '0% 50%' },
+					'100%': { backgroundPosition: '200% 50%' },
+				},
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
@@ -127,6 +146,9 @@ export default {
 				'scale-in': 'scale-in 0.4s ease-out',
 				'float': 'float 6s ease-in-out infinite',
 				'pulse-slow': 'pulse-slow 3s ease-in-out infinite',
+				'wiggle': 'wiggle 4s ease-in-out infinite',
+				'blob': 'blob 5s ease-in-out infinite',
+				'rainbow': 'rainbow 5s linear infinite',
 			},
 		}
 	},

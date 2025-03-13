@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Sparkles } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import LanguageSelector from './LanguageSelector';
 
@@ -55,8 +55,10 @@ const Header = () => {
             to="/" 
             className="text-xl font-medium tracking-tight flex items-center gap-2 transition-transform hover:scale-[1.01] active:scale-[0.99]"
           >
-            <span className="bg-primary text-primary-foreground p-1 rounded-md">PS</span>
-            <span>PlagiatScope</span>
+            <span className="button-gradient text-white p-1 rounded-md flex items-center justify-center">
+              <Sparkles className="h-5 w-5" />
+            </span>
+            <span className="rainbow-text font-bold">PlagiatScope</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -69,14 +71,17 @@ const Header = () => {
                   isActive(link.path) 
                     ? 'text-primary' 
                     : 'text-muted-foreground'
-                }`}
+                } relative no-underline`}
               >
                 {link.name}
+                {isActive(link.path) && (
+                  <span className="absolute left-0 right-0 -bottom-1 h-0.5 button-gradient rounded-full"></span>
+                )}
               </Link>
             ))}
             <Link
               to="/check"
-              className="bg-primary text-primary-foreground px-4 py-2 rounded-lg transition-all hover:brightness-110 active:brightness-90 text-sm font-medium"
+              className="button-gradient text-white px-4 py-2 rounded-lg transition-all hover:shadow-md hover:shadow-primary/30 active:scale-95 text-sm font-medium no-underline"
             >
               {t('nav.checkText')}
             </Link>
@@ -106,10 +111,10 @@ const Header = () => {
               <Link
                 key={link.path}
                 to={link.path}
-                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors no-underline ${
                   isActive(link.path) 
-                    ? 'bg-secondary text-foreground' 
-                    : 'text-muted-foreground hover:bg-secondary/50'
+                    ? 'bg-primary/10 text-primary' 
+                    : 'text-muted-foreground hover:bg-secondary/10'
                 }`}
               >
                 {link.name}
@@ -117,7 +122,7 @@ const Header = () => {
             ))}
             <Link
               to="/check"
-              className="bg-primary text-primary-foreground px-4 py-2 rounded-lg text-center transition-all hover:brightness-110 active:brightness-90 text-sm font-medium"
+              className="button-gradient text-white px-4 py-2 rounded-lg text-center transition-all hover:brightness-110 active:brightness-90 text-sm font-medium no-underline"
             >
               {t('nav.checkText')}
             </Link>

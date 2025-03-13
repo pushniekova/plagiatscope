@@ -5,35 +5,35 @@
 
 @layer base {
   :root {
-    --background: 210 40% 98%;
-    --foreground: 222 47% 11%;
+    --background: 196 100% 97%;
+    --foreground: 262 47% 22%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
+    --card-foreground: 262 47% 22%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
+    --popover-foreground: 262 47% 22%;
 
-    --primary: 210 100% 50%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 280 80% 60%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96%;
-    --secondary-foreground: 222 47% 11%;
+    --secondary: 196 90% 60%;
+    --secondary-foreground: 262 47% 11%;
 
-    --muted: 210 40% 96%;
-    --muted-foreground: 215 16% 47%;
+    --muted: 196 40% 96%;
+    --muted-foreground: 262 20% 47%;
 
-    --accent: 216 100% 50%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 50 100% 60%;
+    --accent-foreground: 262 47% 11%;
 
-    --destructive: 0 84% 60%;
+    --destructive: 0 90% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 210 100% 50%;
+    --border: 196 40% 90%;
+    --input: 196 40% 90%;
+    --ring: 280 80% 60%;
 
-    --radius: 0.75rem;
+    --radius: 1rem;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -46,33 +46,33 @@
   }
 
   .dark {
-    --background: 222 47% 11%;
-    --foreground: 210 40% 98%;
+    --background: 262 47% 11%;
+    --foreground: 196 40% 98%;
 
-    --card: 222 47% 11%;
-    --card-foreground: 210 40% 98%;
+    --card: 262 47% 11%;
+    --card-foreground: 196 40% 98%;
 
-    --popover: 222 47% 11%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 262 47% 11%;
+    --popover-foreground: 196 40% 98%;
 
-    --primary: 210 100% 50%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 280 80% 60%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 217 32% 17%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 196 90% 40%;
+    --secondary-foreground: 196 40% 98%;
 
     --muted: 217 32% 17%;
-    --muted-foreground: 215 20% 65%;
+    --muted-foreground: 196 20% 65%;
 
-    --accent: 216 100% 50%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 50 100% 60%;
+    --accent-foreground: 262 47% 11%;
 
     --destructive: 0 62% 30%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 196 40% 98%;
 
     --border: 217 32% 17%;
     --input: 217 32% 17%;
-    --ring: 212.7 26.8% 83.9%;
+    --ring: 280 70% 60%;
     
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
@@ -97,6 +97,8 @@
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "cv01", "cv02", "cv03", "cv04";
+    background-image: 
+      radial-gradient(circle at 10% 20%, rgba(255, 107, 194, 0.1) 0%, rgba(107, 208, 255, 0.1) 100%);
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -105,14 +107,26 @@
   
   h1 {
     @apply text-4xl sm:text-5xl lg:text-6xl;
+    background: linear-gradient(90deg, #ff3bac 0%, #5b50e8 50%, #45caff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
   
   h2 {
     @apply text-3xl sm:text-4xl;
+    background: linear-gradient(90deg, #ff3bac 0%, #5b50e8 90%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
   
   h3 {
     @apply text-2xl sm:text-3xl;
+    background: linear-gradient(90deg, #5b50e8 0%, #45caff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 }
 
@@ -135,6 +149,131 @@
   
   .animation-delay-600 {
     animation-delay: 600ms;
+  }
+
+  .animated-blob {
+    animation: blob-bouncing 5s ease-in-out infinite;
+  }
+
+  .animated-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .animated-sparkle {
+    animation: sparkle 2s linear infinite;
+  }
+
+  .animated-bounce {
+    animation: bounce 2s ease-in-out infinite;
+  }
+
+  .animated-wiggle {
+    animation: wiggle 4s ease-in-out infinite;
+  }
+
+  .rainbow-text {
+    background: linear-gradient(to right, #ff3bac, #5b50e8, #45caff, #ff8e3b, #ff3bac);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    background-size: 200% auto;
+    animation: rainbow 5s linear infinite;
+  }
+
+  .rainbow-border {
+    border: 2px solid transparent;
+    background-clip: padding-box, border-box;
+    background-origin: padding-box, border-box;
+    background-image: 
+      linear-gradient(to bottom, var(--card), var(--card)), 
+      linear-gradient(90deg, #ff3bac, #5b50e8, #45caff, #ff8e3b, #ff3bac);
+    background-size: 100% 100%, 200% 100%;
+    animation: rainbow 5s linear infinite;
+  }
+
+  .card-gradient {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+  }
+
+  .button-gradient {
+    background-size: 200% auto;
+    background-image: linear-gradient(90deg, #ff3bac 0%, #5b50e8 50%, #45caff 100%);
+    transition: 0.5s;
+  }
+
+  .button-gradient:hover {
+    background-position: right center;
+  }
+}
+
+/* Keyframes for animations */
+@keyframes blob-bouncing {
+  0%, 100% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    transform: translateY(0);
+  }
+  25% {
+    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+    transform: translateY(-3px);
+  }
+  50% {
+    border-radius: 40% 60% 50% 70% / 60% 30% 70% 40%;
+    transform: translateY(0);
+  }
+  75% {
+    border-radius: 60% 40% 30% 70% / 40% 60% 50% 60%;
+    transform: translateY(3px);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes sparkle {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(0.8);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes wiggle {
+  0%, 100% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+}
+
+@keyframes rainbow {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
   }
 }
 
@@ -164,4 +303,53 @@ html {
 
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-muted-foreground/50;
+}
+
+/* Підкреслення для посилань з ефектом */
+a:not(.no-underline) {
+  position: relative;
+}
+
+a:not(.no-underline)::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background: linear-gradient(90deg, #ff3bac, #5b50e8, #45caff);
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.3s;
+}
+
+a:not(.no-underline):hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* Стилі для фону з частинками */
+.particles-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.particle:nth-child(odd) {
+  background: linear-gradient(90deg, #ff3bac, #5b50e8);
+}
+
+.particle:nth-child(even) {
+  background: linear-gradient(90deg, #45caff, #ff8e3b);
 }

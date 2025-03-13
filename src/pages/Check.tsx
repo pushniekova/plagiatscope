@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { AlertTriangle } from 'lucide-react';
+import { AlertTriangle, Sparkles, Search, Globe, FileText } from 'lucide-react';
 import MainLayout from '@/layouts/MainLayout';
 import TextInput from '@/components/TextInput';
 import FileUpload from '@/components/FileUpload';
@@ -8,6 +8,7 @@ import ResultsViewer from '@/components/ResultsViewer';
 import { analyzePlagiarism } from '@/lib/textProcessing';
 import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/contexts/LanguageContext';
+import ColorfulMascot from '@/components/ColorfulMascot';
 
 const CheckPage = () => {
   const [text, setText] = useState('');
@@ -81,10 +82,15 @@ const CheckPage = () => {
         {/* Background gradient */}
         <div className="absolute inset-0 bg-gradient-to-b from-blue-50/50 to-transparent dark:from-blue-950/20 dark:to-transparent -z-10"></div>
         
-        <div className="container mx-auto px-6">
+        <div className="container mx-auto px-6 relative">
+          {/* Colorful mascot */}
+          <div className="absolute -top-20 right-0 hidden lg:block z-10">
+            <ColorfulMascot size="lg" />
+          </div>
+          
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-12">
-              <span className="inline-block bg-primary/10 text-primary rounded-full px-3 py-1 text-sm font-medium mb-6">
+              <span className="inline-block button-gradient text-white rounded-full px-3 py-1 text-sm font-medium mb-6">
                 {t('check.badge')}
               </span>
               <h1 className="text-3xl md:text-5xl font-medium mb-6">
@@ -95,11 +101,14 @@ const CheckPage = () => {
               </p>
             </div>
             
-            <div className="bg-card border border-border rounded-xl shadow-sm overflow-hidden p-6">
+            <div className="card-gradient rounded-xl shadow-lg overflow-hidden p-6 hover:shadow-xl transition-shadow">
               {/* Input method tabs */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                 <div>
-                  <h3 className="text-lg font-medium mb-4">{t('check.pasteText')}</h3>
+                  <h3 className="text-lg font-medium mb-4 flex items-center gap-2">
+                    <FileText className="h-5 w-5 text-primary" />
+                    {t('check.pasteText')}
+                  </h3>
                   <TextInput 
                     onTextChange={handleTextChange} 
                     initialValue={text}
@@ -109,7 +118,10 @@ const CheckPage = () => {
                 </div>
                 
                 <div>
-                  <h3 className="text-lg font-medium mb-4">{t('check.uploadFile')}</h3>
+                  <h3 className="text-lg font-medium mb-4 flex items-center gap-2">
+                    <FileText className="h-5 w-5 text-secondary" />
+                    {t('check.uploadFile')}
+                  </h3>
                   <FileUpload onFileContent={handleFileContent} />
                 </div>
               </div>
@@ -130,13 +142,23 @@ const CheckPage = () => {
                 <button 
                   onClick={handleAnalyze}
                   disabled={isAnalyzing || !text.trim()}
-                  className={`bg-primary text-primary-foreground px-8 py-3 rounded-lg font-medium transition-all ${
+                  className={`button-gradient text-white px-8 py-3 rounded-lg font-medium transition-all flex items-center gap-2 mx-auto ${
                     isAnalyzing || !text.trim()
                       ? 'opacity-70 cursor-not-allowed'
-                      : 'hover:brightness-110 active:brightness-90'
+                      : 'hover:shadow-lg hover:shadow-primary/30 active:scale-95'
                   }`}
                 >
-                  {isAnalyzing ? t('check.analyzing') : t('check.checkButton')}
+                  {isAnalyzing ? (
+                    <>
+                      <div className="animate-spin h-5 w-5 border-2 border-white border-t-transparent rounded-full"></div>
+                      {t('check.analyzing')}
+                    </>
+                  ) : (
+                    <>
+                      <Sparkles className="h-5 w-5" />
+                      {t('check.checkButton')}
+                    </>
+                  )}
                 </button>
               </div>
             </div>
@@ -146,10 +168,13 @@ const CheckPage = () => {
       
       {/* Results section */}
       {showResults && (
-        <section id="results-section" className="py-12 bg-secondary/30">
+        <section id="results-section" className="py-12 bg-secondary/10">
           <div className="container mx-auto px-6">
             <div className="max-w-4xl mx-auto">
-              <h2 className="text-2xl md:text-3xl font-medium mb-6">{t('check.resultsTitle')}</h2>
+              <h2 className="text-2xl md:text-3xl font-medium mb-6 flex items-center gap-2">
+                <Sparkles className="h-6 w-6 text-primary animated-sparkle" />
+                {t('check.resultsTitle')}
+              </h2>
               <ResultsViewer 
                 originalText={text}
                 overallScore={analysisResults.overallScore}
@@ -161,7 +186,10 @@ const CheckPage = () => {
       )}
       
       {/* Features section */}
-      <section className="py-16">
+      <section className="py-16 relative overflow-hidden">
+        <div className="absolute top-1/3 left-1/4 w-64 h-64 bg-primary/5 rounded-full blur-3xl -z-10"></div>
+        <div className="absolute bottom-1/3 right-1/4 w-64 h-64 bg-accent/5 rounded-full blur-3xl -z-10"></div>
+        
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center mb-12">
             <h2 className="text-2xl md:text-3xl font-medium mb-4">
@@ -177,40 +205,24 @@ const CheckPage = () => {
               {
                 title: t('check.feature1.title'),
                 description: t('check.feature1.description'),
-                icon: (
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
-                    <circle cx="11" cy="11" r="8"/>
-                    <path d="m21 21-4.3-4.3"/>
-                  </svg>
-                )
+                icon: <Search className="w-5 h-5" />,
+                color: "text-primary"
               },
               {
                 title: t('check.feature2.title'),
                 description: t('check.feature2.description'),
-                icon: (
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
-                    <circle cx="12" cy="12" r="10"/>
-                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-                    <path d="M2 12h20"/>
-                  </svg>
-                )
+                icon: <Globe className="w-5 h-5" />,
+                color: "text-secondary"
               },
               {
                 title: t('check.feature3.title'),
                 description: t('check.feature3.description'),
-                icon: (
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
-                    <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
-                    <polyline points="14 2 14 8 20 8"/>
-                    <line x1="16" x2="8" y1="13" y2="13"/>
-                    <line x1="16" x2="8" y1="17" y2="17"/>
-                    <line x1="10" x2="8" y1="9" y2="9"/>
-                  </svg>
-                )
+                icon: <FileText className="w-5 h-5" />,
+                color: "text-accent"
               }
             ].map((feature, index) => (
-              <div key={index} className="bg-card border border-border rounded-xl p-6">
-                <div className="w-10 h-10 flex items-center justify-center rounded-full bg-primary/10 text-primary mb-4">
+              <div key={index} className="card-gradient border border-white/10 rounded-xl p-6 group hover:shadow-lg transition-all hover:-translate-y-1">
+                <div className={`w-10 h-10 flex items-center justify-center rounded-full bg-primary/10 ${feature.color} mb-4 group-hover:animated-bounce`}>
                   {feature.icon}
                 </div>
                 <h3 className="text-lg font-medium mb-2">{feature.title}</h3>
