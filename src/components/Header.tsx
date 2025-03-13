@@ -86,7 +86,9 @@ const Header = () => {
               {t('nav.checkText')}
             </Link>
             
-            <LanguageSelector />
+            <div className="min-w-[40px] flex items-center">
+              <LanguageSelector />
+            </div>
           </nav>
 
           {/* Mobile Menu Button and Language Selector */}

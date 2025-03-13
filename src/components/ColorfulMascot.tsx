@@ -84,7 +84,7 @@ const ColorfulMascot: React.FC<ColorfulMascotProps> = ({
 
   return (
     <div 
-      className={`relative ${getPosition()} ${animated ? 'transition-transform duration-300' : ''}`} 
+      className={`absolute ${getPosition()} ${animated ? 'transition-transform duration-300' : ''}`} 
       ref={mascotRef}
       style={style}
     >
