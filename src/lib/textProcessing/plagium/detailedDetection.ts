@@ -6,6 +6,7 @@
 
 import { getPlagiarismScore } from './basicDetection';
 import { simulateWebSearch } from '../externalSources';
+import { searchMultipleResources } from '../webSearch';
 
 /**
  * Extended version with additional parameters matching Plagium API style
@@ -41,8 +42,46 @@ export async function getDetailedPlagiarismScore({
   // Basic implementation - get the score
   const score = await getPlagiarismScore({ text, languageCode });
   
-  // Get the sources
-  const sources = await simulateWebSearch(text);
+  // Get sources from both methods and combine them
+  let sources = [];
+  
+  try {
+    // Try using the web search API with Google Custom Search
+    const webResults = await searchMultipleResources(text);
+    
+    // Convert to the format our API expects
+    const webSources = webResults.map(result => ({
+      url: result.link,
+      title: result.title,
+      snippet: result.snippet,
+      similarity: result.similarity
+    }));
+    
+    sources = [...webSources];
+    
+    // If we don't have enough results, supplement with our simulated search
+    if (sources.length < 3) {
+      const simulatedResults = await simulateWebSearch(text);
+      
+      // Add unique sources that aren't already in our list
+      const existingUrls = new Set(sources.map(s => s.url));
+      
+      for (const result of simulatedResults) {
+        if (!existingUrls.has(result.url)) {
+          sources.push(result);
+          existingUrls.add(result.url);
+        }
+      }
+    }
+  } catch (error) {
+    console.error("Error in web search:", error);
+    
+    // Fall back to simulated search on error
+    sources = await simulateWebSearch(text);
+  }
+  
+  // Sort by similarity
+  sources.sort((a, b) => b.similarity - a.similarity);
   
   return {
     score,

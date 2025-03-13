@@ -12,6 +12,7 @@ import { normalizeText, tokenizeText, generateNGrams, calculateTF } from './norm
 import { calculateCosineSimilarity, findMatchingSegments, calculateJaccardSimilarity } from './similarity';
 import { analyzePlagiarism } from './analyzePlagiarism';
 import { simulateWebSearch } from './externalSources';
+import { searchWithGoogleAPI, searchMultipleResources } from './webSearch';
 import { getPlagiarismScore, getDetailedPlagiarismScore } from './plagium';
 import { hashText, calculateNonOverlappingLength } from './utils';
 
@@ -20,6 +21,9 @@ export { analyzePlagiarism };
 
 // Export Plagium-inspired functions
 export { getPlagiarismScore, getDetailedPlagiarismScore };
+
+// Export web search functions
+export { searchWithGoogleAPI, searchMultipleResources };
 
 // Export all utilities for potential future use
 export const analyzeDocument = {

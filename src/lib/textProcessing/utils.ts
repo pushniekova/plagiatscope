@@ -1,3 +1,4 @@
+
 /**
  * Common utilities for text processing 
  * Used across different plagiarism detection approaches
@@ -68,11 +69,27 @@ export function isPersonalApiConfigured(): boolean {
   }
 }
 
+// Check if Google API is configured
+export function isGoogleApiConfigured(): boolean {
+  try {
+    const apiConfig = localStorage.getItem('plagiarismCheckConfig');
+    if (!apiConfig) return false;
+    
+    const config = JSON.parse(apiConfig);
+    return !!config.googleApiKey && !!config.googleEngineId;
+  } catch (error) {
+    console.error('Error checking Google API configuration:', error);
+    return false;
+  }
+}
+
 // Get the external API configuration from browser storage
 export function getExternalApiConfig(): { 
   groupToken: string; 
   authorEmail: string;
-  personalApiToken?: string; 
+  personalApiToken?: string;
+  googleApiKey?: string;
+  googleEngineId?: string;
 } | null {
   try {
     const apiConfig = localStorage.getItem('plagiarismCheckConfig');
@@ -90,6 +107,8 @@ export function saveExternalApiConfig(config: {
   groupToken: string; 
   authorEmail: string;
   personalApiToken?: string;
+  googleApiKey?: string;
+  googleEngineId?: string;
 }): void {
   try {
     localStorage.setItem('plagiarismCheckConfig', JSON.stringify(config));

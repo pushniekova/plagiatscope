@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Shield, Check, AlertCircle, BookOpen, Brain } from 'lucide-react';
+import { Shield, Check, AlertCircle, BookOpen, Brain, Search } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { getExternalApiConfig, saveExternalApiConfig } from '@/lib/textProcessing/utils';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -20,6 +20,8 @@ const ExternalApiConfig: React.FC<ExternalApiConfigProps> = ({ onConfigSaved }) 
   const [groupToken, setGroupToken] = useState('');
   const [authorEmail, setAuthorEmail] = useState('');
   const [personalApiToken, setPersonalApiToken] = useState('');
+  const [googleApiKey, setGoogleApiKey] = useState('');
+  const [googleEngineId, setGoogleEngineId] = useState('');
   const [isConfigured, setIsConfigured] = useState(false);
   const [activeTab, setActiveTab] = useState('plagiarism');
 
@@ -30,6 +32,8 @@ const ExternalApiConfig: React.FC<ExternalApiConfigProps> = ({ onConfigSaved }) 
       setGroupToken(config.groupToken || '');
       setAuthorEmail(config.authorEmail || '');
       setPersonalApiToken(config.personalApiToken || '');
+      setGoogleApiKey(config.googleApiKey || '');
+      setGoogleEngineId(config.googleEngineId || '');
       setIsConfigured(!!config.groupToken && !!config.authorEmail);
     }
   }, []);
@@ -67,23 +71,36 @@ const ExternalApiConfig: React.FC<ExternalApiConfigProps> = ({ onConfigSaved }) 
         });
         hasError = true;
       }
+    } else if (activeTab === 'websearch') {
+      if (!googleApiKey.trim() || !googleEngineId.trim()) {
+        toast({
+          title: t('common.error'),
+          description: "Необхідно вказати Google API Key та Google Engine ID",
+          variant: "destructive",
+        });
+        hasError = true;
+      }
     }
 
     if (hasError) return;
 
-    // Get existing config to preserve values from the other tab
+    // Get existing config to preserve values from other tabs
     const existingConfig = getExternalApiConfig() || { 
       groupToken: '', 
       authorEmail: '',
-      personalApiToken: '' 
+      personalApiToken: '',
+      googleApiKey: '',
+      googleEngineId: ''
     };
 
-    // Update with new values
+    // Update with new values based on active tab
     const newConfig = {
       ...existingConfig,
       groupToken: activeTab === 'plagiarism' ? groupToken : existingConfig.groupToken,
       authorEmail: activeTab === 'plagiarism' ? authorEmail : existingConfig.authorEmail,
-      personalApiToken: activeTab === 'ai' ? personalApiToken : existingConfig.personalApiToken
+      personalApiToken: activeTab === 'ai' ? personalApiToken : existingConfig.personalApiToken,
+      googleApiKey: activeTab === 'websearch' ? googleApiKey : existingConfig.googleApiKey,
+      googleEngineId: activeTab === 'websearch' ? googleEngineId : existingConfig.googleEngineId
     };
 
     saveExternalApiConfig(newConfig);
@@ -108,7 +125,7 @@ const ExternalApiConfig: React.FC<ExternalApiConfigProps> = ({ onConfigSaved }) 
       
       <CardContent className="space-y-4">
         <Tabs value={activeTab} onValueChange={setActiveTab}>
-          <TabsList className="grid w-full grid-cols-2">
+          <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="plagiarism" className="flex items-center gap-2">
               <BookOpen className="h-4 w-4" />
               {t('check.externalApi.plagiarismTab')}
@@ -116,6 +133,10 @@ const ExternalApiConfig: React.FC<ExternalApiConfigProps> = ({ onConfigSaved }) 
             <TabsTrigger value="ai" className="flex items-center gap-2">
               <Brain className="h-4 w-4" />
               {t('check.externalApi.aiTab')}
+            </TabsTrigger>
+            <TabsTrigger value="websearch" className="flex items-center gap-2">
+              <Search className="h-4 w-4" />
+              Пошук в Інтернеті
             </TabsTrigger>
           </TabsList>
           
@@ -155,6 +176,36 @@ const ExternalApiConfig: React.FC<ExternalApiConfigProps> = ({ onConfigSaved }) 
               />
             </div>
           </TabsContent>
+          
+          <TabsContent value="websearch" className="space-y-4 mt-4">
+            <div className="space-y-2">
+              <Label htmlFor="google-api-key">Google API Key</Label>
+              <Input
+                id="google-api-key"
+                type="text"
+                value={googleApiKey}
+                onChange={(e) => setGoogleApiKey(e.target.value)}
+                placeholder="Введіть ваш Google API Key"
+              />
+              <p className="text-xs text-muted-foreground mt-1">
+                Отримайте API ключ з <a href="https://console.cloud.google.com/apis/credentials" target="_blank" className="text-primary hover:underline">Google Cloud Console</a>
+              </p>
+            </div>
+            
+            <div className="space-y-2">
+              <Label htmlFor="google-engine-id">Google Custom Search Engine ID</Label>
+              <Input
+                id="google-engine-id"
+                type="text"
+                value={googleEngineId}
+                onChange={(e) => setGoogleEngineId(e.target.value)}
+                placeholder="Введіть ID пошукової системи Google"
+              />
+              <p className="text-xs text-muted-foreground mt-1">
+                Створіть пошукову систему та отримайте ID на <a href="https://programmablesearchengine.google.com/cse/all" target="_blank" className="text-primary hover:underline">Programmable Search Engine</a>
+              </p>
+            </div>
+          </TabsContent>
         </Tabs>
         
         {isConfigured && (
@@ -168,7 +219,9 @@ const ExternalApiConfig: React.FC<ExternalApiConfigProps> = ({ onConfigSaved }) 
       <CardFooter className="justify-between">
         <p className="text-sm text-muted-foreground">
           <AlertCircle className="h-4 w-4 inline mr-1" />
-          {t('check.externalApi.warning')}
+          {activeTab === 'websearch' 
+            ? "API ключі будуть збережені лише у вашому локальному сховищі браузера"
+            : t('check.externalApi.warning')}
         </p>
         <Button onClick={handleSaveConfig}>
           {t('check.externalApi.saveButton')}

@@ -1,3 +1,4 @@
+
 /**
  * Core plagiarism detection algorithm adapted from the Plagiarism-Checker algorithm
  * https://github.com/architshukla/Plagiarism-Checker
@@ -10,7 +11,8 @@ import { normalizeText, tokenizeText, calculateTF, generateNGrams } from './norm
 import { calculateCosineSimilarity, findMatchingSegments, calculateJaccardSimilarity } from './similarity';
 import { databaseSources, academicSources } from './databaseSources';
 import { simulateWebSearch } from './externalSources';
-import { hashText, calculateNonOverlappingLength } from './utils';
+import { searchMultipleResources } from './webSearch';
+import { hashText, calculateNonOverlappingLength, isGoogleApiConfigured } from './utils';
 import { getPlagiarismScore } from './plagiumDetection';
 
 /**
@@ -130,34 +132,43 @@ export const analyzePlagiarism = async (text: string): Promise<{
   
   console.log(`Found ${matches.length} matches in database sources`);
   
-  // Step 5: Check against external sources like in the Plagiarism-Checker that uses Google Search API
-  // We'll simulate this by using our simulateWebSearch function
+  // Step 5: Check against external sources using our upgraded web search
   console.log("Checking against external web sources");
   
-  // Create search queries from n-grams (similar to Plagiarism-Checker approach)
-  // We'll use 5-grams as they provide good context for search
-  const searchQueries = inputNGrams5
-    .filter((_, index) => index % 20 === 0) // Take every 20th 5-gram to limit API calls
-    .slice(0, 5); // Limit to maximum 5 queries
-  
-  // For each query, search the web and analyze results
   let externalResults = [];
+  
   try {
-    // Call with only 1 argument as the function expects just the text
-    // In a real implementation, we would pass the search queries as in Plagiarism-Checker
-    externalResults = await simulateWebSearch(text);
+    // Try using Google Custom Search API if configured, otherwise use simulated search
+    if (isGoogleApiConfigured()) {
+      console.log("Using Google Custom Search API for external sources");
+      externalResults = await searchMultipleResources(text);
+    } else {
+      console.log("Google API not configured, using simulated web search");
+      externalResults = await simulateWebSearch(text);
+    }
+    
     console.log(`Found ${externalResults.length} potential external sources`);
   } catch (error) {
     console.error("Error during web search:", error);
-    externalResults = [];
+    // Fallback to simulated search on error
+    externalResults = await simulateWebSearch(text);
   }
   
-  const externalSources = externalResults.map(result => ({
-    source: result.title,
-    similarity: result.similarity,
-    matchedText: result.snippet,
-    sourceUrl: result.url
-  }));
+  // Process and format the results
+  const externalSources = externalResults.map(result => {
+    // Ensure we have the right properties from different APIs
+    const sourceTitle = result.title || result.source || "Unknown source";
+    const sourceUrl = result.link || result.url || result.sourceUrl || "#";
+    const matchedText = result.snippet || result.matchedText || result.text || "";
+    const similarity = result.similarity || 0;
+    
+    return {
+      source: sourceTitle,
+      similarity: similarity,
+      matchedText: matchedText,
+      sourceUrl: sourceUrl
+    };
+  });
   
   // Add matches from external sources to our general matches array
   externalSources.forEach((source) => {
@@ -193,10 +204,15 @@ export const analyzePlagiarism = async (text: string): Promise<{
   
   // Calculate overall score with a weighted formula (adapted from Plagiarism-Checker + Plagium)
   // Give more weight to the original method but boost with Plagium-inspired score
-  let overallScore = Math.round(percentageMatched * 0.6);
+  let overallScore = Math.round(percentageMatched * 0.5); // Reduced from 0.6 to make room for web search
   
   // Add external source weight (up to 20% of the score)
   overallScore += Math.min(20, Math.round(externalSourceWeight * 10));
+  
+  // Add web search component (up to 10% of the score)
+  const webSearchBoost = externalSources.length > 0 ? 
+    Math.min(10, Math.round(externalSources[0].similarity * 20)) : 0;
+  overallScore += webSearchBoost;
   
   // Add Plagium-inspired score component (up to 20% of the score)
   overallScore += Math.min(20, plagiumScoreWeighted);
