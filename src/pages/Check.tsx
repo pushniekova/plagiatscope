@@ -4,6 +4,7 @@ import MainLayout from '@/layouts/MainLayout';
 import { analyzePlagiarism } from '@/lib/textProcessing';
 import { useToast } from '@/hooks/use-toast';
 import { Match, ExternalSource } from '@/components/results/types';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 // Import refactored components
 import CheckHeader from '@/components/check/CheckHeader';
@@ -26,6 +27,7 @@ const CheckPage = () => {
   });
   
   const { toast } = useToast();
+  const { t } = useLanguage();
   
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -51,7 +53,7 @@ const CheckPage = () => {
     setIsAnalyzing(true);
     
     try {
-      // Perform plagiarism analysis
+      // Perform plagiarism analysis with our improved algorithm
       const results = await analyzePlagiarism(text);
       setAnalysisResults(results);
       setShowResults(true);
@@ -107,9 +109,5 @@ const CheckPage = () => {
     </MainLayout>
   );
 };
-
-// Need to import the useLanguage hook for t() function
-import { useLanguage } from '@/contexts/LanguageContext';
-const { t } = useLanguage();
 
 export default CheckPage;

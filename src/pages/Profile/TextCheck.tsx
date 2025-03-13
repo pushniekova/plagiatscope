@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { ArrowLeft, AlertTriangle, Sparkles } from 'lucide-react';
 import ProfileLayout from '@/layouts/ProfileLayout';
@@ -11,6 +10,7 @@ import ResultsViewer from '@/components/ResultsViewer';
 import { analyzePlagiarism } from '@/lib/textProcessing';
 import { useToast } from '@/hooks/use-toast';
 import { Textarea } from '@/components/ui/textarea';
+import { Match, ExternalSource } from '@/components/results/types';
 
 const TextCheckPage: React.FC = () => {
   const [text, setText] = useState('');
@@ -18,20 +18,8 @@ const TextCheckPage: React.FC = () => {
   const [showResults, setShowResults] = useState(false);
   const [analysisResults, setAnalysisResults] = useState<{
     overallScore: number;
-    matches: Array<{
-      text: string;
-      startIndex: number;
-      endIndex: number;
-      matchPercentage: number;
-      source: string;
-      sourceUrl?: string;
-    }>;
-    externalSources: Array<{
-      source: string;
-      similarity: number;
-      matchedText: string;
-      sourceUrl: string;
-    }>;
+    matches: Match[];
+    externalSources: ExternalSource[];
   }>({ 
     overallScore: 0, 
     matches: [],
@@ -62,7 +50,7 @@ const TextCheckPage: React.FC = () => {
     setIsAnalyzing(true);
     
     try {
-      // Perform plagiarism analysis
+      // Perform plagiarism analysis with improved algorithm
       const results = await analyzePlagiarism(text);
       setAnalysisResults(results);
       setShowResults(true);

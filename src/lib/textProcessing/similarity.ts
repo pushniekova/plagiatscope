@@ -41,6 +41,27 @@ export const calculateCosineSimilarity = (
 };
 
 /**
+ * Calculates Jaccard similarity between two sets of fingerprints
+ * Jaccard similarity is the size of the intersection divided by the size of the union
+ */
+export const calculateJaccardSimilarity = (
+  set1: Set<string>,
+  set2: Set<string>
+): number => {
+  if (set1.size === 0 && set2.size === 0) return 1.0; // Both empty sets are 100% similar
+  if (set1.size === 0 || set2.size === 0) return 0.0; // One empty set means 0% similarity
+  
+  // Calculate intersection size
+  const intersection = new Set([...set1].filter(x => set2.has(x)));
+  
+  // Calculate union size: sum of individual sizes minus the intersection size
+  const unionSize = set1.size + set2.size - intersection.size;
+  
+  // Return Jaccard coefficient
+  return intersection.size / unionSize;
+};
+
+/**
  * Find matching segments between two texts
  */
 export const findMatchingSegments = (text1: string, text2: string, minLength = 10): Array<{
