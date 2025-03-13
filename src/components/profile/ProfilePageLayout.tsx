@@ -8,13 +8,15 @@ export interface ProfilePageProps {
   cardTitleKey: string;
   cardDescriptionKey: string;
   children?: React.ReactNode;
+  showEmptyState?: boolean;
 }
 
 const ProfilePageLayout: React.FC<ProfilePageProps> = ({
   titleKey,
   cardTitleKey,
   cardDescriptionKey,
-  children
+  children,
+  showEmptyState = true
 }) => {
   const { t } = useLanguage();
 
@@ -28,7 +30,7 @@ const ProfilePageLayout: React.FC<ProfilePageProps> = ({
           <CardDescription>{t(cardDescriptionKey)}</CardDescription>
         </CardHeader>
         <CardContent>
-          {children || <p>{t('profile.comingSoon')}</p>}
+          {children || (showEmptyState && <p className="text-muted-foreground">{t('profile.comingSoon')}</p>)}
         </CardContent>
       </Card>
     </div>
