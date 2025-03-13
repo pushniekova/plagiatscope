@@ -35,4 +35,6 @@ export default {
   fileLoadedMessage: 'Soubor úspěšně načten!',
   emptyText: 'Text je prázdný',
   enterTextMessage: 'Zadejte text pro kontrolu plagiátorství.',
+  analysisError: 'Chyba analýzy',
+  analysisErrorMessage: 'Při analýze textu došlo k chybě. Zkuste to prosím znovu.',
 };

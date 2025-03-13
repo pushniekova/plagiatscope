@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { AlertTriangle, Sparkles, Search, Globe, FileText } from 'lucide-react';
 import MainLayout from '@/layouts/MainLayout';
@@ -22,8 +21,19 @@ const CheckPage = () => {
       endIndex: number;
       matchPercentage: number;
       source: string;
+      sourceUrl?: string;
     }>;
-  }>({ overallScore: 0, matches: [] });
+    externalSources: Array<{
+      source: string;
+      similarity: number;
+      matchedText: string;
+      sourceUrl: string;
+    }>;
+  }>({ 
+    overallScore: 0, 
+    matches: [],
+    externalSources: [] 
+  });
   
   const { toast } = useToast();
   const { t } = useLanguage();
@@ -50,7 +60,7 @@ const CheckPage = () => {
     });
   };
 
-  const handleAnalyze = () => {
+  const handleAnalyze = async () => {
     if (!text.trim()) {
       toast({
         title: t('check.emptyText'),
@@ -62,18 +72,26 @@ const CheckPage = () => {
 
     setIsAnalyzing(true);
     
-    // Simulate API call to analyze text
-    setTimeout(() => {
-      const results = analyzePlagiarism(text);
+    try {
+      // Perform plagiarism analysis
+      const results = await analyzePlagiarism(text);
       setAnalysisResults(results);
       setShowResults(true);
-      setIsAnalyzing(false);
       
       // Scroll to results after a brief delay
       setTimeout(() => {
         document.getElementById('results-section')?.scrollIntoView({ behavior: 'smooth' });
       }, 100);
-    }, 2000); // Simulated delay for analysis
+    } catch (error) {
+      console.error("Error analyzing text:", error);
+      toast({
+        title: t('check.analysisError'),
+        description: t('check.analysisErrorMessage'),
+        variant: "destructive",
+      });
+    } finally {
+      setIsAnalyzing(false);
+    }
   };
 
   return (
@@ -179,6 +197,7 @@ const CheckPage = () => {
                 originalText={text}
                 overallScore={analysisResults.overallScore}
                 matches={analysisResults.matches}
+                externalSources={analysisResults.externalSources}
               />
             </div>
           </div>

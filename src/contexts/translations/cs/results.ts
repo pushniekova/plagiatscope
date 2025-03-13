@@ -5,28 +5,27 @@ export default {
   tabs: {
     highlighted: 'Zvýrazněno',
     sources: 'Zdroje',
+    external: 'Externí zdroje',
     summary: 'Shrnutí',
   },
   noPlagiarism: 'Nenalezen žádný plagiát',
   noSources: 'Nenalezeny žádné zdroje',
+  noExternalSources: 'Nenalezeny žádné externí zdroje',
   match: 'Shoda',
+  cosineSimilarity: 'Podobnost',
   matchedText: 'Odpovídající text',
   characters: 'znaků',
   sourcesFound: 'Nalezené zdroje',
   charactersAnalyzed: 'Analyzované znaky',
   analysisSummary: 'Shrnutí analýzy',
   summary: {
-    low: 'Nízká',
-    medium: 'Střední',
-    high: 'Vysoká',
+    low: 'Nízká pravděpodobnost plagiátu',
+    medium: 'Střední pravděpodobnost plagiátu',
+    high: 'Vysoká pravděpodobnost plagiátu',
   },
   recommendations: 'Doporučení',
-  recommendation1:
-    'Uveďte zdroje, které jste použili ve svém textu.',
-  recommendation2:
-    'Parafrázujte text, abyste se vyhnuli plagiátorství.',
-  recommendation3:
-    'Použijte uvozovky pro přímé citace.',
-  recommendation4:
-    'Zkontrolujte svůj text pomocí našeho nástroje pro kontrolu plagiátů.',
+  recommendation1: 'Přezkoumejte zvýrazněné části pro potenciální plagiát.',
+  recommendation2: 'Citujte původní zdroje, abyste ocenili autory.',
+  recommendation3: 'Parafrázujte text, aby byl originálnější.',
+  recommendation4: 'Používejte uvozovky pro přímé citace.',
 };

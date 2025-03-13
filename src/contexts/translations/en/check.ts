@@ -29,4 +29,6 @@ export default {
   fileLoadedMessage: 'The file has been successfully loaded.',
   emptyText: 'Please paste text or upload a file to check for plagiarism.',
   enterTextMessage: 'Please enter text to check for plagiarism.',
+  analysisError: 'Analysis Error',
+  analysisErrorMessage: 'An error occurred while analyzing your text. Please try again.',
 };
