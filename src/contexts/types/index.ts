@@ -1,22 +1,21 @@
 
-import { AboutPageTypes } from './aboutPageTypes';
-import { AuthTypes } from './authTypes';
-import { BaseTypes } from './baseTypes';
-import { CheckPageTypes } from './checkPageTypes';
-import { CommonTypes } from './commonTypes';
-import { HomePageTypes } from './homePageTypes';
-import { LegalPageTypes } from './legalPageTypes';
+import { AboutPageTranslations } from './aboutPageTypes';
+import { AuthTranslations } from './authTypes';
+import { Language, LanguageContextProps } from './baseTypes';
+import { CheckPageTranslations } from './checkPageTypes';
+import { CommonTranslations } from './commonTypes';
+import { HomePageTranslations } from './homePageTypes';
+import { LegalPageTranslations } from './legalPageTypes';
 import { ProfilePageTranslations } from './profilePageTypes';
 
 // Combined type for all translations
 export type Translations = 
-  & BaseTypes 
-  & CommonTypes 
-  & HomePageTypes 
-  & AboutPageTypes 
-  & CheckPageTypes
-  & AuthTypes 
-  & LegalPageTypes
+  & CommonTranslations
+  & AuthTranslations
+  & HomePageTranslations
+  & CheckPageTranslations
+  & AboutPageTranslations
+  & LegalPageTranslations
   & ProfilePageTranslations;
 
 // Re-export all types
@@ -28,3 +27,4 @@ export * from './checkPageTypes';
 export * from './authTypes';
 export * from './legalPageTypes';
 export * from './profilePageTypes';
+export type { Language, LanguageContextProps };
