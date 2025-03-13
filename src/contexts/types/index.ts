@@ -1,22 +1,30 @@
 
-import { Language, LanguageContextProps } from './baseTypes';
-import { CommonTranslations } from './commonTypes';
-import { AuthTranslations } from './authTypes';
-import { HomePageTranslations } from './homePageTypes';
-import { CheckPageTranslations } from './checkPageTypes';
-import { AboutPageTranslations } from './aboutPageTypes';
-import { ProfilePageTranslations } from './profile';
-import { LegalPageTranslations } from './legalPageTypes';
+import { AboutPageTypes } from './aboutPageTypes';
+import { AuthTypes } from './authTypes';
+import { BaseTypes } from './baseTypes';
+import { CheckPageTypes } from './checkPageTypes';
+import { CommonTypes } from './commonTypes';
+import { HomePageTypes } from './homePageTypes';
+import { LegalPageTypes } from './legalPageTypes';
+import { ProfilePageTranslations } from './profilePageTypes';
 
-// Re-export types
-export type { Language, LanguageContextProps };
-
-// Define the full Translations type by combining all separate translation types
+// Combined type for all translations
 export type Translations = 
-  & CommonTranslations
-  & AuthTranslations
-  & HomePageTranslations
-  & CheckPageTranslations
-  & AboutPageTranslations
-  & ProfilePageTranslations
-  & LegalPageTranslations;
+  & BaseTypes 
+  & CommonTypes 
+  & HomePageTypes 
+  & AboutPageTypes 
+  & CheckPageTypes
+  & AuthTypes 
+  & LegalPageTypes
+  & ProfilePageTranslations;
+
+// Re-export all types
+export * from './baseTypes';
+export * from './commonTypes';
+export * from './homePageTypes';
+export * from './aboutPageTypes';
+export * from './checkPageTypes';
+export * from './authTypes';
+export * from './legalPageTypes';
+export * from './profilePageTypes';
