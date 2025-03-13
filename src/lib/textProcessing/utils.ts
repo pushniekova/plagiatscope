@@ -1,4 +1,3 @@
-
 /**
  * Utility functions for text processing
  */
@@ -23,7 +22,7 @@ export function calculateNonOverlappingLength(
   text: string, 
   segments: Array<{ startIndex: number, endIndex: number }>
 ): number {
-  if (segments.length === 0) return text.length;
+  if (segments.length === 0) return 0;
   
   // Sort segments by start index
   const sortedSegments = [...segments].sort((a, b) => a.startIndex - b.startIndex);
@@ -54,7 +53,7 @@ export function calculateNonOverlappingLength(
     0
   );
   
-  return text.length - totalSegmentLength;
+  return totalSegmentLength;
 }
 
 // API configuration storage
@@ -94,9 +93,11 @@ export function saveExternalApiConfig(config: ExternalApiConfig): void {
 export function getGoogleApiCredentials(): { apiKey: string; engineId: string } | null {
   const config = getExternalApiConfig();
   if (!config || !config.googleApiKey || !config.googleEngineId) {
+    console.log("No Google API credentials found in local storage");
     return null;
   }
   
+  console.log("Using Google API credentials from local storage");
   return {
     apiKey: config.googleApiKey,
     engineId: config.googleEngineId

@@ -1,7 +1,7 @@
 /**
  * Web search utilities for plagiarism detection
  * This module provides functionality to check text against external web sources
- * It supports both simulated search and real Google Custom Search integration
+ * It supports both real Google Custom Search integration and fallback simulation
  */
 
 import { normalizeText, tokenizeText, calculateTF } from './normalize';
@@ -34,7 +34,9 @@ export async function searchMultipleResources(text: string): Promise<WebSearchRe
       
       // If we got results from Google, calculate similarity and return
       if (googleResults && googleResults.length > 0) {
-        return processAndScoreResults(googleResults, text);
+        const processedResults = processAndScoreResults(googleResults, text);
+        console.log(`Found ${processedResults.length} real sources via Google API`);
+        return processedResults;
       }
     } catch (error) {
       console.error("Error using Google Search API:", error);
@@ -43,13 +45,8 @@ export async function searchMultipleResources(text: string): Promise<WebSearchRe
   }
   
   // Fall back to internal simulation if Google API is not configured or fails
-  console.log("Using simulated search for plagiarism detection");
-  const results = await simulateWebSearch(query);
-  
-  // Filter by minimum similarity threshold and remove duplicates
-  return results
-    .filter(result => result.similarity > 0.15) // Only keep somewhat similar results
-    .sort((a, b) => b.similarity - a.similarity); // Sort by highest similarity first
+  console.log("Using simulated search for plagiarism detection (fallback)");
+  return simulateWebSearch(text);
 }
 
 /**
@@ -61,14 +58,14 @@ function processAndScoreResults(results: any[], originalText: string): WebSearch
     const snippet = result.snippet || result.description || "";
     const link = result.link || result.url || "#";
     
-    // Calculate similarity between original text and the snippet
+    // Calculate actual similarity between original text and the snippet
     const similarity = calculateTextSimilarity(originalText, snippet);
     
     return {
       title,
       snippet,
       link,
-      similarity: similarity * (0.7 + Math.random() * 0.3) // Add some randomness
+      similarity
     };
   })
   .filter(result => result.similarity > 0.1) // Filter out very low similarity results
@@ -83,7 +80,7 @@ async function searchWithGoogleApi(
   credentials: { apiKey: string; engineId: string }
 ): Promise<any[]> {
   const { apiKey, engineId } = credentials;
-  const url = `https://www.googleapis.com/customsearch/v1?key=${apiKey}&cx=${engineId}&q=${encodeURIComponent(query)}`;
+  const url = `https://www.googleapis.com/customsearch/v1?key=${apiKey}&cx=${engineId}&q=${encodeURIComponent(query)}&num=10`;
   
   try {
     const response = await fetch(url);
@@ -155,10 +152,7 @@ function calculateTextSimilarity(text1: string, text2: string): number {
   return calculateCosineSimilarity(tf1, tf2);
 }
 
-/**
- * Simulated web search that generates academic and informational results
- * This is our internal implementation for testing purposes
- */
+// Simulated web search (fallback only)
 export async function simulateWebSearch(query: string): Promise<WebSearchResult[]> {
   // Simulate API call delay
   await new Promise(resolve => setTimeout(resolve, 800));
@@ -304,6 +298,17 @@ function generateDynamicSources(query: string): Array<{title: string, link: stri
   }
   
   return sources;
+}
+
+// Return simulated results with clear indication they are simulated
+  return [
+    {
+      title: "Симульований результат (немає API ключа)",
+      snippet: "Це симульований результат, оскільки ви не налаштували Google API. Будь ласка, налаштуйте Google Custom Search API для отримання реальних результатів.",
+      link: "https://console.cloud.google.com/apis/credentials",
+      similarity: 0.5
+    }
+  ];
 }
 
 // Common words to exclude from search queries for better results
