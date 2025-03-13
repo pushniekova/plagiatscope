@@ -43,6 +43,7 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = ({ children, activePage = 'p
     }
   };
 
+  // Define all menu items in one place for easier maintenance
   const menuItems = [
     { id: 'profile', title: t('profile.menu.profile'), icon: User, path: '/profile' },
     { id: 'settings', title: t('profile.menu.settings'), icon: Settings, path: '/profile/settings' },
