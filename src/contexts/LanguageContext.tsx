@@ -1,12 +1,9 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { LanguageContextProps, Translations } from './languageTypes';
+import { Language, LanguageContextProps, Translations } from './types';
 import ukTranslations from './translations/ukTranslations';
 import enTranslations from './translations/enTranslations';
 import csTranslations from './translations/csTranslations';
-
-// Re-export the Language type to fix the build error
-export type { Language } from './languageTypes';
 
 const LanguageContext = createContext<LanguageContextProps>({
   language: 'uk',
@@ -65,3 +62,4 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 };
 
 export const useLanguage = () => useContext(LanguageContext);
+export type { Language };
