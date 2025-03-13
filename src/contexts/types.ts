@@ -1,12 +1,12 @@
 
-import { AboutPageTypes } from './types/aboutPageTypes';
-import { AuthTypes } from './types/authTypes';
-import { BaseTypes } from './types/baseTypes';
-import { CheckPageTypes } from './types/checkPageTypes';
-import { CommonTypes } from './types/commonTypes';
-import { HomePageTypes } from './types/homePageTypes';
-import { LegalPageTypes } from './types/legalPageTypes';
-import { ProfilePageTypes } from './types/profilePageTypes';
+import type { AboutPageTypes } from './types/aboutPageTypes';
+import type { AuthTypes } from './types/authTypes';
+import type { BaseTypes } from './types/baseTypes';
+import type { CheckPageTypes } from './types/checkPageTypes';
+import type { CommonTypes } from './types/commonTypes';
+import type { HomePageTypes } from './types/homePageTypes';
+import type { LegalPageTypes } from './types/legalPageTypes';
+import type { ProfilePageTypes } from './types/profilePageTypes';
 
 // Combined type for all translations
 export type Translations = BaseTypes &

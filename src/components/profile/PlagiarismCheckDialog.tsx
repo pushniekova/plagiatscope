@@ -99,9 +99,9 @@ const PlagiarismCheckDialog: React.FC<PlagiarismCheckDialogProps> = ({
       text: text.substring(0, Math.min(text.length, 100)),
       startIndex: 0,
       endIndex: Math.min(text.length, 100),
-      similarity: 85,
+      matchPercentage: 85,
       source: 'Source 1',
-      url: 'https://example.com/source1'
+      sourceUrl: 'https://example.com/source1'
     }
   ];
 
