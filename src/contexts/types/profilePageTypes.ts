@@ -138,6 +138,7 @@ export type ProfilePageTranslations = {
       month?: string;
       premiumPlanFeature1?: string;
       premiumPlanFeature2?: string;
+      comingSoon?: string;
     };
     payments: {
       title: string;
