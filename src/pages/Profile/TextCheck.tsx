@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { ArrowLeft, AlertTriangle, Sparkles } from 'lucide-react';
 import ProfileLayout from '@/layouts/ProfileLayout';
@@ -11,6 +12,7 @@ import { analyzePlagiarism } from '@/lib/textProcessing';
 import { useToast } from '@/hooks/use-toast';
 import { Textarea } from '@/components/ui/textarea';
 import { Match, ExternalSource } from '@/components/results/types';
+import FileUpload from '@/components/FileUpload';
 
 const TextCheckPage: React.FC = () => {
   const [text, setText] = useState('');
@@ -32,6 +34,17 @@ const TextCheckPage: React.FC = () => {
   
   const handleTextChange = (newText: string) => {
     setText(newText);
+    if (showResults) {
+      setShowResults(false);
+    }
+  };
+
+  const handleFileContent = (content: string) => {
+    setText(content);
+    toast({
+      title: t('check.fileUploaded'),
+      description: t('check.fileLoadedMessage'),
+    });
     if (showResults) {
       setShowResults(false);
     }
@@ -96,16 +109,20 @@ const TextCheckPage: React.FC = () => {
             <CardDescription>{t('profile.services.premiumTextCheck.description')}</CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
-            <div className="space-y-4">
-              <h3 className="text-lg font-medium">{t('profile.services.premiumTextCheck.enterText')}</h3>
-              <Textarea
-                value={text}
-                onChange={(e) => handleTextChange(e.target.value)}
-                placeholder={t('profile.services.premiumTextCheck.placeholder')}
-                className="min-h-[300px] resize-y"
-              />
-              <div className="text-xs text-muted-foreground text-right">
-                {text.length} {t('textInput.characters')}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-4">
+                <h3 className="text-lg font-medium">{t('check.pasteText')}</h3>
+                <TextInput
+                  onTextChange={handleTextChange}
+                  initialValue={text}
+                  minHeight="240px"
+                  placeholder={t('profile.services.premiumTextCheck.placeholder')}
+                />
+              </div>
+              
+              <div className="space-y-4">
+                <h3 className="text-lg font-medium">{t('check.uploadFile')}</h3>
+                <FileUpload onFileContent={handleFileContent} />
               </div>
             </div>
             
