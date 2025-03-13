@@ -23,3 +23,4 @@ export interface ResultsProps {
   documentName?: string;
   analyzedCharacters?: number;
 }
+

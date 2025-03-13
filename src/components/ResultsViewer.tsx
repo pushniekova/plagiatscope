@@ -158,6 +158,7 @@ const ResultsViewer: React.FC<ResultsProps> = ({
             textLength={textLength} 
             paraphrasedPercentage={paraphrasedPercentage}
             improperCitationPercentage={improperCitationPercentage}
+            originalText={originalText}
           />
         </TabsContent>
       </TabNavigation>
