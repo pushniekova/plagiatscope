@@ -36,7 +36,9 @@ const App = () => (
   <ClerkProvider 
     publishableKey={PUBLISHABLE_KEY}
     localization={{
-      socialButtonsBlockButtonAriaLabel: " "
+      socialButtonsBlockButton: {
+        divider: " "
+      }
     }}
   >
     <QueryClientProvider client={queryClient}>
