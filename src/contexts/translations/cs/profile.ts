@@ -1,4 +1,3 @@
-
 export default {
   dashboard: 'Uživatelský panel',
   welcomeMessage: 'Spravujte svůj účet a přístup ke službám',
@@ -19,6 +18,18 @@ export default {
     services: 'Služby',
     history: 'Historie kontrol'
   },
+  sidebarMenu: {
+    plagiarismCheck: 'Kontrola plagiátů',
+    aiContentCheck: 'AI kontrola obsahu',
+    aiTextHumanization: 'Humanizace AI textu',
+    myOrders: 'Moje objednávky',
+    proofreading: 'Korektura',
+    plagiarismRemoval: 'Odstranění plagiátů',
+    payments: 'Platby',
+    helpdesk: 'Helpdesk',
+    language: 'Jazyk',
+    new: 'NOVÉ'
+  },
   settings: {
     title: 'Nastavení',
     accountSettings: 'Nastavení účtu',
@@ -31,7 +42,11 @@ export default {
     security: 'Zabezpečení',
     twoFactor: 'Dvoufaktorové ověření',
     twoFactorDesc: 'Zvyšte zabezpečení svého účtu pomocí dvoufaktorového ověření',
-    comingSoon: 'Již brzy'
+    comingSoon: 'Již brzy',
+    language: {
+      title: 'Jazyk rozhraní',
+      description: 'Vyberte jazyk zobrazení rozhraní'
+    }
   },
   billing: {
     title: 'Fakturace',

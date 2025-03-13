@@ -7,8 +7,14 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
+import { Button } from '@/components/ui/button';
 
-const LanguageSelector = () => {
+interface LanguageSelectorProps {
+  variant?: 'default' | 'sidebar';
+  showIcon?: boolean;
+}
+
+const LanguageSelector = ({ variant = 'default', showIcon = true }: LanguageSelectorProps) => {
   const { language, setLanguage, t } = useLanguage();
   
   const languages: { code: Language; name: string }[] = [
@@ -17,13 +23,24 @@ const LanguageSelector = () => {
     { code: 'en', name: t('language.en') }
   ];
 
+  // If in sidebar mode, display only the language name without container
+  if (variant === 'sidebar') {
+    return (
+      <span className="truncate">
+        {languages.find(l => l.code === language)?.name}
+      </span>
+    );
+  }
+
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="flex items-center justify-center h-10 w-[100px] gap-1 px-3 py-1 rounded-md hover:bg-secondary transition-colors">
-        <Globe size={18} className="flex-shrink-0" />
-        <span className="hidden md:inline-block ml-1 truncate">
-          {languages.find(l => l.code === language)?.name}
-        </span>
+      <DropdownMenuTrigger asChild>
+        <Button variant="ghost" size="sm" className="h-8 gap-1 px-2">
+          {showIcon && <Globe size={16} className="flex-shrink-0" />}
+          <span className="hidden md:inline-block truncate">
+            {languages.find(l => l.code === language)?.name}
+          </span>
+        </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent 
         align="end" 

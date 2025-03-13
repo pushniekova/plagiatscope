@@ -1,4 +1,3 @@
-
 export default {
   dashboard: 'User Dashboard',
   welcomeMessage: 'Manage your account and service access',
@@ -19,6 +18,18 @@ export default {
     services: 'Services',
     history: 'Check History'
   },
+  sidebarMenu: {
+    plagiarismCheck: 'Plagiarism Check',
+    aiContentCheck: 'AI Content Check',
+    aiTextHumanization: 'AI Text Humanization',
+    myOrders: 'My Orders',
+    proofreading: 'Proofreading',
+    plagiarismRemoval: 'Plagiarism Removal',
+    payments: 'Payments',
+    helpdesk: 'Helpdesk',
+    language: 'Language',
+    new: 'NEW'
+  },
   settings: {
     title: 'Settings',
     accountSettings: 'Account Settings',
@@ -31,7 +42,11 @@ export default {
     security: 'Security',
     twoFactor: 'Two-Factor Authentication',
     twoFactorDesc: 'Enhance your account security with two-factor authentication',
-    comingSoon: 'Coming soon'
+    comingSoon: 'Coming soon',
+    language: {
+      title: 'Interface Language',
+      description: 'Choose the display language for the interface'
+    }
   },
   billing: {
     title: 'Billing',
@@ -91,16 +106,7 @@ export default {
     usagesRemaining: 'Usages Remaining',
     useService: 'Use Service',
     activateService: 'Activate Service',
-    comingSoon: 'Coming soon',
-    premiumTextCheck: {
-      title: 'Premium Plagiarism Detection',
-      description: 'Enhanced plagiarism detection with advanced features and improved accuracy',
-      enterText: 'Enter or paste your text below',
-      placeholder: 'Paste your text here for premium plagiarism detection...',
-      notice: 'Important Notice',
-      noticeText: 'Your text will be checked against our database and external sources. All content remains confidential.',
-      checkButton: 'Analyze for Plagiarism'
-    }
+    comingSoon: 'Coming soon'
   },
   history: {
     title: 'Check History',

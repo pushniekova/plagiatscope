@@ -2,12 +2,25 @@
 import React from 'react';
 import ProfileLayout from '@/layouts/ProfileLayout';
 import ProfilePageLayout from '@/components/profile/ProfilePageLayout';
-import { useLanguage } from '@/contexts/LanguageContext';
+import { useLanguage, Language } from '@/contexts/LanguageContext';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Globe } from 'lucide-react';
 
 const SettingsPage: React.FC = () => {
-  const { t } = useLanguage();
+  const { t, language, setLanguage } = useLanguage();
+
+  const languages = [
+    { code: 'uk', name: t('language.uk') },
+    { code: 'en', name: t('language.en') },
+    { code: 'cs', name: t('language.cs') }
+  ];
+
+  const handleLanguageChange = (value: string) => {
+    setLanguage(value as Language);
+  };
 
   return (
     <ProfileLayout activePage="settings">
@@ -18,6 +31,31 @@ const SettingsPage: React.FC = () => {
         showEmptyState={false}
       >
         <div className="space-y-6">
+          {/* Language settings */}
+          <Card>
+            <CardHeader>
+              <div className="flex items-center gap-2">
+                <Globe className="h-5 w-5 text-primary" />
+                <CardTitle>{t('profile.settings.language.title')}</CardTitle>
+              </div>
+              <CardDescription>{t('profile.settings.language.description')}</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <RadioGroup 
+                defaultValue={language} 
+                onValueChange={handleLanguageChange}
+                className="space-y-3"
+              >
+                {languages.map((lang) => (
+                  <div key={lang.code} className="flex items-center space-x-2">
+                    <RadioGroupItem value={lang.code} id={`lang-${lang.code}`} />
+                    <Label htmlFor={`lang-${lang.code}`}>{lang.name}</Label>
+                  </div>
+                ))}
+              </RadioGroup>
+            </CardContent>
+          </Card>
+
           <div className="space-y-4">
             <h3 className="text-lg font-medium">{t('profile.settings.notifications')}</h3>
             

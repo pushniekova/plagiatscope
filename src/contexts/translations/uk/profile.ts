@@ -1,4 +1,3 @@
-
 export default {
   dashboard: 'Кабінет користувача',
   welcomeMessage: 'Керуйте своїм обліковим записом та доступом до сервісів',
@@ -15,9 +14,21 @@ export default {
     profile: 'Профіль',
     settings: 'Налаштування',
     billing: 'Білінг',
-    payments: 'Оплата',
+    payments: 'Платежі',
     services: 'Сервіси',
     history: 'Історія перевірок'
+  },
+  sidebarMenu: {
+    plagiarismCheck: 'Перевірка на плагіат',
+    aiContentCheck: 'AI аналіз контенту',
+    aiTextHumanization: 'Гуманізація тексту ИИ',
+    myOrders: 'Мої замовлення',
+    proofreading: 'Коректура',
+    plagiarismRemoval: 'Видалення плагіату',
+    payments: 'Платежі',
+    helpdesk: 'Helpdesk',
+    language: 'Мова',
+    new: 'НОВЕ'
   },
   settings: {
     title: 'Налаштування',
@@ -31,7 +42,11 @@ export default {
     security: 'Безпека',
     twoFactor: 'Двофакторна аутентифікація',
     twoFactorDesc: 'Підвищіть безпеку свого облікового запису за допомогою двофакторної аутентифікації',
-    comingSoon: 'Скоро доступно'
+    comingSoon: 'Скоро доступно',
+    language: {
+      title: 'Мова інтерфейсу',
+      description: 'Виберіть мову відображення інтерфейсу'
+    }
   },
   billing: {
     title: 'Білінг',
@@ -91,16 +106,7 @@ export default {
     usagesRemaining: 'Залишилось використань',
     useService: 'Використати сервіс',
     activateService: 'Активувати сервіс',
-    comingSoon: 'Скоро доступно',
-    premiumTextCheck: {
-      title: 'Преміум виявлення плагіату',
-      description: 'Розширене виявлення плагіату з додатковими функціями та підвищеною точністю',
-      enterText: 'Введіть або вставте ваш текст нижче',
-      placeholder: 'Вставте свій текст тут для преміум перевірки на плагіат...',
-      notice: 'Важливе повідомлення',
-      noticeText: 'Ваш текст буде перевірено проти нашої бази даних та зовнішніх джерел. Весь вміст залишається конфіденційним.',
-      checkButton: 'Аналізувати на плагіат'
-    }
+    comingSoon: 'Скоро доступно'
   },
   history: {
     title: 'Історія перевірок',

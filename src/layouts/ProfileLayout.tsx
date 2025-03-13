@@ -16,12 +16,31 @@ import {
   SidebarInset,
 } from '@/components/ui/sidebar';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { User, Settings, CreditCard, DollarSign, List, History, LogOut, Home } from 'lucide-react';
+import { 
+  User, 
+  Settings, 
+  CreditCard, 
+  DollarSign, 
+  List, 
+  History, 
+  LogOut, 
+  Home,
+  FileText,
+  Bot,
+  WandSparkles,
+  Package,
+  PenTool,
+  Eraser,
+  HelpCircle,
+  Globe 
+} from 'lucide-react';
 import Footer from '@/components/Footer';
 import ParticlesBackground from '@/components/ParticlesBackground';
 import { useClerk } from '@clerk/clerk-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
+import LanguageSelector from '@/components/LanguageSelector';
+import { Badge } from '@/components/ui/badge';
 
 interface ProfileLayoutProps {
   children: React.ReactNode;
@@ -47,14 +66,70 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = ({ children, activePage = 'p
     navigate('/');
   };
 
-  // Define all menu items in one place for easier maintenance
-  const menuItems = [
+  // New service menu items with icons based on the image
+  const serviceMenuItems = [
+    { 
+      id: 'plagiarism-check', 
+      title: t('profile.sidebarMenu.plagiarismCheck'), 
+      icon: FileText,
+      path: '/check', 
+      badge: false 
+    },
+    { 
+      id: 'ai-content-check', 
+      title: t('profile.sidebarMenu.aiContentCheck'), 
+      icon: Bot, 
+      path: '/ai-check', 
+      badge: true 
+    },
+    { 
+      id: 'ai-humanization', 
+      title: t('profile.sidebarMenu.aiTextHumanization'), 
+      icon: WandSparkles, 
+      path: '/ai-humanization', 
+      badge: true 
+    },
+    { 
+      id: 'my-orders', 
+      title: t('profile.sidebarMenu.myOrders'), 
+      icon: Package, 
+      path: '/profile/orders', 
+      badge: false 
+    },
+    { 
+      id: 'proofreading', 
+      title: t('profile.sidebarMenu.proofreading'), 
+      icon: PenTool, 
+      path: '/proofreading', 
+      badge: false 
+    },
+    { 
+      id: 'plagiarism-removal', 
+      title: t('profile.sidebarMenu.plagiarismRemoval'), 
+      icon: Eraser, 
+      path: '/plagiarism-removal', 
+      badge: false 
+    },
+    { 
+      id: 'payments', 
+      title: t('profile.sidebarMenu.payments'), 
+      icon: DollarSign, 
+      path: '/profile/payments', 
+      badge: false 
+    },
+    { 
+      id: 'helpdesk', 
+      title: t('profile.sidebarMenu.helpdesk'), 
+      icon: HelpCircle, 
+      path: '/helpdesk', 
+      badge: false 
+    },
+  ];
+
+  // Define user account menu items
+  const accountMenuItems = [
     { id: 'profile', title: t('profile.menu.profile'), icon: User, path: '/profile' },
     { id: 'settings', title: t('profile.menu.settings'), icon: Settings, path: '/profile/settings' },
-    { id: 'billing', title: t('profile.menu.billing'), icon: CreditCard, path: '/profile/billing' },
-    { id: 'payments', title: t('profile.menu.payments'), icon: DollarSign, path: '/profile/payments' },
-    { id: 'services', title: t('profile.menu.services'), icon: List, path: '/profile/services' },
-    { id: 'history', title: t('profile.menu.history'), icon: History, path: '/profile/history' },
   ];
 
   return (
@@ -72,11 +147,41 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = ({ children, activePage = 'p
             </SidebarHeader>
             
             <SidebarContent>
+              {/* Main service menu */}
+              <SidebarGroup>
+                <SidebarGroupContent>
+                  <SidebarMenu>
+                    {serviceMenuItems.map((item) => (
+                      <SidebarMenuItem key={item.id}>
+                        <SidebarMenuButton 
+                          asChild 
+                          isActive={activePage === item.id}
+                          tooltip={item.title}
+                        >
+                          <a href={item.path} className="flex items-center justify-between w-full">
+                            <div className="flex items-center gap-3">
+                              <item.icon className="h-5 w-5 text-primary" />
+                              <span>{item.title}</span>
+                            </div>
+                            {item.badge && (
+                              <Badge className="ml-auto bg-red-500 hover:bg-red-600 text-[10px] px-1.5 py-0" variant="outline">
+                                {t('profile.sidebarMenu.new')}
+                              </Badge>
+                            )}
+                          </a>
+                        </SidebarMenuButton>
+                      </SidebarMenuItem>
+                    ))}
+                  </SidebarMenu>
+                </SidebarGroupContent>
+              </SidebarGroup>
+              
+              {/* User account menu */}
               <SidebarGroup>
                 <SidebarGroupLabel>{t('profile.menu.title')}</SidebarGroupLabel>
                 <SidebarGroupContent>
                   <SidebarMenu>
-                    {menuItems.map((item) => (
+                    {accountMenuItems.map((item) => (
                       <SidebarMenuItem key={item.id}>
                         <SidebarMenuButton 
                           asChild 
@@ -90,6 +195,18 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = ({ children, activePage = 'p
                         </SidebarMenuButton>
                       </SidebarMenuItem>
                     ))}
+                    
+                    {/* Language selector in sidebar */}
+                    <SidebarMenuItem key="language">
+                      <SidebarMenuButton 
+                        tooltip={t('profile.sidebarMenu.language')}
+                      >
+                        <div className="flex items-center gap-3">
+                          <Globe className="h-4 w-4" />
+                          <LanguageSelector />
+                        </div>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
                   </SidebarMenu>
                 </SidebarGroupContent>
               </SidebarGroup>
