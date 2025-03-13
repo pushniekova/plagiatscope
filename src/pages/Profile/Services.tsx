@@ -21,7 +21,7 @@ const ServicesPage: React.FC = () => {
       status: 'active',
       usageCount: 15,
       usageLimit: 25,
-      redirectTo: '/check'
+      redirectTo: '/profile/services/text-check'
     },
     {
       id: 'service-2',
@@ -30,7 +30,7 @@ const ServicesPage: React.FC = () => {
       status: 'inactive',
       usageCount: 0,
       usageLimit: 0,
-      redirectTo: '/check'
+      redirectTo: '/profile/services/text-check'
     },
     {
       id: 'service-3',
@@ -39,7 +39,7 @@ const ServicesPage: React.FC = () => {
       status: 'active',
       usageCount: 5,
       usageLimit: 10,
-      redirectTo: '/check'
+      redirectTo: '/profile/services/text-check'
     }
   ];
 

@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -23,6 +22,7 @@ import BillingPage from "./pages/Profile/Billing";
 import PaymentsPage from "./pages/Profile/Payments";
 import ServicesPage from "./pages/Profile/Services";
 import HistoryPage from "./pages/Profile/History";
+import TextCheckPage from "./pages/Profile/TextCheck";
 
 const queryClient = new QueryClient();
 
@@ -67,6 +67,7 @@ const App = () => (
               <Route path="/profile/billing" element={<BillingPage />} />
               <Route path="/profile/payments" element={<PaymentsPage />} />
               <Route path="/profile/services" element={<ServicesPage />} />
+              <Route path="/profile/services/text-check" element={<TextCheckPage />} />
               <Route path="/profile/history" element={<HistoryPage />} />
               
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

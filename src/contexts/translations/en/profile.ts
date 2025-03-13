@@ -91,7 +91,16 @@ export default {
     usagesRemaining: 'Usages Remaining',
     useService: 'Use Service',
     activateService: 'Activate Service',
-    comingSoon: 'Coming soon'
+    comingSoon: 'Coming soon',
+    premiumTextCheck: {
+      title: 'Premium Plagiarism Detection',
+      description: 'Enhanced plagiarism detection with advanced features and improved accuracy',
+      enterText: 'Enter or paste your text below',
+      placeholder: 'Paste your text here for premium plagiarism detection...',
+      notice: 'Important Notice',
+      noticeText: 'Your text will be checked against our database and external sources. All content remains confidential.',
+      checkButton: 'Analyze for Plagiarism'
+    }
   },
   history: {
     title: 'Check History',
