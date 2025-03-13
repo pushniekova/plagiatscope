@@ -21,7 +21,7 @@ const Auth = () => {
   const navigate = useNavigate();
   const { isLoaded: isSignInLoaded, signIn, setActive } = useSignIn();
   const { isLoaded: isSignUpLoaded, signUp } = useSignUp();
-  const { redirectToHome } = useClerk();
+  const clerk = useClerk();
   
   // Map our app language to Clerk locale
   const localeMap: Record<string, string> = {
@@ -87,9 +87,6 @@ const Auth = () => {
                   }}
                   signUpUrl="/auth?tab=signup"
                   redirectUrl="/"
-                  localization={{
-                    locale: currentLocale,
-                  }}
                 />
               </TabsContent>
               <TabsContent value="signup" className="mt-0">
@@ -114,9 +111,6 @@ const Auth = () => {
                   }}
                   signInUrl="/auth?tab=signin"
                   redirectUrl="/"
-                  localization={{
-                    locale: currentLocale,
-                  }}
                 />
               </TabsContent>
             </Tabs>
