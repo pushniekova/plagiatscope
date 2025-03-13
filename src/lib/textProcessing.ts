@@ -74,87 +74,213 @@ export const calculateCosineSimilarity = (
   return dotProduct / (magnitude1 * magnitude2);
 };
 
-/**
- * Simulates checking text against external sources
- * In a real implementation, this would call external APIs or search engines
- */
-export const checkExternalSources = async (text: string): Promise<Array<{
-  source: string;
+// Simulated database of documents for comparison
+const databaseSources = [
+  {
+    id: "source-1",
+    title: "Основи академічної доброчесності",
+    text: `Академічна доброчесність є важливою частиною освітнього процесу. Вона передбачає дотримання певних етичних принципів та правил, які забезпечують якість та чесність у навчанні та дослідженнях. Плагіат є однією з форм порушення академічної доброчесності, яка полягає у використанні чужих ідей, слів або результатів досліджень без належного посилання на джерело.`,
+    url: "https://example.com/academic-integrity"
+  },
+  {
+    id: "source-2",
+    title: "Технології машинного навчання",
+    text: `Машинне навчання - це підгалузь штучного інтелекту, яка фокусується на розробці алгоритмів та моделей, здатних навчатися на основі даних. Воно застосовується у різних сферах, включаючи розпізнавання образів, обробку природної мови, рекомендаційні системи тощо. Глибоке навчання - це підхід машинного навчання, що базується на використанні нейронних мереж з багатьма шарами.`,
+    url: "https://example.com/machine-learning"
+  },
+  {
+    id: "source-3",
+    title: "Сталий розвиток та екологія",
+    text: `Сталий розвиток - це концепція, яка передбачає задоволення потреб сучасного покоління без шкоди для можливості майбутніх поколінь задовольняти свої потреби. Він включає економічний розвиток, соціальну справедливість та екологічну стійкість. Зміна клімату є однією з найбільших загроз для сталого розвитку, що потребує глобальних колективних дій.`,
+    url: "https://example.com/sustainable-development"
+  },
+  {
+    id: "source-4",
+    title: "Інформаційна безпека в мережі Інтернет",
+    text: `Інформаційна безпека в Інтернеті стосується захисту інформації та інформаційних систем від несанкціонованого доступу, використання, розкриття, порушення, модифікації або знищення. Вона включає такі аспекти, як захист приватності, захист від кібератак, безпека паролів тощо. Шифрування є одним із ключових методів забезпечення інформаційної безпеки в Інтернеті.`,
+    url: "https://example.com/cybersecurity"
+  },
+  {
+    id: "source-5",
+    title: "Квантові обчислення",
+    text: `Квантові обчислення - це галузь, що використовує квантово-механічні явища, такі як суперпозиція та заплутаність, для виконання обчислень. Квантові комп'ютери використовують квантові біти або кубіти, які можуть існувати в суперпозиції станів, що дозволяє їм виконувати певні обчислення значно швидше, ніж класичні комп'ютери. Алгоритм Шора і алгоритм Гровера є двома відомими квантовими алгоритмами.`,
+    url: "https://example.com/quantum-computing"
+  },
+  {
+    id: "source-6",
+    title: "Історія штучного інтелекту",
+    text: `Історія штучного інтелекту бере свій початок у 1950-х роках, хоча багато концепцій і ідей з'явилися раніше. Термін "штучний інтелект" був вперше використаний на Дартмутській конференції 1956 року. З того часу галузь пережила кілька фаз, включаючи періоди великого ентузіазму і фінансування (відомі як "літа АІ") і періоди розчарування і скорочення фінансування (відомі як "зими АІ").`,
+    url: "https://example.com/ai-history"
+  }
+];
+
+// Academic sources for more comprehensive comparison
+const academicSources = [
+  {
+    id: "academic-1",
+    title: "Етика наукових досліджень",
+    text: `У науковій діяльності етика є ключовим аспектом. Дослідники повинні чесно представляти свої методи, результати та висновки. Вони повинні уникати фабрикації, фальсифікації та плагіату. Крім того, дослідження, які включають людей або тварин, повинні проводитися з повагою до їхніх прав та благополуччя. Інформована згода, конфіденційність та справедливість є важливими принципами етики досліджень.`,
+    url: "https://example.com/research-ethics"
+  },
+  {
+    id: "academic-2",
+    title: "Методологія наукових досліджень",
+    text: `Методологія наукових досліджень - це систематичний підхід до вирішення дослідницьких проблем. Вона включає визначення дослідницьких питань, розробку гіпотез, збір та аналіз даних, а також інтерпретацію результатів. Існує багато різних методологій, включаючи експериментальні, спостережні, якісні та кількісні підходи. Вибір методології залежить від природи дослідницького питання та наявних ресурсів.`,
+    url: "https://example.com/research-methodology"
+  }
+];
+
+// External APIs for checking content similarity (simulated)
+interface SimulatedAPIResult {
+  url: string;
+  title: string;
+  snippet: string;
   similarity: number;
-  matchedText: string;
-  sourceUrl: string;
-}>> => {
+}
+
+/**
+ * Simulates a web search for similar content
+ * In a real application, this would call search engine APIs
+ */
+const simulateWebSearch = async (text: string): Promise<SimulatedAPIResult[]> => {
   // Simulate API call delay
-  await new Promise(resolve => setTimeout(resolve, 1500));
+  await new Promise(resolve => setTimeout(resolve, 1000));
   
-  // For demo purposes: simulate finding matches in external sources
+  // Use only relevant words for search (remove common words)
   const normalizedText = normalizeText(text);
-  const textLength = normalizedText.length;
+  const tokens = tokenizeText(normalizedText);
   
-  // Skip very short text
-  if (textLength < 30) {
+  // Create a simple search query from the most significant words
+  const significantWords = tokens
+    .filter(token => token.length > 4) // Only use words with 5+ characters
+    .slice(0, 10); // Limit to 10 words
+  
+  if (significantWords.length === 0) {
     return [];
   }
   
-  // Simulate different external sources with varying degrees of similarity
-  const simulatedSources = [
+  // Simulated search results
+  const webSources = [
     {
-      name: 'Wikipedia',
-      baseUrl: 'https://uk.wikipedia.org/wiki/',
-      paths: ['Плагіат', 'Авторське_право', 'Інтелектуальна_власність'],
-      maxSimilarity: 0.85
+      url: "https://uk.wikipedia.org/wiki/Плагіат",
+      title: "Плагіат — Вікіпедія",
+      snippet: "Плагіат — оприлюднення (опублікування), повністю або частково, чужого твору під іменем особи, яка не є автором цього твору. Плагіат є порушенням авторського права, тобто немайнових (право на ім'я, на оприлюднення тощо) та майнових прав справжнього автора."
     },
     {
-      name: 'Наукова база',
-      baseUrl: 'https://science-database.ua/article/',
-      paths: ['plagiarism-detection', 'text-analysis', 'academic-integrity'],
-      maxSimilarity: 0.75
+      url: "https://uk.wikipedia.org/wiki/Штучний_інтелект",
+      title: "Штучний інтелект — Вікіпедія",
+      snippet: "Штучний інтелект (ШІ, англ. artificial intelligence, AI) — здатність інженерної системи здобувати, обробляти та застосовувати знання та вміння. Це розділ комп'ютерної лінгвістики та інформатики, що опікується формалізацією проблем та завдань, які подібні до дій, що виконує людина."
     },
     {
-      name: 'Освітній портал',
-      baseUrl: 'https://education-portal.ua/resources/',
-      paths: ['student-guide', 'academic-writing', 'research-ethics'],
-      maxSimilarity: 0.65
+      url: "https://uk.wikipedia.org/wiki/Академічна_доброчесність",
+      title: "Академічна доброчесність — Вікіпедія",
+      snippet: "Академічна доброчесність — це сукупність етичних принципів та визначених законом правил, якими мають керуватися учасники освітнього процесу під час навчання, викладання та провадження наукової діяльності з метою забезпечення довіри до результатів навчання та/або наукових досягнень."
+    },
+    {
+      url: "https://science.ua/ua/article/machine-learning-explained",
+      title: "Що таке машинне навчання — пояснюємо простими словами",
+      snippet: "Машинне навчання - це підгалузь штучного інтелекту, яка фокусується на розробці алгоритмів та моделей, здатних навчатися на основі даних без явного програмування. Воно застосовується у різних сферах, включаючи розпізнавання образів, обробку природної мови, рекомендаційні системи тощо."
+    },
+    {
+      url: "https://www.ukma.edu.ua/index.php/osvita/akademichna-dobrochesnist",
+      title: "Академічна доброчесність - НаУКМА",
+      snippet: "Академічна доброчесність є важливою частиною освітнього процесу. Вона передбачає дотримання певних етичних принципів та правил, які забезпечують якість та чесність у навчанні та дослідженнях. Плагіат є однією з форм порушення академічної доброчесності, яка полягає у використанні чужих ідей, слів або результатів досліджень без належного посилання на джерело."
     }
   ];
   
-  // Generate random matches based on text length
-  const results = [];
-  const numberOfMatches = Math.min(
-    simulatedSources.length, 
-    Math.max(1, Math.floor(textLength / 200))
-  );
-  
-  for (let i = 0; i < numberOfMatches; i++) {
-    const source = simulatedSources[i];
-    const pathIndex = Math.floor(Math.random() * source.paths.length);
-    const path = source.paths[pathIndex];
+  // Calculate similarity for each source based on overlapping words
+  return webSources.map(source => {
+    const sourceNormalizedText = normalizeText(source.snippet);
+    const sourceTokens = tokenizeText(sourceNormalizedText);
+    const sourceTF = calculateTF(sourceTokens);
+    const inputTF = calculateTF(tokens);
     
-    // Simulate extracting a portion of the user's text as a "match"
-    const startIndex = Math.floor(Math.random() * (textLength - 50));
-    const excerptLength = Math.min(Math.floor(Math.random() * 100) + 50, textLength - startIndex);
-    const matchedText = text.substring(startIndex, startIndex + excerptLength);
+    const similarity = calculateCosineSimilarity(inputTF, sourceTF);
     
-    // Simulate a similarity score
-    const baseSimilarity = source.maxSimilarity;
-    const randomVariation = Math.random() * 0.3;
-    const similarity = Math.max(0.4, Math.min(0.95, baseSimilarity - randomVariation));
-    
-    results.push({
-      source: `${source.name} - ${path.replace(/_/g, ' ')}`,
-      similarity: parseFloat(similarity.toFixed(2)),
-      matchedText,
-      sourceUrl: `${source.baseUrl}${path}`
-    });
-  }
-  
-  // Sort by similarity (highest first)
-  return results.sort((a, b) => b.similarity - a.similarity);
+    return {
+      ...source,
+      similarity: similarity * (0.7 + Math.random() * 0.3) // Add some randomness for variation
+    };
+  })
+  .filter(result => result.similarity > 0.1) // Filter out very low similarity results
+  .sort((a, b) => b.similarity - a.similarity) // Sort by highest similarity
+  .slice(0, 3); // Return top 3 results
 };
 
 /**
- * For demo purposes: Analyze text and return plagiarism detection results
- * In a real application, this would integrate with proper plagiarism detection services
+ * Find matching segments between two texts
+ */
+export const findMatchingSegments = (text1: string, text2: string, minLength = 10): Array<{
+  text: string;
+  startIndex: number;
+  endIndex: number;
+  matchPercentage: number;
+}> => {
+  const matches: Array<{
+    text: string;
+    startIndex: number;
+    endIndex: number;
+    matchPercentage: number;
+  }> = [];
+  
+  // Normalize texts for comparison
+  const normalizedText1 = text1.toLowerCase();
+  const normalizedText2 = text2.toLowerCase();
+  
+  // Generate n-grams for the second text (used as comparison base)
+  const words2 = normalizedText2.split(/\s+/);
+  const ngrams: Record<string, number> = {};
+  
+  // We'll use different n-gram sizes to catch different length matches
+  for (let ngramSize = 3; ngramSize <= 8; ngramSize++) {
+    for (let i = 0; i <= words2.length - ngramSize; i++) {
+      const ngram = words2.slice(i, i + ngramSize).join(' ');
+      if (ngram.length >= minLength) {
+        ngrams[ngram] = i;
+      }
+    }
+  }
+  
+  // Find matches in the first text
+  const words1 = normalizedText1.split(/\s+/);
+  
+  for (let ngramSize = 8; ngramSize >= 3; ngramSize--) {
+    for (let i = 0; i <= words1.length - ngramSize; i++) {
+      const ngram = words1.slice(i, i + ngramSize).join(' ');
+      
+      if (ngrams[ngram] !== undefined && ngram.length >= minLength) {
+        // Found a match
+        const startIndex = text1.indexOf(ngram);
+        if (startIndex !== -1) {
+          const endIndex = startIndex + ngram.length;
+          
+          // Calculate a match percentage (arbitrary formula for demonstration)
+          const matchPercentage = Math.min(100, Math.floor((ngram.length / 20) * 100));
+          
+          // Check for overlap with existing matches
+          const isOverlapping = matches.some(match => 
+            (startIndex >= match.startIndex && startIndex < match.endIndex) ||
+            (endIndex > match.startIndex && endIndex <= match.endIndex)
+          );
+          
+          if (!isOverlapping) {
+            matches.push({
+              text: ngram,
+              startIndex,
+              endIndex,
+              matchPercentage
+            });
+          }
+        }
+      }
+    }
+  }
+  
+  return matches;
+};
+
+/**
+ * Analyze text against both our database and external sources
  */
 export const analyzePlagiarism = async (text: string): Promise<{
   overallScore: number;
@@ -173,11 +299,8 @@ export const analyzePlagiarism = async (text: string): Promise<{
     sourceUrl: string;
   }>;
 }> => {
-  // This is a more advanced mock implementation that simulates real plagiarism checking
-  const textLength = text.length;
-  
-  // For demo: if text is very short, return no plagiarism
-  if (textLength < 30) {
+  // Skip very short texts
+  if (text.length < 30) {
     return {
       overallScore: 0,
       matches: [],
@@ -185,57 +308,83 @@ export const analyzePlagiarism = async (text: string): Promise<{
     };
   }
   
-  // Check external sources (this would be a real API call in a production app)
-  const externalSources = await checkExternalSources(text);
+  // Prepare the text for analysis
+  const normalizedInputText = normalizeText(text);
+  const inputTokens = tokenizeText(normalizedInputText);
+  const inputTF = calculateTF(inputTokens);
   
-  // Create some random "matches" for demo purposes
-  const matches = [];
-  const numberOfMatches = Math.min(3, Math.floor(textLength / 100));
+  // Match against our database sources
+  const matches: Array<{
+    text: string;
+    startIndex: number;
+    endIndex: number;
+    matchPercentage: number;
+    source: string;
+    sourceUrl?: string;
+  }> = [];
   
-  for (let i = 0; i < numberOfMatches; i++) {
-    const startIndex = Math.floor(Math.random() * (textLength - 30));
-    const length = Math.min(Math.floor(Math.random() * 50) + 20, textLength - startIndex);
-    const endIndex = startIndex + length;
+  // Check against academic database
+  const allDatabaseSources = [...databaseSources, ...academicSources];
+  for (const source of allDatabaseSources) {
+    // Calculate cosine similarity
+    const sourceNormalizedText = normalizeText(source.text);
+    const sourceTokens = tokenizeText(sourceNormalizedText);
+    const sourceTF = calculateTF(sourceTokens);
     
-    matches.push({
-      text: text.substring(startIndex, endIndex),
-      startIndex,
-      endIndex,
-      matchPercentage: Math.floor(Math.random() * 40) + 60, // 60-100%
-      source: `Джерело ${i + 1} (симульоване)`,
-      sourceUrl: i % 2 === 0 ? `https://example${i}.com/article-${i}` : undefined
-    });
+    const similarity = calculateCosineSimilarity(inputTF, sourceTF);
+    
+    // If there's enough similarity, find matching segments
+    if (similarity > 0.2) {
+      const matchingSegments = findMatchingSegments(text, source.text);
+      
+      for (const segment of matchingSegments) {
+        matches.push({
+          ...segment,
+          source: source.title,
+          sourceUrl: source.url
+        });
+      }
+    }
   }
   
+  // Check against external websites (simulated API calls)
+  const externalResults = await simulateWebSearch(text);
+  
+  const externalSources = externalResults.map(result => ({
+    source: result.title,
+    similarity: result.similarity,
+    matchedText: result.snippet,
+    sourceUrl: result.url
+  }));
+  
   // Add matches from external sources to our general matches array
-  externalSources.forEach((source, index) => {
-    // Find the start index of the matched text in the original text
-    const startIndex = text.indexOf(source.matchedText);
-    if (startIndex !== -1) {
-      const endIndex = startIndex + source.matchedText.length;
+  externalSources.forEach((source) => {
+    const matchingSegments = findMatchingSegments(text, source.matchedText);
+    
+    for (const segment of matchingSegments) {
       matches.push({
-        text: source.matchedText,
-        startIndex,
-        endIndex,
-        matchPercentage: Math.round(source.similarity * 100),
+        ...segment,
         source: source.source,
         sourceUrl: source.sourceUrl
       });
     }
   });
   
-  // Calculate overall score based on matched text percentage and external source similarities
+  // Calculate overall score based on matches and external sources
   let totalMatchedChars = matches.reduce((sum, match) => sum + (match.endIndex - match.startIndex), 0);
+  
   // Avoid counting overlapping regions twice
-  totalMatchedChars = Math.min(totalMatchedChars, textLength);
+  totalMatchedChars = Math.min(totalMatchedChars, text.length);
   
   // Add weight from external sources
   const externalSourceWeight = externalSources.reduce((sum, source) => sum + source.similarity, 0);
   
   // Calculate overall score
-  let overallScore = Math.round((totalMatchedChars / textLength) * 70);
+  let overallScore = Math.round((totalMatchedChars / text.length) * 70);
+  
   // Add external source weight (up to 30% of the score)
-  overallScore += Math.min(30, Math.round(externalSourceWeight * 10));
+  overallScore += Math.min(30, Math.round(externalSourceWeight * 15));
+  
   // Ensure score is between 0 and 100
   overallScore = Math.min(100, Math.max(0, overallScore));
   
@@ -244,4 +393,14 @@ export const analyzePlagiarism = async (text: string): Promise<{
     matches,
     externalSources
   };
+};
+
+// Export additional functions for potential future use
+export const analyzeDocument = {
+  normalizeText,
+  tokenizeText,
+  generateNGrams,
+  calculateTF,
+  calculateCosineSimilarity,
+  findMatchingSegments
 };
