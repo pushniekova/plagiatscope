@@ -21,4 +21,5 @@ export interface ResultsProps {
   matches: Match[];
   externalSources?: ExternalSource[];
   documentName?: string;
+  analyzedCharacters?: number;
 }

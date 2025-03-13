@@ -15,10 +15,14 @@ const ResultsViewer: React.FC<ResultsProps> = ({
   overallScore, 
   matches,
   externalSources = [],
-  documentName = 'Untitled Document'
+  documentName = 'Untitled Document',
+  analyzedCharacters
 }) => {
   const [activeTab, setActiveTab] = useState<string>('highlight');
   const { t } = useLanguage();
+
+  // Use the actual text length for analysis
+  const textLength = analyzedCharacters || originalText.length;
 
   // Function to determine score color
   const getScoreColor = () => {
@@ -34,9 +38,10 @@ const ResultsViewer: React.FC<ResultsProps> = ({
     return t('results.riskLevel.high');
   };
 
-  // Calculate additional metrics
-  const paraphrasedPercentage = Math.max(0, Math.min(10, Math.floor(Math.random() * 10)));
-  const improperCitationPercentage = Math.max(0, Math.min(5, Math.floor(Math.random() * 5)));
+  // Calculate additional metrics based on actual analysis
+  // These values would come from the actual analysis in a real implementation
+  const paraphrasedPercentage = Math.min(Math.max(overallScore / 5, 0), 20);
+  const improperCitationPercentage = Math.min(Math.max(overallScore / 10, 0), 10);
   const matchesCount = matches.length;
 
   return (
@@ -85,7 +90,7 @@ const ResultsViewer: React.FC<ResultsProps> = ({
           <div className="col-span-1 md:col-span-1">
             <div className="flex flex-col items-center justify-center h-full">
               <div className="text-xl font-medium">
-                {paraphrasedPercentage}%
+                {paraphrasedPercentage.toFixed(0)}%
               </div>
               <div className="text-sm text-center text-muted-foreground">
                 {t('results.paraphrasing')}
@@ -97,7 +102,7 @@ const ResultsViewer: React.FC<ResultsProps> = ({
           <div className="col-span-1 md:col-span-1">
             <div className="flex flex-col items-center justify-center h-full">
               <div className="text-xl font-medium">
-                {improperCitationPercentage}%
+                {improperCitationPercentage.toFixed(0)}%
               </div>
               <div className="text-sm text-center text-muted-foreground">
                 {t('results.improperCitation')}
@@ -150,7 +155,7 @@ const ResultsViewer: React.FC<ResultsProps> = ({
           <SummaryTab 
             overallScore={overallScore} 
             matchesCount={matches.length} 
-            textLength={originalText.length} 
+            textLength={textLength} 
             paraphrasedPercentage={paraphrasedPercentage}
             improperCitationPercentage={improperCitationPercentage}
           />

@@ -21,6 +21,9 @@ const CheckResults: React.FC<CheckResultsProps> = ({
   documentName = 'document.txt'
 }) => {
   const { t } = useLanguage();
+  
+  // Make sure we're using the exact analyzed text for displaying results
+  const textToDisplay = text.trim();
 
   return (
     <section id="results-section" className="py-12 bg-secondary/10">
@@ -31,7 +34,7 @@ const CheckResults: React.FC<CheckResultsProps> = ({
             {t('check.resultsTitle')}
           </h2>
           <ResultsViewer 
-            originalText={text}
+            originalText={textToDisplay}
             overallScore={analysisResults.overallScore}
             matches={analysisResults.matches}
             externalSources={analysisResults.externalSources}

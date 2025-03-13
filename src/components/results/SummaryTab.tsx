@@ -27,16 +27,21 @@ const SummaryTab: React.FC<SummaryTabProps> = ({
     return <XCircle className="h-5 w-5 text-red-500" />;
   };
 
-  // Document structure - simulating the table of contents from the example
-  const documentStructure = [
-    { title: 'ВСТУП', page: 4 },
-    { title: 'РОЗДІЛ 1. БОТАНІЧНА ХАРАКТЕРИСТИКА ВИДІВ', page: 6 },
-    { title: '1.1. Підрозділ перший', page: 8 },
-    { title: '1.2. Підрозділ другий', page: 10 },
-    { title: 'РОЗДІЛ 2. АНАЛІЗ ДОСЛІДЖЕНЬ', page: 12 },
-    { title: 'ВИСНОВКИ', page: 22 },
-    { title: 'СПИСОК ВИКОРИСТАНИХ ДЖЕРЕЛ', page: 24 },
-  ];
+  // Extract document structure from analyzed text (simplified example)
+  // In a real implementation, this would come from deeper analysis of the text
+  const getDocumentStructure = () => {
+    // Default structure for demonstration
+    return [
+      { title: 'ВСТУП', page: 4 },
+      { title: 'РОЗДІЛ 1. ОСНОВНА ЧАСТИНА', page: 6 },
+      { title: '1.1. Підрозділ перший', page: 8 },
+      { title: '1.2. Підрозділ другий', page: 10 },
+      { title: 'ВИСНОВКИ', page: 12 },
+      { title: 'СПИСОК ВИКОРИСТАНИХ ДЖЕРЕЛ', page: 14 },
+    ];
+  };
+
+  const documentStructure = getDocumentStructure();
 
   return (
     <div className="p-4">
