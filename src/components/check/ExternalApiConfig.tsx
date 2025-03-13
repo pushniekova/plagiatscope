@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
@@ -12,6 +11,14 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 interface ExternalApiConfigProps {
   onConfigSaved: () => void;
+}
+
+interface ApiConfig {
+  groupToken: string;
+  authorEmail: string;
+  personalApiToken?: string;
+  googleApiKey?: string;
+  googleEngineId?: string;
 }
 
 const ExternalApiConfig: React.FC<ExternalApiConfigProps> = ({ onConfigSaved }) => {
@@ -85,19 +92,13 @@ const ExternalApiConfig: React.FC<ExternalApiConfigProps> = ({ onConfigSaved }) 
     if (hasError) return;
 
     // Get existing config to preserve values from other tabs
-    const existingConfig = getExternalApiConfig() || { 
-      groupToken: '', 
-      authorEmail: '',
-      personalApiToken: '',
-      googleApiKey: '',
-      googleEngineId: ''
-    };
+    const existingConfig = getExternalApiConfig() || {} as ApiConfig;
 
     // Update with new values based on active tab
-    const newConfig = {
+    const newConfig: ApiConfig = {
       ...existingConfig,
-      groupToken: activeTab === 'plagiarism' ? groupToken : existingConfig.groupToken,
-      authorEmail: activeTab === 'plagiarism' ? authorEmail : existingConfig.authorEmail,
+      groupToken: activeTab === 'plagiarism' ? groupToken : existingConfig.groupToken || '',
+      authorEmail: activeTab === 'plagiarism' ? authorEmail : existingConfig.authorEmail || '',
       personalApiToken: activeTab === 'ai' ? personalApiToken : existingConfig.personalApiToken,
       googleApiKey: activeTab === 'websearch' ? googleApiKey : existingConfig.googleApiKey,
       googleEngineId: activeTab === 'websearch' ? googleEngineId : existingConfig.googleEngineId

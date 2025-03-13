@@ -1,10 +1,11 @@
 
 /**
- * Common utilities for text processing 
- * Used across different plagiarism detection approaches
+ * Utility functions for text processing
  */
 
-// Utility function to simulate hashing text
+/**
+ * Hashes a text string using a simple hashing algorithm
+ */
 export function hashText(text: string): string {
   let hash = 0;
   for (let i = 0; i < text.length; i++) {
@@ -15,86 +16,89 @@ export function hashText(text: string): string {
   return hash.toString(16);
 }
 
-// Calculate total length of non-overlapping matched text segments
-export function calculateNonOverlappingLength(ranges: {start: number, end: number}[], textLength: number): number {
-  if (ranges.length === 0) return 0;
+/**
+ * Calculates the total length of text with non-overlapping segments removed
+ */
+export function calculateNonOverlappingLength(
+  text: string, 
+  segments: Array<{ startIndex: number, endIndex: number }>
+): number {
+  if (segments.length === 0) return text.length;
   
-  // Sort ranges by start index
-  ranges.sort((a, b) => a.start - b.start);
+  // Sort segments by start index
+  const sortedSegments = [...segments].sort((a, b) => a.startIndex - b.startIndex);
   
-  let totalLength = 0;
-  let currentEnd = ranges[0].start;
+  // Merge overlapping segments
+  const mergedSegments = [];
+  let currentSegment = { ...sortedSegments[0] };
   
-  for (const range of ranges) {
-    if (range.start > currentEnd) {
-      // Non-overlapping range
-      totalLength += range.end - range.start;
-      currentEnd = range.end;
-    } else if (range.end > currentEnd) {
-      // Partially overlapping range
-      totalLength += range.end - currentEnd;
-      currentEnd = range.end;
+  for (let i = 1; i < sortedSegments.length; i++) {
+    const segment = sortedSegments[i];
+    
+    if (segment.startIndex <= currentSegment.endIndex) {
+      // Segments overlap, merge them
+      currentSegment.endIndex = Math.max(currentSegment.endIndex, segment.endIndex);
+    } else {
+      // No overlap, add current segment and start a new one
+      mergedSegments.push(currentSegment);
+      currentSegment = { ...segment };
     }
-    // Completely overlapping ranges are ignored
   }
   
-  return Math.min(totalLength, textLength);
+  // Add the last segment
+  mergedSegments.push(currentSegment);
+  
+  // Calculate total length of merged segments
+  const totalSegmentLength = mergedSegments.reduce(
+    (sum, segment) => sum + (segment.endIndex - segment.startIndex + 1), 
+    0
+  );
+  
+  return text.length - totalSegmentLength;
 }
 
-// Check if the external API is configured via browser storage
-export function isExternalApiConfigured(): boolean {
-  try {
-    const apiConfig = localStorage.getItem('plagiarismCheckConfig');
-    if (!apiConfig) return false;
-    
-    const config = JSON.parse(apiConfig);
-    return !!config.groupToken && !!config.authorEmail;
-  } catch (error) {
-    console.error('Error checking external API configuration:', error);
-    return false;
-  }
-}
-
-// Check if the personal API token is configured
-export function isPersonalApiConfigured(): boolean {
-  try {
-    const apiConfig = localStorage.getItem('plagiarismCheckConfig');
-    if (!apiConfig) return false;
-    
-    const config = JSON.parse(apiConfig);
-    return !!config.personalApiToken;
-  } catch (error) {
-    console.error('Error checking personal API configuration:', error);
-    return false;
-  }
-}
-
-// Get the external API configuration from browser storage
-export function getExternalApiConfig(): { 
-  groupToken: string; 
+// API configuration storage
+interface ExternalApiConfig {
+  groupToken: string;
   authorEmail: string;
   personalApiToken?: string;
-} | null {
+  googleApiKey?: string;
+  googleEngineId?: string;
+}
+
+/**
+ * Gets the external API configuration from localStorage
+ */
+export function getExternalApiConfig(): ExternalApiConfig | null {
+  const configStr = localStorage.getItem('externalApiConfig');
+  if (!configStr) return null;
+  
   try {
-    const apiConfig = localStorage.getItem('plagiarismCheckConfig');
-    if (!apiConfig) return null;
-    
-    return JSON.parse(apiConfig);
-  } catch (error) {
-    console.error('Error getting external API configuration:', error);
+    return JSON.parse(configStr) as ExternalApiConfig;
+  } catch (e) {
+    console.error('Error parsing external API config:', e);
     return null;
   }
 }
 
-// Save external API configuration to browser storage
-export function saveExternalApiConfig(config: { 
-  groupToken: string; 
-  authorEmail: string;
-  personalApiToken?: string;
-}): void {
-  try {
-    localStorage.setItem('plagiarismCheckConfig', JSON.stringify(config));
-  } catch (error) {
-    console.error('Error saving external API configuration:', error);
+/**
+ * Saves the external API configuration to localStorage
+ */
+export function saveExternalApiConfig(config: ExternalApiConfig): void {
+  localStorage.setItem('externalApiConfig', JSON.stringify(config));
+}
+
+/**
+ * Retrieves Google Search API credentials if available
+ */
+export function getGoogleApiCredentials(): { apiKey: string; engineId: string } | null {
+  const config = getExternalApiConfig();
+  if (!config || !config.googleApiKey || !config.googleEngineId) {
+    return null;
   }
+  
+  return {
+    apiKey: config.googleApiKey,
+    engineId: config.googleEngineId
+  };
 }

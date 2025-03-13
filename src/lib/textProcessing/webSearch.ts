@@ -1,14 +1,14 @@
-
 /**
  * Web search utilities for plagiarism detection
  * This module provides functionality to check text against external web sources
- * For now, we're using a simulated search approach for testing
+ * It supports both simulated search and real Google Custom Search integration
  */
 
 import { normalizeText, tokenizeText, calculateTF } from './normalize';
 import { calculateCosineSimilarity } from './similarity';
+import { getGoogleApiCredentials } from './utils';
 
-interface WebSearchResult {
+export interface WebSearchResult {
   title: string;
   snippet: string;
   link: string;
@@ -16,21 +16,90 @@ interface WebSearchResult {
 }
 
 /**
- * Search for matching content using simulated web resources
- * This is our internal implementation that doesn't rely on external APIs
+ * Search for matching content using web resources
+ * This will use Google Custom Search API if credentials are available,
+ * otherwise it will fall back to our internal simulation
  */
 export async function searchMultipleResources(text: string): Promise<WebSearchResult[]> {
   // Generate a suitable search query from the text
   const query = generateSearchQuery(text);
   
-  // For now, we use our internal simulation
-  // In the future, this could be extended to use actual web APIs if needed
+  // First try to use Google Search API if configured
+  const googleCredentials = getGoogleApiCredentials();
+  
+  if (googleCredentials) {
+    try {
+      console.log("Using Google Custom Search API for plagiarism detection");
+      const googleResults = await searchWithGoogleApi(query, googleCredentials);
+      
+      // If we got results from Google, calculate similarity and return
+      if (googleResults && googleResults.length > 0) {
+        return processAndScoreResults(googleResults, text);
+      }
+    } catch (error) {
+      console.error("Error using Google Search API:", error);
+      // Fall back to simulation on error
+    }
+  }
+  
+  // Fall back to internal simulation if Google API is not configured or fails
+  console.log("Using simulated search for plagiarism detection");
   const results = await simulateWebSearch(query);
   
   // Filter by minimum similarity threshold and remove duplicates
   return results
     .filter(result => result.similarity > 0.15) // Only keep somewhat similar results
     .sort((a, b) => b.similarity - a.similarity); // Sort by highest similarity first
+}
+
+/**
+ * Process and score search results based on text similarity
+ */
+function processAndScoreResults(results: any[], originalText: string): WebSearchResult[] {
+  return results.map(result => {
+    const title = result.title || "Unknown Title";
+    const snippet = result.snippet || result.description || "";
+    const link = result.link || result.url || "#";
+    
+    // Calculate similarity between original text and the snippet
+    const similarity = calculateTextSimilarity(originalText, snippet);
+    
+    return {
+      title,
+      snippet,
+      link,
+      similarity: similarity * (0.7 + Math.random() * 0.3) // Add some randomness
+    };
+  })
+  .filter(result => result.similarity > 0.1) // Filter out very low similarity results
+  .sort((a, b) => b.similarity - a.similarity); // Sort by similarity
+}
+
+/**
+ * Search using Google Custom Search API
+ */
+async function searchWithGoogleApi(
+  query: string, 
+  credentials: { apiKey: string; engineId: string }
+): Promise<any[]> {
+  const { apiKey, engineId } = credentials;
+  const url = `https://www.googleapis.com/customsearch/v1?key=${apiKey}&cx=${engineId}&q=${encodeURIComponent(query)}`;
+  
+  try {
+    const response = await fetch(url);
+    
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error(`Google API Error (${response.status}):`, errorText);
+      throw new Error(`Google API returned ${response.status}`);
+    }
+    
+    const data = await response.json();
+    return data.items || [];
+  } catch (error) {
+    console.error("Error during Google API search:", error);
+    throw error;
+  }
 }
 
 /**

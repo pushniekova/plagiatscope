@@ -1,12 +1,11 @@
 
 /**
- * Detailed plagiarism detection module with simulated web search
+ * Detailed plagiarism detection module with web search integration
  * Provides extended functionality compared to basic detection
  */
 
 import { getPlagiarismScore } from './basicDetection';
-import { simulateWebSearch } from '../webSearch';
-import { searchMultipleResources } from '../webSearch';
+import { simulateWebSearch, searchMultipleResources, WebSearchResult } from '../webSearch';
 
 /**
  * Extended version that combines basic plagiarism detection with web sources
@@ -17,8 +16,6 @@ export async function getDetailedPlagiarismScore({
 }: {
   text: string;
   languageCode?: string;
-  googleApiKey?: string;
-  googleEngineId?: string;
 }): Promise<{
   score: number;
   sources: Array<{
@@ -31,14 +28,14 @@ export async function getDetailedPlagiarismScore({
   // Basic implementation - get the score
   const score = await getPlagiarismScore({ text, languageCode });
   
-  // Get sources using our simulated web search
+  // Get sources using our web search functionality
   let sources = [];
   
   try {
-    // Use our simulated search
+    // Use our multi-resource search (which may use Google API if configured)
     const webResults = await searchMultipleResources(text);
     
-    // Convert to the format our API expects
+    // Convert web results to the format our API expects
     const webSources = webResults.map(result => ({
       url: result.link,
       title: result.title,
@@ -56,14 +53,14 @@ export async function getDetailedPlagiarismScore({
       const existingUrls = new Set(sources.map(s => s.url));
       
       for (const result of simulatedResults) {
-        if (!existingUrls.has(result.url)) {
+        if (!existingUrls.has(result.link)) {
           sources.push({
-            url: result.url,
+            url: result.link,
             title: result.title,
             snippet: result.snippet,
             similarity: result.similarity
           });
-          existingUrls.add(result.url);
+          existingUrls.add(result.link);
         }
       }
     }
@@ -71,7 +68,13 @@ export async function getDetailedPlagiarismScore({
     console.error("Error in web search:", error);
     
     // Fall back to direct simulated search on error
-    sources = await simulateWebSearch(text);
+    const fallbackResults = await simulateWebSearch(text);
+    sources = fallbackResults.map(result => ({
+      url: result.link,
+      title: result.title,
+      snippet: result.snippet,
+      similarity: result.similarity
+    }));
   }
   
   // Sort by similarity
