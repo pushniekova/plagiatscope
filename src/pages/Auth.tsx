@@ -77,7 +77,7 @@ const Auth = () => {
               <TabsContent value="signin" className="mt-0">
                 <ClerkSignIn 
                   signUpUrl="/auth?tab=signup"
-                  redirectUrl="/"
+                  redirectUrl="/profile"
                   appearance={{
                     elements: {
                       rootBox: "w-full",
@@ -104,7 +104,7 @@ const Auth = () => {
               <TabsContent value="signup" className="mt-0">
                 <ClerkSignUp 
                   signInUrl="/auth?tab=signin"
-                  redirectUrl="/"
+                  redirectUrl="/profile"
                   appearance={{
                     elements: {
                       rootBox: "w-full",

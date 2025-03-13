@@ -1,27 +1,27 @@
-import { Translations } from "../languageTypes";
+import { Translations } from '../languageTypes';
 
 const csTranslations: Translations = {
   nav: {
     home: 'Domů',
-    check: 'Zkontrolovat',
+    check: 'Kontrola',
     about: 'O nás',
-    checkText: 'Zkontrolovat plagiátorství',
+    checkText: 'Zkontrolovat text',
   },
   footer: {
     rights: 'Všechna práva vyhrazena',
     language: 'Jazyk',
-    description: 'ForgenHub - inteligentní nástroj pro detekci a prevenci plagiátorství ve vašich textech',
+    description: 'Nástroj pro kontrolu plagiátorství poháněný umělou inteligencí',
     navigation: 'Navigace',
-    legal: 'Právní informace',
-    terms: 'Podmínky služby',
-    privacy: 'Zásady ochrany osobních údajů',
-    cookies: 'Zásady používání souborů cookie',
-    copyright: '© {year} ForgenHub. Všechna práva vyhrazena.',
-    tagline: 'Vyrobeno s láskou'
+    legal: 'Právní',
+    terms: 'Podmínky',
+    privacy: 'Soukromí',
+    cookies: 'Cookies',
+    copyright: 'Copyright',
+    tagline: 'Odhalte originalitu, posilte důvěru.',
   },
   common: {
     title: 'ForgenHub',
-    description: 'Výkonný nástroj pro kontrolu plagiátorství poháněný umělou inteligencí',
+    description: 'AI detektor plagiátů',
     back: 'Zpět',
     submit: 'Odeslat',
     loading: 'Načítání...',
@@ -34,317 +34,427 @@ const csTranslations: Translations = {
     cs: 'Čeština',
   },
   textInput: {
-    placeholder: 'Zadejte text ke kontrole...',
+    placeholder: 'Vložte text sem...',
     characters: 'znaků',
   },
   auth: {
     welcome: 'Vítejte ve ForgenHub',
     signIn: 'Přihlásit se',
-    signUp: 'Zaregistrovat se',
+    signUp: 'Registrovat se',
     signInDescription: 'Přihlaste se pro přístup ke svému účtu',
     signUpDescription: 'Vytvořte si účet a začněte',
     account: 'Můj účet',
     email: 'E-mail',
     password: 'Heslo',
     phoneNumber: 'Telefonní číslo',
-    forgotPassword: 'Zapomenuté heslo?',
-    verificationCode: 'Verifikační kód',
+    forgotPassword: 'Zapomněli jste heslo?',
+    verificationCode: 'Ověřovací kód',
     verify: 'Ověřit',
     alreadyHaveAccount: 'Již máte účet?',
     dontHaveAccount: 'Nemáte účet?',
     or: 'nebo',
     continue: 'Pokračovat',
     continueWithGoogle: 'Pokračovat s Google',
+    signOut: 'Odhlásit se',
+    signOutSuccess: 'Byli jste úspěšně odhlášeni',
+    signOutError: 'Chyba při odhlašování'
   },
   hero: {
-    badge: 'Nástroj poháněný umělou inteligencí',
-    title: 'Kontrola plagiátorství s <span>ForgenHub</span>',
-    description: 'Výkonný online nástroj, který pomáhá detekovat plagiátorství a zajistit originalitu vašeho obsahu',
+    badge: 'AI POWERED',
+    title: 'Odhalte originalitu, posilte důvěru.',
+    description:
+      'Nejpřesnější detektor plagiátů poháněný umělou inteligencí pro akademiky a profesionály.',
     checkButton: 'Zkontrolovat text',
-    learnMore: 'Zjistit více'
+    learnMore: 'Zjistit více',
   },
   feature: {
     analysis: {
       title: 'Hloubková analýza',
-      description: 'Podrobné skenování textu k identifikaci potenciálních shod'
+      description:
+        'Naše pokročilá technologie AI provádí hloubkovou analýzu textu, aby zajistila přesné výsledky.',
     },
     fast: {
-      title: 'Rychlá kontrola',
-      description: 'Získejte výsledky během několika sekund'
+      title: 'Rychlé výsledky',
+      description:
+        'Získejte výsledky kontroly plagiátů během několika sekund, což vám ušetří čas a námahu.',
     },
     reports: {
       title: 'Podrobné zprávy',
-      description: 'Jasné zprávy se zvýrazněnými problematickými oblastmi'
+      description:
+        'Generujte podrobné zprávy s zvýrazněnými pasážemi a odkazy na zdroje.',
     }
   },
   howItWorks: {
     badge: 'Jak to funguje',
-    title: 'Jednoduchý proces ve třech krocích',
-    description: 'Rychle zkontrolujte originalitu svého textu pomocí pokročilé technologie umělé inteligence',
+    title: 'Zkontrolujte plagiát ve 3 jednoduchých krocích',
+    description:
+      'Náš nástroj pro kontrolu plagiátů je snadno použitelný a poskytuje přesné výsledky.',
     step1: {
-      number: '1',
-      title: 'Nahrát text',
-      description: 'Zadejte nebo nahrajte text, který chcete zkontrolovat na plagiátorství'
+      number: 'Krok 1',
+      title: 'Vložte text',
+      description: 'Začněte vložením textu, který chcete zkontrolovat.',
     },
     step2: {
-      number: '2',
-      title: 'Analýza umělou inteligencí',
-      description: 'Náš systém umělé inteligence analyzuje text a porovná jej s mnoha zdroji'
+      number: 'Krok 2',
+      title: 'Analyzujte text',
+      description:
+        'Naše AI analyzuje text a porovnává jej s miliony zdrojů.',
     },
     step3: {
-      number: '3',
-      title: 'Získat výsledky',
-      description: 'Obdržíte podrobnou zprávu s procentem originality a detekovanými shodami'
+      number: 'Krok 3',
+      title: 'Získejte výsledky',
+      description: 'Získejte podrobnou zprávu o plagiátorství.',
     },
-    tryItNow: 'Vyzkoušet nyní'
+    tryItNow: 'Vyzkoušet nyní',
   },
   features: {
     badge: 'Funkce',
-    title: 'Pokročilé funkce pro přesnou kontrolu',
-    description: 'ForgenHub poskytuje nástroje potřebné k účinnému boji proti plagiátorství',
+    title: 'Proč si vybrat nás?',
+    description:
+      'Nabízíme řadu funkcí, které z nás dělají nejlepší nástroj pro kontrolu plagiátů.',
     upload: {
-      title: 'Snadné nahrávání',
-      description: 'Zadejte text nebo nahrajte soubory pro rychlou kontrolu'
+      title: 'Nahrát soubory',
+      description: 'Nahrávejte soubory ve formátech .doc, .docx, .pdf a .txt.',
     },
     analysis: {
-      title: 'Chytrá analýza',
-      description: 'Naše umělá inteligence kontroluje váš text proti milionům zdrojů'
+      title: 'Hloubková analýza',
+      description:
+        'Naše AI provádí hloubkovou analýzu textu, aby zajistila přesné výsledky.',
     },
     reports: {
       title: 'Podrobné zprávy',
-      description: 'Získejte jasné zprávy se zvýrazněnými shodami a odkazy na zdroje'
+      description:
+        'Generujte podrobné zprávy s zvýrazněnými pasážemi a odkazy na zdroje.',
     },
     languages: {
       title: 'Vícejazyčná podpora',
-      description: 'Kontrolujte texty v angličtině, ukrajinštině a češtině'
-    }
+      description: 'Podporujeme více jazyků, včetně angličtiny, španělštiny a francouzštiny.',
+    },
   },
   stats: {
-    accuracy: '99.8%',
-    accuracyLabel: 'přesnost',
-    documents: '10M+',
-    documentsLabel: 'zkontrolovaných dokumentů',
-    checkTime: '<3 sek',
-    checkTimeLabel: 'doba kontroly',
+    accuracy: '99,9%',
+    accuracyLabel: 'Přesnost',
+    documents: '1M+',
+    documentsLabel: 'Zkontrolované dokumenty',
+    checkTime: '2s',
+    checkTimeLabel: 'Doba kontroly',
     support: '24/7',
-    supportLabel: 'podpora'
+    supportLabel: 'Podpora',
   },
   cta: {
-    title: 'Jste připraveni zkontrolovat svůj text?',
-    description: 'Začněte používat ForgenHub ještě dnes a zajistěte originalitu svého obsahu',
-    button: 'Zkontrolovat nyní'
+    title: 'Začněte ještě dnes!',
+    description:
+      'Získejte přístup k našemu nástroji pro kontrolu plagiátů a zajistěte originalitu svého textu.',
+    button: 'Zkontrolovat text',
   },
   check: {
-    badge: 'AI Kontrola',
-    title: 'Zkontrolovat text na plagiátorství',
-    description: 'Vložte svůj text nebo nahrajte soubor a zkontrolujte plagiátorství',
+    badge: 'Kontrola',
+    title: 'Zkontrolujte plagiát',
+    description:
+      'Zkontrolujte plagiát vložením textu nebo nahráním souboru.',
     pasteText: 'Vložit text',
     uploadFile: 'Nahrát soubor',
-    textPlaceholder: 'Vložte text ke kontrole...',
-    noticeTitle: 'Důležité informace',
-    noticeText: 'Pro dosažení nejlepších výsledků používejte texty s alespoň 300 slovy',
-    checkButton: 'Zkontrolovat nyní',
+    textPlaceholder: 'Vložte text sem...',
+    noticeTitle: 'Oznámení',
+    noticeText:
+      'Náš nástroj pro kontrolu plagiátů je určen pouze pro informační účely.',
+    checkButton: 'Zkontrolovat',
     analyzing: 'Analyzování...',
-    resultsTitle: 'Výsledky kontroly',
-    featuresTitle: 'Naše kontrolní funkce',
-    featuresDescription: 'ForgenHub nabízí pokročilé nástroje pro detekci plagiátorství v textech',
+    resultsTitle: 'Výsledky',
+    featuresTitle: 'Klíčové vlastnosti',
+    featuresDescription:
+      'Objevte klíčové vlastnosti našeho nástroje pro kontrolu plagiátů.',
     feature1: {
-      title: 'Hloubková analýza',
-      description: 'Podrobné skenování textu k identifikaci potenciálních shod'
+      title: 'Přesnost',
+      description:
+        'Naše AI poskytuje přesné výsledky kontroly plagiátů.',
     },
     feature2: {
-      title: 'Jazyková podpora',
-      description: 'Kontrolujte texty v různých jazycích se stejnou přesností'
+      title: 'Rychlost',
+      description:
+        'Získejte výsledky kontroly plagiátů během několika sekund.',
     },
     feature3: {
-      title: 'Podrobná zpráva',
-      description: 'Získejte kompletní zprávu s odkazy na zdroje'
+      title: 'Podrobné zprávy',
+      description:
+        'Generujte podrobné zprávy s zvýrazněnými pasážemi a odkazy na zdroje.',
     },
     fileUploaded: 'Soubor nahrán',
-    fileLoadedMessage: 'Text ze souboru byl úspěšně načten',
-    emptyText: 'Prázdný text',
-    enterTextMessage: 'Zadejte text ke kontrole nebo nahrajte soubor',
+    fileLoadedMessage: 'Soubor úspěšně načten!',
+    emptyText: 'Text je prázdný',
+    enterTextMessage: 'Zadejte text pro kontrolu plagiátorství.',
   },
   results: {
-    title: 'Výsledky kontroly',
+    title: 'Výsledky kontroly plagiátů',
     similarityScore: 'Skóre podobnosti',
     tabs: {
-      highlighted: 'Zvýrazněný text',
+      highlighted: 'Zvýrazněno',
       sources: 'Zdroje',
-      summary: 'Shrnutí'
+      summary: 'Shrnutí',
     },
-    noPlagiarism: 'V textu nebyl nalezen žádný plagiát.',
-    noSources: 'Pro tento text nebyly nalezeny žádné odpovídající zdroje.',
-    match: 'shoda',
+    noPlagiarism: 'Nenalezen žádný plagiát',
+    noSources: 'Nenalezeny žádné zdroje',
+    match: 'Shoda',
     matchedText: 'Odpovídající text',
-    characters: 'znaky',
+    characters: 'znaků',
     sourcesFound: 'Nalezené zdroje',
     charactersAnalyzed: 'Analyzované znaky',
     analysisSummary: 'Shrnutí analýzy',
     summary: {
-      low: 'Text má nízké skóre podobnosti, což naznačuje vysokou originalitu. Bylo nalezeno málo nebo žádné shody s existujícími zdroji.',
-      medium: 'Text má střední skóre podobnosti. Některé části by měly být přezkoumány a řádně citovány.',
-      high: 'Text má vysoké skóre podobnosti. Významné části se shodují s existujícími zdroji a měly by být pečlivě přezkoumány.'
+      low: 'Nízká',
+      medium: 'Střední',
+      high: 'Vysoká',
     },
     recommendations: 'Doporučení',
-    recommendation1: 'Citujte všechny zdroje správně pomocí vhodného formátu citace',
-    recommendation2: 'Používejte uvozovky pro přímé citace',
-    recommendation3: 'Parafrázujte obsah vlastními slovy, ale stále citujte zdroj',
-    recommendation4: 'Zvažte revizi částí s vysokým skóre podobnosti'
+    recommendation1:
+      'Uveďte zdroje, které jste použili ve svém textu.',
+    recommendation2:
+      'Parafrázujte text, abyste se vyhnuli plagiátorství.',
+    recommendation3:
+      'Použijte uvozovky pro přímé citace.',
+    recommendation4:
+      'Zkontrolujte svůj text pomocí našeho nástroje pro kontrolu plagiátů.',
   },
   about: {
-    badge: 'O ForgenHub',
-    title: 'Naše mise a hodnoty',
-    description: 'Zjistěte více o naší technologii a přístupu k boji proti plagiátorství',
+    badge: 'O nás',
+    title: 'O ForgenHub',
+    description:
+      'Jsme tým odborníků na umělou inteligenci a vzdělávání, kteří se zavázali pomáhat studentům a profesionálům zajistit originalitu jejich textu.',
     mission: {
       label: 'Naše mise',
-      title: 'Podpora akademické a tvůrčí integrity',
-      description1: 'Vytvořili jsme ForgenHub, abychom pomohli autorům, studentům a výzkumníkům chránit jejich práci a ověřovat originalitu textů.',
-      description2: 'Naším cílem je poskytovat přístupný a přesný nástroj pro detekci plagiátorství, který pomáhá učinit intelektuální prostředí poctivějším a transparentnějším.',
-      button: 'Zkusit kontrolu'
+      title: 'Posílit originalitu, posílit důvěru.',
+      description1:
+        'Naším posláním je poskytovat nejpřesnější a nejdostupnější nástroj pro kontrolu plagiátů poháněný umělou inteligencí.',
+      description2:
+        'Chceme pomoci studentům a profesionálům zajistit originalitu jejich textu a vyhnout se plagiátorství.',
+      button: 'Kontaktujte nás',
     },
     values: {
       title: 'Naše hodnoty',
       integrity: {
         title: 'Integrita',
-        description: 'Věříme v důležitost originality a intelektuální poctivosti'
+        description:
+          'Zavazujeme se k integritě a transparentnosti ve všem, co děláme.',
       },
       accuracy: {
         title: 'Přesnost',
-        description: 'Snažíme se poskytovat nejpřesnější výsledky ověření'
+        description:
+          'Snažíme se poskytovat nejpřesnější výsledky kontroly plagiátů.',
       },
       innovation: {
         title: 'Inovace',
-        description: 'Neustále zlepšujeme naše algoritmy a přístupy'
-      }
+        description:
+          'Neustále inovujeme naši technologii, abychom zajistili, že budeme vždy o krok napřed.',
+      },
     },
     technology: {
       label: 'Technologie',
-      title: 'Jak náš systém funguje',
-      description: 'ForgenHub používá pokročilé algoritmy strojového učení a umělé inteligence k analýze textů a detekci plagiátorství'
+      title: 'Jak funguje naše AI?',
+      description:
+        'Naše AI analyzuje text a porovnává jej s miliony zdrojů, aby zjistila plagiát.',
     },
     textProcessing: {
       title: 'Zpracování textu',
-      step1: 'Sémantická analýza textu pro pochopení kontextu',
-      step2: 'Rozdělení na smysluplné fragmenty pro zlepšení přesnosti',
-      step3: 'Odstranění šumu a normalizace textu',
-      step4: 'Vytvoření digitálních otisků pro porovnání'
+      step1: 'Tokenizace',
+      step2: 'Odstranění stop slov',
+      step3: 'Stemming',
+      step4: 'Lemmatizace',
     },
     comparison: {
-      title: 'Proces porovnání',
-      step1: 'Vyhledávání v databázi akademických a internetových zdrojů',
-      step2: 'Porovnání s miliony dokumentů v reálném čase',
-      step3: 'Detekce přímých i parafrázovaných výpůjček',
-      step4: 'Generování podrobné zprávy s procentem shod'
+      title: 'Porovnání',
+      step1: 'Porovnání textu',
+      step2: 'Porovnání vět',
+      step3: 'Porovnání odstavců',
+      step4: 'Porovnání dokumentů',
     },
     languages: {
-      title: 'Jazyková podpora',
-      description: 'Náš systém dokáže analyzovat texty v různých jazycích a zajišťuje přesnost ověření bez ohledu na původní jazyk'
+      title: 'Podporované jazyky',
+      description:
+        'Podporujeme více jazyků, včetně angličtiny, španělštiny a francouzštiny.',
     },
     cta: {
-      title: 'Jste připraveni zkontrolovat svůj text?',
-      description: 'Začněte používat ForgenHub ještě dnes a zajistěte originalitu svého obsahu',
-      button: 'Zkontrolovat nyní'
+      title: 'Připojte se k nám ještě dnes!',
+      description:
+        'Získejte přístup k našemu nástroji pro kontrolu plagiátů a zajistěte originalitu svého textu.',
+      button: 'Zkontrolovat text',
+    },
+  },
+  profile: {
+    dashboard: 'Uživatelský panel',
+    welcomeMessage: 'Spravujte svůj účet a přístup ke službám',
+    title: 'Můj profil',
+    personalInfo: 'Osobní informace',
+    personalInfoDesc: 'Zobrazte a spravujte své osobní údaje',
+    fullName: 'Celé jméno',
+    email: 'E-mail',
+    username: 'Uživatelské jméno',
+    createdAt: 'Datum registrace',
+    menu: {
+      title: 'Navigace',
+      profile: 'Profil',
+      settings: 'Nastavení',
+      billing: 'Fakturace',
+      payments: 'Platby',
+      services: 'Služby',
+      history: 'Historie kontrol'
+    },
+    settings: {
+      title: 'Nastavení',
+      accountSettings: 'Nastavení účtu',
+      accountSettingsDesc: 'Spravujte své nastavení a preference',
+      comingSoon: 'Již brzy'
+    },
+    billing: {
+      title: 'Fakturace',
+      billingInfo: 'Fakturační údaje',
+      billingInfoDesc: 'Spravujte své platební údaje a předplatné',
+      comingSoon: 'Již brzy'
+    },
+    payments: {
+      title: 'Platby',
+      paymentHistory: 'Historie plateb',
+      paymentHistoryDesc: 'Zobrazte a spravujte své platby',
+      comingSoon: 'Již brzy'
+    },
+    services: {
+      title: 'Služby',
+      availableServices: 'Dostupné služby',
+      availableServicesDesc: 'Informace o dostupných službách a funkcích',
+      comingSoon: 'Již brzy'
+    },
+    history: {
+      title: 'Historie kontrol',
+      checkHistory: 'Vaše kontroly',
+      checkHistoryDesc: 'Zobrazte historii vašich kontrol plagiátů',
+      comingSoon: 'Již brzy'
     }
   },
   legal: {
     terms: {
       title: 'Podmínky služby',
-      description: 'Před použitím naší služby si prosím pečlivě přečtěte tyto podmínky.',
+      description:
+        'Přečtěte si naše podmínky služby, abyste porozuměli svým právům a povinnostem.',
       section1: {
         title: 'Přijetí podmínek',
-        paragraph1: 'Používáním ForgenHub souhlasíte s dodržováním těchto Podmínek služby, našich Zásad ochrany osobních údajů a Zásad používání souborů cookie. Pokud s těmito podmínkami nesouhlasíte, nepoužívejte naši službu.',
-        paragraph2: 'Vyhrazujeme si právo tyto podmínky kdykoli změnit. Pokračováním v používání ForgenHub po takových změnách je přijímáte.'
+        paragraph1:
+          'Používáním našich služeb souhlasíte s těmito podmínkami služby.',
+        paragraph2:
+          'Pokud s těmito podmínkami nesouhlasíte, nepoužívejte naše služby.',
       },
       section2: {
-        title: 'Používání služby',
-        paragraph1: 'ForgenHub poskytuje nástroje pro kontrolu textů na plagiátorství. Naše služba je navržena tak, aby pomohla zajistit originalitu obsahu, ale nezaručuje detekci všech možných případů plagiátorství.',
-        paragraph2: 'Používáním naší služby souhlasíte s tím, že:',
-        bullet1: 'Nebudete službu používat k nezákonným účelům',
-        bullet2: 'Nebudete porušovat práva duševního vlastnictví třetích stran',
-        bullet3: 'Nebudete se pokoušet získat neoprávněný přístup k našemu systému',
-        bullet4: 'Nebudete prostřednictvím naší služby šířit škodlivý software'
+        title: 'Popis služeb',
+        paragraph1:
+          'Nabízíme nástroj pro kontrolu plagiátů poháněný umělou inteligencí.',
+        paragraph2: 'Naše služby jsou určeny pouze pro informační účely.',
+        bullet1: 'Kontrola plagiátů',
+        bullet2: 'Podrobné zprávy',
+        bullet3: 'Vícejazyčná podpora',
+        bullet4: '24/7 podpora',
       },
       section3: {
-        title: 'Uživatelský účet',
-        paragraph1: 'Používání některých funkcí naší služby může vyžadovat vytvoření účtu. Jste zodpovědní za zachování důvěrnosti přihlašovacích údajů ke svému účtu a za veškeré aktivity, které se pod vaším účtem uskuteční.',
-        paragraph2: 'Vyhrazujeme si právo smazat nebo zablokovat jakýkoli účet, který podle našeho názoru porušuje tyto podmínky.'
+        title: 'Omezení odpovědnosti',
+        paragraph1:
+          'Neneseme odpovědnost za žádné škody, které vzniknou v důsledku používání našich služeb.',
+        paragraph2:
+          'Používáte naše služby na vlastní nebezpečí.',
       },
       section4: {
         title: 'Duševní vlastnictví',
-        paragraph1: 'Veškerý obsah poskytovaný prostřednictvím ForgenHub, včetně, ale nejen, log, textů, grafiky, kódu a softwaru, je chráněn autorským právem, ochrannou známkou a dalšími zákony o duševním vlastnictví.',
-        paragraph2: 'Obdržíte omezenou, nevýhradní licenci k používání naší služby v souladu s těmito podmínkami. Tato licence nezahrnuje právo kopírovat nebo upravovat naše materiály nebo vytvářet odvozená díla na jejich základě.'
+        paragraph1:
+          'Všechna práva duševního vlastnictví k našim službám jsou vyhrazena.',
+        paragraph2:
+          'Nesmíte kopírovat, distribuovat ani jinak používat naše služby bez našeho písemného souhlasu.',
       },
       section5: {
-        title: 'Odmítnutí odpovědnosti',
-        paragraph1: 'ForgenHub je poskytován „tak, jak je“ a „jak je k dispozici“ bez záruk jakéhokoli druhu, výslovných nebo implicitních. Nezaručujeme, že naše služba bude nepřerušovaná, bezpečná nebo bezchybná.',
-        paragraph2: 'Nejsme odpovědní za žádné přímé, nepřímé, náhodné, zvláštní nebo následné škody, které mohou vzniknout v souvislosti s používáním nebo nemožností používat naši službu.'
+        title: 'Změny podmínek',
+        paragraph1:
+          'Tyto podmínky služby můžeme kdykoli změnit.',
+        paragraph2:
+          'Doporučujeme vám pravidelně kontrolovat tyto podmínky služby.',
       },
-      lastUpdated: 'Poslední aktualizace: 17. července 2023'
+      lastUpdated: 'Poslední aktualizace: 1. ledna 2023',
     },
     privacy: {
       title: 'Zásady ochrany osobních údajů',
-      description: 'Ochranu vašich osobních údajů bereme vážně. Zjistěte, jak shromažďujeme, používáme a chráníme vaše informace.',
+      description:
+        'Přečtěte si naše zásady ochrany osobních údajů, abyste porozuměli tomu, jak shromažďujeme, používáme a chráníme vaše osobní údaje.',
       section1: {
-        title: 'Shromažďování informací',
-        paragraph1: 'Shromažďujeme informace, které poskytujete přímo při používání naší služby, včetně registračních údajů, textů, které odesíláte k ověření, a dalších informací, které dobrovolně poskytujete.',
-        paragraph2: 'Automaticky také shromažďujeme určité informace o vašem používání naší služby, včetně IP adresy, typu prohlížeče, operačního systému, času návštěvy a dalších údajů o používání.'
+        title: 'Shromažďování osobních údajů',
+        paragraph1:
+          'Shromažďujeme vaše osobní údaje, když používáte naše služby.',
+        paragraph2:
+          'Mezi osobní údaje, které shromažďujeme, patří vaše jméno, e-mailová adresa a text, který kontrolujete.',
       },
       section2: {
-        title: 'Používání informací',
-        paragraph1: 'Shromážděné informace používáme pro:',
-        bullet1: 'Poskytování a údržbu naší služby',
-        bullet2: 'Zlepšování a vývoj naší služby',
-        bullet3: 'Komunikaci s vámi ohledně vašeho účtu nebo změn našich podmínek',
-        bullet4: 'Ochranu proti podvodným nebo nezákonným jednáním',
-        bullet5: 'Analýzu trendů používání a aktivity na naší službě'
+        title: 'Používání osobních údajů',
+        paragraph1:
+          'Vaše osobní údaje používáme k poskytování našich služeb, ke zlepšování našich služeb a ke komunikaci s vámi.',
+        bullet1: 'Poskytování našich služeb',
+        bullet2: 'Zlepšování našich služeb',
+        bullet3: 'Komunikace s vámi',
+        bullet4: 'Zasílání e-mailů',
+        bullet5: 'Zasílání newsletterů',
       },
       section3: {
-        title: 'Sdílení informací',
-        paragraph1: 'Neprodáváme, nevyměňujeme ani nepředáváme vaše osobní údaje třetím stranám bez vašeho souhlasu, s výjimkou případů popsaných v těchto zásadách.',
-        paragraph2: 'Můžeme sdílet informace s poskytovateli služeb, kteří nám pomáhají v našich operacích, s orgány činnými v trestním řízení, pokud to vyžaduje zákon, nebo v případě reorganizace našeho podnikání.'
+        title: 'Sdílení osobních údajů',
+        paragraph1:
+          'Vaše osobní údaje nesdílíme s třetími stranami, s výjimkou případů, kdy je to nezbytné k poskytování našich služeb nebo pokud to vyžaduje zákon.',
+        paragraph2:
+          'Vaše osobní údaje můžeme sdílet s našimi poskytovateli služeb, kteří nám pomáhají s poskytováním našich služeb.',
       },
       section4: {
-        title: 'Zabezpečení dat',
-        paragraph1: 'Přijímáme přiměřená opatření k ochraně vašich osobních údajů před neoprávněným přístupem, použitím nebo zveřejněním. Žádný způsob přenosu přes internet ani způsob elektronického ukládání však není zcela bezpečný.',
-        paragraph2: 'Jste také zodpovědní za zachování důvěrnosti svého účtu a hesla a za omezení přístupu ke svému počítači nebo zařízení.'
+        title: 'Zabezpečení osobních údajů',
+        paragraph1:
+          'Přijímáme přiměřená opatření k ochraně vašich osobních údajů před ztrátou, zneužitím a neoprávněným přístupem.',
+        paragraph2:
+          'Používáme šifrování k ochraně vašich osobních údajů, když je přenášíme přes internet.',
       },
       section5: {
-        title: 'Vaše práva',
-        paragraph1: 'V závislosti na vaší poloze můžete mít určitá práva týkající se vašich osobních údajů, včetně práva na přístup, opravu, smazání vašich informací nebo omezení zpracování.',
-        paragraph2: 'Chcete-li uplatnit tato práva nebo pokud máte dotazy týkající se našich Zásad ochrany osobních údajů, kontaktujte nás na níže uvedené adrese.'
+        title: 'Změny zásad ochrany osobních údajů',
+        paragraph1:
+          'Tyto zásady ochrany osobních údajů můžeme kdykoli změnit.',
+        paragraph2:
+          'Doporučujeme vám pravidelně kontrolovat tyto zásady ochrany osobních údajů.',
       },
-      lastUpdated: 'Poslední aktualizace: 17. července 2023'
+      lastUpdated: 'Poslední aktualizace: 1. ledna 2023',
     },
     cookies: {
       title: 'Zásady používání souborů cookie',
-      description: 'Tyto zásady vysvětlují, jak používáme soubory cookie a podobné technologie na našich webových stránkách.',
+      description:
+        'Přečtěte si naše zásady používání souborů cookie, abyste porozuměli tomu, jak používáme soubory cookie.',
       section1: {
-        title: 'Co jsou soubory cookie',
-        paragraph1: 'Soubory cookie jsou malé textové soubory, které jsou uloženy na vašem zařízení (počítači, tabletu nebo mobilním telefonu), když navštívíte webové stránky. Jsou široce používány k tomu, aby webové stránky fungovaly nebo fungovaly efektivněji.',
-        paragraph2: 'Soubory cookie také umožňují webovým stránkám zapamatovat si vaše preference a poskytnout vám personalizovaný zážitek.'
+        title: 'Co jsou soubory cookie?',
+        paragraph1:
+          'Soubory cookie jsou malé textové soubory, které jsou uloženy ve vašem počítači nebo mobilním zařízení, když navštívíte webovou stránku.',
+        paragraph2:
+          'Soubory cookie se používají k tomu, aby webové stránky fungovaly efektivněji a aby poskytovaly informace vlastníkům webových stránek.',
       },
       section2: {
-        title: 'Typy souborů cookie, které používáme',
-        paragraph1: 'Používáme různé typy souborů cookie pro různé účely:',
-        bullet1: 'Nezbytné soubory cookie: Tyto soubory cookie jsou nezbytné pro provoz našich webových stránek a nelze je v našich systémech vypnout.',
-        bullet2: 'Analytické soubory cookie: Tyto soubory cookie nám umožňují sledovat a analyzovat používání našich webových stránek, abychom mohli měřit a zlepšovat jejich výkon.',
-        bullet3: 'Funkční soubory cookie: Tyto soubory cookie umožňují našim webovým stránkám zapamatovat si volby, které provedete, a poskytovat vylepšené a personalizovanější funkce.',
-        bullet4: 'Reklamní soubory cookie: Tyto soubory cookie se používají k zobrazování reklamy, která by vás mohla zajímat na základě vašich zvyklostí při prohlížení.'
+        title: 'Jak používáme soubory cookie?',
+        paragraph1:
+          'Používáme soubory cookie k tomu, abychom si zapamatovali vaše preference, abychom vám poskytli personalizované služby a abychom analyzovali, jak používáte naše služby.',
+        bullet1: 'Zapamatování vašich preferencí',
+        bullet2: 'Poskytování personalizovaných služeb',
+        bullet3: 'Analýza, jak používáte naše služby',
+        bullet4: 'Zasílání e-mailů',
       },
       section3: {
-        title: 'Správa souborů cookie',
-        paragraph1: 'Většina webových prohlížečů vám umožňuje ovládat soubory cookie prostřednictvím nastavení preferencí. Pokud však omezíte naši schopnost nastavovat soubory cookie, může to ovlivnit vaši celkovou zkušenost s webovými stránkami a omezit přístup k některým funkcím.',
-        paragraph2: 'Pokyny pro správu souborů cookie v populárních prohlížečích naleznete na oficiálních webových stránkách příslušných prohlížečů.'
+        title: 'Jak spravovat soubory cookie?',
+        paragraph1:
+          'Soubory cookie můžete spravovat v nastavení svého prohlížeče.',
+        paragraph2:
+          'Můžete soubory cookie zakázat, smazat nebo povolit.',
       },
       section4: {
-        title: 'Soubory cookie třetích stran',
-        paragraph1: 'Můžeme také používat soubory cookie třetích stran, které jsou vlastněny a spravovány jinými stranami, jako je Google Analytics. Tyto společnosti mohou používat soubory cookie ke sledování vaší aktivity v průběhu času a na různých webových stránkách.',
-        paragraph2: 'Nekontrolujeme soubory cookie třetích stran a měli byste si přečíst zásady ochrany osobních údajů a zásady používání souborů cookie těchto třetích stran, pokud potřebujete další informace o jejich postupech.'
+        title: 'Změny zásad používání souborů cookie',
+        paragraph1:
+          'Tyto zásady používání souborů cookie můžeme kdykoli změnit.',
+        paragraph2:
+          'Doporučujeme vám pravidelně kontrolovat tyto zásady používání souborů cookie.',
       },
-      lastUpdated: 'Poslední aktualizace: 17. července 2023'
-    }
-  }
+      lastUpdated: 'Poslední aktualizace: 1. ledna 2023',
+    },
+  },
 };
 
 export default csTranslations;

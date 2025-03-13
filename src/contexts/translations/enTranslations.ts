@@ -1,28 +1,27 @@
-
-import { Translations } from "../languageTypes";
+import { Translations } from '../languageTypes';
 
 const enTranslations: Translations = {
   nav: {
     home: 'Home',
     check: 'Check',
     about: 'About',
-    checkText: 'Check plagiarism',
+    checkText: 'Check for Plagiarism',
   },
   footer: {
-    rights: 'All rights reserved',
+    rights: 'All Rights Reserved',
     language: 'Language',
-    description: 'ForgenHub - an intelligent tool for detecting and preventing plagiarism in your texts',
+    description: 'ForgenHub is your reliable partner in ensuring the originality of texts. We provide advanced tools for checking and analyzing content for plagiarism.',
     navigation: 'Navigation',
     legal: 'Legal',
     terms: 'Terms of Service',
     privacy: 'Privacy Policy',
-    cookies: 'Cookie Policy',
-    copyright: '© {year} ForgenHub. All rights reserved.',
-    tagline: 'Made with love'
+    cookies: 'Cookies Policy',
+    copyright: 'Copyright',
+    tagline: 'Empowering Originality',
   },
   common: {
     title: 'ForgenHub',
-    description: 'Powerful AI-driven plagiarism checker',
+    description: 'Advanced Plagiarism Checker',
     back: 'Back',
     submit: 'Submit',
     loading: 'Loading...',
@@ -35,8 +34,8 @@ const enTranslations: Translations = {
     cs: 'Czech',
   },
   textInput: {
-    placeholder: 'Enter text to check...',
-    characters: 'characters',
+    placeholder: 'Paste your text here...',
+    characters: 'Characters',
   },
   auth: {
     welcome: 'Welcome to ForgenHub',
@@ -56,296 +55,349 @@ const enTranslations: Translations = {
     or: 'or',
     continue: 'Continue',
     continueWithGoogle: 'Continue with Google',
+    signOut: 'Sign Out',
+    signOutSuccess: 'You have successfully signed out',
+    signOutError: 'Error signing out'
   },
   hero: {
-    badge: 'AI-powered Tool',
-    title: 'Plagiarism Checking with <span>ForgenHub</span>',
-    description: 'A powerful online tool that helps detect plagiarism and ensure the originality of your content',
-    checkButton: 'Check Text',
-    learnMore: 'Learn More'
+    badge: 'AI-Powered',
+    title: 'Unleash the Power of Originality',
+    description: 'Ensure the authenticity of your content with our advanced plagiarism detection tools.',
+    checkButton: 'Check Now',
+    learnMore: 'Learn More',
   },
   feature: {
     analysis: {
-      title: 'Deep Analysis',
-      description: 'Detailed scanning of text to identify potential matches'
+      title: 'In-Depth Analysis',
+      description: 'Our advanced algorithms provide a thorough analysis of your text, identifying even the slightest instances of plagiarism.',
     },
     fast: {
-      title: 'Fast Checking',
-      description: 'Get results in seconds'
+      title: 'Fast Results',
+      description: 'Get instant plagiarism reports, saving you time and ensuring the originality of your work.',
     },
     reports: {
       title: 'Detailed Reports',
-      description: 'Clear reports with highlighted problem areas'
+      description: 'Receive comprehensive reports highlighting potential plagiarism issues, complete with source citations.',
     }
   },
   howItWorks: {
-    badge: 'How It Works',
-    title: 'Simple Three-Step Process',
-    description: 'Quickly check the originality of your text using advanced AI technology',
+    badge: 'Easy Steps',
+    title: 'How It Works',
+    description: 'Follow these simple steps to check your text for plagiarism.',
     step1: {
       number: '1',
-      title: 'Upload Text',
-      description: 'Enter or upload the text you want to check for plagiarism'
+      title: 'Paste Your Text',
+      description: 'Copy and paste your text into the input field.',
     },
     step2: {
       number: '2',
-      title: 'AI Analysis',
-      description: 'Our AI system will analyze the text and compare it with numerous sources'
+      title: 'Analyze',
+      description: 'Click the "Check" button to start the analysis.',
     },
     step3: {
       number: '3',
-      title: 'Get Results',
-      description: 'Receive a detailed report with originality percentage and detected matches'
+      title: 'Review Results',
+      description: 'Review the detailed report to identify any potential plagiarism.',
     },
-    tryItNow: 'Try It Now'
+    tryItNow: 'Try It Now',
   },
   features: {
-    badge: 'Features',
-    title: 'Advanced Features for Accurate Checking',
-    description: 'ForgenHub provides the tools needed to effectively combat plagiarism',
+    badge: 'Key Features',
+    title: 'Explore Our Powerful Features',
+    description: 'Discover the tools and capabilities that make ForgenHub the best choice for plagiarism detection.',
     upload: {
-      title: 'Easy Upload',
-      description: 'Enter text or upload files for quick checking'
+      title: 'Upload Files',
+      description: 'Upload documents in various formats for quick and easy plagiarism checks.',
     },
     analysis: {
-      title: 'Smart Analysis',
-      description: 'Our AI checks your text against millions of sources'
+      title: 'Advanced Analysis',
+      description: 'Our AI-powered algorithms provide a thorough analysis of your text.',
     },
     reports: {
       title: 'Detailed Reports',
-      description: 'Get clear reports with highlighted matches and source references'
+      description: 'Receive comprehensive reports highlighting potential plagiarism issues.',
     },
     languages: {
-      title: 'Multilingual Support',
-      description: 'Check texts in English, Ukrainian, and Czech'
-    }
+      title: 'Multi-Language Support',
+      description: 'Check plagiarism in multiple languages, ensuring global content originality.',
+    },
   },
   stats: {
-    accuracy: '99.8%',
-    accuracyLabel: 'accuracy',
+    accuracy: '99.9%',
+    accuracyLabel: 'Accuracy Rate',
     documents: '10M+',
-    documentsLabel: 'documents checked',
-    checkTime: '<3 sec',
-    checkTimeLabel: 'check time',
+    documentsLabel: 'Documents Checked',
+    checkTime: '2s',
+    checkTimeLabel: 'Avg. Check Time',
     support: '24/7',
-    supportLabel: 'support'
+    supportLabel: 'Customer Support',
   },
   cta: {
-    title: 'Ready to Check Your Text?',
-    description: 'Start using ForgenHub today and ensure the originality of your content',
-    button: 'Check Now'
+    title: 'Ready to Get Started?',
+    description: 'Join thousands of users and ensure the originality of your content today!',
+    button: 'Check Your Text',
   },
   check: {
-    badge: 'AI Check',
-    title: 'Check Text for Plagiarism',
-    description: 'Paste your text or upload a file to check for plagiarism',
+    badge: 'Plagiarism Check',
+    title: 'Check Your Text for Plagiarism',
+    description: 'Ensure the originality of your content with our advanced plagiarism detection tools.',
     pasteText: 'Paste Text',
     uploadFile: 'Upload File',
-    textPlaceholder: 'Paste your text to check...',
-    noticeTitle: 'Important Information',
-    noticeText: 'For best results, please use texts with at least 300 words',
-    checkButton: 'Check Now',
+    textPlaceholder: 'Paste your text here...',
+    noticeTitle: 'Important Notice',
+    noticeText: 'Please ensure that you have the right to check this content. We do not store any of your data.',
+    checkButton: 'Check for Plagiarism',
     analyzing: 'Analyzing...',
-    resultsTitle: 'Check Results',
-    featuresTitle: 'Our Checking Features',
-    featuresDescription: 'ForgenHub offers advanced tools for detecting plagiarism in texts',
+    resultsTitle: 'Plagiarism Analysis Results',
+    featuresTitle: 'Key Features',
+    featuresDescription: 'Explore the features that make our plagiarism checker the best choice for you.',
     feature1: {
-      title: 'Deep Analysis',
-      description: 'Detailed scanning of text to identify potential matches'
+      title: 'AI-Powered Analysis',
+      description: 'Our advanced AI algorithms provide a thorough analysis of your text.',
     },
     feature2: {
-      title: 'Language Support',
-      description: 'Check texts in different languages with the same accuracy'
+      title: 'Detailed Reports',
+      description: 'Receive comprehensive reports highlighting potential plagiarism issues.',
     },
     feature3: {
-      title: 'Detailed Report',
-      description: 'Get a complete report with references to sources'
+      title: 'Multi-Language Support',
+      description: 'Check plagiarism in multiple languages, ensuring global content originality.',
     },
     fileUploaded: 'File Uploaded',
-    fileLoadedMessage: 'Text from file successfully loaded',
-    emptyText: 'Empty Text',
-    enterTextMessage: 'Please enter text to check or upload a file',
+    fileLoadedMessage: 'The file has been successfully loaded.',
+    emptyText: 'Please paste text or upload a file to check for plagiarism.',
+    enterTextMessage: 'Please enter text to check for plagiarism.',
   },
   results: {
-    title: 'Check Results',
+    title: 'Plagiarism Analysis Results',
     similarityScore: 'Similarity Score',
     tabs: {
-      highlighted: 'Highlighted Text',
+      highlighted: 'Highlighted',
       sources: 'Sources',
-      summary: 'Summary'
+      summary: 'Summary',
     },
-    noPlagiarism: 'No plagiarism detected in the text.',
-    noSources: 'No matching sources were found for this text.',
-    match: 'match',
-    matchedText: 'Matched text',
-    characters: 'characters',
+    noPlagiarism: 'No plagiarism detected!',
+    noSources: 'No sources found.',
+    match: 'Match',
+    matchedText: 'Matched Text',
+    characters: 'Characters',
     sourcesFound: 'Sources Found',
     charactersAnalyzed: 'Characters Analyzed',
     analysisSummary: 'Analysis Summary',
     summary: {
-      low: 'The text has a low similarity score, suggesting high originality. Few or no matches were found with existing sources.',
-      medium: 'The text has a moderate similarity score. Some portions may need to be reviewed and cited properly.',
-      high: 'The text has a high similarity score. Significant portions match existing sources and should be reviewed carefully.'
+      low: 'Low',
+      medium: 'Medium',
+      high: 'High',
     },
     recommendations: 'Recommendations',
-    recommendation1: 'Cite all sources properly using appropriate citation format',
-    recommendation2: 'Use quotation marks for direct quotes',
-    recommendation3: 'Paraphrase content in your own words while still citing the source',
-    recommendation4: 'Consider revising sections with high similarity scores'
+    recommendation1: 'Review the highlighted sections for potential plagiarism.',
+    recommendation2: 'Cite the original sources to give credit to the authors.',
+    recommendation3: 'Paraphrase the text to make it more original.',
+    recommendation4: 'Use quotation marks for direct quotes.',
   },
   about: {
-    badge: 'About ForgenHub',
-    title: 'Our Mission and Values',
-    description: 'Learn more about our technology and approach to combating plagiarism',
+    badge: 'Our Mission',
+    title: 'About ForgenHub',
+    description: 'Learn more about our mission and values.',
     mission: {
       label: 'Our Mission',
-      title: 'Supporting Academic and Creative Integrity',
-      description1: 'We created ForgenHub to help authors, students, and researchers protect their work and verify the originality of texts.',
-      description2: 'Our goal is to provide an accessible and accurate plagiarism detection tool that helps make the intellectual environment more honest and transparent.',
-      button: 'Try Checking'
+      title: 'Empowering Originality',
+      description1: 'At ForgenHub, our mission is to provide advanced tools for checking and analyzing content for plagiarism. We are committed to ensuring the originality of texts and promoting academic integrity.',
+      description2: 'We strive to empower students, educators, and professionals with the resources they need to create original and authentic work.',
+      button: 'Learn More',
     },
     values: {
-      title: 'Our Values',
+      title: 'Our Core Values',
       integrity: {
         title: 'Integrity',
-        description: 'We believe in the importance of originality and intellectual honesty'
+        description: 'We uphold the highest standards of integrity in all our operations.',
       },
       accuracy: {
         title: 'Accuracy',
-        description: 'We strive to provide the most accurate verification results'
+        description: 'We are committed to providing accurate and reliable plagiarism detection.',
       },
       innovation: {
         title: 'Innovation',
-        description: 'We continuously improve our algorithms and approaches'
-      }
+        description: 'We continuously innovate to improve our tools and services.',
+      },
     },
     technology: {
-      label: 'Technology',
-      title: 'How Our System Works',
-      description: 'ForgenHub uses advanced machine learning and artificial intelligence algorithms to analyze texts and detect plagiarism'
+      label: 'Our Technology',
+      title: 'Advanced AI Algorithms',
+      description: 'We use advanced AI algorithms to provide a thorough analysis of your text, identifying even the slightest instances of plagiarism.',
     },
     textProcessing: {
-      title: 'Text Processing',
-      step1: 'Semantic text analysis to understand context',
-      step2: 'Breaking into meaningful fragments to improve accuracy',
-      step3: 'Noise removal and text normalization',
-      step4: 'Creation of digital fingerprints for comparison'
+      title: 'Text Processing Steps',
+      step1: 'Tokenization',
+      step2: 'Stop Word Removal',
+      step3: 'Stemming',
+      step4: 'Similarity Analysis',
     },
     comparison: {
-      title: 'Comparison Process',
-      step1: 'Search in the database of academic and internet sources',
-      step2: 'Comparison with millions of documents in real-time',
-      step3: 'Detection of both direct and paraphrased borrowings',
-      step4: 'Generation of a detailed report with percentage of matches'
+      title: 'Comparison Methodology',
+      step1: 'Database Search',
+      step2: 'Similarity Scoring',
+      step3: 'Source Identification',
+      step4: 'Report Generation',
     },
     languages: {
-      title: 'Language Support',
-      description: 'Our system can analyze texts in different languages, ensuring accuracy of verification regardless of the original language'
+      title: 'Multi-Language Support',
+      description: 'We support multiple languages, ensuring global content originality.',
     },
     cta: {
-      title: 'Ready to Check Your Text?',
-      description: 'Start using ForgenHub today and ensure the originality of your content',
-      button: 'Check Now'
+      title: 'Ready to Get Started?',
+      description: 'Join thousands of users and ensure the originality of your content today!',
+      button: 'Check Your Text',
+    },
+  },
+  profile: {
+    dashboard: 'User Dashboard',
+    welcomeMessage: 'Manage your account and service access',
+    title: 'My Profile',
+    personalInfo: 'Personal Information',
+    personalInfoDesc: 'View and manage your personal details',
+    fullName: 'Full Name',
+    email: 'Email',
+    username: 'Username',
+    createdAt: 'Registration Date',
+    menu: {
+      title: 'Navigation',
+      profile: 'Profile',
+      settings: 'Settings',
+      billing: 'Billing',
+      payments: 'Payments',
+      services: 'Services',
+      history: 'Check History'
+    },
+    settings: {
+      title: 'Settings',
+      accountSettings: 'Account Settings',
+      accountSettingsDesc: 'Manage your settings and preferences',
+      comingSoon: 'Coming soon'
+    },
+    billing: {
+      title: 'Billing',
+      billingInfo: 'Billing Information',
+      billingInfoDesc: 'Manage your payment details and subscriptions',
+      comingSoon: 'Coming soon'
+    },
+    payments: {
+      title: 'Payments',
+      paymentHistory: 'Payment History',
+      paymentHistoryDesc: 'View and manage your payments',
+      comingSoon: 'Coming soon'
+    },
+    services: {
+      title: 'Services',
+      availableServices: 'Available Services',
+      availableServicesDesc: 'Learn about available services and features',
+      comingSoon: 'Coming soon'
+    },
+    history: {
+      title: 'Check History',
+      checkHistory: 'Your Checks',
+      checkHistoryDesc: 'View history of your plagiarism checks',
+      comingSoon: 'Coming soon'
     }
   },
   legal: {
     terms: {
       title: 'Terms of Service',
-      description: 'Please read these terms carefully before using our service.',
+      description: 'These Terms of Service govern your use of ForgenHub. By accessing or using our services, you agree to these terms.',
       section1: {
         title: 'Acceptance of Terms',
-        paragraph1: 'By using ForgenHub, you agree to comply with these Terms of Service, our Privacy Policy, and Cookie Policy. If you do not agree with these terms, please do not use our service.',
-        paragraph2: 'We reserve the right to change these terms at any time. By continuing to use ForgenHub after such changes, you accept them.'
+        paragraph1: 'By accessing or using ForgenHub, you agree to be bound by these Terms of Service. If you do not agree to these terms, you may not use our services.',
+        paragraph2: 'We may modify these terms at any time, and such modifications shall be effective immediately upon posting. Your continued use of ForgenHub after any such changes constitutes your acceptance of the new Terms of Service.',
       },
       section2: {
-        title: 'Use of Service',
-        paragraph1: 'ForgenHub provides tools for checking texts for plagiarism. Our service is designed to help ensure the originality of content, but does not guarantee the detection of all possible instances of plagiarism.',
-        paragraph2: 'By using our service, you agree to:',
-        bullet1: 'Not use the service for illegal purposes',
-        bullet2: 'Not infringe upon the intellectual property rights of third parties',
-        bullet3: 'Not attempt to gain unauthorized access to our system',
-        bullet4: 'Not distribute malicious software through our service'
+        title: 'Use of Services',
+        paragraph1: 'You agree to use ForgenHub only for lawful purposes and in a manner that does not infringe the rights of, restrict, or inhibit anyone else\'s use and enjoyment of ForgenHub.',
+        paragraph2: 'You are responsible for maintaining the confidentiality of your account and password and for restricting access to your computer. You agree to accept responsibility for all activities that occur under your account or password.',
+        bullet1: 'You must not use ForgenHub to check content that you do not have the right to check.',
+        bullet2: 'You must not use ForgenHub to violate any applicable laws or regulations.',
+        bullet3: 'You must not attempt to interfere with the operation of ForgenHub.',
+        bullet4: 'You must not use ForgenHub to distribute malware or other harmful software.',
       },
       section3: {
-        title: 'User Account',
-        paragraph1: 'Using some features of our service may require creating an account. You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account.',
-        paragraph2: 'We reserve the right to delete or block any account that, in our opinion, violates these terms.'
+        title: 'Intellectual Property',
+        paragraph1: 'The content, trademarks, logos, and other intellectual property on ForgenHub are owned by or licensed to us and are protected by copyright and other laws.',
+        paragraph2: 'You may not use, reproduce, or distribute any content from ForgenHub without our prior written permission.',
       },
       section4: {
-        title: 'Intellectual Property',
-        paragraph1: 'All content provided through ForgenHub, including but not limited to logos, texts, graphics, code, and software, is protected by copyright, trademark, and other intellectual property laws.',
-        paragraph2: 'You receive a limited, non-exclusive license to use our service in accordance with these terms. This license does not include the right to copy or modify our materials or create derivative works based on them.'
+        title: 'Disclaimer of Warranties',
+        paragraph1: 'ForgenHub is provided "as is" and "as available" without any warranties of any kind, either express or implied.',
+        paragraph2: 'We do not warrant that ForgenHub will be uninterrupted or error-free, that defects will be corrected, or that ForgenHub is free of viruses or other harmful components.',
       },
       section5: {
-        title: 'Disclaimer of Liability',
-        paragraph1: 'ForgenHub is provided "as is" and "as available" without warranties of any kind, express or implied. We do not guarantee that our service will be uninterrupted, secure, or error-free.',
-        paragraph2: 'We are not liable for any direct, indirect, incidental, special, or consequential damages that may arise in connection with the use or inability to use our service.'
+        title: 'Limitation of Liability',
+        paragraph1: 'In no event shall we be liable for any direct, indirect, incidental, special, or consequential damages arising out of or in any way connected with your use of ForgenHub.',
+        paragraph2: 'Our liability is limited to the maximum extent permitted by law.',
       },
-      lastUpdated: 'Last Updated: July 17, 2023'
+      lastUpdated: 'Last Updated: June 8, 2024',
     },
     privacy: {
       title: 'Privacy Policy',
-      description: 'We take the protection of your personal data seriously. Learn how we collect, use, and protect your information.',
+      description: 'This Privacy Policy describes how we collect, use, and share your personal information when you use ForgenHub.',
       section1: {
-        title: 'Information Collection',
-        paragraph1: 'We collect information that you provide directly when using our service, including registration data, texts that you submit for verification, and other information that you voluntarily provide.',
-        paragraph2: 'We also automatically collect certain information about your use of our service, including IP address, browser type, operating system, visit time, and other usage data.'
+        title: 'Information We Collect',
+        paragraph1: 'We collect personal information that you provide to us when you create an account, such as your name, email address, and password.',
+        paragraph2: 'We also collect information about your use of ForgenHub, such as the texts you check and the reports you generate.',
       },
       section2: {
-        title: 'Use of Information',
-        paragraph1: 'We use the collected information for:',
-        bullet1: 'Providing and maintaining our service',
-        bullet2: 'Improving and developing our service',
-        bullet3: 'Communicating with you regarding your account or changes to our terms',
-        bullet4: 'Protection against fraudulent or illegal actions',
-        bullet5: 'Analysis of usage trends and activity on our service'
+        title: 'How We Use Your Information',
+        paragraph1: 'We use your personal information to provide and improve ForgenHub, to communicate with you, and to personalize your experience.',
+        bullet1: 'To provide and improve ForgenHub',
+        bullet2: 'To communicate with you about updates and new features',
+        bullet3: 'To personalize your experience',
+        bullet4: 'To analyze usage trends',
+        bullet5: 'To prevent fraud and abuse',
       },
       section3: {
-        title: 'Information Sharing',
-        paragraph1: 'We do not sell, exchange, or transfer your personal data to third parties without your consent, except in cases described in this policy.',
-        paragraph2: 'We may share information with service providers who help us in our operations, with law enforcement agencies if required by law, or in the event of reorganization of our business.'
+        title: 'How We Share Your Information',
+        paragraph1: 'We do not share your personal information with third parties except as described in this Privacy Policy.',
+        paragraph2: 'We may share your information with service providers who help us operate ForgenHub, such as hosting providers and payment processors.',
       },
       section4: {
         title: 'Data Security',
-        paragraph1: 'We take reasonable measures to protect your personal data from unauthorized access, use, or disclosure. However, no method of transmission over the Internet or method of electronic storage is absolutely secure.',
-        paragraph2: 'You are also responsible for maintaining the confidentiality of your account and password and for restricting access to your computer or device.'
+        paragraph1: 'We take reasonable measures to protect your personal information from unauthorized access, use, or disclosure.',
+        paragraph2: 'However, no method of transmission over the Internet or method of electronic storage is 100% secure.',
       },
       section5: {
-        title: 'Your Rights',
-        paragraph1: 'Depending on your location, you may have certain rights regarding your personal data, including the right to access, correct, delete your information, or limit processing.',
-        paragraph2: 'To exercise these rights or if you have questions about our Privacy Policy, please contact us at the address below.'
+        title: 'Changes to This Privacy Policy',
+        paragraph1: 'We may modify this Privacy Policy at any time, and such modifications shall be effective immediately upon posting.',
+        paragraph2: 'Your continued use of ForgenHub after any such changes constitutes your acceptance of the new Privacy Policy.',
       },
-      lastUpdated: 'Last Updated: July 17, 2023'
+      lastUpdated: 'Last Updated: June 8, 2024',
     },
     cookies: {
-      title: 'Cookie Policy',
-      description: 'This policy explains how we use cookies and similar technologies on our website.',
+      title: 'Cookies Policy',
+      description: 'This Cookies Policy describes how we use cookies and similar technologies on ForgenHub.',
       section1: {
         title: 'What Are Cookies',
-        paragraph1: 'Cookies are small text files that are stored on your device (computer, tablet, or mobile phone) when you visit websites. They are widely used to make websites work or work more efficiently.',
-        paragraph2: 'Cookies also allow websites to remember your preferences and provide you with a personalized experience.'
+        paragraph1: 'Cookies are small text files that are placed on your computer or mobile device when you visit a website.',
+        paragraph2: 'We use cookies to enhance your experience on ForgenHub, to analyze usage trends, and to personalize content.',
       },
       section2: {
-        title: 'Types of Cookies We Use',
-        paragraph1: 'We use different types of cookies for various purposes:',
-        bullet1: 'Necessary cookies: These cookies are essential for the operation of our website and cannot be turned off in our systems.',
-        bullet2: 'Analytical cookies: These cookies allow us to track and analyze the use of our website so that we can measure and improve its performance.',
-        bullet3: 'Functional cookies: These cookies allow our website to remember choices you make and provide enhanced, more personalized features.',
-        bullet4: 'Advertising cookies: These cookies are used to display advertising that is likely to interest you based on your browsing habits.'
+        title: 'How We Use Cookies',
+        paragraph1: 'We use cookies for the following purposes:',
+        bullet1: 'To remember your preferences',
+        bullet2: 'To analyze usage trends',
+        bullet3: 'To personalize content',
+        bullet4: 'To provide targeted advertising',
       },
       section3: {
-        title: 'Managing Cookies',
-        paragraph1: 'Most web browsers allow you to control cookies through their preference settings. However, if you limit our ability to set cookies, this may impact your overall experience with the website and limit access to some features.',
-        paragraph2: 'Instructions for managing cookies in popular browsers can be found on the official websites of the respective browsers.'
+        title: 'Your Choices',
+        paragraph1: 'You can control cookies through your browser settings.',
+        paragraph2: 'You can choose to disable cookies, but this may affect your ability to use ForgenHub.',
       },
       section4: {
-        title: 'Third-Party Cookies',
-        paragraph1: 'We may also use third-party cookies that are owned and managed by other parties, such as Google Analytics. These companies may use cookies to track your activity over time and across different websites.',
-        paragraph2: 'We do not control third-party cookies, and you should check the privacy and cookie policies of these third parties if you need additional information about their practices.'
+        title: 'Changes to This Cookies Policy',
+        paragraph1: 'We may modify this Cookies Policy at any time, and such modifications shall be effective immediately upon posting.',
+        paragraph2: 'Your continued use of ForgenHub after any such changes constitutes your acceptance of the new Cookies Policy.',
       },
-      lastUpdated: 'Last Updated: July 17, 2023'
-    }
-  }
+      lastUpdated: 'Last Updated: June 8, 2024',
+    },
+  },
 };
 
 export default enTranslations;

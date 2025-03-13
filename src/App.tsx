@@ -16,6 +16,14 @@ import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import Cookies from "./pages/Cookies";
 
+// Profile Pages
+import ProfilePage from "./pages/Profile/Index";
+import SettingsPage from "./pages/Profile/Settings";
+import BillingPage from "./pages/Profile/Billing";
+import PaymentsPage from "./pages/Profile/Payments";
+import ServicesPage from "./pages/Profile/Services";
+import HistoryPage from "./pages/Profile/History";
+
 const queryClient = new QueryClient();
 
 // Get the publishable key from the environment
@@ -52,6 +60,15 @@ const App = () => (
               <Route path="/terms" element={<Terms />} />
               <Route path="/privacy" element={<Privacy />} />
               <Route path="/cookies" element={<Cookies />} />
+              
+              {/* Profile Routes */}
+              <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/profile/settings" element={<SettingsPage />} />
+              <Route path="/profile/billing" element={<BillingPage />} />
+              <Route path="/profile/payments" element={<PaymentsPage />} />
+              <Route path="/profile/services" element={<ServicesPage />} />
+              <Route path="/profile/history" element={<HistoryPage />} />
+              
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
