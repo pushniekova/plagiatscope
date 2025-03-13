@@ -33,9 +33,7 @@ const ClerkRouteChangeListener = () => {
 };
 
 const App = () => (
-  <ClerkProvider 
-    publishableKey={PUBLISHABLE_KEY}
-  >
+  <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
     <QueryClientProvider client={queryClient}>
       <LanguageProvider>
         <TooltipProvider>

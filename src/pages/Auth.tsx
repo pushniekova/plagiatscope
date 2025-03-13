@@ -49,11 +49,9 @@ const Auth = () => {
   if (!isSignInLoaded || !isSignUpLoaded) {
     return (
       <MainLayout>
-        <div className="container max-w-md mx-auto py-16 px-4">
-          <div className="h-[400px] flex items-center justify-center">
-            <div className="animate-pulse">
-              <div className="h-12 w-12 rounded-full border-4 border-t-primary border-r-transparent border-b-transparent border-l-transparent animate-spin"></div>
-            </div>
+        <div className="flex justify-center items-center min-h-[calc(100vh-200px)]">
+          <div className="animate-pulse">
+            <div className="h-12 w-12 rounded-full border-4 border-t-primary border-r-transparent border-b-transparent border-l-transparent animate-spin"></div>
           </div>
         </div>
       </MainLayout>
@@ -62,8 +60,8 @@ const Auth = () => {
 
   return (
     <MainLayout>
-      <div className="container max-w-md mx-auto py-16 px-4">
-        <Card className="backdrop-blur-sm bg-background/80 border shadow-lg w-full">
+      <div className="flex justify-center items-center min-h-[calc(100vh-200px)]">
+        <Card className="backdrop-blur-sm bg-background/80 border shadow-lg w-full max-w-md mx-auto">
           <CardHeader className="space-y-1 text-center">
             <CardTitle className="text-2xl">{t('auth.welcome')}</CardTitle>
             <CardDescription>
