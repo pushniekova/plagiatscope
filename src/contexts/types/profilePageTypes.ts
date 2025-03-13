@@ -33,6 +33,7 @@ export type ProfilePageTranslations = {
       security: string;
       twoFactor: string;
       twoFactorDesc: string;
+      comingSoon: string;
     };
     billing: {
       title: string;
@@ -57,6 +58,7 @@ export type ProfilePageTranslations = {
       proPlanFeature2: string;
       currentPlan: string;
       upgradePlan: string;
+      comingSoon: string;
     };
     payments: {
       title: string;
@@ -71,6 +73,7 @@ export type ProfilePageTranslations = {
         failed: string;
       };
       noHistory: string;
+      comingSoon: string;
     };
     services: {
       title: string;
@@ -90,6 +93,7 @@ export type ProfilePageTranslations = {
       usagesRemaining: string;
       useService: string;
       activateService: string;
+      comingSoon: string;
     };
     history: {
       title: string;
@@ -107,6 +111,7 @@ export type ProfilePageTranslations = {
       score: string;
       viewDetails: string;
       noHistory: string;
+      comingSoon: string;
     };
   };
 };
