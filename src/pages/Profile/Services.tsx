@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import ProfileLayout from '@/layouts/ProfileLayout';
 import ProfilePageLayout from '@/components/profile/ProfilePageLayout';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -9,6 +10,7 @@ import { Badge } from '@/components/ui/badge';
 
 const ServicesPage: React.FC = () => {
   const { t } = useLanguage();
+  const navigate = useNavigate();
 
   // Sample services data
   const services = [
@@ -18,7 +20,8 @@ const ServicesPage: React.FC = () => {
       description: t('profile.services.serviceDesc1'),
       status: 'active',
       usageCount: 15,
-      usageLimit: 25
+      usageLimit: 25,
+      redirectTo: '/check'
     },
     {
       id: 'service-2',
@@ -26,7 +29,8 @@ const ServicesPage: React.FC = () => {
       description: t('profile.services.serviceDesc2'),
       status: 'inactive',
       usageCount: 0,
-      usageLimit: 0
+      usageLimit: 0,
+      redirectTo: '/check'
     },
     {
       id: 'service-3',
@@ -34,9 +38,14 @@ const ServicesPage: React.FC = () => {
       description: t('profile.services.serviceDesc3'),
       status: 'active',
       usageCount: 5,
-      usageLimit: 10
+      usageLimit: 10,
+      redirectTo: '/check'
     }
   ];
+
+  const handleServiceClick = (redirectTo: string) => {
+    navigate(redirectTo);
+  };
 
   return (
     <ProfileLayout activePage="services">
@@ -78,6 +87,7 @@ const ServicesPage: React.FC = () => {
                 <Button 
                   variant={service.status === 'active' ? 'default' : 'outline'}
                   className="w-full"
+                  onClick={() => handleServiceClick(service.redirectTo)}
                 >
                   {service.status === 'active' 
                     ? t('profile.services.useService') 
