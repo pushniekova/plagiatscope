@@ -23,6 +23,18 @@ export type ProfilePageTranslations = {
       services?: string;
       history?: string;
     };
+    sidebarMenu?: {
+      plagiarismCheck?: string;
+      aiContentCheck?: string;
+      aiTextHumanization?: string;
+      myOrders?: string;
+      proofreading?: string;
+      plagiarismRemoval?: string;
+      payments?: string;
+      helpdesk?: string;
+      language?: string;
+      new?: string;
+    };
     overview?: {
       title?: string;
       welcomeBack?: string;
@@ -123,6 +135,9 @@ export type ProfilePageTranslations = {
       proPlanDesc?: string;
       proPlanFeature1?: string;
       proPlanFeature2?: string;
+      month?: string;
+      premiumPlanFeature1?: string;
+      premiumPlanFeature2?: string;
     };
     payments: {
       title: string;
@@ -135,7 +150,7 @@ export type ProfilePageTranslations = {
         completed: string;
         pending: string;
         failed: string;
-      };
+      } | string; // Allow both object and string for backwards compatibility
       noHistory?: string;
       comingSoon?: string;
       billingInfo?: string;

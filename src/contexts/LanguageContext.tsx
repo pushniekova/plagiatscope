@@ -8,7 +8,7 @@ import csTranslations from './translations/cs';
 const LanguageContext = createContext<LanguageContextProps>({
   language: 'uk',
   setLanguage: () => {},
-  t: (key: string) => key,
+  t: (key: string, replacements?: Record<string, any>) => key,
 });
 
 const translations: Record<Language, Translations> = {

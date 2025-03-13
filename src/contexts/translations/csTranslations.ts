@@ -321,7 +321,7 @@ const csTranslations: Translations = {
       addCardDesc: 'Přidejte platební kartu pro rychlé a bezpečné platby',
       addCard: 'Přidat kartu',
       plans: 'Plány předplatného',
-      month: 'měsíc',
+      monthly: 'měsíc',
       freePlan: 'Bezplatný plán',
       freePlanDesc: 'Základní funkce pro jednotlivce',
       freePlanFeature1: '10 kontrol měsíčně',
