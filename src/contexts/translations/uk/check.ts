@@ -1,4 +1,3 @@
-
 export default {
   badge: 'Перевірка тексту',
   title: 'Перевірте текст на плагіат',
@@ -34,4 +33,19 @@ export default {
   enterTextMessage: 'Введіть текст або завантажте файл для перевірки.',
   analysisError: 'Помилка аналізу',
   analysisErrorMessage: 'Під час аналізу тексту сталася помилка. Будь ласка, спробуйте ще раз.',
+  externalApi: {
+    title: 'Налаштування зовнішнього API',
+    description: 'Налаштуйте свої облікові дані PlagiarismCheck.org API',
+    groupToken: 'API Token',
+    groupTokenPlaceholder: 'Введіть ваш PlagiarismCheck.org API token',
+    authorEmail: 'Email автора',
+    authorEmailPlaceholder: 'Введіть зареєстрований email',
+    warning: 'Ваші облікові дані зберігаються локально у вашому браузері',
+    saveButton: 'Зберегти налаштування',
+    configured: 'API успішно налаштовано',
+    configSaved: 'Налаштування API збережено',
+    configSavedDesc: 'Ваші облікові дані PlagiarismCheck.org API були збережені',
+    missingFields: 'Будь ласка, заповніть всі обов\'язкові поля',
+    invalidEmail: 'Будь ласка, введіть дійсну адресу електронної пошти',
+  },
 };

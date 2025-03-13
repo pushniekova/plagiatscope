@@ -1,4 +1,3 @@
-
 export default {
   badge: 'Plagiarism Check',
   title: 'Check Your Text for Plagiarism',
@@ -31,4 +30,19 @@ export default {
   enterTextMessage: 'Please enter text to check for plagiarism.',
   analysisError: 'Analysis Error',
   analysisErrorMessage: 'An error occurred while analyzing your text. Please try again.',
+  externalApi: {
+    title: 'External API Configuration',
+    description: 'Configure your PlagiarismCheck.org API credentials',
+    groupToken: 'API Token',
+    groupTokenPlaceholder: 'Enter your PlagiarismCheck.org API token',
+    authorEmail: 'Author Email',
+    authorEmailPlaceholder: 'Enter your registered email',
+    warning: 'Your credentials are stored locally in your browser',
+    saveButton: 'Save Configuration',
+    configured: 'API configured successfully',
+    configSaved: 'API Configuration Saved',
+    configSavedDesc: 'Your PlagiarismCheck.org API credentials have been saved',
+    missingFields: 'Please fill in all required fields',
+    invalidEmail: 'Please enter a valid email address',
+  },
 };

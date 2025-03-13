@@ -20,7 +20,7 @@ export function calculateNonOverlappingLength(ranges: {start: number, end: numbe
   if (ranges.length === 0) return 0;
   
   // Sort ranges by start index
-  ranges.sort((a, b) => a.start - b.start);
+  ranges.sort((a, b) => a.start - b.startIndex);
   
   let totalLength = 0;
   let currentEnd = ranges[0].start;
@@ -39,4 +39,40 @@ export function calculateNonOverlappingLength(ranges: {start: number, end: numbe
   }
   
   return Math.min(totalLength, textLength);
+}
+
+// Check if the external API is configured via browser storage
+export function isExternalApiConfigured(): boolean {
+  try {
+    const apiConfig = localStorage.getItem('plagiarismCheckConfig');
+    if (!apiConfig) return false;
+    
+    const config = JSON.parse(apiConfig);
+    return !!config.groupToken && !!config.authorEmail;
+  } catch (error) {
+    console.error('Error checking external API configuration:', error);
+    return false;
+  }
+}
+
+// Get the external API configuration from browser storage
+export function getExternalApiConfig(): { groupToken: string; authorEmail: string } | null {
+  try {
+    const apiConfig = localStorage.getItem('plagiarismCheckConfig');
+    if (!apiConfig) return null;
+    
+    return JSON.parse(apiConfig);
+  } catch (error) {
+    console.error('Error getting external API configuration:', error);
+    return null;
+  }
+}
+
+// Save external API configuration to browser storage
+export function saveExternalApiConfig(config: { groupToken: string; authorEmail: string }): void {
+  try {
+    localStorage.setItem('plagiarismCheckConfig', JSON.stringify(config));
+  } catch (error) {
+    console.error('Error saving external API configuration:', error);
+  }
 }

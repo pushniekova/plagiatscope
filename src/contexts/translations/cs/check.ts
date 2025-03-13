@@ -1,4 +1,3 @@
-
 export default {
   badge: 'Kontrola',
   title: 'Zkontrolujte plagiát',
@@ -37,4 +36,19 @@ export default {
   enterTextMessage: 'Zadejte text pro kontrolu plagiátorství.',
   analysisError: 'Chyba analýzy',
   analysisErrorMessage: 'Při analýze textu došlo k chybě. Zkuste to prosím znovu.',
+  externalApi: {
+    title: 'Konfigurace externího API',
+    description: 'Nastavte své přihlašovací údaje PlagiarismCheck.org API',
+    groupToken: 'API Token',
+    groupTokenPlaceholder: 'Zadejte váš PlagiarismCheck.org API token',
+    authorEmail: 'Email autora',
+    authorEmailPlaceholder: 'Zadejte registrovaný email',
+    warning: 'Vaše přihlašovací údaje jsou uloženy lokálně ve vašem prohlížeči',
+    saveButton: 'Uložit konfiguraci',
+    configured: 'API úspěšně nakonfigurováno',
+    configSaved: 'Konfigurace API uložena',
+    configSavedDesc: 'Vaše přihlašovací údaje PlagiarismCheck.org API byly uloženy',
+    missingFields: 'Vyplňte prosím všechna povinná pole',
+    invalidEmail: 'Zadejte prosím platnou emailovou adresu',
+  },
 };
