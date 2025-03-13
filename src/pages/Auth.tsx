@@ -63,10 +63,10 @@ const Auth = () => {
   return (
     <MainLayout>
       <div className="container max-w-md mx-auto py-16 px-4">
-        <Card className="backdrop-blur-sm bg-background/80 border shadow-lg">
-          <CardHeader className="space-y-1">
-            <CardTitle className="text-2xl text-center">{t('auth.welcome')}</CardTitle>
-            <CardDescription className="text-center">
+        <Card className="backdrop-blur-sm bg-background/80 border shadow-lg w-full">
+          <CardHeader className="space-y-1 text-center">
+            <CardTitle className="text-2xl">{t('auth.welcome')}</CardTitle>
+            <CardDescription>
               {activeTab === 'signin' ? t('auth.signInDescription') : t('auth.signUpDescription')}
             </CardDescription>
           </CardHeader>
@@ -78,6 +78,8 @@ const Auth = () => {
               </TabsList>
               <TabsContent value="signin" className="mt-0">
                 <ClerkSignIn 
+                  signUpUrl="/auth?tab=signup"
+                  redirectUrl="/"
                   appearance={{
                     elements: {
                       rootBox: "w-full",
@@ -93,14 +95,24 @@ const Auth = () => {
                       formFieldLabel: "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
                       identityPreviewText: "text-sm text-muted-foreground",
                       identityPreviewEditButton: "text-primary",
+                      formFieldAction: "text-primary text-sm font-medium",
+                      footerActionLink: "text-primary hover:text-primary/80",
+                      navbar: "hidden",
+                      main: "!p-0"
                     }
                   }}
-                  signUpUrl="/auth?tab=signup"
-                  redirectUrl="/"
+                  localization={{
+                    locale: currentLocale,
+                    socialButtonsBlockButton: {
+                      google: `${t('auth.continueWithGoogle')}`
+                    }
+                  }}
                 />
               </TabsContent>
               <TabsContent value="signup" className="mt-0">
                 <ClerkSignUp 
+                  signInUrl="/auth?tab=signin"
+                  redirectUrl="/"
                   appearance={{
                     elements: {
                       rootBox: "w-full",
@@ -117,10 +129,18 @@ const Auth = () => {
                       identityPreviewText: "text-sm text-muted-foreground",
                       identityPreviewEditButton: "text-primary",
                       otpCodeFieldInput: "flex h-10 w-10 rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm text-center",
+                      formFieldAction: "text-primary text-sm font-medium",
+                      footerActionLink: "text-primary hover:text-primary/80",
+                      navbar: "hidden",
+                      main: "!p-0"
                     }
                   }}
-                  signInUrl="/auth?tab=signin"
-                  redirectUrl="/"
+                  localization={{
+                    locale: currentLocale,
+                    socialButtonsBlockButton: {
+                      google: `${t('auth.continueWithGoogle')}`
+                    }
+                  }}
                 />
               </TabsContent>
             </Tabs>
