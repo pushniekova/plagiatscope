@@ -19,8 +19,8 @@ export function hashText(text: string): string {
 export function calculateNonOverlappingLength(ranges: {start: number, end: number}[], textLength: number): number {
   if (ranges.length === 0) return 0;
   
-  // Sort ranges by start index
-  ranges.sort((a, b) => a.start - b.startIndex);
+  // Sort ranges by start index - Fixed property name from startIndex to start
+  ranges.sort((a, b) => a.start - b.start);
   
   let totalLength = 0;
   let currentEnd = ranges[0].start;
