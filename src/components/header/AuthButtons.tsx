@@ -1,3 +1,4 @@
+
 import { useNavigate } from 'react-router-dom';
 import { LogIn, User, Settings } from 'lucide-react';
 import { useAuth, UserButton } from '@clerk/clerk-react';
@@ -48,7 +49,17 @@ const AuthButtons = ({ isMobile = false }: AuthButtonsProps) => {
     }
 
     return (
-      <div className="flex items-center">
+      <div className="flex items-center space-x-2">
+        <Button 
+          variant="outline" 
+          size="sm" 
+          onClick={goToProfile}
+          className="flex items-center gap-1.5"
+        >
+          <Settings className="h-4 w-4" />
+          <span>{t('profile.dashboard')}</span>
+        </Button>
+        
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <div className="cursor-pointer">
