@@ -1,4 +1,3 @@
-
 /**
  * Common utilities for text processing 
  * Used across different plagiarism detection approaches

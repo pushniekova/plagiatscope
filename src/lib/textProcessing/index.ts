@@ -12,7 +12,7 @@ import { normalizeText, tokenizeText, generateNGrams, calculateTF } from './norm
 import { calculateCosineSimilarity, findMatchingSegments, calculateJaccardSimilarity } from './similarity';
 import { analyzePlagiarism } from './analyzePlagiarism';
 import { simulateWebSearch } from './externalSources';
-import { getPlagiarismScore, getDetailedPlagiarismScore } from './plagiumDetection';
+import { getPlagiarismScore, getDetailedPlagiarismScore } from './plagium';
 import { hashText, calculateNonOverlappingLength } from './utils';
 
 // Re-export the analyzePlagiarism function as the main API
