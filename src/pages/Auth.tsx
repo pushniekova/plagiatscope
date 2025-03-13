@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   useSignIn, 
   useSignUp, 
@@ -7,7 +7,7 @@ import {
   SignUp as ClerkSignUp,
   useClerk
 } from '@clerk/clerk-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import MainLayout from '@/layouts/MainLayout';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
@@ -16,12 +16,22 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from 'sonner';
 
 const Auth = () => {
+  const location = useLocation();
   const [activeTab, setActiveTab] = useState<'signin' | 'signup'>('signin');
   const { t, language } = useLanguage();
   const navigate = useNavigate();
   const { isLoaded: isSignInLoaded, signIn, setActive } = useSignIn();
   const { isLoaded: isSignUpLoaded, signUp } = useSignUp();
   const clerk = useClerk();
+  
+  // Check for tab query parameter on mount
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const tab = params.get('tab');
+    if (tab === 'signin' || tab === 'signup') {
+      setActiveTab(tab);
+    }
+  }, [location.search]);
   
   // Map our app language to Clerk locale
   const localeMap: Record<string, string> = {

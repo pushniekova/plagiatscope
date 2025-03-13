@@ -16,7 +16,7 @@ import NotFound from "./pages/NotFound";
 const queryClient = new QueryClient();
 
 // Get the publishable key from the environment
-const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
+const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY || "pk_test_cHJvLXNhd2ZseS02MC5jbGVyay5hY2NvdW50cy5kZXYk";
 
 // Redirect component for authentication state changes
 const ClerkRouteChangeListener = () => {
