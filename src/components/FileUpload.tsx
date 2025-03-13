@@ -4,7 +4,7 @@ import { Upload, X, FileText } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 interface FileUploadProps {
-  onFileContent: (content: string) => void;
+  onFileContent: (content: string, filename?: string) => void;
   accept?: string;
 }
 
@@ -51,12 +51,12 @@ const FileUpload: React.FC<FileUploadProps> = ({
       const reader = new FileReader();
       reader.onload = (event) => {
         const content = event.target?.result as string;
-        onFileContent(content);
+        onFileContent(content, file.name);
       };
       reader.readAsText(file);
     } else {
       // For demo purposes, we'll just extract the file name as content
-      onFileContent(`[Вміст з файлу ${file.name}] Симульований вміст файлу для демонстрації.`);
+      onFileContent(`[Вміст з файлу ${file.name}] Симульований вміст файлу для демонстрації.`, file.name);
     }
   };
 

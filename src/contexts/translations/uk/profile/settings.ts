@@ -1,19 +1,19 @@
 
 export default {
   title: 'Налаштування',
-  accountSettings: 'Налаштування облікового запису',
-  accountSettingsDesc: 'Керуйте налаштуваннями вашого облікового запису.',
+  accountSettings: 'Налаштування акаунту',
+  accountSettingsDesc: 'Керуйте вашими налаштуваннями та вподобаннями',
   language: {
-    title: 'Мова',
-    description: 'Виберіть мову інтерфейсу',
+    title: 'Мова інтерфейсу',
+    description: 'Виберіть мову відображення інтерфейсу'
   },
-  notifications: 'Налаштування сповіщень',
-  emailNotifications: 'Електронні листи про оновлення',
-  emailNotificationsDesc: 'Отримуйте електронні листи про важливі оновлення та активність',
-  marketingEmails: 'Маркетингові електронні листи',
-  marketingEmailsDesc: 'Отримуйте електронні листи про нові функції та спеціальні пропозиції',
-  security: 'Налаштування безпеки',
-  twoFactor: 'Двофакторна аутентифікація',
-  twoFactorDesc: 'Додаткова безпека для вашого облікового запису',
+  notifications: 'Сповіщення',
+  emailNotifications: 'Email сповіщення',
+  emailNotificationsDesc: 'Отримуйте сповіщення про важливі події',
+  marketingEmails: 'Маркетингові листи',
+  marketingEmailsDesc: 'Отримуйте листи про наші новини та акції',
+  security: 'Безпека',
+  twoFactor: 'Двофакторна автентифікація',
+  twoFactorDesc: 'Підвищіть безпеку вашого облікового запису за допомогою двофакторної автентифікації',
   comingSoon: 'Скоро буде доступно',
 };
