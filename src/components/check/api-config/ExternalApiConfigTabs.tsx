@@ -92,7 +92,7 @@ const ExternalApiConfigTabs: React.FC<ExternalApiConfigProps> = ({ onConfigSaved
             </TabsTrigger>
             <TabsTrigger value="websearch" className="flex items-center gap-2">
               <Search className="h-4 w-4" />
-              Пошук в Інтернеті
+              {t('check.externalApi.websearchTab') || "Пошук в Інтернеті"}
             </TabsTrigger>
           </TabsList>
           

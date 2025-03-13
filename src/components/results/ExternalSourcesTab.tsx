@@ -12,8 +12,12 @@ const ExternalSourcesTab: React.FC<ExternalSourcesTabProps> = ({ externalSources
   const { t } = useLanguage();
   
   // Check if we have real sources or simulated ones
-  const hasRealSources = externalSources.some(source => source.sourceUrl && 
-    (source.sourceUrl.startsWith('http') && !source.sourceUrl.includes('example.com')));
+  const hasRealSources = externalSources.some(source => 
+    source.sourceUrl && 
+    source.sourceUrl.includes('.') && 
+    !source.sourceUrl.includes('example.com') &&
+    source.sourceUrl !== "#"
+  );
   
   return (
     <div className="p-4">
@@ -22,7 +26,7 @@ const ExternalSourcesTab: React.FC<ExternalSourcesTabProps> = ({ externalSources
           <AlertTriangle className="h-5 w-5 text-yellow-500 flex-shrink-0 mt-0.5" />
           <div>
             <p className="text-sm text-yellow-700 dark:text-yellow-400">
-              {t('results.simulatedSourcesWarning') || "These are simulated sources. To get real sources, please configure Google API key and Search Engine ID in the settings."}
+              {t('results.simulatedSourcesWarning') || "Показано симульовані результати. Для отримання реальних джерел, будь ласка, налаштуйте Google API key та Search Engine ID у налаштуваннях."}
             </p>
           </div>
         </div>

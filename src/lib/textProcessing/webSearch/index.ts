@@ -25,17 +25,23 @@ export async function searchMultipleResources(text: string): Promise<WebSearchRe
   
   if (googleCredentials && googleCredentials.apiKey && googleCredentials.engineId) {
     try {
+      console.log("Attempting to use Google Search API with credentials");
       // Try to use Google Search API with our query
       const googleResults = await performGoogleSearch(query, text);
       
       // If we got results from Google, return them
       if (googleResults && googleResults.length > 0) {
+        console.log(`Successfully retrieved ${googleResults.length} results from Google API`);
         return googleResults;
       }
+      
+      console.log("Google API returned no results, falling back to simulation");
     } catch (error) {
       console.error("Google search failed, falling back to simulation:", error);
       // Continue to fallback if Google search fails
     }
+  } else {
+    console.log("No Google API credentials found, using simulation");
   }
   
   // Fall back to internal simulation if Google API is not configured or fails
