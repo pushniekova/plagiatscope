@@ -28,4 +28,6 @@ export default {
   noHistory: 'No check history',
   queueEstimate: 'Estimated wait time: 15 min',
   unavailableMessage: 'The document remained locked for a long time, so its content was automatically deleted from our servers.',
+  reportNotFound: 'Report not found',
+  reportNotFoundDesc: 'The requested report could not be found or is no longer available.',
 };

@@ -28,4 +28,6 @@ export default {
   noHistory: 'Žádná historie kontrol',
   queueEstimate: 'Odhadovaná doba čekání: 15 min',
   unavailableMessage: 'Dokument zůstal dlouho uzamčen, takže jeho obsah byl automaticky odstraněn z našich serverů.',
+  reportNotFound: 'Zpráva nenalezena',
+  reportNotFoundDesc: 'Požadovaná zpráva nebyla nalezena nebo již není k dispozici.',
 };

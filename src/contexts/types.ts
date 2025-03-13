@@ -17,4 +17,4 @@ export type Translations =
   & LegalPageTranslations
   & ProfilePageTranslations;
 
-export { Language, LanguageContextProps };
+export type { Language, LanguageContextProps };

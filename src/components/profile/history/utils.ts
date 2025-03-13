@@ -28,3 +28,7 @@ export const getRiskLevel = (score: number) => {
   if (score < 40) return 'medium';
   return 'high';
 };
+
+export const findHistoryItemById = (items: any[], id: string) => {
+  return items.find(item => item.id === id);
+};

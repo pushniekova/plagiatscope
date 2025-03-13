@@ -23,6 +23,7 @@ import BillingPage from "./pages/Profile/Billing";
 import PaymentsPage from "./pages/Profile/Payments";
 import ServicesPage from "./pages/Profile/Services";
 import HistoryPage from "./pages/Profile/History";
+import ReportPage from "./pages/Profile/Report";
 import TextCheckPage from "./pages/Profile/TextCheck";
 
 const queryClient = new QueryClient();
@@ -70,6 +71,7 @@ const App = () => (
               <Route path="/profile/services" element={<ServicesPage />} />
               <Route path="/profile/services/text-check" element={<TextCheckPage />} />
               <Route path="/profile/history" element={<HistoryPage />} />
+              <Route path="/profile/reports/:reportId" element={<ReportPage />} />
               
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />

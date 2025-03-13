@@ -31,5 +31,7 @@ export type ProfileHistoryTypes = {
     comingSoon?: string;
     queueEstimate?: string;
     unavailableMessage?: string;
+    reportNotFound?: string;
+    reportNotFoundDesc?: string;
   };
 };
