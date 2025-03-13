@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 export type Language = 'uk' | 'en' | 'cs';
@@ -230,6 +229,104 @@ type Translations = {
       button: string;
     };
   };
+  legal: {
+    terms: {
+      title: string;
+      description: string;
+      section1: {
+        title: string;
+        paragraph1: string;
+        paragraph2: string;
+      };
+      section2: {
+        title: string;
+        paragraph1: string;
+        paragraph2: string;
+        bullet1: string;
+        bullet2: string;
+        bullet3: string;
+        bullet4: string;
+      };
+      section3: {
+        title: string;
+        paragraph1: string;
+        paragraph2: string;
+      };
+      section4: {
+        title: string;
+        paragraph1: string;
+        paragraph2: string;
+      };
+      section5: {
+        title: string;
+        paragraph1: string;
+        paragraph2: string;
+      };
+      lastUpdated: string;
+    };
+    privacy: {
+      title: string;
+      description: string;
+      section1: {
+        title: string;
+        paragraph1: string;
+        paragraph2: string;
+      };
+      section2: {
+        title: string;
+        paragraph1: string;
+        bullet1: string;
+        bullet2: string;
+        bullet3: string;
+        bullet4: string;
+        bullet5: string;
+      };
+      section3: {
+        title: string;
+        paragraph1: string;
+        paragraph2: string;
+      };
+      section4: {
+        title: string;
+        paragraph1: string;
+        paragraph2: string;
+      };
+      section5: {
+        title: string;
+        paragraph1: string;
+        paragraph2: string;
+      };
+      lastUpdated: string;
+    };
+    cookies: {
+      title: string;
+      description: string;
+      section1: {
+        title: string;
+        paragraph1: string;
+        paragraph2: string;
+      };
+      section2: {
+        title: string;
+        paragraph1: string;
+        bullet1: string;
+        bullet2: string;
+        bullet3: string;
+        bullet4: string;
+      };
+      section3: {
+        title: string;
+        paragraph1: string;
+        paragraph2: string;
+      };
+      section4: {
+        title: string;
+        paragraph1: string;
+        paragraph2: string;
+      };
+      lastUpdated: string;
+    };
+  };
 };
 
 const LanguageContext = createContext<LanguageContextProps>({
@@ -458,6 +555,104 @@ const translations: Record<Language, Translations> = {
         description: 'Почніть користуватися ForgenHub вже сьогодні та забезпечте оригінальність вашого контенту',
         button: 'Перевірити зараз'
       }
+    },
+    legal: {
+      terms: {
+        title: 'Умови використання',
+        description: 'Будь ласка, уважно прочитайте ці умови перед використанням нашого сервісу.',
+        section1: {
+          title: 'Прийняття умов',
+          paragraph1: 'Використовуючи ForgenHub, ви погоджуєтесь дотримуватися цих Умов використання, нашої Політики конфіденційності та Політики щодо файлів cookie. Якщо ви не згодні з цими умовами, будь ласка, не використовуйте наш сервіс.',
+          paragraph2: 'Ми залишаємо за собою право змінювати ці умови в будь-який час. Продовжуючи використовувати ForgenHub після внесення таких змін, ви приймаєте їх.'
+        },
+        section2: {
+          title: 'Використання сервісу',
+          paragraph1: 'ForgenHub надає інструменти для перевірки текстів на плагіат. Наш сервіс призначений для допомоги в забезпеченні оригінальності контенту, але не гарантує повного виявлення всіх можливих випадків плагіату.',
+          paragraph2: 'Користуючись нашим сервісом, ви погоджуєтеся:',
+          bullet1: 'Не використовувати сервіс для незаконних цілей',
+          bullet2: 'Не порушувати права інтелектуальної власності третіх осіб',
+          bullet3: 'Не намагатися отримати несанкціонований доступ до нашої системи',
+          bullet4: 'Не розповсюджувати шкідливе програмне забезпечення через наш сервіс'
+        },
+        section3: {
+          title: 'Обліковий запис користувача',
+          paragraph1: 'Для використання деяких функцій нашого сервісу може знадобитися створення облікового запису. Ви несете відповідальність за збереження конфіденційності своїх облікових даних і за всі дії, що відбуваються в вашому обліковому записі.',
+          paragraph2: 'Ми залишаємо за собою право видалити або заблокувати будь-який обліковий запис, який, на нашу думку, порушує ці умови.'
+        },
+        section4: {
+          title: 'Інтелектуальна власність',
+          paragraph1: 'Весь контент, що надається через ForgenHub, включаючи, але не обмежуючись, логотипи, тексти, графіку, код та програмне забезпечення, захищено авторським правом, товарними знаками та іншими законами про інтелектуальну власність.',
+          paragraph2: 'Ви отримуєте обмежену, невиключну ліцензію на використання нашого сервісу відповідно до цих умов. Ця ліцензія не включає право на копіювання або модифікацію наших матеріалів чи створення похідних робіт на їх основі.'
+        },
+        section5: {
+          title: 'Відмова від відповідальності',
+          paragraph1: 'ForgenHub надається "як є" і "як доступно" без будь-яких гарантій, явних чи неявних. Ми не гарантуємо, що наш сервіс буде безперервним, безпечним або без помилок.',
+          paragraph2: 'Ми не несемо відповідальності за будь-які прямі, непрямі, випадкові, спеціальні або подальші збитки, що виникають у зв\'язку з використанням або неможливістю використання нашого сервісу.'
+        },
+        lastUpdated: 'Останнє оновлення: 17 липня 2023 року'
+      },
+      privacy: {
+        title: 'Політика конфіденційності',
+        description: 'Ми серйозно ставимося до захисту ваших персональних даних. Дізнайтеся, як ми збираємо, використовуємо та захищаємо вашу інформацію.',
+        section1: {
+          title: 'Збір інформації',
+          paragraph1: 'Ми збираємо інформацію, яку ви надаєте безпосередньо при використанні нашого сервісу, включаючи реєстраційні дані, тексти, які ви надсилаєте для перевірки, та іншу інформацію, яку ви добровільно надаєте.',
+          paragraph2: 'Ми також автоматично збираємо певну інформацію про ваше використання нашого сервісу, включаючи IP-адресу, тип браузера, операційну систему, час відвідування та інші дані про використання.'
+        },
+        section2: {
+          title: 'Використання інформації',
+          paragraph1: 'Ми використовуємо зібрану інформацію для:',
+          bullet1: 'Надання та підтримки нашого сервісу',
+          bullet2: 'Покращення та розвитку нашого сервісу',
+          bullet3: 'Спілкування з вами щодо вашого облікового запису або змін у наших умовах',
+          bullet4: 'Захисту від шахрайських або незаконних дій',
+          bullet5: 'Аналізу тенденцій використання та активності на нашому сервісі'
+        },
+        section3: {
+          title: 'Поширення інформації',
+          paragraph1: 'Ми не продаємо, не обмінюємо і не передаємо ваші особисті дані третім сторонам без вашої згоди, за винятком випадків, описаних у цій політиці.',
+          paragraph2: 'Ми можемо поширювати інформацію з постачальниками послуг, які допомагають нам у роботі, з правоохоронними органами, якщо це вимагається законом, або в разі реорганізації нашого бізнесу.'
+        },
+        section4: {
+          title: 'Безпека даних',
+          paragraph1: 'Ми вживаємо розумних заходів для захисту ваших персональних даних від несанкціонованого доступу, використання або розкриття. Однак, жоден метод передачі через Інтернет або метод електронного зберігання не є абсолютно безпечним.',
+          paragraph2: 'Ви також відповідаєте за збереження конфіденційності вашого облікового запису та пароля та за обмеження доступу до вашого комп\'ютера або пристрою.'
+        },
+        section5: {
+          title: 'Ваші права',
+          paragraph1: 'Залежно від вашого місцезнаходження, ви можете мати певні права щодо ваших персональних даних, включаючи право на доступ, виправлення, видалення вашої інформації або обмеження обробки.',
+          paragraph2: 'Для реалізації цих прав або якщо у вас є запитання щодо нашої Політики конфіденційності, будь ласка, зв\'яжіться з нами за адресою, вказаною нижче.'
+        },
+        lastUpdated: 'Останнє оновлення: 17 липня 2023 року'
+      },
+      cookies: {
+        title: 'Політика файлів cookie',
+        description: 'Ця політика пояснює, як ми використовуємо файли cookie та подібні технології на нашому веб-сайті.',
+        section1: {
+          title: 'Що таке файли cookie',
+          paragraph1: 'Файли cookie - це невеликі текстові файли, які зберігаються на вашому пристрої (комп\'ютері, планшеті або мобільному телефоні) при відвідуванні веб-сайтів. Вони широко використовуються для забезпечення роботи веб-сайтів або їх більш ефективної роботи.',
+          paragraph2: 'Файли cookie також дозволяють веб-сайтам запам\'ятовувати ваші уподобання та надавати вам персоналізований досвід.'
+        },
+        section2: {
+          title: 'Типи файлів cookie, які ми використовуємо',
+          paragraph1: 'Ми використовуємо різні типи файлів cookie для різних цілей:',
+          bullet1: 'Необхідні файли cookie: Ці файли cookie необхідні для роботи нашого веб-сайту і не можуть бути вимкнені в наших системах.',
+          bullet2: 'Аналітичні файли cookie: Ці файли cookie дозволяють нам відстежувати та аналізувати використання нашого веб-сайту, щоб ми могли вимірювати та покращувати його продуктивність.',
+          bullet3: 'Функціональні файли cookie: Ці файли cookie дозволяють нашому веб-сайту запам\'ятовувати вибір, який ви робите, та надавати розширені, більш персоналізовані функції.',
+          bullet4: 'Рекламні файли cookie: Ці файли cookie використовуються для показу реклами, яка, ймовірно, вас зацікавить на основі ваших звичок перегляду.'
+        },
+        section3: {
+          title: 'Управління файлами cookie',
+          paragraph1: 'Більшість веб-браузерів дозволяють контролювати файли cookie через налаштування своїх уподобань. Однак, якщо ви обмежите нашу можливість встановлювати файли cookie, це може вплинути на вашу загальну взаємодію з веб-сайтом і обмежити доступ до деяких функцій.',
+          paragraph2: 'Інструкції щодо управління файлами cookie у популярних браузерах можна знайти на офіційних веб-сайтах відповідних браузерів.'
+        },
+        section4: {
+          title: 'Сторонні файли cookie',
+          paragraph1: 'Ми також можемо використовувати сторонні файли cookie, які належать і управляються іншими сторонами, такими як Google Analytics. Ці компанії можуть використовувати файли cookie для відстеження вашої активності протягом часу та на різних веб-сайтах.',
+          paragraph2: 'Ми не контролюємо сторонні файли cookie, і вам слід перевіряти політики конфіденційності та файлів cookie цих третіх сторін, якщо вам потрібна додаткова інформація про їхні практики.'
+        },
+        lastUpdated: 'Останнє оновлення: 17 липня 2023 року'
+      }
     }
   },
   en: {
@@ -625,322 +820,4 @@ const translations: Record<Language, Translations> = {
       emptyText: 'Empty Text',
       enterTextMessage: 'Please enter text to check or upload a file',
     },
-    about: {
-      badge: 'About ForgenHub',
-      title: 'Our Mission and Values',
-      description: 'Learn more about our technology and approach to combating plagiarism',
-      mission: {
-        label: 'Our Mission',
-        title: 'Supporting Academic and Creative Integrity',
-        description1: 'We created ForgenHub to help authors, students, and researchers protect their work and verify the originality of texts.',
-        description2: 'Our goal is to provide an accessible and accurate tool for detecting plagiarism that will help make the intellectual environment more honest and transparent.',
-        button: 'Try Checking'
-      },
-      values: {
-        title: 'Our Values',
-        integrity: {
-          title: 'Integrity',
-          description: 'We believe in the importance of originality and intellectual honesty'
-        },
-        accuracy: {
-          title: 'Accuracy',
-          description: 'We strive to provide the most accurate checking results'
-        },
-        innovation: {
-          title: 'Innovation',
-          description: 'We constantly improve our algorithms and approaches'
-        }
-      },
-      technology: {
-        label: 'Technology',
-        title: 'How Our System Works',
-        description: 'ForgenHub uses advanced machine learning and artificial intelligence algorithms to analyze texts and detect plagiarism'
-      },
-      textProcessing: {
-        title: 'Text Processing',
-        step1: 'Semantic text analysis to understand context',
-        step2: 'Breaking into meaningful fragments to improve accuracy',
-        step3: 'Noise removal and text normalization',
-        step4: 'Creating digital fingerprints for comparison'
-      },
-      comparison: {
-        title: 'Comparison Process',
-        step1: 'Search in a database of academic and internet sources',
-        step2: 'Comparison with millions of documents in real-time',
-        step3: 'Detection of both direct and paraphrased borrowings',
-        step4: 'Generation of a detailed report with match percentage'
-      },
-      languages: {
-        title: 'Language Support',
-        description: 'Our system can analyze texts in different languages, ensuring checking accuracy regardless of the original language'
-      },
-      cta: {
-        title: 'Ready to Check Your Text?',
-        description: 'Start using ForgenHub today and ensure the originality of your content',
-        button: 'Check Now'
-      }
-    }
-  },
-  cs: {
-    nav: {
-      home: 'Domů',
-      check: 'Kontrola',
-      about: 'O nás',
-      checkText: 'Zkontrolovat plagiát',
-    },
-    footer: {
-      rights: 'Všechna práva vyhrazena',
-      language: 'Jazyk',
-      description: 'ForgenHub - inteligentní nástroj pro detekci a prevenci plagiátů ve vašich textech',
-      navigation: 'Navigace',
-      legal: 'Právní informace',
-      terms: 'Podmínky použití',
-      privacy: 'Zásady ochrany osobních údajů',
-      cookies: 'Zásady cookies',
-      copyright: '© {year} ForgenHub. Všechna práva vyhrazena.',
-      tagline: 'Vytvořeno s láskou'
-    },
-    common: {
-      title: 'ForgenHub',
-      description: 'Výkonný nástroj pro kontrolu plagiátů s využitím AI',
-      back: 'Zpět',
-      submit: 'Potvrdit',
-      loading: 'Načítání...',
-      success: 'Úspěch!',
-      error: 'Chyba!',
-    },
-    language: {
-      en: 'Angličtina',
-      uk: 'Ukrajinština',
-      cs: 'Čeština',
-    },
-    textInput: {
-      placeholder: 'Zadejte text ke kontrole...',
-      characters: 'znaků',
-    },
-    auth: {
-      welcome: 'Vítejte v ForgenHub',
-      signIn: 'Přihlásit se',
-      signUp: 'Zaregistrovat se',
-      signInDescription: 'Přihlaste se pro přístup k vašemu účtu',
-      signUpDescription: 'Vytvořte si účet, abyste mohli začít',
-      account: 'Můj účet',
-      email: 'E-mail',
-      password: 'Heslo',
-      phoneNumber: 'Telefonní číslo',
-      forgotPassword: 'Zapomněli jste heslo?',
-      verificationCode: 'Ověřovací kód',
-      verify: 'Ověřit',
-      alreadyHaveAccount: 'Již máte účet?',
-      dontHaveAccount: 'Nemáte účet?',
-      or: 'nebo',
-      continue: 'Pokračovat',
-      continueWithGoogle: 'Pokračovat s Google',
-    },
-    hero: {
-      badge: 'AI nástroj',
-      title: 'Kontrola plagiátů s <span>ForgenHub</span>',
-      description: 'Výkonný online nástroj, který pomáhá odhalit plagiáty a zajistit originalitu vašeho obsahu',
-      checkButton: 'Zkontrolovat text',
-      learnMore: 'Zjistit více'
-    },
-    feature: {
-      analysis: {
-        title: 'Hloubková analýza',
-        description: 'Detailní skenování textu pro identifikaci potenciálních shod'
-      },
-      fast: {
-        title: 'Rychlá kontrola',
-        description: 'Získejte výsledky během několika sekund'
-      },
-      reports: {
-        title: 'Podrobné zprávy',
-        description: 'Přehledné zprávy se zvýrazněnými problematickými místy'
-      }
-    },
-    howItWorks: {
-      badge: 'Jak to funguje',
-      title: 'Jednoduchý třístupňový proces',
-      description: 'Rychle zkontrolujte originalitu vašeho textu pomocí pokročilé technologie AI',
-      step1: {
-        number: '1',
-        title: 'Nahrání textu',
-        description: 'Zadejte nebo nahrajte text, který chcete zkontrolovat na plagiáty'
-      },
-      step2: {
-        number: '2',
-        title: 'AI analýza',
-        description: 'Náš AI systém analyzuje text a porovnává jej s mnoha zdroji'
-      },
-      step3: {
-        number: '3',
-        title: 'Získání výsledků',
-        description: 'Obdržíte podrobnou zprávu s procentem originality a zjištěnými shodami'
-      },
-      tryItNow: 'Vyzkoušet nyní'
-    },
-    features: {
-      badge: 'Funkce',
-      title: 'Pokročilé funkce pro přesnou kontrolu',
-      description: 'ForgenHub poskytuje nástroje potřebné k efektivnímu boji proti plagiátům',
-      upload: {
-        title: 'Snadné nahrávání',
-        description: 'Zadejte text nebo nahrajte soubory pro rychlou kontrolu'
-      },
-      analysis: {
-        title: 'Chytrá analýza',
-        description: 'Naše AI kontroluje váš text oproti milionům zdrojů'
-      },
-      reports: {
-        title: 'Podrobné zprávy',
-        description: 'Získejte přehledné zprávy se zvýrazněnými shodami a odkazy na zdroje'
-      },
-      languages: {
-        title: 'Vícejazyčná podpora',
-        description: 'Kontrolujte texty v češtině, angličtině a ukrajinštině'
-      }
-    },
-    stats: {
-      accuracy: '99,8 %',
-      accuracyLabel: 'přesnost',
-      documents: '10M+',
-      documentsLabel: 'zkontrolovaných dokumentů',
-      checkTime: '<3 s',
-      checkTimeLabel: 'čas kontroly',
-      support: '24/7',
-      supportLabel: 'podpora'
-    },
-    cta: {
-      title: 'Připraveni zkontrolovat svůj text?',
-      description: 'Začněte používat ForgenHub ještě dnes a zajistěte originalitu svého obsahu',
-      button: 'Zkontrolovat nyní'
-    },
-    check: {
-      badge: 'AI kontrola',
-      title: 'Kontrola textu na plagiáty',
-      description: 'Vložte svůj text nebo nahrajte soubor ke kontrole plagiátů',
-      pasteText: 'Vložit text',
-      uploadFile: 'Nahrát soubor',
-      textPlaceholder: 'Vložte svůj text ke kontrole...',
-      noticeTitle: 'Důležité informace',
-      noticeText: 'Pro nejlepší výsledky použijte texty s minimálně 300 slovy',
-      checkButton: 'Zkontrolovat',
-      analyzing: 'Analyzuji...',
-      resultsTitle: 'Výsledky kontroly',
-      featuresTitle: 'Naše funkce kontroly',
-      featuresDescription: 'ForgenHub nabízí pokročilé nástroje pro detekci plagiátů v textech',
-      feature1: {
-        title: 'Hloubková analýza',
-        description: 'Detailní skenování textu pro identifikaci potenciálních shod'
-      },
-      feature2: {
-        title: 'Jazyková podpora',
-        description: 'Kontrolujte texty v různých jazycích se stejnou přesností'
-      },
-      feature3: {
-        title: 'Podrobná zpráva',
-        description: 'Získejte kompletní zprávu s odkazy na zdroje'
-      },
-      fileUploaded: 'Soubor nahrán',
-      fileLoadedMessage: 'Text ze souboru byl úspěšně nahrán',
-      emptyText: 'Prázdný text',
-      enterTextMessage: 'Prosím, zadejte text ke kontrole nebo nahrajte soubor',
-    },
-    about: {
-      badge: 'O ForgenHub',
-      title: 'Naše mise a hodnoty',
-      description: 'Zjistěte více o naší technologii a přístupu k boji proti plagiátům',
-      mission: {
-        label: 'Naše mise',
-        title: 'Podpora akademické a tvůrčí integrity',
-        description1: 'Vytvořili jsme ForgenHub, abychom pomohli autorům, studentům a výzkumníkům chránit jejich práci a ověřit originalitu textů.',
-        description2: 'Naším cílem je poskytnout dostupný a přesný nástroj pro detekci plagiátů, který pomůže učinit intelektuální prostředí poctivějším a transparentnějším.',
-        button: 'Vyzkoušet kontrolu'
-      },
-      values: {
-        title: 'Naše hodnoty',
-        integrity: {
-          title: 'Integrita',
-          description: 'Věříme v důležitost originality a intelektuální poctivosti'
-        },
-        accuracy: {
-          title: 'Přesnost',
-          description: 'Snažíme se poskytovat nejpřesnější výsledky kontroly'
-        },
-        innovation: {
-          title: 'Inovace',
-          description: 'Neustále zdokonalujeme naše algoritmy a přístupy'
-        }
-      },
-      technology: {
-        label: 'Technologie',
-        title: 'Jak náš systém funguje',
-        description: 'ForgenHub používá pokročilé algoritmy strojového učení a umělé inteligence k analýze textů a detekci plagiátů'
-      },
-      textProcessing: {
-        title: 'Zpracování textu',
-        step1: 'Sémantická analýza textu pro pochopení kontextu',
-        step2: 'Rozdělení na smysluplné fragmenty pro zlepšení přesnosti',
-        step3: 'Odstranění šumu a normalizace textu',
-        step4: 'Vytváření digitálních otisků pro porovnání'
-      },
-      comparison: {
-        title: 'Proces porovnávání',
-        step1: 'Vyhledávání v databázi akademických a internetových zdrojů',
-        step2: 'Porovnání s miliony dokumentů v reálném čase',
-        step3: 'Detekce přímých i parafrázovaných výpůjček',
-        step4: 'Generování podrobné zprávy s procentem shody'
-      },
-      languages: {
-        title: 'Jazyková podpora',
-        description: 'Náš systém dokáže analyzovat texty v různých jazycích a zajišťuje přesnost kontroly bez ohledu na původní jazyk'
-      },
-      cta: {
-        title: 'Připraveni zkontrolovat svůj text?',
-        description: 'Začněte používat ForgenHub ještě dnes a zajistěte originalitu svého obsahu',
-        button: 'Zkontrolovat nyní'
-      }
-    }
-  },
-};
-
-export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const storedLanguage = (localStorage.getItem('language') || 'uk') as Language;
-  const [language, setLanguage] = useState<Language>(storedLanguage);
-
-  useEffect(() => {
-    localStorage.setItem('language', language);
-  }, [language]);
-
-  const t = (key: string): string => {
-    try {
-      // Split the key into parts to access nested properties
-      const keyParts = key.split('.');
-      let translation: any = translations[language];
-  
-      // Traverse the key parts to find the translation
-      for (const part of keyParts) {
-        translation = translation[part];
-        if (translation === undefined) {
-          console.warn(`Translation not found for key: ${key} in language: ${language}`);
-          return key; // Return the key as a fallback
-        }
-      }
-  
-      return translation as string;
-    } catch (error) {
-      console.error(`Error accessing translation for key: ${key} in language: ${language}`, error);
-      return key; // Return the key as a fallback in case of an error
-    }
-  };
-
-  return (
-    <LanguageContext.Provider value={{ language, setLanguage, t }}>
-      {children}
-    </LanguageContext.Provider>
-  );
-};
-
-export const useLanguage = (): LanguageContextProps => {
-  return useContext(LanguageContext);
-};
+    about:
