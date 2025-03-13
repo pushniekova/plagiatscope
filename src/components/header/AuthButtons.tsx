@@ -1,9 +1,14 @@
-
 import { useNavigate } from 'react-router-dom';
-import { LogIn, User } from 'lucide-react';
+import { LogIn, User, Settings } from 'lucide-react';
 import { useAuth, UserButton } from '@clerk/clerk-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 interface AuthButtonsProps {
   isMobile?: boolean;
@@ -14,10 +19,22 @@ const AuthButtons = ({ isMobile = false }: AuthButtonsProps) => {
   const { isSignedIn } = useAuth();
   const { t } = useLanguage();
 
+  const goToProfile = () => {
+    navigate('/profile');
+  };
+
   if (isSignedIn) {
     if (isMobile) {
       return (
         <div className="flex items-center gap-3 px-3 py-2">
+          <Button 
+            onClick={goToProfile} 
+            variant="ghost" 
+            className="flex items-center gap-2 w-full justify-start"
+          >
+            <Settings className="h-4 w-4" />
+            <span className="text-sm font-medium">{t('profile.dashboard')}</span>
+          </Button>
           <UserButton 
             afterSignOutUrl="/"
             appearance={{
@@ -26,23 +43,34 @@ const AuthButtons = ({ isMobile = false }: AuthButtonsProps) => {
               }
             }}
           />
-          <span className="text-sm font-medium">{t('auth.account')}</span>
         </div>
       );
     }
 
     return (
       <div className="flex items-center">
-        <UserButton 
-          afterSignOutUrl="/"
-          appearance={{
-            elements: {
-              userButtonBox: "h-10 w-10",
-              userButtonTrigger: "h-10 w-10 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-              userButtonAvatarBox: "h-9 w-9",
-            }
-          }}
-        />
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <div className="cursor-pointer">
+              <UserButton 
+                afterSignOutUrl="/"
+                appearance={{
+                  elements: {
+                    userButtonBox: "h-10 w-10",
+                    userButtonTrigger: "h-10 w-10 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+                    userButtonAvatarBox: "h-9 w-9",
+                  }
+                }}
+              />
+            </div>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuItem onClick={goToProfile}>
+              <Settings className="mr-2 h-4 w-4" />
+              <span>{t('profile.dashboard')}</span>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     );
   }
