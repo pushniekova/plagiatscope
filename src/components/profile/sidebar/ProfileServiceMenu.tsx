@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { SidebarMenu, SidebarMenuItem, SidebarMenuButton } from '@/components/ui/sidebar';
 import { Badge } from '@/components/ui/badge';
@@ -13,6 +13,7 @@ import {
   DollarSign, 
   HelpCircle 
 } from 'lucide-react';
+import PlagiarismCheckDialog from '@/components/profile/PlagiarismCheckDialog';
 
 interface ProfileServiceMenuProps {
   activePage?: string;
@@ -20,6 +21,7 @@ interface ProfileServiceMenuProps {
 
 const ProfileServiceMenu: React.FC<ProfileServiceMenuProps> = ({ activePage }) => {
   const { t } = useLanguage();
+  const [isPlagiarismDialogOpen, setIsPlagiarismDialogOpen] = useState(false);
 
   // Service menu items with icons
   const serviceMenuItems = [
@@ -27,7 +29,7 @@ const ProfileServiceMenu: React.FC<ProfileServiceMenuProps> = ({ activePage }) =
       id: 'plagiarism-check', 
       title: t('profile.sidebarMenu.plagiarismCheck'), 
       icon: FileText,
-      path: '/check', 
+      action: () => setIsPlagiarismDialogOpen(true),
       badge: false 
     },
     { 
@@ -82,29 +84,53 @@ const ProfileServiceMenu: React.FC<ProfileServiceMenuProps> = ({ activePage }) =
   ];
 
   return (
-    <SidebarMenu>
-      {serviceMenuItems.map((item) => (
-        <SidebarMenuItem key={item.id}>
-          <SidebarMenuButton 
-            asChild 
-            isActive={activePage === item.id}
-            tooltip={item.title}
-          >
-            <a href={item.path} className="flex items-center justify-between w-full">
-              <div className="flex items-center gap-3">
-                <item.icon className="h-5 w-5 text-primary" />
-                <span>{item.title}</span>
-              </div>
-              {item.badge && (
-                <Badge className="ml-auto bg-red-500 hover:bg-red-600 text-[10px] px-1.5 py-0" variant="outline">
-                  {t('profile.sidebarMenu.new')}
-                </Badge>
+    <>
+      <SidebarMenu>
+        {serviceMenuItems.map((item) => (
+          <SidebarMenuItem key={item.id}>
+            <SidebarMenuButton 
+              asChild 
+              isActive={activePage === item.id}
+              tooltip={item.title}
+            >
+              {item.action ? (
+                <button 
+                  onClick={item.action} 
+                  className="flex items-center justify-between w-full"
+                >
+                  <div className="flex items-center gap-3">
+                    <item.icon className="h-5 w-5 text-primary" />
+                    <span>{item.title}</span>
+                  </div>
+                  {item.badge && (
+                    <Badge className="ml-auto bg-red-500 hover:bg-red-600 text-[10px] px-1.5 py-0" variant="outline">
+                      {t('profile.sidebarMenu.new')}
+                    </Badge>
+                  )}
+                </button>
+              ) : (
+                <a href={item.path} className="flex items-center justify-between w-full">
+                  <div className="flex items-center gap-3">
+                    <item.icon className="h-5 w-5 text-primary" />
+                    <span>{item.title}</span>
+                  </div>
+                  {item.badge && (
+                    <Badge className="ml-auto bg-red-500 hover:bg-red-600 text-[10px] px-1.5 py-0" variant="outline">
+                      {t('profile.sidebarMenu.new')}
+                    </Badge>
+                  )}
+                </a>
               )}
-            </a>
-          </SidebarMenuButton>
-        </SidebarMenuItem>
-      ))}
-    </SidebarMenu>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        ))}
+      </SidebarMenu>
+
+      <PlagiarismCheckDialog 
+        open={isPlagiarismDialogOpen} 
+        onOpenChange={setIsPlagiarismDialogOpen} 
+      />
+    </>
   );
 };
 

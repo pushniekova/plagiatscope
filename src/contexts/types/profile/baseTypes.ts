@@ -1,26 +1,15 @@
 
-// Base profile page types
 export type ProfilePageBaseTypes = {
-  title?: string;
-  subtitle?: string;
-  dashboard?: string;
-  welcomeMessage?: string;
-  personalInfo?: string;
-  personalInfoDesc?: string;
-  fullName?: string;
-  email?: string;
-  username?: string;
-  createdAt?: string;
-  comingSoon?: string;
-  menu: {
-    title?: string;
-    profile?: string;
-    overview?: string;
-    settings?: string;
-    billing?: string;
-    payments?: string;
-    services?: string;
-    history?: string;
+  title: string;
+  sidebar: {
+    dashboard: string;
+    services: string;
+    documents: string;
+    history: string;
+    settings: string;
+    payments: string;
+    billing: string;
+    logout: string;
   };
   sidebarMenu?: {
     plagiarismCheck?: string;
@@ -31,7 +20,23 @@ export type ProfilePageBaseTypes = {
     plagiarismRemoval?: string;
     payments?: string;
     helpdesk?: string;
-    language?: string;
     new?: string;
+  };
+  menu?: {
+    profile: string;
+    settings: string;
+    billing: string;
+    logout: string;
+  };
+  back: string;
+  save: string;
+  cancel: string;
+  usageStats: {
+    title: string;
+    checksRemaining: string;
+    checksTotal: string;
+    checksUsed: string;
+    upgradeButton: string;
+    unlimited: string;
   };
 };
