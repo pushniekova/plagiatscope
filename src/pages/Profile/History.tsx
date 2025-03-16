@@ -20,13 +20,11 @@ const HistoryPage: React.FC = () => {
         cardTitleKey="profile.history.checkHistory"
         cardDescriptionKey="profile.history.checkHistoryDesc"
         showEmptyState={checksHistory.length === 0 && !isLoading}
-        isLoading={isLoading}
       >
         <div className="space-y-6">
           <HistoryToolbar 
             selectedView={selectedView} 
             setSelectedView={setSelectedView} 
-            onRefresh={refetch}
           />
           
           {selectedView === 'list' ? (
