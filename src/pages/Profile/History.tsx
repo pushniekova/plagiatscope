@@ -6,11 +6,12 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import HistoryCardView from '@/components/profile/history/HistoryCardView';
 import HistoryListView from '@/components/profile/history/HistoryListView';
 import HistoryToolbar from '@/components/profile/history/HistoryToolbar';
-import { sampleHistoryData } from '@/components/profile/history/data';
+import { useChecksHistory } from '@/hooks/use-checks-history';
 
 const HistoryPage: React.FC = () => {
   const { t } = useLanguage();
   const [selectedView, setSelectedView] = useState<'card' | 'list'>('card');
+  const { checksHistory, isLoading, refetch } = useChecksHistory();
   
   return (
     <ProfileLayout activePage="history">
@@ -18,18 +19,20 @@ const HistoryPage: React.FC = () => {
         titleKey="profile.history.title"
         cardTitleKey="profile.history.checkHistory"
         cardDescriptionKey="profile.history.checkHistoryDesc"
-        showEmptyState={sampleHistoryData.length === 0}
+        showEmptyState={checksHistory.length === 0 && !isLoading}
+        isLoading={isLoading}
       >
         <div className="space-y-6">
           <HistoryToolbar 
             selectedView={selectedView} 
             setSelectedView={setSelectedView} 
+            onRefresh={refetch}
           />
           
           {selectedView === 'list' ? (
-            <HistoryListView checkHistory={sampleHistoryData} />
+            <HistoryListView checkHistory={checksHistory} />
           ) : (
-            <HistoryCardView checkHistory={sampleHistoryData} />
+            <HistoryCardView checkHistory={checksHistory} />
           )}
         </div>
       </ProfilePageLayout>

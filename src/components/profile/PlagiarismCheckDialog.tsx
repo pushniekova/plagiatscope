@@ -16,6 +16,8 @@ import TextInput from '@/components/TextInput';
 import FileUpload from '@/components/FileUpload';
 import ResultsViewer from '@/components/ResultsViewer';
 import { useToast } from '@/hooks/use-toast';
+import { useChecksHistory } from '@/hooks/use-checks-history';
+import { analyzePlagiarism } from '@/lib/textProcessing';
 
 interface PlagiarismCheckDialogProps {
   open: boolean;
@@ -35,6 +37,7 @@ const PlagiarismCheckDialog: React.FC<PlagiarismCheckDialogProps> = ({
   
   const { t } = useLanguage();
   const { toast } = useToast();
+  const { createCheck, isCreating } = useChecksHistory();
 
   const handleTextChange = (newText: string) => {
     setText(newText);
@@ -73,12 +76,15 @@ const PlagiarismCheckDialog: React.FC<PlagiarismCheckDialogProps> = ({
     setIsAnalyzing(true);
     
     try {
-      // Simulate analysis delay
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      // Створюємо запис в базі даних
+      createCheck({
+        documentName,
+        textContent: text
+      });
       
-      // Generate a random plagiarism score for demonstration
-      const randomScore = Math.floor(Math.random() * 100);
-      setPlagiarismScore(randomScore);
+      // Аналізуємо текст
+      const results = await analyzePlagiarism(text);
+      setPlagiarismScore(results.overallScore);
       setShowResults(true);
     } catch (error) {
       console.error("Error analyzing text:", error);
