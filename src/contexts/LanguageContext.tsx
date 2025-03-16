@@ -11,10 +11,11 @@ const LanguageContext = createContext<LanguageContextProps>({
   t: (key: string, replacements?: Record<string, any>) => key,
 });
 
+// Define translation objects with proper type cast
 const translations: Record<Language, Translations> = {
-  uk: ukTranslations as Translations,
-  en: enTranslations as Translations,
-  cs: csTranslations as Translations,
+  uk: ukTranslations as unknown as Translations,
+  en: enTranslations as unknown as Translations,
+  cs: csTranslations as unknown as Translations,
 };
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {

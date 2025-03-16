@@ -16,7 +16,7 @@ export type Translations =
   & CheckPageTranslations
   & AboutPageTranslations
   & LegalPageTranslations
-  & ProfilePageTranslations;
+  & { profile: ProfilePageTranslations };
 
 // Re-export all types
 export * from './baseTypes';
