@@ -1,22 +1,23 @@
 
-import type { AboutPageTypes } from './types/aboutPageTypes';
-import type { AuthTypes } from './types/authTypes';
-import type { BaseTypes } from './types/baseTypes';
-import type { CheckPageTypes } from './types/checkPageTypes';
-import type { CommonTypes } from './types/commonTypes';
-import type { HomePageTypes } from './types/homePageTypes';
-import type { LegalPageTypes } from './types/legalPageTypes';
-import type { ProfilePageTypes } from './types/profilePageTypes';
+import type { AboutPageTranslations } from './types/aboutPageTypes';
+import type { AuthTranslations } from './types/authTypes';
+import type { Language, LanguageContextProps } from './types/baseTypes';
+import type { CheckPageTranslations } from './types/checkPageTypes';
+import type { CommonTranslations } from './types/commonTypes';
+import type { HomePageTranslations } from './types/homePageTypes';
+import type { LegalPageTranslations } from './types/legalPageTypes';
+import type { ProfilePageTranslations } from './types/profile';
 
 // Combined type for all translations
-export type Translations = BaseTypes &
-  HomePageTypes &
-  AuthTypes &
-  CheckPageTypes &
-  ProfilePageTypes &
-  AboutPageTypes &
-  LegalPageTypes & 
-  CommonTypes & {
+export type Translations = 
+  & CommonTranslations
+  & AuthTranslations
+  & HomePageTranslations
+  & CheckPageTranslations
+  & ProfilePageTranslations
+  & AboutPageTranslations
+  & LegalPageTranslations
+  & {
     profile: {
       menu: {
         profile: string;
@@ -27,3 +28,6 @@ export type Translations = BaseTypes &
       [key: string]: any;
     };
   };
+
+// Re-export the language types for easier access
+export type { Language, LanguageContextProps };
