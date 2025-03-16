@@ -1,11 +1,8 @@
 
-import { useState, useEffect } from 'react';
-import { useToast } from '@/hooks/use-toast';
-import { Match, ExternalSource, QueueStatus } from '@/components/results/types';
-import { useLanguage } from '@/contexts/LanguageContext';
-import { analyzePlagiarism } from '@/lib/textProcessing';
+import { useEffect } from 'react';
 import { useAuth } from '@clerk/clerk-react';
-import { checkResultsService } from '@/lib/services/checkResultsService';
+import { useTextCheck } from '@/hooks/use-text-check';
+import { useAnalysisProcess } from '@/hooks/use-analysis-process';
 
 interface CheckPageLogicProps {
   children: (props: {
@@ -17,11 +14,11 @@ interface CheckPageLogicProps {
     showResults: boolean;
     showQueueStatus: boolean;
     showScientificOffer: boolean;
-    queueStatus: QueueStatus | null;
+    queueStatus: import('@/components/results/types').QueueStatus | null;
     analysisResults: {
       overallScore: number;
-      matches: Match[];
-      externalSources: ExternalSource[];
+      matches: import('@/components/results/types').Match[];
+      externalSources: import('@/components/results/types').ExternalSource[];
     };
     handleTextChange: (newText: string) => void;
     handleFileUpload: (content: string, filename: string) => void;
@@ -33,176 +30,33 @@ interface CheckPageLogicProps {
 }
 
 const CheckPageLogic: React.FC<CheckPageLogicProps> = ({ children }) => {
-  const [text, setText] = useState('');
-  const [isAnalyzing, setIsAnalyzing] = useState(false);
-  const [showResults, setShowResults] = useState(false);
-  const [documentName, setDocumentName] = useState('document.txt');
-  const [showQueueStatus, setShowQueueStatus] = useState(false);
-  const [showScientificOffer, setShowScientificOffer] = useState(false);
-  const [queueStatus, setQueueStatus] = useState<QueueStatus | null>(null);
-  const [analysisResults, setAnalysisResults] = useState<{
-    overallScore: number;
-    matches: Match[];
-    externalSources: ExternalSource[];
-  }>({ 
-    overallScore: 0, 
-    matches: [],
-    externalSources: [] 
-  });
+  const {
+    text,
+    setText,
+    documentName,
+    setDocumentName,
+    showResults,
+    showQueueStatus,
+    showScientificOffer,
+    handleTextChange,
+    handleFileUpload
+  } = useTextCheck();
   
-  const { toast } = useToast();
-  const { t } = useLanguage();
   const { userId } = useAuth();
+  
+  const {
+    analysisResults,
+    isAnalyzing,
+    queueStatus,
+    handleAnalyze,
+    handleSkipQueue,
+    handleAddScientificCheck,
+    handleSkipScientificCheck
+  } = useAnalysisProcess({ userId });
   
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  const handleTextChange = (newText: string) => {
-    setText(newText);
-    if (showResults) {
-      setShowResults(false);
-    }
-    if (showQueueStatus) {
-      setShowQueueStatus(false);
-    }
-    if (showScientificOffer) {
-      setShowScientificOffer(false);
-    }
-  };
-
-  const handleFileUpload = (content: string, filename: string) => {
-    setText(content);
-    setDocumentName(filename || 'document.txt');
-    if (showResults) {
-      setShowResults(false);
-    }
-    if (showQueueStatus) {
-      setShowQueueStatus(false);
-    }
-    if (showScientificOffer) {
-      setShowScientificOffer(false);
-    }
-  };
-
-  const mockQueueAnalysis = () => {
-    // Simulate entering the queue
-    setShowQueueStatus(true);
-    setQueueStatus({
-      status: 'inQueue',
-      position: 12,
-      estimatedMinutes: 15,
-      skipQueueAvailable: true,
-      skipQueuePrice: '₴150',
-      onSkipQueue: handleSkipQueue
-    });
-    
-    // Scroll to queue status after a brief delay
-    setTimeout(() => {
-      document.getElementById('results-section')?.scrollIntoView({ behavior: 'smooth' });
-    }, 100);
-  };
-
-  const handleSkipQueue = () => {
-    // Simulate skipping the queue and starting the analysis
-    setShowQueueStatus(false);
-    performAnalysis();
-  };
-
-  const performAnalysis = async () => {
-    setIsAnalyzing(true);
-    
-    try {
-      // Perform plagiarism analysis with our improved algorithm
-      const results = await analyzePlagiarism(text);
-      setAnalysisResults(results);
-      
-      // Save the check results to the database if user is logged in
-      if (userId) {
-        try {
-          await checkResultsService.saveCheckResult({
-            user_id: userId,
-            document_name: documentName,
-            text_content: text,
-            overall_score: results.overallScore,
-            matches: results.matches,
-            external_sources: results.externalSources
-          });
-          
-          console.log('Successfully saved check result to database');
-        } catch (saveError) {
-          console.error('Error saving check result:', saveError);
-          // Continue with the analysis even if saving to DB fails
-        }
-      }
-      
-      // For demo purposes, sometimes show the scientific offer
-      if (Math.random() > 0.5) {
-        setShowScientificOffer(true);
-      } else {
-        setShowResults(true);
-      }
-      
-      // Scroll to results after a brief delay
-      setTimeout(() => {
-        document.getElementById('results-section')?.scrollIntoView({ behavior: 'smooth' });
-      }, 100);
-    } catch (error) {
-      console.error("Error analyzing text:", error);
-      toast({
-        title: t('check.analysisError'),
-        description: t('check.analysisErrorMessage'),
-        variant: "destructive",
-      });
-    } finally {
-      setIsAnalyzing(false);
-    }
-  };
-
-  const handleAnalyze = async () => {
-    if (!text.trim()) {
-      toast({
-        title: t('check.emptyText'),
-        description: t('check.enterTextMessage'),
-        variant: "destructive",
-      });
-      return;
-    }
-
-    // Simulate entering the queue (as a demonstration)
-    // In a real system, this would depend on server load
-    if (Math.random() > 0.5) {
-      mockQueueAnalysis();
-    } else {
-      performAnalysis();
-    }
-  };
-
-  const handleAddScientificCheck = () => {
-    setShowScientificOffer(false);
-    setShowResults(true);
-    
-    // In a real application, this would add the scientific check to the analysis
-    toast({
-      title: t('check.fileUploaded'),
-      description: "Added scientific paper check to your analysis",
-    });
-    
-    // Scroll to results after a brief delay
-    setTimeout(() => {
-      document.getElementById('results-section')?.scrollIntoView({ behavior: 'smooth' });
-    }, 100);
-  };
-
-  const handleSkipScientificCheck = () => {
-    setShowScientificOffer(false);
-    setShowResults(true);
-    
-    // Scroll to results after a brief delay
-    setTimeout(() => {
-      document.getElementById('results-section')?.scrollIntoView({ behavior: 'smooth' });
-    }, 100);
-  };
 
   return children({
     text,
