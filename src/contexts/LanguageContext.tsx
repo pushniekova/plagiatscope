@@ -12,9 +12,9 @@ const LanguageContext = createContext<LanguageContextProps>({
 });
 
 const translations: Record<Language, Translations> = {
-  uk: ukTranslations,
-  en: enTranslations,
-  cs: csTranslations,
+  uk: ukTranslations as Translations,
+  en: enTranslations as Translations,
+  cs: csTranslations as Translations,
 };
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
