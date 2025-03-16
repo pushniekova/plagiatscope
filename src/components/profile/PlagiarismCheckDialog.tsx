@@ -11,10 +11,12 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useToast } from '@/hooks/use-toast';
 import { useChecksHistory } from '@/hooks/use-checks-history';
+import { useAuth } from '@clerk/clerk-react';
 import ResultsViewer from '@/components/ResultsViewer';
 import TextAnalysisForm from './plagiarismCheck/TextAnalysisForm';
 import { generateMockMatches } from './plagiarismCheck/MockData';
 import { analyzePlagiarismText } from './plagiarismCheck/PlagiarismAnalyzer';
+import { checkResultsService } from '@/lib/services/checkResultsService';
 
 interface PlagiarismCheckDialogProps {
   open: boolean;
@@ -34,6 +36,7 @@ const PlagiarismCheckDialog: React.FC<PlagiarismCheckDialogProps> = ({
   
   const { t } = useLanguage();
   const { toast } = useToast();
+  const { userId } = useAuth();
   const { createCheck, isCreating } = useChecksHistory();
 
   const handleTextChange = (newText: string) => {
@@ -73,7 +76,7 @@ const PlagiarismCheckDialog: React.FC<PlagiarismCheckDialogProps> = ({
     setIsAnalyzing(true);
     
     try {
-      // Create a record in the database
+      // Create a record in the database via the checks history service
       createCheck({
         documentName,
         textContent: text
@@ -82,6 +85,27 @@ const PlagiarismCheckDialog: React.FC<PlagiarismCheckDialogProps> = ({
       // Analyze the text
       const results = await analyzePlagiarismText(text);
       setPlagiarismScore(results.overallScore);
+      
+      // Generate mock matches for display
+      const mockMatches = generateMockMatches(text);
+      
+      // Save to the database if user is logged in
+      if (userId) {
+        try {
+          await checkResultsService.saveCheckResult({
+            user_id: userId,
+            document_name: documentName,
+            text_content: text,
+            overall_score: results.overallScore,
+            matches: mockMatches,
+            external_sources: []
+          });
+          console.log('Successfully saved detailed check result to database');
+        } catch (error) {
+          console.error('Error saving detailed check result:', error);
+        }
+      }
+      
       setShowResults(true);
     } catch (error) {
       console.error("Error analyzing text:", error);

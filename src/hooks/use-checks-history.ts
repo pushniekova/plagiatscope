@@ -1,6 +1,7 @@
 
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { checkHistoryService } from '@/lib/services/supabaseClient';
+import { checkResultsService } from '@/lib/services/checkResultsService'; 
 import { useAuth } from '@clerk/clerk-react';
 import { useToast } from './use-toast';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -11,7 +12,7 @@ export function useChecksHistory() {
   const { toast } = useToast();
   const { t } = useLanguage();
   
-  // Отримання всіх перевірок користувача
+  // Fetch all checks for the current user
   const { 
     data: checksHistory, 
     isLoading, 
@@ -19,31 +20,81 @@ export function useChecksHistory() {
     refetch 
   } = useQuery({
     queryKey: ['checksHistory', userId],
-    queryFn: () => userId ? checkHistoryService.getUserChecks(userId) : Promise.resolve([]),
+    queryFn: async () => {
+      if (!userId) return [];
+      
+      // Try to get check results from our new service
+      try {
+        const results = await checkResultsService.getUserCheckResults(userId);
+        if (results && results.length > 0) {
+          // Transform to CheckHistoryItem format
+          return results.map(item => ({
+            id: item.id || '',
+            date: item.created_at || new Date().toISOString(),
+            documentName: item.document_name,
+            status: 'completed' as const,
+            score: item.overall_score
+          }));
+        }
+      } catch (error) {
+        console.error('Error fetching from checkResultsService:', error);
+      }
+      
+      // Fall back to the original service if the new one fails
+      return checkHistoryService.getUserChecks(userId);
+    },
     enabled: !!userId,
   });
 
-  // Отримання деталей перевірки
+  // Get detailed information about a specific check
   const useCheckDetails = (checkId: string) => {
     return useQuery({
       queryKey: ['checkDetails', checkId],
-      queryFn: () => checkHistoryService.getCheckDetails(checkId),
+      queryFn: async () => {
+        try {
+          const result = await checkResultsService.getCheckResultDetails(checkId);
+          if (result) {
+            return result;
+          }
+        } catch (error) {
+          console.error('Error fetching check details from new service:', error);
+        }
+        
+        // Fall back to the original service
+        return checkHistoryService.getCheckDetails(checkId);
+      },
       enabled: !!checkId,
     });
   };
 
-  // Отримання результатів перевірки
+  // Get results of a specific check
   const useCheckResults = (checkId: string) => {
     return useQuery({
       queryKey: ['checkResults', checkId],
-      queryFn: () => checkHistoryService.getCheckResults(checkId),
+      queryFn: async () => {
+        try {
+          const result = await checkResultsService.getCheckResultDetails(checkId);
+          if (result) {
+            return {
+              score: result.overall_score,
+              matches: result.matches,
+              external_sources: result.external_sources
+            };
+          }
+        } catch (error) {
+          console.error('Error fetching check results from new service:', error);
+        }
+        
+        // Fall back to the original service
+        return checkHistoryService.getCheckResults(checkId);
+      },
       enabled: !!checkId,
     });
   };
 
-  // Створення нової перевірки
+  // Create a new check
   const createCheckMutation = useMutation({
-    mutationFn: ({ 
+    mutationFn: async ({ 
       documentName, 
       textContent 
     }: { 
@@ -51,6 +102,26 @@ export function useChecksHistory() {
       textContent: string 
     }) => {
       if (!userId) throw new Error('User not authenticated');
+      
+      // Try to use the new service first
+      try {
+        const result = await checkResultsService.saveCheckResult({
+          user_id: userId,
+          document_name: documentName,
+          text_content: textContent,
+          overall_score: 0, // Will be updated after analysis
+          matches: [],
+          external_sources: []
+        });
+        
+        if (result) {
+          return result;
+        }
+      } catch (error) {
+        console.error('Error creating check with new service:', error);
+      }
+      
+      // Fall back to the original service
       return checkHistoryService.createCheck(userId, documentName, textContent);
     },
     onSuccess: () => {
@@ -69,9 +140,22 @@ export function useChecksHistory() {
     }
   });
 
-  // Видалення перевірки
+  // Delete a check
   const deleteCheckMutation = useMutation({
-    mutationFn: (checkId: string) => checkHistoryService.deleteCheck(checkId),
+    mutationFn: async (checkId: string) => {
+      // Try with the new service first
+      try {
+        const result = await checkResultsService.deleteCheckResult(checkId);
+        if (result) {
+          return result;
+        }
+      } catch (error) {
+        console.error('Error deleting check with new service:', error);
+      }
+      
+      // Fall back to the original service
+      return checkHistoryService.deleteCheck(checkId);
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['checksHistory'] });
       toast({

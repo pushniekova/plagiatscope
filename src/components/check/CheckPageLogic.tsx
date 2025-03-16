@@ -4,6 +4,8 @@ import { useToast } from '@/hooks/use-toast';
 import { Match, ExternalSource, QueueStatus } from '@/components/results/types';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { analyzePlagiarism } from '@/lib/textProcessing';
+import { useAuth } from '@clerk/clerk-react';
+import { checkResultsService } from '@/lib/services/checkResultsService';
 
 interface CheckPageLogicProps {
   children: (props: {
@@ -50,6 +52,7 @@ const CheckPageLogic: React.FC<CheckPageLogicProps> = ({ children }) => {
   
   const { toast } = useToast();
   const { t } = useLanguage();
+  const { userId } = useAuth();
   
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -113,6 +116,25 @@ const CheckPageLogic: React.FC<CheckPageLogicProps> = ({ children }) => {
       // Perform plagiarism analysis with our improved algorithm
       const results = await analyzePlagiarism(text);
       setAnalysisResults(results);
+      
+      // Save the check results to the database if user is logged in
+      if (userId) {
+        try {
+          await checkResultsService.saveCheckResult({
+            user_id: userId,
+            document_name: documentName,
+            text_content: text,
+            overall_score: results.overallScore,
+            matches: results.matches,
+            external_sources: results.externalSources
+          });
+          
+          console.log('Successfully saved check result to database');
+        } catch (saveError) {
+          console.error('Error saving check result:', saveError);
+          // Continue with the analysis even if saving to DB fails
+        }
+      }
       
       // For demo purposes, sometimes show the scientific offer
       if (Math.random() > 0.5) {
