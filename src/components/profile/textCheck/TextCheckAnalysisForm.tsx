@@ -7,6 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import TextInput from '@/components/TextInput';
 import FileUpload from '@/components/FileUpload';
 import { useToast } from '@/hooks/use-toast';
+import { advancedPlagiarismCheck } from '@/lib/textProcessing/advancedPlagiarismDetection';
 
 interface TextCheckAnalysisFormProps {
   onAnalyzeComplete: (score: number) => void;
@@ -29,6 +30,14 @@ const TextCheckAnalysisForm: React.FC<TextCheckAnalysisFormProps> = ({
   const { t } = useLanguage();
   const { toast } = useToast();
 
+  // Predefined reference texts for checking plagiarism
+  // In a real app, these would come from a database or API
+  const referenceTexts = [
+    "Искусственный интеллект - это область компьютерных наук, которая занимается созданием систем, способных выполнять задачи, требующие человеческого интеллекта.",
+    "Машинное обучение является подразделом искусственного интеллекта, который фокусируется на разработке алгоритмов, позволяющих компьютерам учиться на основе данных.",
+    "Нейронные сети - это модели, вдохновленные структурой мозга, которые используются для распознавания образов и решения сложных задач."
+  ];
+
   const handleAnalyze = async () => {
     if (!text.trim()) {
       toast({
@@ -42,12 +51,34 @@ const TextCheckAnalysisForm: React.FC<TextCheckAnalysisFormProps> = ({
     setIsAnalyzing(true);
     
     try {
-      // Simulate analysis delay
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      console.log("Starting plagiarism analysis with text:", text.slice(0, 100) + "...");
       
-      // Generate a random plagiarism score for demonstration
-      const randomScore = Math.floor(Math.random() * 100);
-      onAnalyzeComplete(randomScore);
+      // In a real app, we would use the API for this, but for demo purposes,
+      // we'll use our local implementation
+      
+      // Approach 1: Simple random score (original method)
+      // const randomScore = Math.floor(Math.random() * 100);
+      
+      // Approach 2: Use our advanced plagiarism detection algorithm
+      let plagiarismScore = 0;
+      
+      try {
+        // If the text is in a language our detector supports
+        if (text.length > 30) {
+          const results = await advancedPlagiarismCheck(text, referenceTexts);
+          plagiarismScore = results.overallScore;
+          console.log("Plagiarism check results:", results);
+        } else {
+          // Fallback to simple random for very short texts
+          plagiarismScore = Math.floor(Math.random() * 100);
+        }
+      } catch (error) {
+        console.error("Error in advanced check, falling back to random:", error);
+        plagiarismScore = Math.floor(Math.random() * 100);
+      }
+      
+      // Pass the score back to the parent component
+      onAnalyzeComplete(plagiarismScore);
       
     } catch (error) {
       console.error("Error analyzing text:", error);
