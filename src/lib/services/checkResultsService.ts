@@ -11,6 +11,7 @@ export interface CheckResultData {
   matches: Match[];
   external_sources: ExternalSource[];
   created_at?: string;
+  status?: 'completed' | 'inQueue' | 'unavailable' | 'failed';
 }
 
 export const checkResultsService = {
