@@ -23,7 +23,9 @@ export const analysisService = {
           text_content: text,
           overall_score: results.overallScore,
           matches: results.matches,
-          external_sources: results.externalSources
+          external_sources: results.externalSources,
+          created_at: new Date().toISOString(),
+          status: 'completed'
         });
         
         console.log('Successfully saved check result to database');

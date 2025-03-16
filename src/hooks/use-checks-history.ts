@@ -5,6 +5,20 @@ import { checkResultsService } from '@/lib/services/checkResultsService';
 import { useAuth } from '@clerk/clerk-react';
 import { useToast } from './use-toast';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { CheckHistoryItem } from '@/components/profile/history/types';
+import { PlagiarismCheck } from '@/types/database';
+
+// Helper function to convert database model to view model
+const mapToCheckHistoryItem = (item: any): CheckHistoryItem => {
+  return {
+    id: item.id || '',
+    date: item.created_at || new Date().toISOString(),
+    documentName: item.document_name || '',
+    status: item.status || 'completed',
+    score: item.overall_score || item.score || 0,
+    position: item.position
+  };
+};
 
 export function useChecksHistory() {
   const { userId } = useAuth();
@@ -28,20 +42,15 @@ export function useChecksHistory() {
         const results = await checkResultsService.getUserCheckResults(userId);
         if (results && results.length > 0) {
           // Transform to CheckHistoryItem format
-          return results.map(item => ({
-            id: item.id || '',
-            date: item.created_at || new Date().toISOString(),
-            documentName: item.document_name,
-            status: 'completed' as const,
-            score: item.overall_score
-          }));
+          return results.map(mapToCheckHistoryItem);
         }
       } catch (error) {
         console.error('Error fetching from checkResultsService:', error);
       }
       
       // Fall back to the original service if the new one fails
-      return checkHistoryService.getUserChecks(userId);
+      const checks = await checkHistoryService.getUserChecks(userId);
+      return checks.map(mapToCheckHistoryItem);
     },
     enabled: !!userId,
   });
@@ -173,7 +182,7 @@ export function useChecksHistory() {
   });
 
   return {
-    checksHistory: checksHistory || [],
+    checksHistory: checksHistory as CheckHistoryItem[] || [],
     isLoading,
     error,
     refetch,
